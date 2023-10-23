@@ -1,8 +1,9 @@
 package com.gsxy.core.pojo;
 
 import javax.xml.crypto.Data;
+import java.io.Serializable;
 
-public class Community {
+public class Community implements Serializable {
     private String name;
     private String createBy;
     private Data createTime;

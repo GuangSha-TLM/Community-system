@@ -1,8 +1,9 @@
 package com.gsxy.core.pojo;
 
 import javax.xml.crypto.Data;
+import java.io.Serializable;
 
-public class Org {
+public class Org implements Serializable {
     private String name;
     private String createBy;
     private Data createTime;
