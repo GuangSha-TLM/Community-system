@@ -4,9 +4,13 @@ import com.gsxy.core.pojo.Org;
 
 import java.io.Serializable;
 
+/**
+ * @author zhuxinyu 2023-10-23
+ *      通过id更新Org实体类
+ */
 public class OrgUpdateByIdBo implements Serializable {
     private String token;
-    private Org org;
+    private Org org;    //班级实体类
 
     public OrgUpdateByIdBo(){
 

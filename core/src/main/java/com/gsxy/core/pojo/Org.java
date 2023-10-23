@@ -3,15 +3,19 @@ package com.gsxy.core.pojo;
 import javax.xml.crypto.Data;
 import java.io.Serializable;
 
+/**
+ * @author zhuxinyu 2023-10-23
+ *      班级实体类
+ */
 public class Org implements Serializable {
     private Long id;
-    private String name;
-    private String createBy;
-    private Data createTime;
-    private String updateBy;
-    private Data updateTime;
-    private Integer status;
-    private Integer del_flag;
+    private String name; //班级
+    private String createBy; //创建人
+    private Data createTime; //创建时间
+    private String updateBy; //修改人
+    private Data updateTime; //修改时间
+    private Integer status;  //状态
+    private Integer del_flag;//逻辑删除
     public Org(){
 
     }

@@ -12,11 +12,21 @@ import com.gsxy.core.util.ThreadLocalUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * @author zhuxinyu 2023-10-23
+ *      班级业务实体类接口
+ */
 @Service
 public class OrgServiceImpl implements OrgService {
     @Autowired
     private OrgMapper orgMapper;
 
+    /**
+     * @author zhuxinyu 2023-10-23
+     *     添加Org
+     * @param orgAddByIdBo
+     * @return
+     */
     @Override
     public ResponseVo orgAdd(OrgAddBo orgAddByIdBo){
         String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
@@ -29,6 +39,12 @@ public class OrgServiceImpl implements OrgService {
         return new ResponseVo("增加成功", null, "0x200");
     }
 
+    /**
+     * @author zhuxinyu 2023-10-23
+     *      通过id删除Org
+     * @param orgDeleteByIdBo
+     * @return
+     */
 
     @Override
     public ResponseVo orgDeleteById(OrgDeleteByIdBo orgDeleteByIdBo){
@@ -41,7 +57,12 @@ public class OrgServiceImpl implements OrgService {
         return new ResponseVo("删除成功",id, "0x200");
     }
 
-
+    /**
+     * @author zhuxinyu 2023-10-23
+     *      通过id查找Org
+     * @param orgSelectByIdBo
+     * @return
+     */
     @Override
     public ResponseVo orgSelectById(OrgSelectByIdBo orgSelectByIdBo) {
 
@@ -54,7 +75,12 @@ public class OrgServiceImpl implements OrgService {
         return new ResponseVo("查询成功",org,"0x200");
     }
 
-
+    /**
+     *@author zhuxinyu 2023-10-23
+     *      通过id修改Org
+     * @param orgUpdateByIdBo
+     * @return
+     */
     @Override
     public ResponseVo orgUpdateById(OrgUpdateByIdBo orgUpdateByIdBo){
         String orgIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");

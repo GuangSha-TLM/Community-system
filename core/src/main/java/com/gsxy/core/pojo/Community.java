@@ -3,16 +3,20 @@ package com.gsxy.core.pojo;
 import javax.xml.crypto.Data;
 import java.io.Serializable;
 
+/**
+ * @author zhuxinyu 2023-10-23
+ *      社团实体类
+ */
 public class Community implements Serializable {
     private Long id;
-    private String name;
-    private String createBy;
-    private Data createTime;
-    private String updateBy;
-    private Data updateTime;
-    private Integer status;
-    private Integer del_flag;
-    private String remark;
+    private String name;    //社团班级
+    private String createBy;    //创建人
+    private Data createTime;    //创建时间
+    private String updateBy;    //修改人
+    private Data updateTime;    //修改时间
+    private Integer status;     //状态
+    private Integer del_flag;   //逻辑删除
+    private String remark;      //备注
     public Community(){
 
     }

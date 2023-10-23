@@ -2,6 +2,10 @@ package com.gsxy.core.pojo.bo;
 
 import java.io.Serializable;
 
+/**
+ * @author zhuxinyu 2023-10-23
+ *      通过id查找Org实体类
+ */
 public class OrgSelectByIdBo implements Serializable {
     private String token;
     private Long id;

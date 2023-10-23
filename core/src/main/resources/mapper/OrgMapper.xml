@@ -4,7 +4,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gsxy.core.mapper.OrgMapper">
         
-
+        <!--
+            @author zhuxinyu 2023-10-23
+                添加班级
+        -->
         <insert id="addOrg">
             insert into
                 Org
@@ -14,11 +17,19 @@
                  #{updateBy}, #{updateTime}, 
                  #{status}, #{del_flag} )
         </insert>
-    
+
+        <!--
+            @author zhuxinyu 2023-10-23
+                删除班级
+        -->
         <delete id="deleteByIdOrg">
             delete from Org where id = #{id}
         </delete>
 
+        <!--
+            @author zhuxinyu 2023-10-23
+                查找班级
+        -->
         <select id="selectByIdOrg" resultType="com.gsxy.core.pojo.Org">
             select
                 *
@@ -29,6 +40,10 @@
             limit 1
         </select>
 
+        <!--
+            @author zhuxinyu 2023-10-23
+                更新班级
+        -->
         <update id="updateByIdOrg">
             update org
             <set>
