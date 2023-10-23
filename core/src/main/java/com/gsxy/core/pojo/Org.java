@@ -4,6 +4,7 @@ import javax.xml.crypto.Data;
 import java.io.Serializable;
 
 public class Org implements Serializable {
+    private Long id;
     private String name;
     private String createBy;
     private Data createTime;
@@ -15,7 +16,8 @@ public class Org implements Serializable {
 
     }
 
-    public Org(String name, String createBy, Data createTime, String updateBy, Data updateTime, Integer status, Integer del_flag) {
+    public Org(Long id, String name, String createBy, Data createTime, String updateBy, Data updateTime, Integer status, Integer del_flag) {
+        this.id = id;
         this.name = name;
         this.createBy = createBy;
         this.createTime = createTime;
@@ -23,6 +25,14 @@ public class Org implements Serializable {
         this.updateTime = updateTime;
         this.status = status;
         this.del_flag = del_flag;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -84,7 +94,8 @@ public class Org implements Serializable {
     @Override
     public String toString() {
         return "Org{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", createBy='" + createBy + '\'' +
                 ", createTime=" + createTime +
                 ", updateBy='" + updateBy + '\'' +

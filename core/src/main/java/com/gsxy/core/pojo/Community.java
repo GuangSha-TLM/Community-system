@@ -4,6 +4,7 @@ import javax.xml.crypto.Data;
 import java.io.Serializable;
 
 public class Community implements Serializable {
+    private Long id;
     private String name;
     private String createBy;
     private Data createTime;
@@ -16,7 +17,8 @@ public class Community implements Serializable {
 
     }
 
-    public Community(String name, String createBy, Data createTime, String updateBy, Data updateTime, Integer status, Integer del_flag, String remark) {
+    public Community(Long id, String name, String createBy, Data createTime, String updateBy, Data updateTime, Integer status, Integer del_flag, String remark) {
+        this.id = id;
         this.name = name;
         this.createBy = createBy;
         this.createTime = createTime;
@@ -25,6 +27,14 @@ public class Community implements Serializable {
         this.status = status;
         this.del_flag = del_flag;
         this.remark = remark;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -94,7 +104,8 @@ public class Community implements Serializable {
     @Override
     public String toString() {
         return "Community{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", createBy='" + createBy + '\'' +
                 ", createTime=" + createTime +
                 ", updateBy='" + updateBy + '\'' +

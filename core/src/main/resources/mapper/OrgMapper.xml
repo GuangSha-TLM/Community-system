@@ -3,5 +3,58 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gsxy.core.mapper.OrgMapper">
+        
 
+        <insert id="addOrg">
+            insert into
+                Org
+            values
+                (null, #{name}, 
+                 #{createBy}, #{createTime}, 
+                 #{updateBy}, #{updateTime}, 
+                 #{status}, #{del_flag} )
+        </insert>
+    
+        <delete id="deleteByIdOrg">
+            delete from Org where id = #{id}
+        </delete>
+
+        <select id="selectByIdOrg" resultType="com.gsxy.core.pojo.Org">
+            select
+                *
+            from
+                Org
+            where
+                id = #{id}
+            limit 1
+        </select>
+
+        <update id="updateByIdOrg">
+            update org
+            <set>
+                <if test="name != null and name != '' ">
+                    name = #{name}
+                </if>
+                <if test="createBy != null ">
+                    create_by = #{createBy},
+                </if>
+                <if test="createTime != null ">
+                    create_time = #{createTime},
+                </if>
+                <if test="updateBy != null">
+                    update_by = #{updateBy},
+                </if>
+                <if test="updateTime != null">
+                    update_time = #{updateTime},
+                </if>
+                <if test="status != null">
+                    status = #{status},
+                </if>
+                <if test="delFlag != null">
+                    del_flag = #{delFlag}
+                </if>
+            </set>
+            where
+                id = #{id}
+        </update>
 </mapper>
