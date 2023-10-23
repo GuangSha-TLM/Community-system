@@ -1,11 +1,11 @@
 package com.gsxy.core.service;
 
 
-import com.gsxy.core.domain.bo.ImgAddByBo;
-import com.gsxy.core.domain.bo.ImgDeleteByIdBo;
-import com.gsxy.core.domain.bo.ImgSelectByIdBo;
-import com.gsxy.core.domain.bo.ImgUpdateByIdBo;
-import com.gsxy.core.domain.vo.ResponseVo;
+import com.gsxy.core.pojo.bo.ImgAddByBo;
+import com.gsxy.core.pojo.bo.ImgDeleteByIdBo;
+import com.gsxy.core.pojo.bo.ImgSelectByIdBo;
+import com.gsxy.core.pojo.bo.ImgUpdateByIdBo;
+import com.gsxy.core.pojo.vo.ResponseVo;
 
 /**
  * 2023-10-23
