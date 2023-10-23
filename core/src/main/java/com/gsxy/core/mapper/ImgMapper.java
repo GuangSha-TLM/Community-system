@@ -1,6 +1,6 @@
 package com.gsxy.core.mapper;
 
-import com.gsxy.core.domain.Img;
+import com.gsxy.core.pojo.Img;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
