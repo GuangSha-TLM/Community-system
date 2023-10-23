@@ -1,12 +1,13 @@
 package com.gsxy.core.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 2023-10-23
  * 照片实体类
  */
-public class Img {
+public class Img implements Serializable {
 
     private Long id;
     //图片url
