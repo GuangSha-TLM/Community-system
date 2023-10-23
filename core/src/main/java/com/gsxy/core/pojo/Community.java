@@ -2,7 +2,7 @@ package com.gsxy.core.pojo;
 
 import javax.xml.crypto.Data;
 
-public class Org {
+public class Community {
     private String name;
     private String createBy;
     private Data createTime;
@@ -10,11 +10,12 @@ public class Org {
     private Data updateTime;
     private Integer status;
     private Integer del_flag;
-    public Org(){
+    private String remark;
+    public Community(){
 
     }
 
-    public Org(String name, String createBy, Data createTime, String updateBy, Data updateTime, Integer status, Integer del_flag) {
+    public Community(String name, String createBy, Data createTime, String updateBy, Data updateTime, Integer status, Integer del_flag, String remark) {
         this.name = name;
         this.createBy = createBy;
         this.createTime = createTime;
@@ -22,6 +23,7 @@ public class Org {
         this.updateTime = updateTime;
         this.status = status;
         this.del_flag = del_flag;
+        this.remark = remark;
     }
 
     public String getName() {
@@ -80,9 +82,17 @@ public class Org {
         this.del_flag = del_flag;
     }
 
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
     @Override
     public String toString() {
-        return "Org{" +
+        return "Community{" +
                 "name='" + name + '\'' +
                 ", createBy='" + createBy + '\'' +
                 ", createTime=" + createTime +
@@ -90,6 +100,7 @@ public class Org {
                 ", updateTime=" + updateTime +
                 ", status=" + status +
                 ", del_flag=" + del_flag +
+                ", remark='" + remark + '\'' +
                 '}';
     }
 }
