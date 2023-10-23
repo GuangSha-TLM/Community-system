@@ -8,7 +8,7 @@
          @author Oh… Yeah!!! 2023-10-23
          根据Id查询Img
     -->
-    <select id="selectByIdImg" resultType="com.gsxy.core.domain.Img">
+    <select id="selectByIdImg" resultType="com.gsxy.core.pojo.Img">
         select
             *
         from
@@ -34,7 +34,7 @@
          @author Oh… Yeah!!! 2023-10-23
          增加新数据
     -->
-    <insert id="addImg" parameterType="com.gsxy.core.domain.Img">
+    <insert id="addImg" parameterType="com.gsxy.core.pojo.Img">
         insert into
             img
         values
@@ -47,7 +47,7 @@
           @author Oh… Yeah!!! 2023-10-23
           更新Img数据
     -->
-    <update id="updateByIdImg" parameterType="com.gsxy.core.domain.Img">
+    <update id="updateByIdImg" parameterType="com.gsxy.core.pojo.Img">
             update img
             <set>
                 <if test="url != null and url != '' ">
