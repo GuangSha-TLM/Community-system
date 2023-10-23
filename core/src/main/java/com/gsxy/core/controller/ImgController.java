@@ -5,7 +5,7 @@ import com.gsxy.core.pojo.bo.ImgAddByBo;
 import com.gsxy.core.pojo.bo.ImgDeleteByIdBo;
 import com.gsxy.core.pojo.bo.ImgSelectByIdBo;
 import com.gsxy.core.pojo.bo.ImgUpdateByIdBo;
-
+import com.gsxy.core.service.ImgService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

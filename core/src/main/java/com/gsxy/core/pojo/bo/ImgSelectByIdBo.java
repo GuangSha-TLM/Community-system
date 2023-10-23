@@ -3,6 +3,7 @@ package com.gsxy.core.pojo.bo;
 import java.io.Serializable;
 
 
+
 /**
  *  2023-10-12
  *  通过id查询img
