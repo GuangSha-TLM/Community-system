@@ -1,6 +1,7 @@
 package com.gsxy.core.pojo.bo;
 
-import com.gsxy.core.domain.Img;
+
+import com.gsxy.core.pojo.Img;
 
 import java.io.Serializable;
 
