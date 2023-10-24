@@ -55,7 +55,6 @@
                 id=#{id}
     </delete>
 
-
     <!-- 用户登录 -->
     <select id="userLogin" resultType="com.gsxy.core.pojo.User"
             parameterType="com.gsxy.core.pojo.bo.UserLoginBo">

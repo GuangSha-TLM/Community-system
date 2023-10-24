@@ -8,9 +8,13 @@ import com.gsxy.core.pojo.bo.OrgUpdateByIdBo;
 import com.gsxy.core.service.SystemService;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-@Service
+@Component
+@Aspect
 public class OrgControllerAopImpl implements OrgControllerAop {
 
     @Autowired
@@ -22,7 +26,7 @@ public class OrgControllerAopImpl implements OrgControllerAop {
      * @return
      */
     @Override
-    @After("execution(* com.gsxy.core.controller.*.*(..))")
+    @Before("execution(* com.gsxy.core.controller.OrgController.orgAdd(..))")
     public String OrgAdd(JoinPoint joinPoint) {
         Object[] args = joinPoint.getArgs();
         OrgAddBo arg = (OrgAddBo) args[0];
@@ -37,6 +41,7 @@ public class OrgControllerAopImpl implements OrgControllerAop {
      * @return
      */
     @Override
+    @Before("execution(* com.gsxy.core.controller.OrgController.orgDeleteById(..))")
     public String OrgDeleteById(JoinPoint joinPoint) {
         Object[] args = joinPoint.getArgs();
         OrgDeleteByIdBo arg = (OrgDeleteByIdBo) args[0];
@@ -52,7 +57,7 @@ public class OrgControllerAopImpl implements OrgControllerAop {
      * @return
      */
     @Override
-    @After("execution(* com.gsxy.core.controller.*.*(..))")
+    @Before("execution(* com.gsxy.core.controller.OrgController.orgSelectById(..))")
     public String OrgSelectById(JoinPoint joinPoint) {
         Object[] args = joinPoint.getArgs();
         OrgSelectByIdBo arg = (OrgSelectByIdBo) args[0];
@@ -68,7 +73,7 @@ public class OrgControllerAopImpl implements OrgControllerAop {
      * @return
      */
     @Override
-    @After("execution(* com.gsxy.core.controller.*.*(..))")
+    @Before("execution(* com.gsxy.core.controller.OrgController.orgUpdateById(..))")
     public String OrgUpdateById(JoinPoint joinPoint) {
         Object[] args = joinPoint.getArgs();
         OrgUpdateByIdBo arg = (OrgUpdateByIdBo) args[0];

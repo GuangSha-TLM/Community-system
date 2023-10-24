@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gsxy.core.mapper.ActiveMapper">
+
+    <!-- 添加活动功能 -->
+    <insert id="addActive">
+        insert into
+            active
+        values
+            (null,#{title},#{context},#{community},#{communityList},
+             #{startTime},#{endTime},#{createTime},#{updateTime}
+                ,#{updateBy},#{createBy},#{status},#{delFlag})
+    </insert>
+
+</mapper>

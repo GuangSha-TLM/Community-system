@@ -1,8 +1,5 @@
 package com.gsxy.core.pojo;
 
-
-import org.w3c.dom.Text;
-
 import java.io.Serializable;
 import java.util.Date;
 
@@ -10,19 +7,22 @@ public class Activity implements Serializable {
 
     private Long id;//ID
     private String title;//活动标题
-    private Text context;//活动内容
+    private String context;//活动内容
     private Integer community;//所属社团活动
     private String communityList;//status为1的时候存放所有参加社团的json str
     private Date startTime;//开始时间
     private Date endTime;//结束时间
     private Date createTime;//创建时间
     private Date updateTime;//修改时间
-    private Integer updateBy;//修改人
-    private Integer createBy;//创建人
+    private Long updateBy;//修改人
+    private Long createBy;//创建人
     private Integer status;//0为私有活动 1多个社团活动 2 所有社团活动
     private Integer delFlag;//逻辑删除
 
-    public Activity(Long id, String title, Text context, Integer community, String communityList, Date startTime, Date endTime, Date createTime, Date updateTime, Integer updateBy, Integer createBy, Integer status, Integer delFlag) {
+    public Activity() {
+    }
+
+    public Activity(Long id, String title, String context, Integer community, String communityList, Date startTime, Date endTime, Date createTime, Date updateTime, Long updateBy, Long createBy, Integer status, Integer delFlag) {
         this.id = id;
         this.title = title;
         this.context = context;
@@ -36,9 +36,6 @@ public class Activity implements Serializable {
         this.createBy = createBy;
         this.status = status;
         this.delFlag = delFlag;
-    }
-
-    public Activity() {
     }
 
     public Long getId() {
@@ -57,11 +54,11 @@ public class Activity implements Serializable {
         this.title = title;
     }
 
-    public Text getContext() {
+    public String getContext() {
         return context;
     }
 
-    public void setContext(Text context) {
+    public void setContext(String context) {
         this.context = context;
     }
 
@@ -113,19 +110,19 @@ public class Activity implements Serializable {
         this.updateTime = updateTime;
     }
 
-    public Integer getUpdateBy() {
+    public Long getUpdateBy() {
         return updateBy;
     }
 
-    public void setUpdateBy(Integer updateBy) {
+    public void setUpdateBy(Long updateBy) {
         this.updateBy = updateBy;
     }
 
-    public Integer getCreateBy() {
+    public Long getCreateBy() {
         return createBy;
     }
 
-    public void setCreateBy(Integer createBy) {
+    public void setCreateBy(Long createBy) {
         this.createBy = createBy;
     }
 
@@ -150,7 +147,7 @@ public class Activity implements Serializable {
         return "Activity{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", context=" + context +
+                ", context='" + context + '\'' +
                 ", community=" + community +
                 ", communityList='" + communityList + '\'' +
                 ", startTime=" + startTime +
@@ -164,3 +161,4 @@ public class Activity implements Serializable {
                 '}';
     }
 }
+
