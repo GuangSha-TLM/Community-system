@@ -75,6 +75,11 @@ public class OrgServiceImpl implements OrgService {
         return new ResponseVo("查询成功",org,"0x200");
     }
 
+    @Override
+    public ResponseVo orgSelectAll() {
+        return null;
+    }
+
     /**
      *@author zhuxinyu 2023-10-23
      *      通过id修改Org
