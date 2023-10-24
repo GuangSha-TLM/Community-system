@@ -12,7 +12,7 @@
             insert into
                 Org
             values
-                (null, #{name}, 
+                (null, #{college}, #{grade}, #{name},
                  #{createBy}, #{createTime}, 
                  #{updateBy}, #{updateTime}, 
                  #{status}, #{del_flag} )
@@ -47,6 +47,12 @@
         <update id="updateByIdOrg">
             update Org
             <set>
+                <if test="college != null">
+                    college = #{college},
+                </if>
+                <if test="grade != null and grade != ''">
+                    grade = #{grade},
+                </if>
                 <if test="name != null and name != '' ">
                     name = #{name}
                 </if>
