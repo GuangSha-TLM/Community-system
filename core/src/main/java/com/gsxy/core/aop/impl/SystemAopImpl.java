@@ -5,6 +5,10 @@ import com.gsxy.core.util.ThreadLocalUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 
+
+/**
+ * @author zhuxinyu
+ */
 public class SystemAopImpl implements SystemAop {
     /**
      * @author zhuxinyu

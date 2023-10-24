@@ -2,6 +2,9 @@ package com.gsxy.core.aop;
 
 import org.aspectj.lang.JoinPoint;
 
+/**
+ * @author zhuxinyu
+ */
 public interface SystemAop {
     /**
      * @author zhuxinyu
