@@ -57,21 +57,11 @@ public class UserServiceImpl implements UserService {
         User user = userMapper.userLogin(userLoginBo);
 
         //比较用户密码和数据库中密码是否一致
-        if(user == null || user.getPassword().equals(userLoginBo.getPassword())){
+        if(user == null || !user.getPassword().equals(userLoginBo.getPassword())){
             return new ResponseVo("登录失败",null,"0x500");
         }
 
-        String jwt = JwtUtil.createJWT(user);
-        Integer role = user.getRole();
-
-        //登录时权限变为用户角色
-        user.setRole(0);
-
-        HashMap<String, Object> map = new HashMap<>();
-        map.put("jwt",jwt);
-        map.put("role",role);
-
-        return new ResponseVo("登录成功",map,"0x200");
+        return new ResponseVo("登录成功",user,"0x200");
     }
 
     /**

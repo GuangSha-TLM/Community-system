@@ -17,7 +17,7 @@ public class ActivityController {
 
 //    @PostMapping("/add")
 //    @ApiOperation("添加活动")
-//    public String addActivity(@RequestBody ){
+//    public String addActivity(@RequestBody ActivityAddBo addActivityBo){
 //
 //    }
 
