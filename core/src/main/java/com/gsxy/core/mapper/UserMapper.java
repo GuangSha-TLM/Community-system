@@ -47,7 +47,7 @@ public interface UserMapper {
      * @param id
      * @return
      */
-    Long deleteByUserId(String id);
+    Long deleteByUserId(Long id);
 
     /**
      * @author hln 2023-10-23

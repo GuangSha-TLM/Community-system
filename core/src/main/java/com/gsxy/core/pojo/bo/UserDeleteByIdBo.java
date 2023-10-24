@@ -5,9 +5,9 @@ import java.io.Serializable;
 public class UserDeleteByIdBo implements Serializable {
 
     private String token;
-    private String id;
+    private Long id;
 
-    public UserDeleteByIdBo(String token, String id) {
+    public UserDeleteByIdBo(String token, Long id) {
         this.token = token;
         this.id = id;
     }
@@ -23,11 +23,11 @@ public class UserDeleteByIdBo implements Serializable {
         this.token = token;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -35,7 +35,7 @@ public class UserDeleteByIdBo implements Serializable {
     public String toString() {
         return "UserDeleteByIdBo{" +
                 "token='" + token + '\'' +
-                ", id='" + id + '\'' +
+                ", id=" + id +
                 '}';
     }
 }

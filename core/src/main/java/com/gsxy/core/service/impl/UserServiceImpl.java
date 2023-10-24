@@ -61,7 +61,10 @@ public class UserServiceImpl implements UserService {
             return new ResponseVo("登录失败",null,"0x500");
         }
 
-        return new ResponseVo("登录成功",user,"0x200");
+        String jwt = JwtUtil.createJWT(user);
+
+
+        return new ResponseVo("登录成功",jwt,"0x200");
     }
 
     /**

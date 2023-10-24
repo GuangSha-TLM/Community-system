@@ -19,7 +19,7 @@
                 username = #{username},
             </if>
             <if test="password != null and password != ''">
-                password = #{username},
+                password = #{password},
             </if>
             <if test="name != null and name != ''">
                 name = #{name},
@@ -52,12 +52,13 @@
     </update>
 
     <!-- 根据id删除用户 -->
-    <delete id="deleteByUserId" parameterType="java.lang.String">
-        delete
-        from user
-        where
-            id=#{id}
+    <delete id="deleteByUserId" parameterType="java.lang.Long">
+            delete
+            from user
+            where
+                id=#{id}
     </delete>
+
 
     <!-- 用户登录 -->
     <select id="userLogin" resultType="com.gsxy.core.pojo.User"
