@@ -47,5 +47,14 @@ public interface UserAdminService {
     public ResponseVo userAdminUpdateById(UserAdminUpdateByIdBo userAdminUpdateByIdBo);
 
 
+    /**
+     * @author Oh… Yeah!!!, 2023-10-24
+     *      管理员登录验证
+     * @param userAdminLoginBo
+     * @return String.classs
+     */
+ /*   public ResponseVo userAdminLogin(UserAdminLoginBo userAdminLoginBo);
+
+*/
 
 }

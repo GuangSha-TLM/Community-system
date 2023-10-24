@@ -5,6 +5,7 @@ import com.gsxy.core.pojo.bo.UserAdminAddByBo;
 import com.gsxy.core.pojo.bo.UserAdminDeleteByIdBo;
 import com.gsxy.core.pojo.bo.UserAdminSelectByIdBo;
 import com.gsxy.core.pojo.bo.UserAdminUpdateByIdBo;
+import com.gsxy.core.pojo.vo.ResponseVo;
 import com.gsxy.core.service.UserAdminService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -23,6 +24,23 @@ public class UserAdminController {
 
     @Autowired
     private UserAdminService userAdminService;
+
+    /**
+     * @author Oh… Yeah!!!, 2023-10-24
+     *      管理员登录验证
+     * @param userAdminLoginBo
+     * @return String.classs
+     */
+/*    @PostMapping("/login")
+    @ApiOperation("管理员登入")
+    public String adminLogin(@RequestBody UserAdminLoginBo userAdminLoginBo){
+        if (userAdminLoginBo == null){
+            JSONArray.toJSONString( new ResponseVo("参数为null", null, "0x455"));
+        }
+
+        return JSONArray.toJSONString(userAdminService.userAdminLogin(userAdminLoginBo));
+    }*/
+
 
     /**
      * @author Oh… Yeah!!!, 2023-10-24
@@ -55,7 +73,7 @@ public class UserAdminController {
      * @return String.class
      */
     @PostMapping("/add")
-    @ApiOperation("增加img数据")
+    @ApiOperation("增加UserAdmin数据")
     public String userAdminAdd(@RequestBody UserAdminAddByBo userAdminAddByBo){
         return JSONArray.toJSONString(userAdminService.userAdminAdd(userAdminAddByBo));
     }
@@ -66,7 +84,7 @@ public class UserAdminController {
      * @param userAdminUpdateByIdBo
      * @return String.class
      */
-    @ApiOperation("通过id修改Img数据")
+    @ApiOperation("通过id修改UserAdmin数据")
     @PostMapping("/update")
     public String userAdminUpdateById(@RequestBody UserAdminUpdateByIdBo userAdminUpdateByIdBo){
         return JSONArray.toJSONString(userAdminService.userAdminUpdateById(userAdminUpdateByIdBo));
