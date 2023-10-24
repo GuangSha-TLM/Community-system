@@ -2,7 +2,6 @@ package com.gsxy.core.aop.impl;
 
 import com.gsxy.core.aop.ActivityControllerAop;
 import com.gsxy.core.pojo.Activity;
-import com.gsxy.core.pojo.bo.ActivityAddBo;
 import com.gsxy.core.service.SystemService;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Before;
