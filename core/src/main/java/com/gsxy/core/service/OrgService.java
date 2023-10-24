@@ -36,6 +36,12 @@ public interface OrgService {
      */
     public ResponseVo orgSelectById(OrgSelectByIdBo orgSelectByIdBo);
 
+    /**
+     * @author zhuxinyu 2023-10-24
+     *      查询所有数据
+     * @return
+     */
+    public ResponseVo orgSelectAll();
 
     /**
      *@author zhuxinyu 2023-10-23
@@ -44,4 +50,5 @@ public interface OrgService {
      * @return
      */
     public ResponseVo orgUpdateById(OrgUpdateByIdBo orgUpdateByIdBo);
+
 }
