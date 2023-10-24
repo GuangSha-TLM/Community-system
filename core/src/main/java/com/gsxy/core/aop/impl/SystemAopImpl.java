@@ -13,7 +13,7 @@ public class SystemAopImpl implements SystemAop {
      * @throws Exception
      */
     @Override
-    @After("execution(* com.example.complaint_system.controller.*.*(..))")
+    @After("execution(* com.gsxy.core.controller.*.*(..))")
     public void removeAllThreadLocal(JoinPoint joinpoint) throws Exception {
         ThreadLocalUtil.mapThreadLocalOfJWT.remove();
         ThreadLocalUtil.mapThreadLocal.remove();
