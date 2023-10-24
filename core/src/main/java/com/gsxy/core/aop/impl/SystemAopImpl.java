@@ -5,13 +5,12 @@ import com.gsxy.core.util.ThreadLocalUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 
-
 /**
- * @author zhuxinyu
+ * @author zhuxinyu 2023-10-23
  */
 public class SystemAopImpl implements SystemAop {
     /**
-     * @author zhuxinyu
+     * @author zhuxinyu 2023-10-23
      * 清理ThreadLocal 防止内存泄漏
      * @param joinpoint
      * @throws Exception

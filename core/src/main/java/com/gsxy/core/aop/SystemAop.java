@@ -3,11 +3,11 @@ package com.gsxy.core.aop;
 import org.aspectj.lang.JoinPoint;
 
 /**
- * @author zhuxinyu
+ * @author zhuxinyu 2023-10-23
  */
 public interface SystemAop {
     /**
-     * @author zhuxinyu
+     * @author zhuxinyu 2023-10-23
      * 清理ThreadLocal 防止内存泄露
      * @param joinpoint
      * @throws Exception
