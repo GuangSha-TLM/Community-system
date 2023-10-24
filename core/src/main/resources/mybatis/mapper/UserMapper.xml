@@ -24,7 +24,7 @@
             <if test="name != null and name != ''">
                 name = #{name},
             </if>
-            <if test="college != null and college != ''">
+            <if test="college != null">
                 college = #{college},
             </if>
             <if test="studentId != null and studentId != ''">
@@ -33,11 +33,8 @@
             <if test="org != null and org != ''">
                 org = #{org},
             </if>
-            <if test="updateBy != null and updateBy != ''">
-                update_by = #{updateBy},
-            </if>
-            <if test="updateTime != null and updateTime != ''">
-                update_time = #{updateTime},
+            <if test="true">
+                update_by = #{updateBy},update_time = #{updateTime},
             </if>
             <if test="status != null and status != ''">
                 status = #{status},
@@ -46,9 +43,8 @@
                 del_flag = #{delFlag}
             </if>
         </set>
-        <where>
-            id=#{id}
-        </where>
+        where
+            id = #{id}
     </update>
 
     <!-- 根据id删除用户 -->

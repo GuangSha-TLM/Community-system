@@ -13,10 +13,10 @@ public class User implements Serializable {
     private String password;
     private String name;
     private Integer college;
-    private String org;
     private String studentId;
-    private Date createTime;
+    private String org;
     private Long createBy;
+    private Date createTime;
     private Long updateBy;
     private Date updateTime;
     private Integer status;
