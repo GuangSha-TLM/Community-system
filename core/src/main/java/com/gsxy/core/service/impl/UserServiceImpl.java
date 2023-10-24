@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService {
 
         //比较用户密码和数据库中密码是否一致
         if(user == null || user.getPassword().equals(userLoginBo.getPassword())){
-
+            return new ResponseVo("登录失败",null,"0x500");
         }
 
         String jwt = JwtUtil.createJWT(user);
