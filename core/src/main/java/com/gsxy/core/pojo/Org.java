@@ -107,11 +107,11 @@ public class Org implements Serializable {
         this.status = status;
     }
 
-    public Integer getdelFlag() {
+    public Integer getDelFlag() {
         return delFlag;
     }
 
-    public void setdelFlag(Integer delFlag) {
+    public void setDelFlag(Integer delFlag) {
         this.delFlag = delFlag;
     }
 
@@ -122,9 +122,9 @@ public class Org implements Serializable {
                 ", college=" + college +
                 ", grade='" + grade + '\'' +
                 ", name='" + name + '\'' +
-                ", createBy='" + createBy + '\'' +
+                ", createBy=" + createBy +
                 ", createTime=" + createTime +
-                ", updateBy='" + updateBy + '\'' +
+                ", updateBy=" + updateBy +
                 ", updateTime=" + updateTime +
                 ", status=" + status +
                 ", delFlag=" + delFlag +

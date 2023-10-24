@@ -49,7 +49,7 @@ public class OrgServiceImpl implements OrgService {
         Long id = orgDeleteByIdBo.getId();
 
         Long aLong = orgMapper.deleteByIdOrg(id);
-        if (aLong.longValue() != 0L) {
+        if (aLong.longValue() == 0L) {
             return new ResponseVo("删除失败", null, "0x500");
         }
         return new ResponseVo("删除成功",id, "0x200");
