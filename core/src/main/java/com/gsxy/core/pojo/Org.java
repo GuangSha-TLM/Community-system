@@ -9,6 +9,8 @@ import java.io.Serializable;
  */
 public class Org implements Serializable {
     private Long id;
+    private Integer college;//学院
+    private String grade;//年级
     private String name; //班级
     private String createBy; //创建人
     private Data createTime; //创建时间
@@ -20,8 +22,10 @@ public class Org implements Serializable {
 
     }
 
-    public Org(Long id, String name, String createBy, Data createTime, String updateBy, Data updateTime, Integer status, Integer del_flag) {
+    public Org(Long id, Integer college, String grade, String name, String createBy, Data createTime, String updateBy, Data updateTime, Integer status, Integer del_flag) {
         this.id = id;
+        this.college = college;
+        this.grade = grade;
         this.name = name;
         this.createBy = createBy;
         this.createTime = createTime;
@@ -37,6 +41,22 @@ public class Org implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Integer getCollege() {
+        return college;
+    }
+
+    public void setCollege(Integer college) {
+        this.college = college;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
     }
 
     public String getName() {
@@ -99,6 +119,8 @@ public class Org implements Serializable {
     public String toString() {
         return "Org{" +
                 "id=" + id +
+                ", college=" + college +
+                ", grade='" + grade + '\'' +
                 ", name='" + name + '\'' +
                 ", createBy='" + createBy + '\'' +
                 ", createTime=" + createTime +
@@ -109,3 +131,4 @@ public class Org implements Serializable {
                 '}';
     }
 }
+

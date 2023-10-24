@@ -12,10 +12,8 @@ public class User implements Serializable {
     private String username;
     private String password;
     private String name;
-    private Integer role;
     private Integer college;
     private String org;
-    private String grade;
     private String studentId;
     private Date createTime;
     private Long createBy;
@@ -24,15 +22,13 @@ public class User implements Serializable {
     private Integer status;
     private Integer delFlag;
 
-    public User(Long id, String username, String password, String name, Integer role, Integer college, String org, String grade, String studentId, Date createTime, Long createBy, Long updateBy, Date updateTime, Integer status, Integer delFlag) {
+    public User(Long id, String username, String password, String name, Integer college, String org, String studentId, Date createTime, Long createBy, Long updateBy, Date updateTime, Integer status, Integer delFlag) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.name = name;
-        this.role = role;
         this.college = college;
         this.org = org;
-        this.grade = grade;
         this.studentId = studentId;
         this.createTime = createTime;
         this.createBy = createBy;
@@ -77,14 +73,6 @@ public class User implements Serializable {
         this.name = name;
     }
 
-    public Integer getRole() {
-        return role;
-    }
-
-    public void setRole(Integer role) {
-        this.role = role;
-    }
-
     public Integer getCollege() {
         return college;
     }
@@ -99,14 +87,6 @@ public class User implements Serializable {
 
     public void setOrg(String org) {
         this.org = org;
-    }
-
-    public String getGrade() {
-        return grade;
-    }
-
-    public void setGrade(String grade) {
-        this.grade = grade;
     }
 
     public String getStudentId() {
@@ -172,10 +152,8 @@ public class User implements Serializable {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
-                ", role=" + role +
                 ", college=" + college +
                 ", org='" + org + '\'' +
-                ", grade='" + grade + '\'' +
                 ", studentId='" + studentId + '\'' +
                 ", createTime=" + createTime +
                 ", createBy=" + createBy +
