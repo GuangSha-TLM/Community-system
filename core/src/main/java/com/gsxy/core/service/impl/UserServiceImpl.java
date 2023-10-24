@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService {
             return new ResponseVo("登录失败",null,"0x500");
         }
 
-        return new ResponseVo("登录成功",user,"0x200");
+        return new ResponseVo("登录成功",userLoginBo.getToken(),"0x200");
     }
 
     /**
@@ -91,7 +91,7 @@ public class UserServiceImpl implements UserService {
             return new ResponseVo("删除失败",null,"0x500");
         }
 
-        return new ResponseVo("删除成功",aLong,"0x200");
+        return new ResponseVo("删除成功",null,"0x200");
     }
 
     /**
