@@ -31,13 +31,6 @@ public class UserAdminServiceImpl implements UserAdminService {
     @Override
     public ResponseVo userAdminSelectById(UserAdminSelectByIdBo userAdminSelectByIdBo) {
 
-        String imgIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
-        Long imgId = Long.valueOf(imgIdOfStr);
-
-        if (imgId == 0L){
-            return new ResponseVo("token解析失败或者未传入token,", null, "0x501");
-        }
-
         UserAdmin userAdmin = userAdminMapper.selectByIdUserAdmin(userAdminSelectByIdBo.getId());
 
         if (userAdmin == null) {
@@ -55,13 +48,6 @@ public class UserAdminServiceImpl implements UserAdminService {
      */
     @Override
     public ResponseVo userAdminDeleteById(UserAdminDeleteByIdBo userAdminDeleteByIdBo) {
-
-        String imgIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
-        Long imgId = Long.valueOf(imgIdOfStr);
-
-        if (imgId == 0L){
-            return new ResponseVo("token解析失败或者未传入token,", null, "0x501");
-        }
 
         Long id = userAdminDeleteByIdBo.getId();
         Long numbersOfOpetion = userAdminMapper.deleteByIdUserAdmin(id);
@@ -82,12 +68,6 @@ public class UserAdminServiceImpl implements UserAdminService {
      */
     @Override
     public ResponseVo userAdminAdd(UserAdminAddByBo userAdminAddByBo) {
-        String userAdminIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
-        Long userAdminId = Long.valueOf(userAdminIdOfStr);
-
-        if (userAdminId == 0L){
-            return new ResponseVo("token解析失败或者未传入token,", null, "0x501");
-        }
 
         Long aLong = userAdminMapper.addUserAdmin(userAdminAddByBo.getUserAdmin());
 
@@ -106,12 +86,6 @@ public class UserAdminServiceImpl implements UserAdminService {
      */
     @Override
     public ResponseVo userAdminUpdateById(UserAdminUpdateByIdBo userAdminUpdateByIdBo) {
-        String userAdminIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
-        Long userAdminId = Long.valueOf(userAdminIdOfStr);
-
-        if (userAdminId == 0L){
-            return new ResponseVo("token解析失败或者未传入token,", null, "0x501");
-        }
 
         UserAdmin userAdmin = userAdminUpdateByIdBo.getUserAdmin();
         Long numbersOfOpertion = userAdminMapper.updateByIdUserAdmin(userAdmin);
