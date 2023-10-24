@@ -29,8 +29,6 @@ public class OrgServiceImpl implements OrgService {
      */
     @Override
     public ResponseVo orgAdd(OrgAddBo orgAddByIdBo){
-        String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
-        Long userId = Long.valueOf(userIdOfStr);
         Long  aLong = orgMapper.addOrg(orgAddByIdBo.getOrg());
         if (aLong.longValue() == 0L) {
             return new ResponseVo("增加失败",  null, "0x500");
@@ -88,9 +86,6 @@ public class OrgServiceImpl implements OrgService {
      */
     @Override
     public ResponseVo orgUpdateById(OrgUpdateByIdBo orgUpdateByIdBo){
-        String orgIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
-        Long orgId = Long.valueOf(orgIdOfStr);
-
         Org org = orgUpdateByIdBo.getOrg();
         Long aLong = orgMapper.updateByIdOrg(org);
 
