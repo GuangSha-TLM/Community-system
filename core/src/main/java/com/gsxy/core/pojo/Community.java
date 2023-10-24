@@ -11,9 +11,9 @@ import java.util.Date;
 public class Community implements Serializable {
     private Long id;
     private String name;    //社团班级
-    private String createBy;    //创建人
+    private Long createBy;    //创建人
     private Date createTime;    //创建时间
-    private String updateBy;    //修改人
+    private Long updateBy;    //修改人
     private Date updateTime;    //修改时间
     private Integer status;     //状态
     private Integer del_flag;   //逻辑删除
@@ -22,7 +22,7 @@ public class Community implements Serializable {
 
     }
 
-    public Community(Long id, String name, String createBy, Date createTime, String updateBy, Date updateTime, Integer status, Integer del_flag, String remark) {
+    public Community(Long id, String name, Long createBy, Date createTime, Long updateBy, Date updateTime, Integer status, Integer del_flag, String remark) {
         this.id = id;
         this.name = name;
         this.createBy = createBy;
@@ -50,11 +50,11 @@ public class Community implements Serializable {
         this.name = name;
     }
 
-    public String getCreateBy() {
+    public Long getCreateBy() {
         return createBy;
     }
 
-    public void setCreateBy(String createBy) {
+    public void setCreateBy(Long createBy) {
         this.createBy = createBy;
     }
 
@@ -66,11 +66,11 @@ public class Community implements Serializable {
         this.createTime = createTime;
     }
 
-    public String getUpdateBy() {
+    public Long getUpdateBy() {
         return updateBy;
     }
 
-    public void setUpdateBy(String updateBy) {
+    public void setUpdateBy(Long updateBy) {
         this.updateBy = updateBy;
     }
 

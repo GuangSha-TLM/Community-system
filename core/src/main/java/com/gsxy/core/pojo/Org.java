@@ -12,17 +12,17 @@ public class Org implements Serializable {
     private Integer college;//学院
     private String grade;//年级
     private String name; //班级
-    private String createBy; //创建人
+    private Long createBy; //创建人
     private Date createTime; //创建时间
-    private String updateBy; //修改人
+    private Long updateBy; //修改人
     private Date updateTime; //修改时间
     private Integer status;  //状态
-    private Integer del_flag;//逻辑删除
+    private Integer delFlag;//逻辑删除
     public Org(){
 
     }
 
-    public Org(Long id, Integer college, String grade, String name, String createBy, Date createTime, String updateBy, Date updateTime, Integer status, Integer del_flag) {
+    public Org(Long id, Integer college, String grade, String name, Long createBy, Date createTime, Long updateBy, Date updateTime, Integer status, Integer delFlag) {
         this.id = id;
         this.college = college;
         this.grade = grade;
@@ -32,7 +32,7 @@ public class Org implements Serializable {
         this.updateBy = updateBy;
         this.updateTime = updateTime;
         this.status = status;
-        this.del_flag = del_flag;
+        this.delFlag = delFlag;
     }
 
     public Long getId() {
@@ -67,11 +67,11 @@ public class Org implements Serializable {
         this.name = name;
     }
 
-    public String getCreateBy() {
+    public Long getCreateBy() {
         return createBy;
     }
 
-    public void setCreateBy(String createBy) {
+    public void setCreateBy(Long createBy) {
         this.createBy = createBy;
     }
 
@@ -83,11 +83,11 @@ public class Org implements Serializable {
         this.createTime = createTime;
     }
 
-    public String getUpdateBy() {
+    public Long getUpdateBy() {
         return updateBy;
     }
 
-    public void setUpdateBy(String updateBy) {
+    public void setUpdateBy(Long updateBy) {
         this.updateBy = updateBy;
     }
 
@@ -107,12 +107,12 @@ public class Org implements Serializable {
         this.status = status;
     }
 
-    public Integer getDel_flag() {
-        return del_flag;
+    public Integer getdelFlag() {
+        return delFlag;
     }
 
-    public void setDel_flag(Integer del_flag) {
-        this.del_flag = del_flag;
+    public void setdelFlag(Integer delFlag) {
+        this.delFlag = delFlag;
     }
 
     @Override
@@ -127,7 +127,7 @@ public class Org implements Serializable {
                 ", updateBy='" + updateBy + '\'' +
                 ", updateTime=" + updateTime +
                 ", status=" + status +
-                ", del_flag=" + del_flag +
+                ", delFlag=" + delFlag +
                 '}';
     }
 }
