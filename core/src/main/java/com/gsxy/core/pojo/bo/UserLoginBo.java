@@ -7,15 +7,25 @@ import java.io.Serializable;
  */
 public class UserLoginBo implements Serializable {
 
+    private String token;
     private String username;
     private String password;
 
-    public UserLoginBo(String username, String password) {
+    public UserLoginBo(String token, String username, String password) {
+        this.token = token;
         this.username = username;
         this.password = password;
     }
 
     public UserLoginBo() {
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public String getUsername() {
@@ -37,7 +47,8 @@ public class UserLoginBo implements Serializable {
     @Override
     public String toString() {
         return "UserLoginBo{" +
-                "username='" + username + '\'' +
+                "token='" + token + '\'' +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }
