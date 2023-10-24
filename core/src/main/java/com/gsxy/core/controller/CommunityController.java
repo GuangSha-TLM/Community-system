@@ -16,6 +16,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
+/**
+ * @author zhuxinyu 2023-10-24
+ *      社团板块控制器
+ */
 @CrossOrigin
 @Api(value = "社团板块接口" , tags = {"社团板块接口"})
 @RestController
@@ -23,6 +27,13 @@ import java.util.Map;
 public class CommunityController {
     @Autowired
     private CommunityService communityService;
+
+    /**
+     * @author zhuxinyu 2023-10-24
+     *      添加社团数据
+     * @param communityAddByIdBo
+     * @return
+     */
     @PostMapping("/add")
     @ApiOperation("添加社团数据")
     public String Communityadd(@RequestBody CommunityAddBo communityAddByIdBo){
@@ -34,12 +45,24 @@ public class CommunityController {
         return JSONArray.toJSONString(communityService.addCommunity(communityAddByIdBo));
     }
 
+    /**
+     * @author zhuxinyu 2023-10-24
+     *      通过id删除社团数据
+     * @param communityDeleteByIdBo
+     * @return
+     */
     @PostMapping("/delete")
     @ApiOperation("通过id删除社团数据")
     public String CommunityDeleteById(@RequestBody CommunityDeleteByIdBo communityDeleteByIdBo){
         return JSONArray.toJSONString(communityService.deleteByIdCommunity(communityDeleteByIdBo));
     }
 
+    /**
+     * @author zhuxinyu 2023-10-24
+     *      通过id查找社团数据
+     * @param communitySelectByIdBo
+     * @return
+     */
     @PostMapping("/select")
     @ApiOperation("通过id查找社团数据")
     public String CommunitySelectById(@RequestBody CommunitySelectByIdBo communitySelectByIdBo){
@@ -51,6 +74,12 @@ public class CommunityController {
         return JSONArray.toJSONString(communityService.selectByIdCommunity(communitySelectByIdBo));
     }
 
+    /**
+     * @author zhuxinyu 2023-10-24
+     *      通过id修改社团数据
+     * @param communityUpdateByIdBo
+     * @return
+     */
     @PostMapping("/update")
     @ApiOperation("通过id修改社团数据")
     public String CommunityUpdateById(@RequestBody CommunityUpdateByIdBo communityUpdateByIdBo){

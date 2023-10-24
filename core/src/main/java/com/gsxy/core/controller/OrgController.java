@@ -17,7 +17,7 @@ import java.util.Map;
 
 /**
  * @author zhuxinyu 2023-10-23
- *      班级板块接口
+ *      班级板块控制器
  */
 @CrossOrigin
 @Api(value = "班级版块接口", tags = {"班级板块接口"})

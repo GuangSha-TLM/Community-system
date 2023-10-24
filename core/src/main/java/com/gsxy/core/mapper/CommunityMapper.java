@@ -22,10 +22,10 @@ public interface CommunityMapper {
     public Long deleteByIdcommunity(Long id);
 
     /**
+     * @author zhuxinyu 2023-10-24
+     *      查找社团
      * @param id
      * @return
-     * @author zhuxinyu 2023-10-24
-     * 查找社团
      */
     public Community selectByIdcommunity(Long id);
 
