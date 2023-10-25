@@ -130,5 +130,11 @@ public class Org implements Serializable {
                 ", del_flag=" + delFlag +
                 '}';
     }
+
+    public void setCreateBy(Long userId) {
+    }
+
+    public void setUpdateBy(Long userId) {
+    }
 }
 

@@ -62,7 +62,7 @@ public class OrgController {
      * @return
      */
     @PostMapping("/select")
-    @ApiOperation("根据userId查询Org数据")
+    @ApiOperation("根据Id查询Org数据")
     public String orgSelectById(@RequestBody OrgSelectByIdBo orgSelectByIdBo){
         Map<String, String> map = ThreadLocalUtil.mapThreadLocal.get();
         ThreadLocalUtil.mapThreadLocal.remove();
