@@ -39,7 +39,10 @@
                 id = #{id}
             limit 1
         </select>
-
+        <!--
+            @author zhuxinyu 2023-10-25
+            查找所有信息
+        -->
         <select id="selectAll" resultType="com.gsxy.core.pojo.bo.OrgAndUserBo">
             SELECT DISTINCT org.id, org.college, org.`name`, org.grade, org.create_time, org.update_time, `user`.username
             FROM org
