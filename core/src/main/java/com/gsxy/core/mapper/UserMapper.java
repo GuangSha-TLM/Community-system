@@ -39,7 +39,7 @@ public interface UserMapper {
      * @param userId
      * @return
      */
-    List<User> selectByUserId(Long userId);
+    User selectByUserId(Long userId);
 
     /**
      * @author hln 2023-10-23

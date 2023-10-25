@@ -80,13 +80,21 @@ public class UserServiceImpl implements UserService {
         String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
         Long userId = Long.valueOf(userIdOfStr);
 
-        List<User> list = userMapper.selectByUserId(userId);
+        if(userId == null || userId == 0L){
+            return new ResponseVo("token解析失败",null,"0x501");
+        }
 
-        if(list == null || userId == 0L){
+        if (userId != userSelectByUserIdBo.getId()){
+            return new ResponseVo("查询id与用户id不符",null,"0x500");
+        }
+
+        User user = userMapper.selectByUserId(userSelectByUserIdBo.getId());
+
+        if(user == null){
             return new ResponseVo("查询条件不存在",null,"0x500");
         }
 
-        return new ResponseVo("查找成功",list,"0x200");
+        return new ResponseVo("查找成功",user,"0x200");
     }
 
     /**
