@@ -1,9 +1,6 @@
 package com.gsxy.core.service;
 
-import com.gsxy.core.pojo.bo.OrgAddBo;
-import com.gsxy.core.pojo.bo.OrgDeleteByIdBo;
-import com.gsxy.core.pojo.bo.OrgSelectByIdBo;
-import com.gsxy.core.pojo.bo.OrgUpdateByIdBo;
+import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.ResponseVo;
 
 /**
@@ -42,6 +39,14 @@ public interface OrgService {
      * @return
      */
     public ResponseVo orgSelectAll();
+
+    /**
+     * @author zhuxinyu 2023-10-25
+     *      根据org查找user
+     * @param
+     * @return
+     */
+    public ResponseVo orgSelectByUser();
 
     /**
      *@author zhuxinyu 2023-10-23

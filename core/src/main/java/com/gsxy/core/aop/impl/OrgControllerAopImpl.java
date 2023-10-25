@@ -10,6 +10,9 @@ import org.aspectj.lang.annotation.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 @Component
 @Aspect
 public class OrgControllerAopImpl implements OrgControllerAop {
@@ -78,5 +81,21 @@ public class OrgControllerAopImpl implements OrgControllerAop {
         systemService.auth(token);
         return null;
     }
+
+    /**
+     * @author zhuxinyu 2023-10-25
+     *       根据Org查找user的权限验证
+     * @param joinPoint
+     * @return
+     */
+//    @Override
+//    @Before("execution(* com.gsxy.core.controller.OrgController.orgSelectByUser())")
+//    public List<OrgSelectByUserBo> OrgSelectByUser(JoinPoint joinPoint) {
+//        Object[] args = joinPoint.getArgs();
+//        OrgSelectByUserBo arg = (OrgSelectByUserBo) args[0];
+//        String token = arg.getToken();
+//        systemService.auth(token);
+//        return null;
+//    }
 
 }

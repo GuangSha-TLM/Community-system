@@ -105,4 +105,15 @@ public class OrgController {
         }
         return JSONArray.toJSONString(orgService.orgUpdateById(orgUpdateByIdBo));
     }
+
+    /**
+     * @author zhuxinyu 2023-10-25
+     *      通过Org修改id数据
+     * @return
+     */
+    @PostMapping("/orgselectuser")
+    @ApiOperation("通过Org修改id数据")
+    public String orgSelectByUser(){
+        return JSONArray.toJSONString(orgService.orgSelectByUser());
+    }
 }

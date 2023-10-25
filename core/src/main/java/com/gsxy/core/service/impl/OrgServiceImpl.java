@@ -99,6 +99,17 @@ public class OrgServiceImpl implements OrgService {
     }
 
     /**
+     * @author zhuxinyu 2023-10-25
+     * 通过Org修改id数据
+     * @return
+     */
+    @Override
+    public ResponseVo orgSelectByUser() {
+        List <OrgSelectByUserBo> list = orgMapper.selectOrgByUser();
+        return new ResponseVo("查询成功",list,"0x200");
+    }
+
+    /**
      *@author zhuxinyu 2023-10-23
      *      通过id修改Org
      * @param orgUpdateByIdBo
