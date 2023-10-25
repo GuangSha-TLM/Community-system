@@ -25,7 +25,7 @@ public class ActivityControllerAopImpl implements ActivityControllerAop {
         Object[] args = joinPoint.getArgs();
         ActiveAddBo arg = (ActiveAddBo) args[0];
         String token = arg.getToken();
-        systemService.auth(token);
+        systemService.isAdmin(token,2);
 
         return null;
     }

@@ -8,7 +8,7 @@
     <insert id="userReg" parameterType="com.gsxy.core.pojo.User">
         insert into
             user
-        values (null,#{username},#{password},#{name},#{college},#{studentId},#{org},#{createBy},#{createTime},#{updateBy},#{updateTime},#{status},#{delFlag})
+        values (null,#{username},#{password},#{name},#{college},#{studentId},#{org},#{grade},#{createBy},#{createTime},#{updateBy},#{updateTime},#{status},#{delFlag})
     </insert>
 
     <!-- 通过id修改用户 -->

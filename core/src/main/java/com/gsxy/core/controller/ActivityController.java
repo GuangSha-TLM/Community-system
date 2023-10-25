@@ -4,10 +4,13 @@ import com.alibaba.fastjson2.JSONArray;
 import com.gsxy.core.pojo.bo.ActiveAddBo;
 import com.gsxy.core.pojo.vo.ResponseVo;
 import com.gsxy.core.service.ActiveService;
+import com.gsxy.core.util.ThreadLocalUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @CrossOrigin
 @Api(value = "活动板块接口",tags = {"活动板块接口"})
@@ -27,8 +30,10 @@ public class ActivityController {
     @PostMapping("/add")
     @ApiOperation("添加活动")
     public String addActive(@RequestBody ActiveAddBo activeAddBo){
-        if (activeAddBo == null){
-            JSONArray.toJSONString( new ResponseVo("参数为null", null, "0x455"));
+        Map<String, String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+        if ( map.get("error") != null) {
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
         }
 
         return JSONArray.toJSONString(activeService.addActive(activeAddBo));

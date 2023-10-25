@@ -25,8 +25,11 @@ public class ActivityServiceImpl implements ActiveService {
     @Override
     public ResponseVo addActive(ActiveAddBo activityAddBo) {
 
-        String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
+        Long aLong = activeMapper.addActive(activityAddBo.getActivity());
 
+        if (aLong == null){
+            return new ResponseVo("增加失败",null,"0x500");
+        }
 
         return new ResponseVo("增加成功",null,"0x200");
     }

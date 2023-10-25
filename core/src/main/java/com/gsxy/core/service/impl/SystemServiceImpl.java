@@ -134,11 +134,17 @@ public class SystemServiceImpl implements SystemService {
 
         String strUserId = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
         Long userId = Long.valueOf(strUserId);
+
+        if(userId == null || userId == 0L){
+            return new ResponseVo("token解析失败",null,"0x501");
+        }
+
         UserAdmin userAdmin = userAdminMapper.queryByUserId(userId);
-        if (userAdmin == null){
+
+        if (userAdmin == null || userAdmin.getRole() < leave){
             ThreadLocalUtil.mapThreadLocal.get().put("error","权限不足");
             ThreadLocalUtil.mapThreadLocal.get().put("code", "0x600");
-            return new ResponseVo("权限不足",null,"0x204");
+            return new ResponseVo("权限不足",null,"0x404");
         }
 
         return null;

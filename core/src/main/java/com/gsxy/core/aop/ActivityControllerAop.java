@@ -11,7 +11,6 @@ public interface ActivityControllerAop {
      * @param joinPoint
      * @return
      */
-    @Before("execution(* com.example.complaint_system.controller.ActivityController.addActivity(..))")
     public String addActivity(JoinPoint joinPoint);
 
 
