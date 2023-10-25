@@ -2,15 +2,14 @@ package com.gsxy.core.service.impl;
 
 import com.gsxy.core.mapper.OrgMapper;
 import com.gsxy.core.pojo.Org;
-import com.gsxy.core.pojo.bo.OrgAddBo;
-import com.gsxy.core.pojo.bo.OrgDeleteByIdBo;
-import com.gsxy.core.pojo.bo.OrgSelectByIdBo;
-import com.gsxy.core.pojo.bo.OrgUpdateByIdBo;
+import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.ResponseVo;
 import com.gsxy.core.service.OrgService;
 import com.gsxy.core.util.ThreadLocalUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author zhuxinyu 2023-10-23
@@ -73,9 +72,15 @@ public class OrgServiceImpl implements OrgService {
         return new ResponseVo("查询成功",org,"0x200");
     }
 
+    /**
+     * @author zhuxinyu 2023-10-25
+     *      查找所有信息
+     * @return
+     */
     @Override
     public ResponseVo orgSelectAll() {
-        return null;
+        List <OrgAndUserBo> list = orgMapper.selectAll();
+        return new ResponseVo("查询成功",list,"0x200");
     }
 
     /**
