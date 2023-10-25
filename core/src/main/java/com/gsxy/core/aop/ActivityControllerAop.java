@@ -1,6 +1,7 @@
 package com.gsxy.core.aop;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.Before;
 
 public interface ActivityControllerAop {
 
@@ -10,7 +11,8 @@ public interface ActivityControllerAop {
      * @param joinPoint
      * @return
      */
-//    public String addActivity(JoinPoint joinPoint);
+    @Before("execution(* com.example.complaint_system.controller.ActivityController.addActivity(..))")
+    public String addActivity(JoinPoint joinPoint);
 
 
 }
