@@ -322,6 +322,7 @@ export default {
             this.getMerchantInformation(1);
 
         },
+
         //查看功能
         openView(obj) {
             this.view = false
@@ -331,8 +332,6 @@ export default {
             }
             this.schoolView = obj
         }
-
-
     }
 
 }
