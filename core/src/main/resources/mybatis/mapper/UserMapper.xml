@@ -33,6 +33,9 @@
             <if test="org != null and org != ''">
                 org = #{org},
             </if>
+            <if test="grade != null and org != ''">
+                grade = #{grade},
+            </if>
             <if test="true">
                 update_by = #{updateBy},update_time = #{updateTime},
             </if>

@@ -15,6 +15,7 @@ public class User implements Serializable {
     private Integer college;
     private String studentId;
     private String org;
+    private String grade;
     private Long createBy;
     private Date createTime;
     private Long updateBy;
@@ -22,16 +23,17 @@ public class User implements Serializable {
     private Integer status;
     private Integer delFlag;
 
-    public User(Long id, String username, String password, String name, Integer college, String org, String studentId, Date createTime, Long createBy, Long updateBy, Date updateTime, Integer status, Integer delFlag) {
+    public User(Long id, String username, String password, String name, Integer college, String studentId, String org, String grade, Long createBy, Date createTime, Long updateBy, Date updateTime, Integer status, Integer delFlag) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.name = name;
         this.college = college;
-        this.org = org;
         this.studentId = studentId;
-        this.createTime = createTime;
+        this.org = org;
+        this.grade = grade;
         this.createBy = createBy;
+        this.createTime = createTime;
         this.updateBy = updateBy;
         this.updateTime = updateTime;
         this.status = status;
@@ -81,14 +83,6 @@ public class User implements Serializable {
         this.college = college;
     }
 
-    public String getOrg() {
-        return org;
-    }
-
-    public void setOrg(String org) {
-        this.org = org;
-    }
-
     public String getStudentId() {
         return studentId;
     }
@@ -97,12 +91,20 @@ public class User implements Serializable {
         this.studentId = studentId;
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public String getOrg() {
+        return org;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setOrg(String org) {
+        this.org = org;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
     }
 
     public Long getCreateBy() {
@@ -111,6 +113,14 @@ public class User implements Serializable {
 
     public void setCreateBy(Long createBy) {
         this.createBy = createBy;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public Long getUpdateBy() {
@@ -153,10 +163,11 @@ public class User implements Serializable {
                 ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
                 ", college=" + college +
-                ", org='" + org + '\'' +
                 ", studentId='" + studentId + '\'' +
-                ", createTime=" + createTime +
+                ", org='" + org + '\'' +
+                ", grade='" + grade + '\'' +
                 ", createBy=" + createBy +
+                ", createTime=" + createTime +
                 ", updateBy=" + updateBy +
                 ", updateTime=" + updateTime +
                 ", status=" + status +
