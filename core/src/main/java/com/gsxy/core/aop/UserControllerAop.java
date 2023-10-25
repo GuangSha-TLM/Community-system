@@ -14,4 +14,10 @@ public interface UserControllerAop {
     @Before("execution(* com.gsxy.core.controller.UserController.selectByUserId(..))")
     public String selectByUserId(JoinPoint joinPoint);
 
+    @Before("execution(* com.gsxy.core.controller.UserController.updateByUserId(..))")
+    public String updateByUserId(JoinPoint joinPoint);
+
+    @Before("execution(* com.gsxy.core.controller.UserController.deleteByUserId(..))")
+    public String deleteByUserId(JoinPoint joinPoint);
+
 }

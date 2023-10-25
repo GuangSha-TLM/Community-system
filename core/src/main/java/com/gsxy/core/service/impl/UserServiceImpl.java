@@ -101,6 +101,14 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public ResponseVo deleteByUserId(UserDeleteByIdBo userDeleteByIdBo) {
+
+        String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
+        Long userId = Long.valueOf(userIdOfStr);
+
+        if(userId == null || userId == 0L){
+            return new ResponseVo("token解析失败",null,"0x501");
+        }
+
         Long aLong = userMapper.deleteByUserId(userDeleteByIdBo.getId());
 
         if(aLong == null || aLong.longValue() == 0L){
@@ -118,15 +126,24 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public ResponseVo updateByUserId(UserUpdateByUserIdBo userUpdateByUserIdBo) {
-        userUpdateByUserIdBo.getUser().setUpdateBy(1L);
+
+        String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
+        Long userId = Long.valueOf(userIdOfStr);
+
+        if(userId == null || userId == 0L){
+            return new ResponseVo("token解析失败",null,"0x501");
+        }
+
+        userUpdateByUserIdBo.getUser().setUpdateBy(userId);
         userUpdateByUserIdBo.getUser().setUpdateTime(new Date());
-        Long aLong = userMapper.updateByUserId(userUpdateByUserIdBo.getUser());
+        User user = userUpdateByUserIdBo.getUser();
+        Long aLong = userMapper.updateByUserId(user);
 
         if(aLong == null || aLong.longValue() == 0L){
             return new ResponseVo("修改失败",null,"0x500");
         }
 
-        return new ResponseVo("修改成功",null,"0x200");
+        return new ResponseVo("修改成功",user.getId(),"0x200");
     }
 
     /**
