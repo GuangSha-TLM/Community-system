@@ -12,4 +12,11 @@ public interface ActiveService {
      * @return
      */
     ResponseVo addActive(ActiveAddBo activityAddBo);
+
+    /**
+     * @author hln 2023-10-25
+     *      查询所有活动功能
+     * @return
+     */
+    ResponseVo findAll();
 }

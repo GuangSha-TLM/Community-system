@@ -22,7 +22,7 @@ public class ActivityController {
     private ActiveService activeService;
 
     /**
-     * @auhtor hln 2023-10-24
+     * @auhtor hln 2023-10-25
      *      添加活动功能
      * @param activeAddBo
      * @return
@@ -37,6 +37,17 @@ public class ActivityController {
         }
 
         return JSONArray.toJSONString(activeService.addActive(activeAddBo));
+    }
+
+    /**
+     * @author hln 2023-10-25
+     *      查询所有活动功能
+     * @return
+     */
+    @PostMapping("/findAll")
+    @ApiOperation("查询所有活动")
+    public String findAll(){
+        return JSONArray.toJSONString(activeService.findAll());
     }
 
 }
