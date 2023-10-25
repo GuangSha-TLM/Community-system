@@ -12,10 +12,10 @@
             insert into
                 Org
             values
-                (null, #{college}, #{grade}, #{name},
-                 #{createBy}, #{createTime}, 
+                (null, #{grade},  #{name},#{college},
+                 #{createBy}, #{createTime},
                  #{updateBy}, #{updateTime}, 
-                 #{status}, #{del_flag} )
+                 #{status}, #{delFlag} )
         </insert>
 
         <!--
@@ -47,14 +47,14 @@
         <update id="updateByIdOrg">
             update Org
             <set>
-                <if test="college != null">
-                    college = #{college},
-                </if>
                 <if test="grade != null and grade != ''">
                     grade = #{grade},
                 </if>
-                <if test="name != null and name != '' ">
-                    name = #{name}
+                <if test="name != null and name != ''">
+                    name = #{name},
+                </if>
+                <if test="college != null">
+                    college = #{college},
                 </if>
                 <if test="createBy != null ">
                     create_by = #{createBy},

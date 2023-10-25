@@ -122,9 +122,9 @@ public class Org implements Serializable {
                 ", college=" + college +
                 ", grade='" + grade + '\'' +
                 ", name='" + name + '\'' +
-                ", createBy='" + createBy + '\'' +
+                ", createBy=" + createBy +
                 ", createTime=" + createTime +
-                ", updateBy='" + updateBy + '\'' +
+                ", updateBy=" + updateBy +
                 ", updateTime=" + updateTime +
                 ", status=" + status +
                 ", del_flag=" + delFlag +
