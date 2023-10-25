@@ -1,10 +1,7 @@
 package com.gsxy.core.aop.impl;
 
 import com.gsxy.core.aop.OrgControllerAop;
-import com.gsxy.core.pojo.bo.OrgAddBo;
-import com.gsxy.core.pojo.bo.OrgDeleteByIdBo;
-import com.gsxy.core.pojo.bo.OrgSelectByIdBo;
-import com.gsxy.core.pojo.bo.OrgUpdateByIdBo;
+import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.service.SystemService;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -81,4 +78,5 @@ public class OrgControllerAopImpl implements OrgControllerAop {
         systemService.auth(token);
         return null;
     }
+
 }

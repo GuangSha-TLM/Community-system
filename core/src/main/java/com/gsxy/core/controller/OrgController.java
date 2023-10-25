@@ -1,10 +1,7 @@
 package com.gsxy.core.controller;
 
 import com.alibaba.fastjson2.JSONArray;
-import com.gsxy.core.pojo.bo.OrgAddBo;
-import com.gsxy.core.pojo.bo.OrgDeleteByIdBo;
-import com.gsxy.core.pojo.bo.OrgSelectByIdBo;
-import com.gsxy.core.pojo.bo.OrgUpdateByIdBo;
+import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.ResponseVo;
 import com.gsxy.core.service.OrgService;
 import com.gsxy.core.util.ThreadLocalUtil;
@@ -65,7 +62,7 @@ public class OrgController {
      * @return
      */
     @PostMapping("/select")
-    @ApiOperation("根据userId查询Org数据")
+    @ApiOperation("根据Id查询Org数据")
     public String orgSelectById(@RequestBody OrgSelectByIdBo orgSelectByIdBo){
         Map<String, String> map = ThreadLocalUtil.mapThreadLocal.get();
         ThreadLocalUtil.mapThreadLocal.remove();
@@ -74,6 +71,17 @@ public class OrgController {
         }
 
         return JSONArray.toJSONString(orgService.orgSelectById(orgSelectByIdBo));
+    }
+
+    /**
+     * @author zhuxinyu 2023-10-25
+     *      查询所有信息
+     * @return
+     */
+    @PostMapping("/selectall")
+    @ApiOperation("查询所有数据")
+    public String orgselectall(){
+        return JSONArray.toJSONString(orgService.orgSelectAll());
     }
 
     /**

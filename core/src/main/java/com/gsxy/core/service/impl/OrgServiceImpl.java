@@ -2,15 +2,15 @@ package com.gsxy.core.service.impl;
 
 import com.gsxy.core.mapper.OrgMapper;
 import com.gsxy.core.pojo.Org;
-import com.gsxy.core.pojo.bo.OrgAddBo;
-import com.gsxy.core.pojo.bo.OrgDeleteByIdBo;
-import com.gsxy.core.pojo.bo.OrgSelectByIdBo;
-import com.gsxy.core.pojo.bo.OrgUpdateByIdBo;
+import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.ResponseVo;
 import com.gsxy.core.service.OrgService;
 import com.gsxy.core.util.ThreadLocalUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * @author zhuxinyu 2023-10-23
@@ -29,12 +29,16 @@ public class OrgServiceImpl implements OrgService {
      */
     @Override
     public ResponseVo orgAdd(OrgAddBo orgAddByIdBo){
+        String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
+        Long userId = Long.valueOf(userIdOfStr);
+        orgAddByIdBo.getOrg().setCreateBy(userId);
+        orgAddByIdBo.getOrg().setCreateTime(new Date());
         Long  aLong = orgMapper.addOrg(orgAddByIdBo.getOrg());
         if (aLong.longValue() == 0L) {
             return new ResponseVo("增加失败",  null, "0x500");
         }
 
-        return new ResponseVo("增加成功", null, "0x200");
+        return new ResponseVo("增加成功", userId, "0x200");
     }
 
     /**
@@ -73,9 +77,15 @@ public class OrgServiceImpl implements OrgService {
         return new ResponseVo("查询成功",org,"0x200");
     }
 
+    /**
+     * @author zhuxinyu 2023-10-25
+     *      查找所有信息
+     * @return
+     */
     @Override
     public ResponseVo orgSelectAll() {
-        return null;
+        List <OrgAndUserBo> list = orgMapper.selectAll();
+        return new ResponseVo("查询成功",list,"0x200");
     }
 
     /**
@@ -86,13 +96,16 @@ public class OrgServiceImpl implements OrgService {
      */
     @Override
     public ResponseVo orgUpdateById(OrgUpdateByIdBo orgUpdateByIdBo){
-        Org org = orgUpdateByIdBo.getOrg();
-        Long aLong = orgMapper.updateByIdOrg(org);
+        String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
+        Long userId = Long.valueOf(userIdOfStr);
+        orgUpdateByIdBo.getOrg().setUpdateBy(userId);
+        orgUpdateByIdBo.getOrg().setUpdateTime(new Date());
+        Long aLong = orgMapper.updateByIdOrg(orgUpdateByIdBo.getOrg());
 
         if (aLong.longValue() == 0L) {
             return new ResponseVo("更新失败", null, "0x500");
         }
-        return new ResponseVo("更新成功", org.getId(), "0x200");
+        return new ResponseVo("更新成功", userId , "0x200");
     }
 
 }
