@@ -73,7 +73,8 @@
     //提交登入
     async submit(){
          this.switchbutton = true;
-         var object = synRequestPost("/user/Login",this.userLoginBo);
+         var object =await synRequestPost("/user/Login",this.userLoginBo);
+         console.log(object);
          if(object.code != "0x200"){
             alert(object.message);
             this.switchbutton = false;
