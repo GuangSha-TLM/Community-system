@@ -92,7 +92,7 @@
     <select id="userFindAll" resultType="com.gsxy.core.pojo.User">
         select *
         from user
-        limit 0,15
+        limit #{start},#{stop}
     </select>
 
 
