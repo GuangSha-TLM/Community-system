@@ -14,4 +14,13 @@
                 ,#{updateBy},#{createBy},#{status},#{delFlag})
     </insert>
 
+    <!-- 查询所有活动信息 -->
+    <select id="findAll" resultType="com.gsxy.core.pojo.Activity">
+        select
+            *
+        from
+            active
+        limit 0,15
+    </select>
+
 </mapper>
