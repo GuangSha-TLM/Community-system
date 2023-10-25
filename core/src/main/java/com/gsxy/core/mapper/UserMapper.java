@@ -36,10 +36,10 @@ public interface UserMapper {
     /**
      * @author hln 2023-10-23
      *      通过id查找用户
-     * @param id
+     * @param userId
      * @return
      */
-    User selectByUserId(Long id);
+    List<User> selectByUserId(Long userId);
 
     /**
      * @author hln 2023-10-23
@@ -63,4 +63,5 @@ public interface UserMapper {
      * @return
      */
     List<User> userFindAll();
+
 }
