@@ -11,7 +11,7 @@ public interface ActivityControllerAop {
      * @param joinPoint
      * @return
      */
-    public String addActivity(JoinPoint joinPoint);
+    public String addActive(JoinPoint joinPoint);
 
 
 }

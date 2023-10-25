@@ -10,6 +10,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ActivityServiceImpl implements ActiveService {
 
@@ -32,6 +34,23 @@ public class ActivityServiceImpl implements ActiveService {
         }
 
         return new ResponseVo("增加成功",null,"0x200");
+    }
+
+    /**
+     * @author hln 2023-10-25
+     *      查询所有活动功能
+     * @return
+     */
+    @Override
+    public ResponseVo findAll() {
+
+        List<Activity> list = activeMapper.findAll();
+
+        if (list == null){
+            return new ResponseVo("查询失败",list,"0x200");
+        }
+
+        return new ResponseVo("查询成功",list,"0x200");
     }
 
 }

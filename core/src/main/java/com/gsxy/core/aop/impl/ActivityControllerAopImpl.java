@@ -5,9 +5,13 @@ import com.gsxy.core.pojo.Activity;
 import com.gsxy.core.pojo.bo.ActiveAddBo;
 import com.gsxy.core.service.SystemService;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
+@Aspect
 public class ActivityControllerAopImpl implements ActivityControllerAop {
 
     @Autowired
@@ -20,8 +24,8 @@ public class ActivityControllerAopImpl implements ActivityControllerAop {
      * @return
      */
     @Override
-    @Before("execution(* com.example.complaint_system.controller.ActivityController.addActivity(..))")
-    public String addActivity(JoinPoint joinPoint) {
+    @Before("execution(* com.gsxy.core.controller.ActivityController.addActive(..))")
+    public String addActive(JoinPoint joinPoint) {
         Object[] args = joinPoint.getArgs();
         ActiveAddBo arg = (ActiveAddBo) args[0];
         String token = arg.getToken();

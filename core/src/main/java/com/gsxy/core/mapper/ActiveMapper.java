@@ -3,6 +3,8 @@ package com.gsxy.core.mapper;
 import com.gsxy.core.pojo.Activity;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface ActiveMapper {
 
@@ -14,4 +16,10 @@ public interface ActiveMapper {
      */
     Long addActive(Activity activity);
 
+    /**
+     * @author hln 2023-10-25
+     *      查询所有活动功能
+     * @return
+     */
+    List<Activity> findAll();
 }
