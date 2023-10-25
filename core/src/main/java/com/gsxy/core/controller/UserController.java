@@ -8,10 +8,13 @@ import com.gsxy.core.pojo.bo.UserSelectByUserIdBo;
 import com.gsxy.core.pojo.bo.UserUpdateByUserIdBo;
 import com.gsxy.core.pojo.vo.ResponseVo;
 import com.gsxy.core.service.UserService;
+import com.gsxy.core.util.ThreadLocalUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 /**
  * 2023-10-23
@@ -64,9 +67,15 @@ public class UserController {
      * @param userSelectByUserIdBo
      * @return
      */
-    @PostMapping("/selectByUserId")
+    @PostMapping("/select")
     @ApiOperation("通过id查找用户")
     public String selectByUserId(@RequestBody UserSelectByUserIdBo userSelectByUserIdBo){
+        Map<String, String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+        if ( map.get("error") != null) {
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
+
         return JSONArray.toJSONString(userService.selectByUserId(userSelectByUserIdBo));
     }
 
@@ -76,7 +85,7 @@ public class UserController {
      * @param userDeleteByIdBo
      * @return
      */
-    @PostMapping("/deleteByUserId")
+    @PostMapping("/delete")
     @ApiOperation("通过id删除用户")
     public String deleteByUserId(@RequestBody UserDeleteByIdBo userDeleteByIdBo){
         return JSONArray.toJSONString(userService.deleteByUserId(userDeleteByIdBo));

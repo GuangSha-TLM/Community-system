@@ -9,6 +9,7 @@ import com.gsxy.core.pojo.bo.UserUpdateByUserIdBo;
 import com.gsxy.core.pojo.vo.ResponseVo;
 import com.gsxy.core.service.UserService;
 import com.gsxy.core.util.JwtUtil;
+import com.gsxy.core.util.ThreadLocalUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -69,15 +70,23 @@ public class UserServiceImpl implements UserService {
 
     /**
      * @author hln 2023-10-23
-     *      通过id查找用户
+     *      通过id查找用户信息
      * @param userSelectByUserIdBo
      * @return
      */
     @Override
     public ResponseVo selectByUserId(UserSelectByUserIdBo userSelectByUserIdBo) {
-        User user = userMapper.selectByUserId(userSelectByUserIdBo.getId());
 
-        return new ResponseVo("查找成功",user,"0x200");
+        String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
+        Long userId = Long.valueOf(userIdOfStr);
+
+        List<User> list = userMapper.selectByUserId(userId);
+
+        if(list == null || userId == 0L){
+            return new ResponseVo("查询条件不存在",null,"0x500");
+        }
+
+        return new ResponseVo("查找成功",list,"0x200");
     }
 
     /**
