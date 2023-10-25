@@ -1,7 +1,9 @@
 package com.gsxy.core.service.impl;
 
 import com.gsxy.core.mapper.OrgMapper;
+import com.gsxy.core.mapper.UserMapper;
 import com.gsxy.core.pojo.Org;
+import com.gsxy.core.pojo.User;
 import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.ResponseVo;
 import com.gsxy.core.service.OrgService;
@@ -20,6 +22,8 @@ import java.util.List;
 public class OrgServiceImpl implements OrgService {
     @Autowired
     private OrgMapper orgMapper;
+    @Autowired
+    private UserMapper userMapper;
 
     /**
      * @author zhuxinyu 2023-10-23
@@ -71,8 +75,10 @@ public class OrgServiceImpl implements OrgService {
      */
     @Override
     public ResponseVo orgSelectById(OrgSelectByIdBo orgSelectByIdBo) {
-
-         Org org = orgMapper.selectByIdOrg(orgSelectByIdBo.getId());
+        String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
+        Long userId = Long.valueOf(userIdOfStr);
+        User user = userMapper.selectByUserId(userId);
+        String org = user.getOrg();
 
         if (org == null) {
             return new ResponseVo("查询的数据不存在,", null, "0x500");

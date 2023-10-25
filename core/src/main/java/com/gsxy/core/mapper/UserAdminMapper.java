@@ -2,6 +2,8 @@ package com.gsxy.core.mapper;
 
 import com.gsxy.core.pojo.UserAdmin;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 /**
  *  2023-10-24
@@ -10,6 +12,8 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UserAdminMapper {
 
+    @Select("select * from user_admin where user_id = #{userId} limit 1")
+    public UserAdmin queryByUserId(@Param("userId")Long userId);
 
     /**
      * @author Oh… Yeah!!!, 2023-10-24

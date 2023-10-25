@@ -42,6 +42,7 @@ public class CommunityController {
         if (map.get("error") != null) {
             return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
         }
+
         return JSONArray.toJSONString(communityService.addCommunity(communityAddByIdBo));
     }
 

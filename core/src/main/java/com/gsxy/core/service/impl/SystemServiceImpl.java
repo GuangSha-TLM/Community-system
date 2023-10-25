@@ -1,11 +1,14 @@
 package com.gsxy.core.service.impl;
 
 import com.alibaba.fastjson2.JSONArray;
+import com.gsxy.core.mapper.UserAdminMapper;
+import com.gsxy.core.pojo.UserAdmin;
 import com.gsxy.core.pojo.vo.ResponseVo;
 import com.gsxy.core.service.SystemService;
 
 import com.gsxy.core.util.ThreadLocalUtil;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -30,6 +33,8 @@ public class SystemServiceImpl implements SystemService {
     private String path;
     @Value("${projecturl}")
     private String projecturl;
+    @Autowired
+    private UserAdminMapper userAdminMapper;
 
     /**
      * 鉴权
@@ -110,6 +115,33 @@ public class SystemServiceImpl implements SystemService {
         file.transferTo(new File(path+""+id+"/"+fileName));
         System.err.println("??");
         return JSONArray.toJSONString(new ResponseVo<>("success",projecturl+"/system/getimage?imgUrl="+id+"/"+fileName,"0x200"));
+    }
+
+
+    /**
+     *
+     * @param token
+     * @param leave
+     * @return
+     */
+    @Override
+    public ResponseVo isAdmin(String token,Integer leave){
+        //身份鉴权
+        ResponseVo auth = this.auth(token);
+        if (auth.getData() == null) {
+            return null;
+        }
+
+        String strUserId = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
+        Long userId = Long.valueOf(strUserId);
+        UserAdmin userAdmin = userAdminMapper.queryByUserId(userId);
+        if (userAdmin == null){
+            ThreadLocalUtil.mapThreadLocal.get().put("error","权限不足");
+            ThreadLocalUtil.mapThreadLocal.get().put("code", "0x600");
+            return new ResponseVo("权限不足",null,"0x204");
+        }
+
+        return null;
     }
 
 }
