@@ -88,6 +88,12 @@ public class UserController {
     @PostMapping("/delete")
     @ApiOperation("通过id删除用户")
     public String deleteByUserId(@RequestBody UserDeleteByIdBo userDeleteByIdBo){
+        Map<String, String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+        if ( map.get("error") != null) {
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
+
         return JSONArray.toJSONString(userService.deleteByUserId(userDeleteByIdBo));
     }
 
@@ -100,6 +106,12 @@ public class UserController {
     @PostMapping("/update")
     @ApiOperation("通过id修改用户")
     public String updateByUserId(@RequestBody UserUpdateByUserIdBo userUpdateByUserIdBo){
+        Map<String, String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+        if ( map.get("error") != null) {
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
+
         return JSONArray.toJSONString(userService.updateByUserId(userUpdateByUserIdBo));
     }
 

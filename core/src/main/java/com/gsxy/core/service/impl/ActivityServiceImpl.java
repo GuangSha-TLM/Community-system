@@ -5,6 +5,7 @@ import com.gsxy.core.pojo.Activity;
 import com.gsxy.core.pojo.bo.ActiveAddBo;
 import com.gsxy.core.pojo.vo.ResponseVo;
 import com.gsxy.core.service.ActiveService;
+import com.gsxy.core.util.ThreadLocalUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,15 +25,10 @@ public class ActivityServiceImpl implements ActiveService {
     @Override
     public ResponseVo addActive(ActiveAddBo activityAddBo) {
 
-        Activity activity = new Activity();
-        BeanUtils.copyProperties(activityAddBo,activity);
-        Long aLong = activeMapper.addActive(activity);
+        String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
 
-        if (aLong == 0L || aLong == null){
-            return new ResponseVo("增加失败",null,"0x500");
-        }
 
-        return new ResponseVo("增加成功",aLong,"0x200");
+        return new ResponseVo("增加成功",null,"0x200");
     }
 
 }
