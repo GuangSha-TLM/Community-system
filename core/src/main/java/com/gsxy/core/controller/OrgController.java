@@ -52,6 +52,11 @@ public class OrgController {
     @PostMapping("/delete")
     @ApiOperation("通过id删除Org数据")
     public String orgDeleteById(@RequestBody OrgDeleteByIdBo orgDeleteByIdBo){
+        Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+        if (map.get("error") != null) {
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
         return JSONArray.toJSONString(orgService.orgDeleteById(orgDeleteByIdBo));
     }
 
@@ -93,6 +98,11 @@ public class OrgController {
     @PostMapping("/update")
     @ApiOperation("通过id修改Org数据")
     public String orgUpdateById(@RequestBody OrgUpdateByIdBo orgUpdateByIdBo){
+        Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+        if (map.get("error") != null) {
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
         return JSONArray.toJSONString(orgService.orgUpdateById(orgUpdateByIdBo));
     }
 }

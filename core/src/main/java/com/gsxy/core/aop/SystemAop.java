@@ -14,5 +14,6 @@ public interface SystemAop {
      * @param joinpoint
      * @throws Exception
      */
+
     public void removeAllThreadLocal(JoinPoint joinpoint) throws Exception;
 }

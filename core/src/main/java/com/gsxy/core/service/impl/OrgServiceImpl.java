@@ -29,16 +29,16 @@ public class OrgServiceImpl implements OrgService {
      */
     @Override
     public ResponseVo orgAdd(OrgAddBo orgAddByIdBo){
-        String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
-        Long userId = Long.valueOf(userIdOfStr);
-        orgAddByIdBo.getOrg().setCreateBy(userId);
+        String orgIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
+        Long orgId = Long.valueOf(orgIdOfStr);
+        orgAddByIdBo.getOrg().setCreateBy(orgId);
         orgAddByIdBo.getOrg().setCreateTime(new Date());
         Long  aLong = orgMapper.addOrg(orgAddByIdBo.getOrg());
         if (aLong.longValue() == 0L) {
             return new ResponseVo("增加失败",  null, "0x500");
         }
 
-        return new ResponseVo("增加成功", userId, "0x200");
+        return new ResponseVo("增加成功", orgId, "0x200");
     }
 
     /**
@@ -50,8 +50,12 @@ public class OrgServiceImpl implements OrgService {
 
     @Override
     public ResponseVo orgDeleteById(OrgDeleteByIdBo orgDeleteByIdBo){
+        String orgIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
+        Long orgId = Long.valueOf(orgIdOfStr);
+        if(orgId == null || orgId == 0L){
+            return new ResponseVo("token解析失败",null,"0x501");
+        }
         Long id = orgDeleteByIdBo.getId();
-
         Long aLong = orgMapper.deleteByIdOrg(id);
         if (aLong.longValue() == 0L) {
             return new ResponseVo("删除失败", null, "0x500");
@@ -96,16 +100,16 @@ public class OrgServiceImpl implements OrgService {
      */
     @Override
     public ResponseVo orgUpdateById(OrgUpdateByIdBo orgUpdateByIdBo){
-        String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
-        Long userId = Long.valueOf(userIdOfStr);
-        orgUpdateByIdBo.getOrg().setUpdateBy(userId);
+        String orgIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
+        Long orgId = Long.valueOf(orgIdOfStr);
+        orgUpdateByIdBo.getOrg().setUpdateBy(orgId);
         orgUpdateByIdBo.getOrg().setUpdateTime(new Date());
         Long aLong = orgMapper.updateByIdOrg(orgUpdateByIdBo.getOrg());
 
         if (aLong.longValue() == 0L) {
             return new ResponseVo("更新失败", null, "0x500");
         }
-        return new ResponseVo("更新成功", userId , "0x200");
+        return new ResponseVo("更新成功", orgId , "0x200");
     }
 
 }
