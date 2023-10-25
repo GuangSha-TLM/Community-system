@@ -84,10 +84,6 @@ public class UserServiceImpl implements UserService {
             return new ResponseVo("token解析失败",null,"0x501");
         }
 
-        if (userId != userSelectByUserIdBo.getId()){
-            return new ResponseVo("查询id与用户id不符",null,"0x500");
-        }
-
         User user = userMapper.selectByUserId(userSelectByUserIdBo.getId());
 
         if(user == null){
