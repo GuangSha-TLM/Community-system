@@ -55,7 +55,6 @@ public class UserAdminController {
     @ApiOperation("根据id查询UserAdmin数据")
     public String userAdminSelect(@RequestBody UserAdminSelectByIdBo userAdminSelectByIdBo){
         Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
-        ThreadLocalUtil.mapThreadLocal.remove();
         if (map.get("error") != null) {
             return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
         }
@@ -72,7 +71,6 @@ public class UserAdminController {
     @ApiOperation("通过id删除UserAdmin数据")
     public String userAdminDeleteById(@RequestBody UserAdminDeleteByIdBo userAdminDeleteByIdBo){
         Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
-        ThreadLocalUtil.mapThreadLocal.remove();
         if (map.get("error") != null) {
             return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
         }
@@ -89,7 +87,6 @@ public class UserAdminController {
     @ApiOperation("增加UserAdmin数据")
     public String userAdminAdd(@RequestBody UserAdminAddByBo userAdminAddByBo){
         Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
-        ThreadLocalUtil.mapThreadLocal.remove();
         if (map.get("error") != null) {
             return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
         }
@@ -106,7 +103,6 @@ public class UserAdminController {
     @PostMapping("/update")
     public String userAdminUpdateById(@RequestBody UserAdminUpdateByIdBo userAdminUpdateByIdBo){
         Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
-        ThreadLocalUtil.mapThreadLocal.remove();
         if (map.get("error") != null) {
             return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
         }

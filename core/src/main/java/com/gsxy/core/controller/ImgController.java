@@ -38,7 +38,6 @@ public class ImgController {
     @ApiOperation("根据id查询img数据")
     public String imgSelect(@RequestBody ImgSelectByIdBo imgSelectByIdBo){
         Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
-        ThreadLocalUtil.mapThreadLocal.remove();
         if ( map.get("error") != null) {
             return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
         }
@@ -56,7 +55,6 @@ public class ImgController {
     @ApiOperation("通过id删除img数据")
     public String imgDeleteById(@RequestBody ImgDeleteByIdBo imgDeleteByIdBo){
         Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
-        ThreadLocalUtil.mapThreadLocal.remove();
         if (map.get("error") != null) {
             return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
         }
@@ -74,7 +72,6 @@ public class ImgController {
     @ApiOperation("增加img数据")
     public String imgAdd(@RequestBody ImgAddByBo imgAddByBo){
         Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
-        ThreadLocalUtil.mapThreadLocal.remove();
         if (map.get("error") != null) {
             return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
         }
@@ -93,7 +90,6 @@ public class ImgController {
     @PostMapping("/update")
     public String imgUpdateById(@RequestBody ImgUpdateByIdBo imgUpdateByIdBo){
         Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
-        ThreadLocalUtil.mapThreadLocal.remove();
         if (map.get("error") != null) {
             return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
         }
