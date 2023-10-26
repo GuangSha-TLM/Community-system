@@ -5,11 +5,15 @@ import com.gsxy.core.pojo.bo.ImgAddByBo;
 import com.gsxy.core.pojo.bo.ImgDeleteByIdBo;
 import com.gsxy.core.pojo.bo.ImgSelectByIdBo;
 import com.gsxy.core.pojo.bo.ImgUpdateByIdBo;
+import com.gsxy.core.pojo.vo.ResponseVo;
 import com.gsxy.core.service.ImgService;
+import com.gsxy.core.util.ThreadLocalUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 /**
  *  2023-10-12
@@ -33,6 +37,11 @@ public class ImgController {
     @PostMapping("/select")
     @ApiOperation("根据id查询img数据")
     public String imgSelect(@RequestBody ImgSelectByIdBo imgSelectByIdBo){
+        Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+        if ( map.get("error") != null) {
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
         return JSONArray.toJSONString(imgService.imgSelectById(imgSelectByIdBo));
     }
 
@@ -46,6 +55,11 @@ public class ImgController {
     @PostMapping("/delete")
     @ApiOperation("通过id删除img数据")
     public String imgDeleteById(@RequestBody ImgDeleteByIdBo imgDeleteByIdBo){
+        Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+        if (map.get("error") != null) {
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
         return JSONArray.toJSONString(imgService.imgDeleteById(imgDeleteByIdBo));
     }
 
@@ -59,6 +73,11 @@ public class ImgController {
     @PostMapping("/add")
     @ApiOperation("增加img数据")
     public String imgAdd(@RequestBody ImgAddByBo imgAddByBo){
+        Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+        if (map.get("error") != null) {
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
         return JSONArray.toJSONString(imgService.imgAdd(imgAddByBo));
     }
 
@@ -73,6 +92,11 @@ public class ImgController {
     @ApiOperation("通过id修改Img数据")
     @PostMapping("/update")
     public String imgUpdateById(@RequestBody ImgUpdateByIdBo imgUpdateByIdBo){
+        Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+        if (map.get("error") != null) {
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
         return JSONArray.toJSONString(imgService.imgUpdateById(imgUpdateByIdBo));
     }
 

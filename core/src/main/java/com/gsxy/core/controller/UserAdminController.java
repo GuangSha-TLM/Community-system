@@ -7,10 +7,13 @@ import com.gsxy.core.pojo.bo.UserAdminSelectByIdBo;
 import com.gsxy.core.pojo.bo.UserAdminUpdateByIdBo;
 import com.gsxy.core.pojo.vo.ResponseVo;
 import com.gsxy.core.service.UserAdminService;
+import com.gsxy.core.util.ThreadLocalUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 /**
  *  2023-10-24
@@ -51,6 +54,11 @@ public class UserAdminController {
     @PostMapping("/select")
     @ApiOperation("根据id查询UserAdmin数据")
     public String userAdminSelect(@RequestBody UserAdminSelectByIdBo userAdminSelectByIdBo){
+        Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+        if (map.get("error") != null) {
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
         return JSONArray.toJSONString(userAdminService.userAdminSelectById(userAdminSelectByIdBo));
     }
 
@@ -63,6 +71,11 @@ public class UserAdminController {
     @PostMapping("/delete")
     @ApiOperation("通过id删除UserAdmin数据")
     public String userAdminDeleteById(@RequestBody UserAdminDeleteByIdBo userAdminDeleteByIdBo){
+        Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+        if (map.get("error") != null) {
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
         return JSONArray.toJSONString(userAdminService.userAdminDeleteById(userAdminDeleteByIdBo));
     }
 
@@ -75,6 +88,11 @@ public class UserAdminController {
     @PostMapping("/add")
     @ApiOperation("增加UserAdmin数据")
     public String userAdminAdd(@RequestBody UserAdminAddByBo userAdminAddByBo){
+        Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+        if (map.get("error") != null) {
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
         return JSONArray.toJSONString(userAdminService.userAdminAdd(userAdminAddByBo));
     }
 
@@ -87,6 +105,11 @@ public class UserAdminController {
     @ApiOperation("通过id修改UserAdmin数据")
     @PostMapping("/update")
     public String userAdminUpdateById(@RequestBody UserAdminUpdateByIdBo userAdminUpdateByIdBo){
+        Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+        if (map.get("error") != null) {
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
         return JSONArray.toJSONString(userAdminService.userAdminUpdateById(userAdminUpdateByIdBo));
     }
 
