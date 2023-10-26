@@ -47,7 +47,7 @@ public class ActivityServiceImpl implements ActiveService {
         List<Activity> list = activeMapper.findAll();
 
         if (list == null){
-            return new ResponseVo("查询失败",list,"0x200");
+            return new ResponseVo("查询失败",null,"0x200");
         }
 
         return new ResponseVo("查询成功",list,"0x200");

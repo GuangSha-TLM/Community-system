@@ -167,7 +167,7 @@
 
     </div>
 </template>
-  
+
 <script>
 
 import { synRequestPost, synRequestGet } from "../../static/request"
@@ -284,7 +284,7 @@ export default {
             this.updataByIdBo.user.name = this.userInfo.name;
             this.updataByIdBo.user.id = this.userInfo.id;
             console.log(this.updataByIdBo);
-            let obj = await synRequestPost("/user/updata", this.updataByIdBo);
+            let obj = await synRequestPost("/user/update", this.updataByIdBo);
             alert(obj.message);
             this.updateWindows = false
             this.getMerchantInformation(1);
@@ -294,7 +294,7 @@ export default {
         async openUpdateUserInfoWindows(id) {
             this.selectByIdBo.id = id;
             this.selectByIdBo.token = this.token;
-            let obj = await synRequestPost("/user/selectById", this.selectByIdBo);
+            let obj = await synRequestPost("/user/select", this.selectByIdBo);
             this.userInfo = obj.data;
             // this.userInfo.college = this.college[this.userInfo.college]
             console.log(this.userInfo);
@@ -302,7 +302,7 @@ export default {
             this.updateWindows = true;
         },
 
-        //跳转指定页面  
+        //跳转指定页面
         async getMerchantInformation(val) {
             this.pagingToGetUserDataBo.start = (val - 1) * this.pagingToGetUserDataBo.size;
             let obj = await synRequestPost("/user/findAll", this.pagingToGetUserDataBo);
@@ -337,7 +337,7 @@ export default {
 }
 
 </script>
-    
+
     <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h1,
@@ -375,4 +375,3 @@ a {
     font-size: 20px;
 }
 </style>
-    
