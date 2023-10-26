@@ -1,6 +1,5 @@
 package com.gsxy.core.pojo;
 
-import javax.xml.crypto.Data;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -11,26 +10,28 @@ import java.util.Date;
 public class Community implements Serializable {
     private Long id;
     private String name;    //社团班级
+    private Long communityId;//社团id
     private Long createBy;    //创建人
     private Date createTime;    //创建时间
     private Long updateBy;    //修改人
     private Date updateTime;    //修改时间
     private Integer status;     //状态
-    private Integer del_flag;   //逻辑删除
+    private Integer delFlag;   //逻辑删除
     private String remark;      //备注
     public Community(){
 
     }
 
-    public Community(Long id, String name, Long createBy, Date createTime, Long updateBy, Date updateTime, Integer status, Integer del_flag, String remark) {
+    public Community(Long id, String name, Long communityId, Long createBy, Date createTime, Long updateBy, Date updateTime, Integer status, Integer delFlag, String remark) {
         this.id = id;
         this.name = name;
+        this.communityId = communityId;
         this.createBy = createBy;
         this.createTime = createTime;
         this.updateBy = updateBy;
         this.updateTime = updateTime;
         this.status = status;
-        this.del_flag = del_flag;
+        this.delFlag = delFlag;
         this.remark = remark;
     }
 
@@ -48,6 +49,14 @@ public class Community implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Long getCommunityId() {
+        return communityId;
+    }
+
+    public void setCommunityId(Long communityId) {
+        this.communityId = communityId;
     }
 
     public Long getCreateBy() {
@@ -90,12 +99,12 @@ public class Community implements Serializable {
         this.status = status;
     }
 
-    public Integer getDel_flag() {
-        return del_flag;
+    public Integer getDelFlag() {
+        return delFlag;
     }
 
-    public void setDel_flag(Integer del_flag) {
-        this.del_flag = del_flag;
+    public void setDelFlag(Integer delFlag) {
+        this.delFlag = delFlag;
     }
 
     public String getRemark() {
@@ -111,12 +120,13 @@ public class Community implements Serializable {
         return "Community{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", createBy='" + createBy + '\'' +
+                ", communityId=" + communityId +
+                ", createBy=" + createBy +
                 ", createTime=" + createTime +
-                ", updateBy='" + updateBy + '\'' +
+                ", updateBy=" + updateBy +
                 ", updateTime=" + updateTime +
                 ", status=" + status +
-                ", del_flag=" + del_flag +
+                ", del_flag=" + delFlag +
                 ", remark='" + remark + '\'' +
                 '}';
     }

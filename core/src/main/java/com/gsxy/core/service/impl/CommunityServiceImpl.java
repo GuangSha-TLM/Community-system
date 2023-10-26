@@ -29,8 +29,6 @@ public class CommunityServiceImpl implements CommunityService {
      */
     @Override
     public ResponseVo addCommunity(CommunityAddBo communityAddByIdBo) {
-        String orgIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
-        Long orgId = Long.valueOf(orgIdOfStr);
         Long aLong = communityMapper.addcommunity(communityAddByIdBo.getCommunity());
         if (aLong.longValue() == 0L) {
             return new ResponseVo("增加失败",  null, "0x500");
@@ -50,7 +48,7 @@ public class CommunityServiceImpl implements CommunityService {
         Long id = communityDeleteByIdBo.getId();
         Long aLong = communityMapper.deleteByIdcommunity(id);
 
-        if (aLong.longValue() != 0L) {
+        if (aLong.longValue() == 0L) {
             return new ResponseVo("删除失败", null, "0x500");
         }
         return new ResponseVo("删除成功",id, "0x200");
@@ -81,8 +79,7 @@ public class CommunityServiceImpl implements CommunityService {
      */
     @Override
     public ResponseVo updateByIdCommunity(CommunityUpdateByIdBo communityUpdateByIdBo) {
-        String orgIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
-        Long orgId = Long.valueOf(orgIdOfStr);
+
         Community community = communityUpdateByIdBo.getCommunity();
         Long aLong = communityMapper.updateByIdcommunity(community);
         if (aLong.longValue() == 0L) {
