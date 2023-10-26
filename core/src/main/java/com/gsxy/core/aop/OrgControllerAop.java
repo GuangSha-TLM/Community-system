@@ -1,9 +1,6 @@
 package com.gsxy.core.aop;
 
-import com.gsxy.core.pojo.bo.OrgSelectByUserBo;
 import org.aspectj.lang.JoinPoint;
-
-import java.util.List;
 
 public interface OrgControllerAop {
     /**
@@ -16,7 +13,7 @@ public interface OrgControllerAop {
 
     /**
      * @author zhuxinyu 2023-10-24
-     * 添加org 主要做了鉴权
+     * 删除org 主要做了鉴权
      * @param joinPoint
      * @return
      */
@@ -24,7 +21,7 @@ public interface OrgControllerAop {
 
     /**
      * @author zhuxinyu 2023-10-24
-     * 添加org 主要做了鉴权
+     * 查找org 主要做了鉴权
      * @param joinPoint
      * @return
      */
@@ -32,7 +29,7 @@ public interface OrgControllerAop {
 
     /**
      * @author zhuxinyu 2023-10-24
-     * 添加org 主要做了鉴权
+     * 修改org 主要做了鉴权
      * @param joinPoint
      * @return
      */

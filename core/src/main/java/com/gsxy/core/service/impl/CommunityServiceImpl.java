@@ -12,6 +12,8 @@ import com.gsxy.core.util.ThreadLocalUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 /**
  * @author zhuxinyu 2023-10-24
  *    社团业务实体类接口
@@ -20,7 +22,6 @@ import org.springframework.stereotype.Service;
 public class CommunityServiceImpl implements CommunityService {
     @Autowired
     private CommunityMapper communityMapper;
-
     /**
      * @author zhuxinyu 2023-10-24
      *      添加社团
@@ -29,6 +30,10 @@ public class CommunityServiceImpl implements CommunityService {
      */
     @Override
     public ResponseVo addCommunity(CommunityAddBo communityAddByIdBo) {
+        String communityIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
+        Long communityId = Long.valueOf(communityIdOfStr);
+        communityAddByIdBo.getCommunity().setCreateBy(communityId);
+        communityAddByIdBo.getCommunity().setCreateTime(new Date());
         Long aLong = communityMapper.addcommunity(communityAddByIdBo.getCommunity());
         if (aLong.longValue() == 0L) {
             return new ResponseVo("增加失败",  null, "0x500");
@@ -45,9 +50,14 @@ public class CommunityServiceImpl implements CommunityService {
      */
     @Override
     public ResponseVo deleteByIdCommunity(CommunityDeleteByIdBo communityDeleteByIdBo) {
+        String communityIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
+        Long communityId = Long.valueOf(communityIdOfStr);
+        if(communityId == null || communityId == 0L){
+            return new ResponseVo("token解析失败",null,"0x501");
+        }
+
         Long id = communityDeleteByIdBo.getId();
         Long aLong = communityMapper.deleteByIdcommunity(id);
-
         if (aLong.longValue() == 0L) {
             return new ResponseVo("删除失败", null, "0x500");
         }
@@ -62,8 +72,9 @@ public class CommunityServiceImpl implements CommunityService {
      */
     @Override
     public ResponseVo selectByIdCommunity(CommunitySelectByIdBo communitySelectByIdBo) {
-        Community community = communityMapper.selectByIdcommunity(communitySelectByIdBo.getId());
-
+        String userAdminIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
+        Long userAdminId = Long.valueOf(userAdminIdOfStr);
+        Community community = communityMapper.selectByIdcommunity(userAdminId);
         if (community == null) {
             return new ResponseVo("查询的数据不存在,", null, "0x500");
         }
@@ -79,7 +90,10 @@ public class CommunityServiceImpl implements CommunityService {
      */
     @Override
     public ResponseVo updateByIdCommunity(CommunityUpdateByIdBo communityUpdateByIdBo) {
-
+        String userAdminIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
+        Long userAdminId = Long.valueOf(userAdminIdOfStr);
+        communityUpdateByIdBo.getCommunity().setUpdateBy(userAdminId);
+        communityUpdateByIdBo.getCommunity().setUpdateTime(new Date());
         Community community = communityUpdateByIdBo.getCommunity();
         Long aLong = communityMapper.updateByIdcommunity(community);
         if (aLong.longValue() == 0L) {

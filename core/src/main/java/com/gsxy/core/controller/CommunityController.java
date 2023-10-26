@@ -55,6 +55,11 @@ public class CommunityController {
     @PostMapping("/delete")
     @ApiOperation("通过id删除社团数据")
     public String CommunityDeleteById(@RequestBody CommunityDeleteByIdBo communityDeleteByIdBo){
+        Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+        if (map.get("error") != null) {
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
         return JSONArray.toJSONString(communityService.deleteByIdCommunity(communityDeleteByIdBo));
     }
 
@@ -84,6 +89,11 @@ public class CommunityController {
     @PostMapping("/update")
     @ApiOperation("通过id修改社团数据")
     public String CommunityUpdateById(@RequestBody CommunityUpdateByIdBo communityUpdateByIdBo){
+        Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+        if (map.get("error") != null) {
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
         return JSONArray.toJSONString(communityService.updateByIdCommunity(communityUpdateByIdBo));
     }
 }

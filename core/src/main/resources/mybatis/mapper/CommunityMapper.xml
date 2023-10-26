@@ -14,7 +14,7 @@
             (null, #{name},#{communityId},
              #{createBy}, #{createTime},
              #{updateBy}, #{updateTime},
-             #{status}, #{del_flag} ,#{remark})
+             #{status}, #{delFlag} ,#{remark})
     </insert>
     <!--
         @author zhuxinyu 2023-10-24
