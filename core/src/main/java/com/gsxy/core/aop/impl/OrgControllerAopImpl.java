@@ -31,7 +31,7 @@ public class OrgControllerAopImpl implements OrgControllerAop {
         Object[] args = joinPoint.getArgs();
         OrgAddBo arg = (OrgAddBo) args[0];
         String token = arg.getToken();
-        systemService.isAdmin(token,1);
+        systemService.isAdmin(token,0);
         return null;
     }
     /**
@@ -46,7 +46,7 @@ public class OrgControllerAopImpl implements OrgControllerAop {
         Object[] args = joinPoint.getArgs();
         OrgDeleteByIdBo arg = (OrgDeleteByIdBo) args[0];
         String token = arg.getToken();
-        systemService.isAdmin(token,1);
+        systemService.isAdmin(token,0);
         return null;
     }
 
@@ -78,7 +78,7 @@ public class OrgControllerAopImpl implements OrgControllerAop {
         Object[] args = joinPoint.getArgs();
         OrgUpdateByIdBo arg = (OrgUpdateByIdBo) args[0];
         String token = arg.getToken();
-        systemService.isAdmin(token,1);
+        systemService.isAdmin(token,0);
         return null;
     }
 
