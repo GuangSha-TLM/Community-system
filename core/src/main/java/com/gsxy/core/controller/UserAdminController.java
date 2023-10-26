@@ -1,12 +1,10 @@
 package com.gsxy.core.controller;
 
 import com.alibaba.fastjson2.JSONArray;
-import com.gsxy.core.pojo.bo.UserAdminAddByBo;
-import com.gsxy.core.pojo.bo.UserAdminDeleteByIdBo;
-import com.gsxy.core.pojo.bo.UserAdminSelectByIdBo;
-import com.gsxy.core.pojo.bo.UserAdminUpdateByIdBo;
+import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.ResponseVo;
 import com.gsxy.core.service.UserAdminService;
+import com.gsxy.core.util.RoleUtil;
 import com.gsxy.core.util.ThreadLocalUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -14,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
+
 
 /**
  *  2023-10-24
@@ -27,22 +26,6 @@ public class UserAdminController {
 
     @Autowired
     private UserAdminService userAdminService;
-
-    /**
-     * @author Oh… Yeah!!!, 2023-10-24
-     *      管理员登录验证
-     * @param userAdminLoginBo
-     * @return String.classs
-     */
-/*    @PostMapping("/login")
-    @ApiOperation("管理员登入")
-    public String adminLogin(@RequestBody UserAdminLoginBo userAdminLoginBo){
-        if (userAdminLoginBo == null){
-            JSONArray.toJSONString( new ResponseVo("参数为null", null, "0x455"));
-        }
-
-        return JSONArray.toJSONString(userAdminService.userAdminLogin(userAdminLoginBo));
-    }*/
 
 
     /**
@@ -58,6 +41,12 @@ public class UserAdminController {
         if (map.get("error") != null) {
             return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
         }
+
+        //进行权限判定，只有管理员和超级管理员才可以操作管理员面板
+        if (RoleUtil.userAdmin == null || RoleUtil.userAdmin.getRole() == 1 || RoleUtil.userAdmin.getRole() == 2){
+            return JSONArray.toJSONString(new ResponseVo<>("用户权限不足,不能执行此操作",null,"507"));
+        }
+
         return JSONArray.toJSONString(userAdminService.userAdminSelectById(userAdminSelectByIdBo));
     }
 
@@ -73,6 +62,11 @@ public class UserAdminController {
         Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
         if (map.get("error") != null) {
             return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
+
+        //进行权限判定，只有管理员和超级管理员才可以操作管理员面板
+        if (RoleUtil.userAdmin == null || RoleUtil.userAdmin.getRole() == 1 || RoleUtil.userAdmin.getRole() == 2){
+            return JSONArray.toJSONString(new ResponseVo<>("用户权限不足,不能执行此操作",null,"507"));
         }
         return JSONArray.toJSONString(userAdminService.userAdminDeleteById(userAdminDeleteByIdBo));
     }
@@ -90,6 +84,10 @@ public class UserAdminController {
         if (map.get("error") != null) {
             return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
         }
+        //进行权限判定，只有管理员和超级管理员才可以操作管理员面板
+        if (RoleUtil.userAdmin == null || RoleUtil.userAdmin.getRole() == 1 || RoleUtil.userAdmin.getRole() == 2){
+            return JSONArray.toJSONString(new ResponseVo<>("用户权限不足,不能执行此操作",null,"507"));
+        }
         return JSONArray.toJSONString(userAdminService.userAdminAdd(userAdminAddByBo));
     }
 
@@ -106,9 +104,14 @@ public class UserAdminController {
         if (map.get("error") != null) {
             return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
         }
+        //进行权限判定，只有管理员和超级管理员才可以操作管理员面板
+        if (RoleUtil.userAdmin == null || RoleUtil.userAdmin.getRole() == 1 || RoleUtil.userAdmin.getRole() == 2){
+            return JSONArray.toJSONString(new ResponseVo<>("用户权限不足,不能执行此操作",null,"507"));
+        }
         return JSONArray.toJSONString(userAdminService.userAdminUpdateById(userAdminUpdateByIdBo));
     }
 
 
-
 }
+
+

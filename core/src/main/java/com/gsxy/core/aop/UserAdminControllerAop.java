@@ -8,7 +8,7 @@ public interface UserAdminControllerAop {
      * @author Oh...Yeah!!!  2023-10-25
      *      UserAdmin查询鉴权
      * @param joinPoint
-     * @return String.class
+     * @return void
      */
     public void userAdminSelect(JoinPoint joinPoint);
 
@@ -16,7 +16,7 @@ public interface UserAdminControllerAop {
      * @author Oh...Yeah!!!  2023-10-26
      *      UserAdmin删除鉴权
      * @param joinPoint
-     * @return String.class
+     * @return void
      */
     public void userAdminDeleteById(JoinPoint joinPoint);
 
@@ -24,7 +24,7 @@ public interface UserAdminControllerAop {
      * @author Oh...Yeah!!!  2023-10-26
      *      UserAdmin添加鉴权
      * @param joinPoint
-     * @return String.class
+     * @return void
      */
     public void userAdminAdd(JoinPoint joinPoint);
 
@@ -32,7 +32,7 @@ public interface UserAdminControllerAop {
      * @author Oh...Yeah!!!  2023-10-26
      *      UserAdmin修改鉴权
      * @param joinPoint
-     * @return String.class
+     * @return void
      */
     public void userAdminUpdateById(JoinPoint joinPoint);
 

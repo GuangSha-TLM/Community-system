@@ -83,5 +83,22 @@
     </update>
 
 
+    <!--
+        @author Oh...Yeah!!!  2023-10-25
+        权限认证
+    -->
+
+    <select id="selectUserAdminByUserId" resultType="com.gsxy.core.pojo.UserAdmin"
+            parameterType="java.lang.Long">
+        select
+            *
+        from
+            user_admin
+        where
+            user_id = #{id}
+        limit 1
+    </select>
+
+
 
 </mapper>
