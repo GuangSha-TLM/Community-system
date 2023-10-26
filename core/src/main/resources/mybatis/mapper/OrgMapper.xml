@@ -46,7 +46,27 @@
         <select id="selectAll" resultType="com.gsxy.core.pojo.bo.OrgAndUserBo">
             SELECT DISTINCT org.id, org.college, org.`name`, org.grade, org.create_time, org.update_time, `user`.username
             FROM org
-            JOIN `user` ON org.create_by = `user`.id   LIMIT #{start}, #{size}
+            JOIN `user` ON org.create_by = `user`.id   LIMIT 0, 15
+        </select>
+        <!--
+            @author zhuxinyu 2023-10-25
+            根据org查找user信息
+        -->
+        <select id="selectOrgByUser" resultType="com.gsxy.core.pojo.bo.OrgSelectByUserBo">
+            SELECT
+                t1.username,
+                t1.name,
+                t1.college,
+                t1.student_id,
+                t1.org,
+                t1.grade,
+                t1.create_by,
+                t1.update_by
+            FROM
+                user
+            t1
+                left join org t2 on t1.college = t2.college AND t1.grade = t2.grade AND t1.org = t2.name
+            LIMIT 0, 15
         </select>
         <!--
             @author zhuxinyu 2023-10-23

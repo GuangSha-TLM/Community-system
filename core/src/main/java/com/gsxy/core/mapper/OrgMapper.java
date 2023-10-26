@@ -2,6 +2,7 @@ package com.gsxy.core.mapper;
 
 import com.gsxy.core.pojo.Org;
 import com.gsxy.core.pojo.bo.OrgAndUserBo;
+import com.gsxy.core.pojo.bo.OrgSelectByUserBo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -51,7 +52,11 @@ public interface OrgMapper {
      */
     public Long updateByIdOrg(Org org);
 
-
-
+    /**
+     * @author zhuxinyu 2023-10-25
+     *      根据Org查找User
+     * @return
+     */
+    public List<OrgSelectByUserBo> selectOrgByUser();
 
 }

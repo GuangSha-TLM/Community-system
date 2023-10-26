@@ -19,10 +19,10 @@
 
                         <div>
                             <div class="form-group">
-                                <label for="exampleInputEmail1">账号</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1"
-                                    aria-describedby="emailHelp">
-                                <small id="emailHelp" class="form-text text-muted">We'll never share your account
+                                <label for="exampleInputusername">账号</label>
+                                <input type="text" class="form-control" id="exampleInputusername"
+                                v-model="user.username">
+                                <small id="username" class="form-text text-muted">We'll never share your account
                                     information with anyone
                                     else.</small>
                             </div>
