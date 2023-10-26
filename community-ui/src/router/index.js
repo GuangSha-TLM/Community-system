@@ -7,6 +7,7 @@ import AssociationManager from '@/components/AssociationManager'
 import ActivityManagement from '../components/ActivityManagement.vue'
 import Login from '@/components/Login.vue'
 import UserReg from '@/components/UserReg.vue'
+import Home from '@/components/Home';
 Vue.use(Router)
 
 export default new Router({
@@ -14,6 +15,26 @@ export default new Router({
   base: '/h',
   
   routes: [
+    {
+      path: '/',
+      component: Home,
+      children: [
+        {
+          path: '/ClassManagement',
+          name: 'ClassManagement',
+          component: ClassManagement,
+        },
+        {
+          path: '/userManagement',
+          name: 'UserManagement',
+          component: UserManagement
+        },{
+          path: '/AssociationManager',
+          name: 'AssociationManager',
+          component: AssociationManager
+        }
+      ] 
+    },
     {
       path: '/',
       name: 'HelloWorld',

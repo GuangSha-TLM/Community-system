@@ -32,6 +32,14 @@ public class ImgServiceImpl implements ImgService {
     @Override
     public ResponseVo imgSelectById(ImgSelectByIdBo imgSelectByIdBo) {
 
+        String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
+        Long userId = Long.valueOf(userIdOfStr);
+
+        if(userId == null || userId == 0L){
+            return new ResponseVo("token解析失败",null,"0x501");
+        }
+
+
         Img img = imgMapper.selectByIdImg(imgSelectByIdBo.getId());
 
         if (img == null) {
@@ -50,6 +58,13 @@ public class ImgServiceImpl implements ImgService {
      */
     @Override
     public ResponseVo imgDeleteById(ImgDeleteByIdBo imgDeleteByIdBo) {
+
+        String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
+        Long userId = Long.valueOf(userIdOfStr);
+
+        if(userId == null || userId == 0L){
+            return new ResponseVo("token解析失败",null,"0x501");
+        }
 
         Long id = imgDeleteByIdBo.getId();
         Long numbersOfOpetion = imgMapper.deleteByIdImg(id);
@@ -70,6 +85,13 @@ public class ImgServiceImpl implements ImgService {
     @Override
     public ResponseVo imgAdd(ImgAddByBo imgAddByBo) {
 
+        String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
+        Long userId = Long.valueOf(userIdOfStr);
+
+        if(userId == null || userId == 0L){
+            return new ResponseVo("token解析失败",null,"0x501");
+        }
+
         Long aLong = imgMapper.addImg(imgAddByBo.getImg());
 
         if (aLong.longValue() == 0){
@@ -86,6 +108,13 @@ public class ImgServiceImpl implements ImgService {
      */
     @Override
     public ResponseVo imgUpdateById(ImgUpdateByIdBo imgUpdateByIdBo) {
+
+        String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
+        Long userId = Long.valueOf(userIdOfStr);
+
+        if(userId == null || userId == 0L){
+            return new ResponseVo("token解析失败",null,"0x501");
+        }
 
         Img img = imgUpdateByIdBo.getImg();
         Long numbersOfOpertion = imgMapper.updateByIdImg(img);

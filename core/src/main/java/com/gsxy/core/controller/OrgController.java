@@ -108,11 +108,11 @@ public class OrgController {
 
     /**
      * @author zhuxinyu 2023-10-25
-     *      通过Org修改id数据
+     *      通过Org查找user数据
      * @return
      */
     @PostMapping("/orgselectuser")
-    @ApiOperation("通过Org修改id数据")
+    @ApiOperation("通过Org查找user数据")
     public String orgSelectByUser(){
         return JSONArray.toJSONString(orgService.orgSelectByUser());
     }

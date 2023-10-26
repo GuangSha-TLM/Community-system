@@ -11,10 +11,10 @@
         insert into
             Community
         values
-            (null, #{name},
+            (null, #{name},#{communityId},
              #{createBy}, #{createTime},
              #{updateBy}, #{updateTime},
-             #{status}, #{del_flag} ,#{remark})
+             #{status}, #{delFlag} ,#{remark})
     </insert>
     <!--
         @author zhuxinyu 2023-10-24
@@ -38,7 +38,10 @@
         update Community
         <set>
             <if test="name != null and name != '' ">
-                name = #{name}
+                name = #{name},
+            </if>
+            <if test="communityId != null ">
+                community_id = #{communityId},
             </if>
             <if test="createBy != null ">
                 create_by = #{createBy},
@@ -56,7 +59,7 @@
                 status = #{status},
             </if>
             <if test="delFlag != null">
-                del_flag = #{delFlag}
+                del_flag = #{delFlag},
             </if>
             <if test="remark">
                 remark = #{remark}
