@@ -3,7 +3,7 @@ package com.gsxy.core.pojo;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Activity implements Serializable {
+public class Active implements Serializable {
 
     private Long id;//ID
     private String title;//活动标题
@@ -19,10 +19,7 @@ public class Activity implements Serializable {
     private Integer status;//0为私有活动 1多个社团活动 2 所有社团活动
     private Integer delFlag;//逻辑删除
 
-    public Activity() {
-    }
-
-    public Activity(Long id, String title, String context, Integer community, String communityList, Date startTime, Date endTime, Date createTime, Date updateTime, Long updateBy, Long createBy, Integer status, Integer delFlag) {
+    public Active(Long id, String title, String context, Integer community, String communityList, Date startTime, Date endTime, Date createTime, Date updateTime, Long updateBy, Long createBy, Integer status, Integer delFlag) {
         this.id = id;
         this.title = title;
         this.context = context;
@@ -36,6 +33,9 @@ public class Activity implements Serializable {
         this.createBy = createBy;
         this.status = status;
         this.delFlag = delFlag;
+    }
+
+    public Active() {
     }
 
     public Long getId() {

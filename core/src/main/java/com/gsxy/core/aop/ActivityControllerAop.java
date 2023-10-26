@@ -13,5 +13,10 @@ public interface ActivityControllerAop {
      */
     public String addActive(JoinPoint joinPoint);
 
+    public String deleteActive(JoinPoint joinPoint);
+
+    public String selectActive(JoinPoint joinPoint);
+
+    public String updateActive(JoinPoint joinPoint);
 
 }
