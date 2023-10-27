@@ -91,10 +91,27 @@ public class ActivityControllerAopImpl implements ActivityControllerAop {
      * @return
      */
     @Override
-    @Before("execution(* com.gsxy.core.controller.ActivityController.pagingQuery(..))")
-    public String pagingQuery(JoinPoint joinPoint) {
+    @Before("execution(* com.gsxy.core.controller.ActivityController.activeLikeToGet(..))")
+    public String activeLikeToGet(JoinPoint joinPoint) {
         Object[] args = joinPoint.getArgs();
-        ActivePagingQueryByTitleBo arg = (ActivePagingQueryByTitleBo) args[0];
+        ActiveLikeToGetByTitleBo arg = (ActiveLikeToGetByTitleBo) args[0];
+        String token = arg.getToken();
+        systemService.isAdmin(token,2);
+
+        return null;
+    }
+
+    /**
+     * @author hln
+     * 添加task 主要做了鉴权
+     * @param joinPoint
+     * @return
+     */
+    @Override
+    @Before("execution(* com.gsxy.core.controller.ActivityController.pagingToGetActiveData(..))")
+    public String pagingToGetActiveData(JoinPoint joinPoint) {
+        Object[] args = joinPoint.getArgs();
+        PagingToGetActiveDataBo arg = (PagingToGetActiveDataBo) args[0];
         String token = arg.getToken();
         systemService.isAdmin(token,2);
 

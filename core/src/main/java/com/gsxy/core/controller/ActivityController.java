@@ -1,7 +1,6 @@
 package com.gsxy.core.controller;
 
 import com.alibaba.fastjson2.JSONArray;
-import com.gsxy.core.pojo.Active;
 import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.ResponseVo;
 import com.gsxy.core.service.ActiveService;
@@ -100,12 +99,12 @@ public class ActivityController {
     /**
      * @author hln 2023-10-27
      *      根据title进行模糊查询
-     * @param activePagingQueryByTitleBo
+     * @param activeLikeToGetByTitleBo
      * @return
      */
-    @PostMapping("/pagingQuery")
+    @PostMapping("/likeToGet")
     @ApiOperation("根据title进行模糊查询")
-    public String pagingQuery(@RequestBody ActivePagingQueryByTitleBo activePagingQueryByTitleBo){
+    public String activeLikeToGet(@RequestBody ActiveLikeToGetByTitleBo activeLikeToGetByTitleBo){
 
         Map<String,String> map = ThreadLocalUtil.mapThreadLocal.get();
         ThreadLocalUtil.mapThreadLocal.remove();
@@ -113,7 +112,30 @@ public class ActivityController {
             return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
         }
 
-        return JSONArray.toJSONString(activeService.pagingQuery(activePagingQueryByTitleBo));
+        return JSONArray.toJSONString(activeService.activeLikeToGetByTitle(activeLikeToGetByTitleBo));
+    }
+
+    /**
+     * @author hln 2023-10-27
+     *      分页查询
+     * @param pagingToGetActiveDataBo
+     * @return
+     */
+    @PostMapping("/pagingQuery")
+    @ApiOperation("分页查询")
+    public String pagingToGetActiveData(@RequestBody PagingToGetActiveDataBo pagingToGetActiveDataBo){
+
+        Map<String,String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+        if(map.get("error") != null){
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
+
+        if (pagingToGetActiveDataBo == null){
+            return JSONArray.toJSONString(new ResponseVo<>("参数为null",null,"455"));
+        }
+
+        return JSONArray.toJSONString(activeService.pagingToGetActiveData(pagingToGetActiveDataBo));
     }
 
     /**

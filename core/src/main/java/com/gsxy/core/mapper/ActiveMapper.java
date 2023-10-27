@@ -1,8 +1,9 @@
 package com.gsxy.core.mapper;
 
 import com.gsxy.core.pojo.Active;
-import com.gsxy.core.pojo.bo.ActivePagingQueryByTitleBo;
+import com.gsxy.core.pojo.bo.ActiveLikeToGetByTitleBo;
 import com.gsxy.core.pojo.bo.ActiveSelectByIdBo;
+import com.gsxy.core.pojo.bo.PagingToGetActiveDataBo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -52,8 +53,24 @@ public interface ActiveMapper {
     /**
      * @author hln 2023-10-27
      *      根据title进行模糊查询
-     * @param activePagingQueryByTitleBo
+     * @param activeLikeToGetByTitleBo
      * @return
      */
-    List<Active> pagingQueryByTitleBo(ActivePagingQueryByTitleBo activePagingQueryByTitleBo);
+    List<Active> activeLikeToGetByTitle(ActiveLikeToGetByTitleBo activeLikeToGetByTitleBo);
+
+    /**
+     * @author hln 2023-10-27
+     *      获取所有活动的数据
+     * @param pagingToGetActiveDataBo
+     * @return
+     */
+    List<Active> pagingToGetActiveData(PagingToGetActiveDataBo pagingToGetActiveDataBo);
+
+    /**
+     * @author hln 2023-10-27
+     *      获取活动总数
+     * @param pagingToGetActiveDataBo
+     * @return
+     */
+    Long pagingToGetCountOfActiveData(PagingToGetActiveDataBo pagingToGetActiveDataBo);
 }

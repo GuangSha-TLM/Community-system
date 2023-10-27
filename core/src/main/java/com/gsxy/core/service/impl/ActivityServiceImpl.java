@@ -3,9 +3,9 @@ package com.gsxy.core.service.impl;
 import com.gsxy.core.mapper.ActiveMapper;
 import com.gsxy.core.pojo.Active;
 import com.gsxy.core.pojo.bo.*;
+import com.gsxy.core.pojo.vo.PagingToGetActiveDataVO;
 import com.gsxy.core.pojo.vo.ResponseVo;
 import com.gsxy.core.service.ActiveService;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -113,14 +113,14 @@ public class ActivityServiceImpl implements ActiveService {
     /**
      * @author hln 2023-10-27
      *      根据title进行模糊查询
-     * @param activePagingQueryByTitleBo
+     * @param activeLikeToGetByTitleBo
      * @return
      */
     @Override
-    public ResponseVo pagingQuery(ActivePagingQueryByTitleBo activePagingQueryByTitleBo) {
+    public ResponseVo activeLikeToGetByTitle(ActiveLikeToGetByTitleBo activeLikeToGetByTitleBo) {
 
         //调用数据库查询出所有符合条件的数据
-        List<Active> list = activeMapper.pagingQueryByTitleBo(activePagingQueryByTitleBo);
+        List<Active> list = activeMapper.activeLikeToGetByTitle(activeLikeToGetByTitleBo);
 
         //判断集合是否为空，若为空则查询失败
         if(list == null){
@@ -129,6 +129,28 @@ public class ActivityServiceImpl implements ActiveService {
 
         //若list不为空，返回结果
         return new ResponseVo("查询成功",list,"0x200");
+    }
+
+    /**
+     * @author hln 2023-10-27
+     *      分页查询
+     * @param pagingToGetActiveDataBo
+     * @return
+     */
+    @Override
+    public ResponseVo pagingToGetActiveData(PagingToGetActiveDataBo pagingToGetActiveDataBo) {
+
+        //获取所有活动的数据
+        List<Active> activeList = activeMapper.pagingToGetActiveData(pagingToGetActiveDataBo);
+
+        //获取活动总数
+        Long count = activeMapper.pagingToGetCountOfActiveData(pagingToGetActiveDataBo);
+
+        PagingToGetActiveDataVO pagingToGetActiveDataVO = new PagingToGetActiveDataVO();
+        pagingToGetActiveDataVO.setCount(count);
+        pagingToGetActiveDataVO.setList(activeList);
+
+        return new ResponseVo(null,pagingToGetActiveDataVO,"0x200");
     }
 
 }

@@ -72,8 +72,8 @@
     </select>
 
     <!-- 根据title进行模糊查询 -->
-    <select id="pagingQueryByTitleBo" resultType="com.gsxy.core.pojo.Active"
-            parameterType="com.gsxy.core.pojo.bo.ActivePagingQueryByTitleBo">
+    <select id="activeLikeToGetByTitle" resultType="com.gsxy.core.pojo.Active"
+            parameterType="com.gsxy.core.pojo.bo.ActiveLikeToGetByTitleBo">
         select
             *
         from
@@ -83,6 +83,38 @@
           and
             status = #{status}
           and
+            del_flag = #{delFlag}
+    </select>
+
+    <!-- 获取所有活动数据 -->
+    <select id="pagingToGetActiveData" resultType="com.gsxy.core.pojo.Active"
+            parameterType="com.gsxy.core.pojo.bo.PagingToGetActiveDataBo">
+        select
+            *
+        from
+            active
+        where
+            <if test="title != null and title != ''">
+                title like #{title} and
+            </if>
+                status = #{status} and
+                del_flag = #{delFlag}
+        limit
+            #{start},#{size}
+    </select>
+
+    <!-- 获取活动总数 -->
+    <select id="pagingToGetCountOfActiveData" resultType="java.lang.Long"
+            parameterType="com.gsxy.core.pojo.bo.PagingToGetActiveDataBo">
+        select
+            count(*)
+        from
+            active
+        where
+            <if test="title != null and title != ''">
+                title like #{title} and
+            </if>
+            status = #{status} and
             del_flag = #{delFlag}
     </select>
 
