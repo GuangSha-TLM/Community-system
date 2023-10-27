@@ -6,10 +6,12 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">用户名</th>
-                            <th scope="col">密码</th>
-                            <th scope="col">学生Id</th>
+                            <th scope="col">序号</th>
+                            <th scope="col">学院</th>
+                            <th scope="col">班级</th>
+                            <th scope="col">学号</th>
+                            <th scope="col">姓名</th>
+                            <th scope="col">创建时间</th>
                             <th scope="col">操作</th>
                         </tr>
 
@@ -17,9 +19,12 @@
                     <tbody>
                         <tr v-for="obj in list" :key="obj.index">
                             <th scope="row">{{ obj.id }}</th>
-                            <td>{{ obj.username }}</td>
-                            <td>{{ obj.password }}</td>
+                            <td>{{ obj.college }}</td>
+                            <td>{{ obj.org }}</td>
                             <td>{{ obj.studentId }}</td>
+                            <td>{{ obj.username }}</td>
+                            <td>{{ obj.create_by }}</td>
+                            
                             <td>
                                 <el-link type="primary" @click="openView(obj)">查看</el-link>
 
@@ -81,83 +86,47 @@
         </section>
 
         <!-- View content  -->
-        <section v-else class="check">
+        <section v-else class="table">
             <!-- 用户名 -->
+            <div class="row" >
             <div>
-                <div class="key">
-                    用户名
-                </div>
-                <div class="value">
+                <div class="cell key">
+                        用户名
+                    </div>
+                <div class="cell value">
                     {{ schoolView.username }}
                 </div>
             </div>
+            </div>
 
             <!-- 密码 -->
+            <div class="row">
             <div>
-                <div class="key">
+                <div class=" cell key">
                     密码
                 </div>
-                <div class="value">
+                <div class="cell value">
                     {{ schoolView.password }}
                 </div>
             </div>
+            </div>
 
             <!-- 名字 -->
-            <div v-if="schoolView.name">
-                <div class="key">
-                    名字
+                <div class="row">
+                <div>
+                    <div class=" cell key" v-if="schoolView.name">
+                        名字
+                    </div>
+                    <div class="cell value">
+                        {{ schoolView.name }}
+                    </div>
                 </div>
-                <div class="value">
-                    {{ schoolView.name }}
                 </div>
-            </div>
-
-            <!-- 班级 -->
-            <div v-if="schoolView.org">
-                <div class="key">
-                    班级
-                </div>
-                <div class="value">
-                    {{ schoolView.org }}
-                </div>
-            </div>
-
-            <!-- 学院 -->
-            <div v-if="schoolView.college">
-                <div class="key">
-                    学院
-                </div>
-                <div class="value">
-                    {{ schoolView.college }}
-                </div>
-            </div>
-
-
-            <!-- 年级 -->
-            <div v-if="schoolView.grade">
-                <div class="key">
-                    年级
-                </div>
-                <div class="value">
-                    {{ schoolView.grade }}
-                </div>
-            </div>
-
-            <!-- 学号 -->
-            <div v-if="schoolView.student_id">
-                <div class="key">
-                    学号
-                </div>
-                <div class="value">
-                    {{ schoolView.student_id }}
-                </div>
-            </div>
-
-            <div>
-                <div class="key">
+            <div class="check">
+                <div >
                     <el-link type="primary" @click="openUpdateUserInfoWindows(schoolView.id)">修改</el-link>
                 </div>
-                <div class="value">
+                <div >
                     <el-link type="success" @click="deleteById(schoolView.id)">删除</el-link>
                 </div>
             </div>
@@ -180,7 +149,7 @@ export default {
                 username: "",
                 password: "",
             },
-            //查看学院
+            //查看
             schoolView: {
 
             },
@@ -359,10 +328,13 @@ a {
     color: #42b983;
 }
 
-.check div {
+.check  {
     display: flex;
     justify-content: center;
     flex-direction: row;
+}
+.check div {
+    margin: 10px;
 }
 
 .key {
@@ -374,4 +346,26 @@ a {
     margin: 15px;
     font-size: 20px;
 }
+
+.table {
+  display: table;
+  width: 100%;
+}
+
+
+.row {
+  display: table-row;
+}
+
+.cell {
+  display: table-cell;
+  padding: 8px; /* 可以调整单元格内边距 */
+  /* border: 1px solid #ccc; 可以添加边框 */
+}
+
+.key {
+  font-weight: bold; /* 可以使键加粗 */
+}
+
+
 </style>

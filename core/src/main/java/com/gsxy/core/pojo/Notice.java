@@ -1,21 +1,18 @@
 package com.gsxy.core.pojo;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 2023-10-23
- * 管理员类
+ *  2023-10-27
+ *  通知实体类
  */
-public class UserAdmin implements Serializable {
+public class Notice {
 
     private Long id;
-    //关联的用户id
-    private Long userId;
-    //权限
-    private Integer role;
-    //社团id
-    private Long communityId;
+    //通知内容
+    private String context;
+    //关联的图片id
+    private Long imgId;
     //创建人
     private Long createBy;
     //创建时间
@@ -29,15 +26,13 @@ public class UserAdmin implements Serializable {
     //逻辑删除
     private Integer delFlag;
 
-
-    public UserAdmin() {
+    public Notice() {
     }
 
-    public UserAdmin(Long id, Long userId, Integer role, Long communityId, Long createBy, Date createTime, Long updateBy, Date updateTime, Integer status, Integer delFlag) {
+    public Notice(Long id, String context, Long imgId, Long createBy, Date createTime, Long updateBy, Date updateTime, Integer status, Integer delFlag) {
         this.id = id;
-        this.userId = userId;
-        this.role = role;
-        this.communityId = communityId;
+        this.context = context;
+        this.imgId = imgId;
         this.createBy = createBy;
         this.createTime = createTime;
         this.updateBy = updateBy;
@@ -54,28 +49,20 @@ public class UserAdmin implements Serializable {
         this.id = id;
     }
 
-    public Long getUserId() {
-        return userId;
+    public String getContext() {
+        return context;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setContext(String context) {
+        this.context = context;
     }
 
-    public Integer getRole() {
-        return role;
+    public Long getImgId() {
+        return imgId;
     }
 
-    public void setRole(Integer role) {
-        this.role = role;
-    }
-
-    public Long getCommunityId() {
-        return communityId;
-    }
-
-    public void setCommunityId(Long communityId) {
-        this.communityId = communityId;
+    public void setImgId(Long imgId) {
+        this.imgId = imgId;
     }
 
     public Long getCreateBy() {
@@ -128,11 +115,10 @@ public class UserAdmin implements Serializable {
 
     @Override
     public String toString() {
-        return "UserAdmin{" +
+        return "Notice{" +
                 "id=" + id +
-                ", userId=" + userId +
-                ", role=" + role +
-                ", communityId=" + communityId +
+                ", context='" + context + '\'' +
+                ", imgId=" + imgId +
                 ", createBy=" + createBy +
                 ", createTime=" + createTime +
                 ", updateBy=" + updateBy +

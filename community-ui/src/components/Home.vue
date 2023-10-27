@@ -1,20 +1,22 @@
 <template>
-    <!-- mainconten -->
     <div class="hello">
         <div class="top">
             <Top></Top>
         </div>
         <div class="content">
             <div class="left">
-                <div class="complaintManagement tab" v-if="Admin">
+                <div class="complaintManagement tab" >
                     <router-link to="/ClassManagement">班级管理</router-link>
                 </div>
                 <div class="userMangement tab" >
                     <router-link to="/userManagement">用户管理</router-link>
                 </div>
-                <div class="userInfo tab">
+                <div class="AssociationManager tab">
                     <router-link to="/AssociationManager">社团管理</router-link>
                 </div>
+                <div class="ActivityManagement tab">
+                        <router-link to="/ActivityManagement">活动管理</router-link>
+                    </div>
             </div>
             <div class="rigth">
                 <router-view />
@@ -38,20 +40,13 @@ export default {
     },
     data() {
         return {
-            // Admin: false
-            Admin: true
+            Admin: false
+            
         }
     },
     methods: {
-        isAdmin() {
-            let role = JSON.parse(localStorage.getItem('role'))
-            if (role == 2) {
-                this.Admin = true
-            }
-        }
     },
     mounted() {
-        this.isAdmin()
     }
 
 }

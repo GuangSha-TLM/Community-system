@@ -33,6 +33,11 @@ export default new Router({
           name: 'AssociationManager',
           component: AssociationManager
         }
+        ,{
+          path: '/ActivityManagement',
+          name: 'ActivityManagement',
+          component: ActivityManagement
+        }
       ] 
     },
     {
