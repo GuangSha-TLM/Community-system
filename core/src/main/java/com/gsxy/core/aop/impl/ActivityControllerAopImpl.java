@@ -1,10 +1,7 @@
 package com.gsxy.core.aop.impl;
 
 import com.gsxy.core.aop.ActivityControllerAop;
-import com.gsxy.core.pojo.bo.ActiveAddBo;
-import com.gsxy.core.pojo.bo.ActiveDeleteByIdBo;
-import com.gsxy.core.pojo.bo.ActiveSelectByIdBo;
-import com.gsxy.core.pojo.bo.ActiveUpdateByIdBo;
+import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.service.SystemService;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
@@ -81,6 +78,23 @@ public class ActivityControllerAopImpl implements ActivityControllerAop {
     public String updateActive(JoinPoint joinPoint) {
         Object[] args = joinPoint.getArgs();
         ActiveUpdateByIdBo arg = (ActiveUpdateByIdBo) args[0];
+        String token = arg.getToken();
+        systemService.isAdmin(token,2);
+
+        return null;
+    }
+
+    /**
+     * @author hln
+     * 添加task 主要做了鉴权
+     * @param joinPoint
+     * @return
+     */
+    @Override
+    @Before("execution(* com.gsxy.core.controller.ActivityController.pagingQuery(..))")
+    public String pagingQuery(JoinPoint joinPoint) {
+        Object[] args = joinPoint.getArgs();
+        ActivePagingQueryByTitleBo arg = (ActivePagingQueryByTitleBo) args[0];
         String token = arg.getToken();
         systemService.isAdmin(token,2);
 

@@ -71,4 +71,14 @@
             id = #{id}
     </select>
 
+    <!-- 根据title进行模糊查询 -->
+    <select id="pagingQueryByTitleBo" resultType="java.lang.Long">
+        select
+            *
+        from
+            active
+        where
+            title = concat('%',#{title},'%')
+    </select>
+
 </mapper>

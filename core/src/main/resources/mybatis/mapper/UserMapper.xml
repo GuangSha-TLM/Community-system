@@ -8,7 +8,7 @@
     <insert id="userReg" parameterType="com.gsxy.core.pojo.User">
         insert into
             user
-        values (null,#{username},#{password},#{name},#{college},#{studentId},#{org},#{grade},#{createBy},#{createTime},#{updateBy},#{updateTime},#{status},#{delFlag})
+        values (null,#{username},#{password},#{name},#{college},#{studentId},#{org},#{grade},#{professional},#{createBy},#{createTime},#{updateBy},#{updateTime},#{status},#{delFlag})
     </insert>
 
     <!-- 通过id修改用户 -->
@@ -33,8 +33,11 @@
             <if test="org != null and org != ''">
                 org = #{org},
             </if>
-            <if test="grade != null and org != ''">
+            <if test="grade != null and grade != ''">
                 grade = #{grade},
+            </if>
+            <if test="professional != null and professional != ''">
+                professional = #{professional},
             </if>
             <if test="true">
                 update_by = #{updateBy},update_time = #{updateTime},

@@ -2,10 +2,7 @@ package com.gsxy.core.controller;
 
 import com.alibaba.fastjson2.JSONArray;
 import com.gsxy.core.pojo.Active;
-import com.gsxy.core.pojo.bo.ActiveAddBo;
-import com.gsxy.core.pojo.bo.ActiveDeleteByIdBo;
-import com.gsxy.core.pojo.bo.ActiveSelectByIdBo;
-import com.gsxy.core.pojo.bo.ActiveUpdateByIdBo;
+import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.ResponseVo;
 import com.gsxy.core.service.ActiveService;
 import com.gsxy.core.util.ThreadLocalUtil;
@@ -98,6 +95,25 @@ public class ActivityController {
         }
 
         return JSONArray.toJSONString(activeService.updateActive(activeUpdateByIdBo));
+    }
+
+    /**
+     * @author hln 2023-10-27
+     *      根据title进行模糊查询
+     * @param activePagingQueryByTitleBo
+     * @return
+     */
+    @PostMapping("/pagingQuery")
+    @ApiOperation("根据title进行模糊查询")
+    public String pagingQuery(@RequestBody ActivePagingQueryByTitleBo activePagingQueryByTitleBo){
+
+        Map<String,String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+        if(map.get("error") != null){
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
+
+        return JSONArray.toJSONString(activeService.pagingQuery(activePagingQueryByTitleBo));
     }
 
     /**

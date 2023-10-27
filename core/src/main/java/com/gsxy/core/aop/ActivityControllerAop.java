@@ -19,4 +19,6 @@ public interface ActivityControllerAop {
 
     public String updateActive(JoinPoint joinPoint);
 
+    public String pagingQuery(JoinPoint joinPoint);
+
 }
