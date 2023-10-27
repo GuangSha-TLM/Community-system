@@ -120,7 +120,7 @@ public class ActivityServiceImpl implements ActiveService {
     public ResponseVo pagingQuery(ActivePagingQueryByTitleBo activePagingQueryByTitleBo) {
 
         //调用数据库查询出所有符合条件的数据
-        List<Active> list = activeMapper.pagingQueryByTitleBo(activePagingQueryByTitleBo.getActive().getTitle());
+        List<Active> list = activeMapper.pagingQueryByTitleBo(activePagingQueryByTitleBo);
 
         //判断集合是否为空，若为空则查询失败
         if(list == null){

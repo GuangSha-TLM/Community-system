@@ -52,8 +52,8 @@ public interface ActiveMapper {
     /**
      * @author hln 2023-10-27
      *      根据title进行模糊查询
-     * @param title
+     * @param activePagingQueryByTitleBo
      * @return
      */
-    List<Active> pagingQueryByTitleBo(String title);
+    List<Active> pagingQueryByTitleBo(ActivePagingQueryByTitleBo activePagingQueryByTitleBo);
 }
