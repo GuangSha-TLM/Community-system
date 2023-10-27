@@ -11,7 +11,8 @@
         insert into
             Community
         values
-            (null, #{name},#{communityId},
+            (null, #{name},
+             #{introduce},#{communityId},
              #{createBy}, #{createTime},
              #{updateBy}, #{updateTime},
              #{status}, #{delFlag} ,#{remark})
@@ -39,6 +40,9 @@
         <set>
             <if test="name != null and name != '' ">
                 name = #{name},
+            </if>
+            <if test="introduce != null and introduce != '' ">
+                introduce = #{introduce},
             </if>
             <if test="communityId != null ">
                 community_id = #{communityId},

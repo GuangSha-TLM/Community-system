@@ -32,6 +32,7 @@ public class CommunityServiceImpl implements CommunityService {
     public ResponseVo addCommunity(CommunityAddBo communityAddByIdBo) {
         String communityIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
         Long communityId = Long.valueOf(communityIdOfStr);
+        communityAddByIdBo.getCommunity().setCommunityId(communityId);
         communityAddByIdBo.getCommunity().setCreateBy(communityId);
         communityAddByIdBo.getCommunity().setCreateTime(new Date());
         Long aLong = communityMapper.addcommunity(communityAddByIdBo.getCommunity());
@@ -72,9 +73,9 @@ public class CommunityServiceImpl implements CommunityService {
      */
     @Override
     public ResponseVo selectByIdCommunity(CommunitySelectByIdBo communitySelectByIdBo) {
-        String userAdminIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
-        Long userAdminId = Long.valueOf(userAdminIdOfStr);
-        Community community = communityMapper.selectByIdcommunity(userAdminId);
+        String communityIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
+        Long communityId = Long.valueOf(communityIdOfStr);
+        Community community = communityMapper.selectByIdcommunity(communityId);
         if (community == null) {
             return new ResponseVo("查询的数据不存在,", null, "0x500");
         }
@@ -90,9 +91,10 @@ public class CommunityServiceImpl implements CommunityService {
      */
     @Override
     public ResponseVo updateByIdCommunity(CommunityUpdateByIdBo communityUpdateByIdBo) {
-        String userAdminIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
-        Long userAdminId = Long.valueOf(userAdminIdOfStr);
-        communityUpdateByIdBo.getCommunity().setUpdateBy(userAdminId);
+        String communityIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
+        Long communityId = Long.valueOf(communityIdOfStr);
+        communityUpdateByIdBo.getCommunity().setCommunityId(communityId);
+        communityUpdateByIdBo.getCommunity().setUpdateBy(communityId);
         communityUpdateByIdBo.getCommunity().setUpdateTime(new Date());
         Community community = communityUpdateByIdBo.getCommunity();
         Long aLong = communityMapper.updateByIdcommunity(community);
