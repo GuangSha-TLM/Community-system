@@ -45,14 +45,6 @@ public interface UserAdminService {
      */
     public ResponseVo userAdminUpdateById(UserAdminUpdateByIdBo userAdminUpdateByIdBo);
 
-    /**
-     * @author Oh...Yeah!!! 2023-10-26
-     *      权限认证
-     * @param user
-     * @return UserAdmin.class
-     */
-    public UserAdmin selectUserAdminByUserId(User user);
-
 
 
 }

@@ -97,5 +97,23 @@ public class ImgController {
     }
 
 
+    /**
+     * @author Oh...Yeah!!! 2023-10-27
+     *    分页获取用户数据通过条件分页
+     * @param pagingToGetImgDataBo
+     * @return String.class
+     */
+/*    @ApiOperation("分页获取用户数据通过条件分页")
+    @PostMapping("/pagingToGetImgDataBo")
+    public String pagingToGetUserData(@RequestBody PagingToGetImgDataBo pagingToGetImgDataBo){
+        Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
+        if (map.get("error") != null) {
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
+        return JSONArray.toJSONString(imgService.pagingToGetImgData(pagingToGetImgDataBo));
+    }*/
+
+
+
 
 }

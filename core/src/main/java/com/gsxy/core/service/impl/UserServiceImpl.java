@@ -11,7 +11,6 @@ import com.gsxy.core.service.SystemService;
 import com.gsxy.core.service.UserAdminService;
 import com.gsxy.core.service.UserService;
 import com.gsxy.core.util.JwtUtil;
-import com.gsxy.core.util.RoleUtil;
 import com.gsxy.core.util.ThreadLocalUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -72,11 +71,6 @@ public class UserServiceImpl implements UserService {
 
         String jwt = JwtUtil.createJWT(user);
 
-        //此处对用户的权限进行判定
-        systemService.auth(jwt);
-        String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
-        Long userId = Long.valueOf(userIdOfStr);
-        RoleUtil.hashMap.put(userId,userAdminService.selectUserAdminByUserId(user));
 
         //记录用户当前的登录时间
         Date nowTime = new Date();
