@@ -2,7 +2,6 @@ package com.gsxy.core.service.impl;
 
 import com.gsxy.core.mapper.UserMapper;
 import com.gsxy.core.pojo.User;
-import com.gsxy.core.pojo.UserAdmin;
 import com.gsxy.core.pojo.bo.UserDeleteByIdBo;
 import com.gsxy.core.pojo.bo.UserLoginBo;
 import com.gsxy.core.pojo.bo.UserSelectByUserIdBo;
@@ -71,7 +70,6 @@ public class UserServiceImpl implements UserService {
             return new ResponseVo("登录失败",null,"0x500");
         }
 
-
         String jwt = JwtUtil.createJWT(user);
 
         //此处对用户的权限进行判定
@@ -80,7 +78,14 @@ public class UserServiceImpl implements UserService {
         Long userId = Long.valueOf(userIdOfStr);
         RoleUtil.hashMap.put(userId,userAdminService.selectUserAdminByUserId(user));
 
-        return new ResponseVo("登录成功",jwt,"0x200");
+        //记录用户当前的登录时间
+        Date nowTime = new Date();
+
+        //使用map将jwt和nowTime返回给前端
+        HashMap<String, Date> map = new HashMap<>();
+        map.put(jwt,nowTime);
+
+        return new ResponseVo("登录成功",map,"0x200");
     }
 
     /**

@@ -5,6 +5,7 @@ import com.gsxy.core.pojo.Active;
 import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.ResponseVo;
 import com.gsxy.core.service.ActiveService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -118,13 +119,16 @@ public class ActivityServiceImpl implements ActiveService {
     @Override
     public ResponseVo pagingQuery(ActivePagingQueryByTitleBo activePagingQueryByTitleBo) {
 
-        Long aLong = activeMapper.pagingQueryByTitleBo(activePagingQueryByTitleBo);
+        //调用数据库查询出所有符合条件的数据
+        List<Active> list = activeMapper.pagingQueryByTitleBo(activePagingQueryByTitleBo.getActive().getTitle());
 
-        if(aLong == null || aLong == 0L){
+        //判断集合是否为空，若为空则查询失败
+        if(list == null){
             return new ResponseVo("查询失败",null,"0x500");
         }
 
-        return new ResponseVo("查询成功",aLong,"0x200");
+        //若list不为空，返回结果
+        return new ResponseVo("查询成功",list,"0x200");
     }
 
 }

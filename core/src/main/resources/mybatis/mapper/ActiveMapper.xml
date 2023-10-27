@@ -72,13 +72,14 @@
     </select>
 
     <!-- 根据title进行模糊查询 -->
-    <select id="pagingQueryByTitleBo" resultType="java.lang.Long">
+    <select id="pagingQueryByTitleBo" resultType="com.gsxy.core.pojo.Active" parameterType="java.lang.String">
         select
             *
         from
             active
         where
-            title = concat('%',#{title},'%')
+            title like concat('%',#{title},'%')
     </select>
+
 
 </mapper>
