@@ -14,7 +14,8 @@ public class User implements Serializable {
     private String name;
     private Integer college;
     private String studentId;
-    private String org;
+    private Integer org;
+    private String professional;
     private String grade;
     private Long createBy;
     private Date createTime;
@@ -23,7 +24,7 @@ public class User implements Serializable {
     private Integer status;
     private Integer delFlag;
 
-    public User(Long id, String username, String password, String name, Integer college, String studentId, String org, String grade, Long createBy, Date createTime, Long updateBy, Date updateTime, Integer status, Integer delFlag) {
+    public User(Long id, String username, String password, String name, Integer college, String studentId, Integer org, String professional, String grade, Long createBy, Date createTime, Long updateBy, Date updateTime, Integer status, Integer delFlag) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -31,6 +32,7 @@ public class User implements Serializable {
         this.college = college;
         this.studentId = studentId;
         this.org = org;
+        this.professional = professional;
         this.grade = grade;
         this.createBy = createBy;
         this.createTime = createTime;
@@ -91,12 +93,20 @@ public class User implements Serializable {
         this.studentId = studentId;
     }
 
-    public String getOrg() {
+    public Integer getOrg() {
         return org;
     }
 
-    public void setOrg(String org) {
+    public void setOrg(Integer org) {
         this.org = org;
+    }
+
+    public String getProfessional() {
+        return professional;
+    }
+
+    public void setProfessional(String professional) {
+        this.professional = professional;
     }
 
     public String getGrade() {
@@ -164,7 +174,8 @@ public class User implements Serializable {
                 ", name='" + name + '\'' +
                 ", college=" + college +
                 ", studentId='" + studentId + '\'' +
-                ", org='" + org + '\'' +
+                ", org=" + org +
+                ", professional='" + professional + '\'' +
                 ", grade='" + grade + '\'' +
                 ", createBy=" + createBy +
                 ", createTime=" + createTime +

@@ -1,9 +1,6 @@
 package com.gsxy.core.service;
 
-import com.gsxy.core.pojo.bo.ActiveAddBo;
-import com.gsxy.core.pojo.bo.ActiveDeleteByIdBo;
-import com.gsxy.core.pojo.bo.ActiveSelectByIdBo;
-import com.gsxy.core.pojo.bo.ActiveUpdateByIdBo;
+import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.ResponseVo;
 
 public interface ActiveService {
@@ -46,4 +43,12 @@ public interface ActiveService {
      * @return
      */
     ResponseVo updateActive(ActiveUpdateByIdBo activeUpdateByIdBo);
+
+    /**
+     * @author hln 2023-10-27
+     *      根据title进行模糊查询
+     * @param activePagingQueryByTitleBo
+     * @return
+     */
+    ResponseVo pagingQuery(ActivePagingQueryByTitleBo activePagingQueryByTitleBo);
 }

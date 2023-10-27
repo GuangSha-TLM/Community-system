@@ -1,6 +1,7 @@
 package com.gsxy.core.mapper;
 
 import com.gsxy.core.pojo.Active;
+import com.gsxy.core.pojo.bo.ActivePagingQueryByTitleBo;
 import com.gsxy.core.pojo.bo.ActiveSelectByIdBo;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -47,4 +48,12 @@ public interface ActiveMapper {
      * @return
      */
     Long updateActiveById(Active active);
+
+    /**
+     * @author hln 2023-10-27
+     *      根据title进行模糊查询
+     * @param activePagingQueryByTitleBo
+     * @return
+     */
+    Long pagingQueryByTitleBo(ActivePagingQueryByTitleBo activePagingQueryByTitleBo);
 }
