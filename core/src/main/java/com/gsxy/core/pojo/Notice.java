@@ -11,14 +11,8 @@ public class Notice {
     private Long id;
     //通知内容
     private String context;
-    //用户id
-    private Long userId;
-    //关联的社团id
-    private Long communityId;
     //关联的图片id
     private Long imgId;
-    //关联的活动id
-    private Long activeId;
     //创建人
     private Long createBy;
     //创建时间
@@ -35,13 +29,10 @@ public class Notice {
     public Notice() {
     }
 
-    public Notice(Long id, String context, Long userId, Long communityId, Long imgId, Long activeId, Long createBy, Date createTime, Long updateBy, Date updateTime, Integer status, Integer delFlag) {
+    public Notice(Long id, String context, Long imgId, Long createBy, Date createTime, Long updateBy, Date updateTime, Integer status, Integer delFlag) {
         this.id = id;
         this.context = context;
-        this.userId = userId;
-        this.communityId = communityId;
         this.imgId = imgId;
-        this.activeId = activeId;
         this.createBy = createBy;
         this.createTime = createTime;
         this.updateBy = updateBy;
@@ -66,36 +57,12 @@ public class Notice {
         this.context = context;
     }
 
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public Long getCommunityId() {
-        return communityId;
-    }
-
-    public void setCommunityId(Long communityId) {
-        this.communityId = communityId;
-    }
-
     public Long getImgId() {
         return imgId;
     }
 
     public void setImgId(Long imgId) {
         this.imgId = imgId;
-    }
-
-    public Long getActiveId() {
-        return activeId;
-    }
-
-    public void setActiveId(Long activeId) {
-        this.activeId = activeId;
     }
 
     public Long getCreateBy() {
@@ -151,10 +118,7 @@ public class Notice {
         return "Notice{" +
                 "id=" + id +
                 ", context='" + context + '\'' +
-                ", userId=" + userId +
-                ", communityId=" + communityId +
                 ", imgId=" + imgId +
-                ", activeId=" + activeId +
                 ", createBy=" + createBy +
                 ", createTime=" + createTime +
                 ", updateBy=" + updateBy +

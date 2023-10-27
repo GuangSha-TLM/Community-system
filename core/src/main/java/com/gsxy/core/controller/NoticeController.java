@@ -4,7 +4,6 @@ import com.alibaba.fastjson2.JSONArray;
 import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.ResponseVo;
 import com.gsxy.core.service.NoticeService;
-import com.gsxy.core.service.UserAdminService;
 import com.gsxy.core.util.ThreadLocalUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -29,12 +28,12 @@ public class NoticeController {
 
     /**
      * @author Oh… Yeah!!!, 2023-10-27
-     *      根据id查询数据.
+     *      用户查看通知.
      * @param noticeSelectByIdBo
      * @return String.class
      */
     @PostMapping("/select")
-    @ApiOperation("根据id查询数据")
+    @ApiOperation("用户查看通知")
     public String noticeSelectById(@RequestBody NoticeSelectByIdBo noticeSelectByIdBo){
         Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
         if (map.get("error") != null) {

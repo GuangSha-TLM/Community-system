@@ -11,14 +11,12 @@ import java.io.Serializable;
 public class NoticeSelectByIdBo implements Serializable {
 
     private String token;
-    private Long id;
 
     public NoticeSelectByIdBo() {
     }
 
-    public NoticeSelectByIdBo(String token, Long id) {
+    public NoticeSelectByIdBo(String token) {
         this.token = token;
-        this.id = id;
     }
 
     public String getToken() {
@@ -29,19 +27,10 @@ public class NoticeSelectByIdBo implements Serializable {
         this.token = token;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     @Override
     public String toString() {
         return "NoticeSelectByIdBo{" +
                 "token='" + token + '\'' +
-                ", id=" + id +
                 '}';
     }
 }

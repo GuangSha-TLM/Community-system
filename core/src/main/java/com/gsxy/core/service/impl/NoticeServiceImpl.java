@@ -14,6 +14,8 @@ import com.gsxy.core.util.ThreadLocalUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class NoticeServiceImpl implements NoticeService {
 
@@ -22,7 +24,7 @@ public class NoticeServiceImpl implements NoticeService {
 
     /**
      * @author Oh… Yeah!!!, 2023-10-27
-     *      根据id查询数据.
+     *      用户查看通知.
      * @param noticeSelectByIdBo
      * @return ResponseVo.class
      */
@@ -36,21 +38,13 @@ public class NoticeServiceImpl implements NoticeService {
             return new ResponseVo("token解析失败", null, "0x501");
         }
 
-        //只有管理员才可以操作通知面板
-        UserAdmin admin = RoleUtil.hashMap.get(userId);
-        if (admin == null ||admin.getRole()  < 2 ){
-            return new ResponseVo<>("用户权限不足,不能执行此操作",null,"507");
-        }
+        List<Notice> list = noticeMapper.selectByIdNotice(userId);
 
-
-        Notice notice = noticeMapper.selectByIdNotice(noticeSelectByIdBo.getId());
-
-        if (notice == null) {
+        if (list == null) {
             return new ResponseVo("查询的数据不存在,", null, "0x500");
         }
 
-        return new ResponseVo("查询成功", notice, "0x200");
-
+        return new ResponseVo("查询成功", list, "0x200");
 
     }
 

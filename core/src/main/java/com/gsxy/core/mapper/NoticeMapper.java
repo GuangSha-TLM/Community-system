@@ -3,17 +3,19 @@ package com.gsxy.core.mapper;
 import com.gsxy.core.pojo.Notice;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface NoticeMapper {
 
 
     /**
      * @author Oh… Yeah!!!, 2023-10-27
-     *      根据id查询数据.
-     * @param id
-     * @return Notice.class
+     *      用户查看通知.
+     * @param userId
+     * @return List<Notice>.class
      */
-    public Notice selectByIdNotice(Long id);
+    public List<Notice> selectByIdNotice(Long userId);
 
 
     /**
@@ -39,6 +41,7 @@ public interface NoticeMapper {
      * @return Long.class
      */
     public Long updateByIdNotice(Notice notice);
+
 
 }
 

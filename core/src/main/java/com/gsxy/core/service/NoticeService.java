@@ -15,7 +15,7 @@ public interface NoticeService {
 
     /**
      * @author Oh… Yeah!!!, 2023-10-27
-     *      根据id查询数据.
+     *      用户查看通知.
      * @param noticeSelectByIdBo
      * @return ResponseVo.class
      */

@@ -6,22 +6,27 @@
 
 
     <!--
-     @author Oh… Yeah!!! 2023-10-27
-     根据Id查询Img
+         @author Oh… Yeah!!! 2023-10-27
+         用户查看通知
     -->
+
     <select id="selectByIdNotice" resultType="com.gsxy.core.pojo.Notice" parameterType="java.lang.Long">
         select
             *
         from
-            notice
+            notice no
+                inner join
+            notice_with_user nu
+            on
+                nu.user_id = #{userId}
         where
-            id = #{id}
-        limit 1
+            nu.notice_id = no.id;
     </select>
 
+
     <!--
-              @author Oh… Yeah!!! 2023-10-24
-              根据Id删除数据
+          @author Oh… Yeah!!! 2023-10-24
+          根据Id删除数据
     -->
     <delete id="deleteByIdNotice" parameterType="java.lang.Long">
         delete from
@@ -39,10 +44,9 @@
         insert into
             notice
         values
-            (null,#{context},#{userId},#{communityId},
-             #{imgId},#{activeId},#{createBy},
-             #{createTime},#{updateBy},#{updateTime},
-             #{status},#{delFlag});
+            (null,#{context},#{imgId},
+             #{createBy},#{createTime},#{updateBy},
+             #{updateTime},#{status},#{delFlag});
     </insert>
 
     <!--
@@ -55,17 +59,8 @@
             <if test="context != null and context != ''">
                 context = #{context},
             </if>
-            <if test="userId != null ">
-                user_id = #{userId},
-            </if>
-            <if test="communityId != null ">
-                community_id = #{communityId},
-            </if>
             <if test="imgId != null ">
                 img_id = #{imgId},
-            </if>
-            <if test="activeId != null ">
-                active_id = #{activeId},
             </if>
             <if test="createBy != null ">
                 create_by = #{createBy},
