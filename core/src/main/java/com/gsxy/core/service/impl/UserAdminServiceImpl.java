@@ -1,11 +1,13 @@
 package com.gsxy.core.service.impl;
 
+import com.alibaba.fastjson2.JSONArray;
 import com.gsxy.core.mapper.UserAdminMapper;
 import com.gsxy.core.pojo.User;
 import com.gsxy.core.pojo.UserAdmin;
 import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.ResponseVo;
 import com.gsxy.core.service.UserAdminService;
+import com.gsxy.core.util.RoleUtil;
 import com.gsxy.core.util.ThreadLocalUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,6 +38,13 @@ public class UserAdminServiceImpl implements UserAdminService {
             return new ResponseVo("token解析失败",null,"0x501");
         }
 
+        UserAdmin admin = RoleUtil.hashMap.get(userId);
+
+        //进行权限判定，只有管理员和超级管理员才可以操作管理员面板
+        if (admin == null ||admin.getRole()  == 1 || admin.getRole()  == 2){
+            return new ResponseVo<>("用户权限不足,不能执行此操作",null,"507");
+        }
+
         UserAdmin userAdmin = userAdminMapper.selectByIdUserAdmin(userAdminSelectByIdBo.getId());
 
         if (userAdmin == null) {
@@ -59,6 +68,13 @@ public class UserAdminServiceImpl implements UserAdminService {
 
         if(userId == null || userId == 0L){
             return new ResponseVo("token解析失败",null,"0x501");
+        }
+
+        UserAdmin admin = RoleUtil.hashMap.get(userId);
+
+        //进行权限判定，只有管理员和超级管理员才可以操作管理员面板
+        if (admin == null ||admin.getRole()  == 1 || admin.getRole()  == 2){
+            return new ResponseVo<>("用户权限不足,不能执行此操作",null,"507");
         }
 
         Long id = userAdminDeleteByIdBo.getId();
@@ -88,6 +104,13 @@ public class UserAdminServiceImpl implements UserAdminService {
             return new ResponseVo("token解析失败",null,"0x501");
         }
 
+        UserAdmin admin = RoleUtil.hashMap.get(userId);
+
+        //进行权限判定，只有管理员和超级管理员才可以操作管理员面板
+        if (admin == null ||admin.getRole()  == 1 || admin.getRole()  == 2){
+            return new ResponseVo<>("用户权限不足,不能执行此操作",null,"507");
+        }
+
         Long aLong = userAdminMapper.addUserAdmin(userAdminAddByBo.getUserAdmin());
 
         if (aLong.longValue() == 0){
@@ -111,6 +134,13 @@ public class UserAdminServiceImpl implements UserAdminService {
 
         if(userId == null || userId == 0L){
             return new ResponseVo("token解析失败",null,"0x501");
+        }
+
+        UserAdmin admin = RoleUtil.hashMap.get(userId);
+
+        //进行权限判定，只有管理员和超级管理员才可以操作管理员面板
+        if (admin == null ||admin.getRole()  == 1 || admin.getRole()  == 2){
+            return new ResponseVo<>("用户权限不足,不能执行此操作",null,"507");
         }
 
         UserAdmin userAdmin = userAdminUpdateByIdBo.getUserAdmin();

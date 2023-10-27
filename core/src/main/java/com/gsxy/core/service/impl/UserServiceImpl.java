@@ -8,6 +8,7 @@ import com.gsxy.core.pojo.bo.UserLoginBo;
 import com.gsxy.core.pojo.bo.UserSelectByUserIdBo;
 import com.gsxy.core.pojo.bo.UserUpdateByUserIdBo;
 import com.gsxy.core.pojo.vo.ResponseVo;
+import com.gsxy.core.service.SystemService;
 import com.gsxy.core.service.UserAdminService;
 import com.gsxy.core.service.UserService;
 import com.gsxy.core.util.JwtUtil;
@@ -27,6 +28,8 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
     @Autowired
     private UserAdminService userAdminService;
+    @Autowired
+    private SystemService systemService;
 
 
     /**
@@ -68,10 +71,14 @@ public class UserServiceImpl implements UserService {
             return new ResponseVo("登录失败",null,"0x500");
         }
 
-        //此处对用户的权限进行判定
-        RoleUtil.userAdmin = userAdminService.selectUserAdminByUserId(user);
 
         String jwt = JwtUtil.createJWT(user);
+
+        //此处对用户的权限进行判定
+        systemService.auth(jwt);
+        String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
+        Long userId = Long.valueOf(userIdOfStr);
+        RoleUtil.hashMap.put(userId,userAdminService.selectUserAdminByUserId(user));
 
         return new ResponseVo("登录成功",jwt,"0x200");
     }

@@ -42,11 +42,6 @@ public class UserAdminController {
             return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
         }
 
-        //进行权限判定，只有管理员和超级管理员才可以操作管理员面板
-        if (RoleUtil.userAdmin == null || RoleUtil.userAdmin.getRole() == 1 || RoleUtil.userAdmin.getRole() == 2){
-            return JSONArray.toJSONString(new ResponseVo<>("用户权限不足,不能执行此操作",null,"507"));
-        }
-
         return JSONArray.toJSONString(userAdminService.userAdminSelectById(userAdminSelectByIdBo));
     }
 
@@ -64,10 +59,6 @@ public class UserAdminController {
             return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
         }
 
-        //进行权限判定，只有管理员和超级管理员才可以操作管理员面板
-        if (RoleUtil.userAdmin == null || RoleUtil.userAdmin.getRole() == 1 || RoleUtil.userAdmin.getRole() == 2){
-            return JSONArray.toJSONString(new ResponseVo<>("用户权限不足,不能执行此操作",null,"507"));
-        }
         return JSONArray.toJSONString(userAdminService.userAdminDeleteById(userAdminDeleteByIdBo));
     }
 
@@ -84,10 +75,6 @@ public class UserAdminController {
         if (map.get("error") != null) {
             return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
         }
-        //进行权限判定，只有管理员和超级管理员才可以操作管理员面板
-        if (RoleUtil.userAdmin == null || RoleUtil.userAdmin.getRole() == 1 || RoleUtil.userAdmin.getRole() == 2){
-            return JSONArray.toJSONString(new ResponseVo<>("用户权限不足,不能执行此操作",null,"507"));
-        }
         return JSONArray.toJSONString(userAdminService.userAdminAdd(userAdminAddByBo));
     }
 
@@ -103,10 +90,6 @@ public class UserAdminController {
         Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
         if (map.get("error") != null) {
             return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
-        }
-        //进行权限判定，只有管理员和超级管理员才可以操作管理员面板
-        if (RoleUtil.userAdmin == null || RoleUtil.userAdmin.getRole() == 1 || RoleUtil.userAdmin.getRole() == 2){
-            return JSONArray.toJSONString(new ResponseVo<>("用户权限不足,不能执行此操作",null,"507"));
         }
         return JSONArray.toJSONString(userAdminService.userAdminUpdateById(userAdminUpdateByIdBo));
     }
