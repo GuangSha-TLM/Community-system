@@ -1,17 +1,19 @@
 package com.gsxy.core.pojo.bo;
 
-import com.gsxy.core.pojo.Active;
-
 import java.io.Serializable;
 
 public class ActivePagingQueryByTitleBo implements Serializable {
 
     private String token;
-    private Active active;
+    private String title;
+    private Integer status;
+    private Integer delFlag;
 
-    public ActivePagingQueryByTitleBo(String token, Active active) {
+    public ActivePagingQueryByTitleBo(String token, String title, Integer status, Integer delFlag) {
         this.token = token;
-        this.active = active;
+        this.title = title;
+        this.status = status;
+        this.delFlag = delFlag;
     }
 
     public ActivePagingQueryByTitleBo() {
@@ -25,19 +27,37 @@ public class ActivePagingQueryByTitleBo implements Serializable {
         this.token = token;
     }
 
-    public Active getActive() {
-        return active;
+    public String getTitle() {
+        return title;
     }
 
-    public void setActive(Active active) {
-        this.active = active;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Integer getDelFlag() {
+        return delFlag;
+    }
+
+    public void setDelFlag(Integer delFlag) {
+        this.delFlag = delFlag;
     }
 
     @Override
     public String toString() {
         return "ActivePagingQueryByTitleBo{" +
                 "token='" + token + '\'' +
-                ", active=" + active +
+                ", title='" + title + '\'' +
+                ", status=" + status +
+                ", delFlag=" + delFlag +
                 '}';
     }
 }

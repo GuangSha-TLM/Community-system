@@ -72,14 +72,18 @@
     </select>
 
     <!-- 根据title进行模糊查询 -->
-    <select id="pagingQueryByTitleBo" resultType="com.gsxy.core.pojo.Active" parameterType="java.lang.String">
+    <select id="pagingQueryByTitleBo" resultType="com.gsxy.core.pojo.Active"
+            parameterType="com.gsxy.core.pojo.bo.ActivePagingQueryByTitleBo">
         select
             *
         from
             active
         where
             title like concat('%',#{title},'%')
+          and
+            status = #{status}
+          and
+            del_flag = #{delFlag}
     </select>
-
 
 </mapper>
