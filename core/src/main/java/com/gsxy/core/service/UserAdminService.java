@@ -1,9 +1,8 @@
 package com.gsxy.core.service;
 
-import com.gsxy.core.pojo.bo.UserAdminAddByBo;
-import com.gsxy.core.pojo.bo.UserAdminDeleteByIdBo;
-import com.gsxy.core.pojo.bo.UserAdminSelectByIdBo;
-import com.gsxy.core.pojo.bo.UserAdminUpdateByIdBo;
+import com.gsxy.core.pojo.User;
+import com.gsxy.core.pojo.UserAdmin;
+import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.ResponseVo;
 
 /**
@@ -46,15 +45,13 @@ public interface UserAdminService {
      */
     public ResponseVo userAdminUpdateById(UserAdminUpdateByIdBo userAdminUpdateByIdBo);
 
-
     /**
-     * @author Oh… Yeah!!!, 2023-10-24
-     *      管理员登录验证
-     * @param userAdminLoginBo
-     * @return String.classs
+     * @author Oh...Yeah!!! 2023-10-26
+     *      权限认证
+     * @param user
+     * @return UserAdmin.class
      */
- /*   public ResponseVo userAdminLogin(UserAdminLoginBo userAdminLoginBo);
+    public UserAdmin selectUserAdminByUserId(User user);
 
-*/
 
 }

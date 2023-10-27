@@ -1,11 +1,9 @@
 package com.gsxy.core.service.impl;
 
 import com.gsxy.core.mapper.UserAdminMapper;
+import com.gsxy.core.pojo.User;
 import com.gsxy.core.pojo.UserAdmin;
-import com.gsxy.core.pojo.bo.UserAdminAddByBo;
-import com.gsxy.core.pojo.bo.UserAdminDeleteByIdBo;
-import com.gsxy.core.pojo.bo.UserAdminSelectByIdBo;
-import com.gsxy.core.pojo.bo.UserAdminUpdateByIdBo;
+import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.ResponseVo;
 import com.gsxy.core.service.UserAdminService;
 import com.gsxy.core.util.ThreadLocalUtil;
@@ -127,7 +125,18 @@ public class UserAdminServiceImpl implements UserAdminService {
     }
 
 
+    /**
+     * @author Oh...Yeah!!! 2023-10-26
+     *      权限认证
+     * @param user
+     * @return UserAdmin.class
+     */
+    @Override
+    public UserAdmin selectUserAdminByUserId(User user) {
 
+        return userAdminMapper.selectUserAdminByUserId(user.getId());
+
+    }
 
 
 }

@@ -2,13 +2,16 @@ package com.gsxy.core.service.impl;
 
 import com.gsxy.core.mapper.UserMapper;
 import com.gsxy.core.pojo.User;
+import com.gsxy.core.pojo.UserAdmin;
 import com.gsxy.core.pojo.bo.UserDeleteByIdBo;
 import com.gsxy.core.pojo.bo.UserLoginBo;
 import com.gsxy.core.pojo.bo.UserSelectByUserIdBo;
 import com.gsxy.core.pojo.bo.UserUpdateByUserIdBo;
 import com.gsxy.core.pojo.vo.ResponseVo;
+import com.gsxy.core.service.UserAdminService;
 import com.gsxy.core.service.UserService;
 import com.gsxy.core.util.JwtUtil;
+import com.gsxy.core.util.RoleUtil;
 import com.gsxy.core.util.ThreadLocalUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +25,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private UserAdminService userAdminService;
+
 
     /**
      * @author hln 2023-10-23
@@ -62,8 +68,10 @@ public class UserServiceImpl implements UserService {
             return new ResponseVo("登录失败",null,"0x500");
         }
 
-        String jwt = JwtUtil.createJWT(user);
+        //此处对用户的权限进行判定
+        RoleUtil.userAdmin = userAdminService.selectUserAdminByUserId(user);
 
+        String jwt = JwtUtil.createJWT(user);
 
         return new ResponseVo("登录成功",jwt,"0x200");
     }

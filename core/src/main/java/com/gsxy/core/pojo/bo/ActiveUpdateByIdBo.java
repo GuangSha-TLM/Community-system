@@ -1,19 +1,20 @@
 package com.gsxy.core.pojo.bo;
 
 import com.gsxy.core.pojo.Active;
+
 import java.io.Serializable;
 
-public class ActiveAddBo implements Serializable {
+public class ActiveUpdateByIdBo implements Serializable {
 
     private String token;
     private Active active;
 
-    public ActiveAddBo(String token, Active active) {
+    public ActiveUpdateByIdBo(String token, Active active) {
         this.token = token;
         this.active = active;
     }
 
-    public ActiveAddBo() {
+    public ActiveUpdateByIdBo() {
     }
 
     public String getToken() {
@@ -34,7 +35,7 @@ public class ActiveAddBo implements Serializable {
 
     @Override
     public String toString() {
-        return "ActiveAddBo{" +
+        return "ActiveUpdateByIdBo{" +
                 "token='" + token + '\'' +
                 ", active=" + active +
                 '}';

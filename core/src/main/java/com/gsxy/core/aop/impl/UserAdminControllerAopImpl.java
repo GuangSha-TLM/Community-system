@@ -20,7 +20,7 @@ public class UserAdminControllerAopImpl implements UserAdminControllerAop {
      * @author Oh...Yeah!!!  2023-10-25
      *      UserAdmin查询鉴权
      * @param joinPoint
-     * @return String.class
+     * @return void
      */
     @Override
     @Before("execution(* com.gsxy.core.controller.UserAdminController.userAdminSelect(..))")
@@ -35,7 +35,7 @@ public class UserAdminControllerAopImpl implements UserAdminControllerAop {
      * @author Oh...Yeah!!!  2023-10-26
      *      UserAdmin删除鉴权
      * @param joinPoint
-     * @return String.class
+     * @return void
      */
     @Override
     @Before("execution(* com.gsxy.core.controller.UserAdminController.userAdminDeleteById(..))")
@@ -50,7 +50,7 @@ public class UserAdminControllerAopImpl implements UserAdminControllerAop {
      * @author Oh...Yeah!!!  2023-10-26
      *      UserAdmin添加鉴权
      * @param joinPoint
-     * @return String.class
+     * @return void
      */
     @Override
     @Before("execution(* com.gsxy.core.controller.UserAdminController.userAdminAdd(..))")
@@ -65,7 +65,7 @@ public class UserAdminControllerAopImpl implements UserAdminControllerAop {
      * @author Oh...Yeah!!!  2023-10-26
      *      UserAdmin修改鉴权
      * @param joinPoint
-     * @return String.class
+     * @return void
      */
     @Override
     @Before("execution(* com.gsxy.core.controller.UserAdminController.userAdminUpdateById(..))")

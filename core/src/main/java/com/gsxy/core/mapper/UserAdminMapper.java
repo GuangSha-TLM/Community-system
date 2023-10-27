@@ -51,5 +51,11 @@ public interface UserAdminMapper {
     public Long updateByIdUserAdmin(UserAdmin userAdmin);
 
 
-
+    /**
+     * @author Oh...Yeah!!! 2023-10-26
+     *      权限认证
+     * @param id
+     * @return UserAdmin.class
+     */
+    public UserAdmin selectUserAdminByUserId(Long id);
 }
