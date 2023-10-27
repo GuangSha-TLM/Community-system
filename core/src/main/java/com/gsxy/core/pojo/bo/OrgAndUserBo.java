@@ -5,7 +5,8 @@ import java.util.Date;
 public class OrgAndUserBo {
     private Long id;
     private Integer college;//学院
-    private String name;//班级
+    private String professional;//专业
+    private Integer name;//班级
     private String grade;//年级
     private Date createTime;//创建时间
     private Date updateTime;//更新时间
@@ -13,9 +14,11 @@ public class OrgAndUserBo {
     public OrgAndUserBo(){
 
     }
-    public OrgAndUserBo(Long id, Integer college, String name, String grade, Date createTime, Date updateTime) {
+
+    public OrgAndUserBo(Long id, Integer college, String professional, Integer name, String grade, Date createTime, Date updateTime) {
         this.id = id;
         this.college = college;
+        this.professional = professional;
         this.name = name;
         this.grade = grade;
         this.createTime = createTime;
@@ -38,11 +41,19 @@ public class OrgAndUserBo {
         this.college = college;
     }
 
-    public String getName() {
+    public String getProfessional() {
+        return professional;
+    }
+
+    public void setProfessional(String professional) {
+        this.professional = professional;
+    }
+
+    public Integer getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(Integer name) {
         this.name = name;
     }
 
@@ -75,7 +86,8 @@ public class OrgAndUserBo {
         return "OrgAndUserBo{" +
                 "id=" + id +
                 ", college=" + college +
-                ", org='" + name + '\'' +
+                ", professional='" + professional + '\'' +
+                ", name=" + name +
                 ", grade='" + grade + '\'' +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +

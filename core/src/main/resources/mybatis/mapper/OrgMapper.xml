@@ -12,7 +12,8 @@
             insert into
                 Org
             values
-                (null, #{grade},  #{name},#{college},
+                (null, #{grade}, #{professional},
+                 #{name},#{college},
                  #{createBy}, #{createTime},
                  #{updateBy}, #{updateTime}, 
                  #{status}, #{delFlag} )
@@ -44,7 +45,7 @@
             查找所有信息
         -->
         <select id="selectAll" resultType="com.gsxy.core.pojo.bo.OrgAndUserBo">
-            SELECT DISTINCT org.id, org.college, org.`name`, org.grade, org.create_time, org.update_time, `user`.username
+            SELECT DISTINCT org.id, org.college, org.professional, org.`name`, org.grade, org.create_time, org.update_time, `user`.username
             FROM org
             JOIN `user` ON org.create_by = `user`.id   LIMIT 0, 15
         </select>
@@ -78,7 +79,10 @@
                 <if test="grade != null and grade != ''">
                     grade = #{grade},
                 </if>
-                <if test="name != null and name != ''">
+                <if test="professional != null and professional != ''">
+                    professional = #{professional},
+                </if>
+                <if test="name != null ">
                     name = #{name},
                 </if>
                 <if test="college != null">
