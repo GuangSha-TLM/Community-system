@@ -40,7 +40,7 @@ public class CommunityServiceImpl implements CommunityService {
             return new ResponseVo("增加失败",  null, "0x500");
         }
 
-        return new ResponseVo("增加成功", null, "0x200");
+        return new ResponseVo("增加成功", communityId, "0x200");
     }
 
     /**
@@ -75,9 +75,10 @@ public class CommunityServiceImpl implements CommunityService {
     public ResponseVo selectByIdCommunity(CommunitySelectByIdBo communitySelectByIdBo) {
         String communityIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
         Long communityId = Long.valueOf(communityIdOfStr);
-        Community community = communityMapper.selectByIdcommunity(communityId);
+        Long id = communitySelectByIdBo.getId();
+        Community community = communityMapper.selectByIdcommunity(id);
         if (community == null) {
-            return new ResponseVo("查询的数据不存在,", null, "0x500");
+            return new ResponseVo("查询的数据不存在,", communityId, "0x500");
         }
 
         return new ResponseVo("查询成功",community,"0x200");
