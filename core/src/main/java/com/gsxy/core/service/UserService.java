@@ -1,10 +1,7 @@
 package com.gsxy.core.service;
 
 import com.gsxy.core.pojo.User;
-import com.gsxy.core.pojo.bo.UserDeleteByIdBo;
-import com.gsxy.core.pojo.bo.UserLoginBo;
-import com.gsxy.core.pojo.bo.UserSelectByUserIdBo;
-import com.gsxy.core.pojo.bo.UserUpdateByUserIdBo;
+import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.ResponseVo;
 
 /**
@@ -58,4 +55,12 @@ public interface UserService {
      * @return
      */
     ResponseVo userFindAll();
+
+    /**
+     * @author hln 2023-10-27
+     *      分页查询
+     * @param pagingToGetUserDataBo
+     * @return
+     */
+    ResponseVo pagingToGetUserData(PagingToGetUserDataBo pagingToGetUserDataBo);
 }

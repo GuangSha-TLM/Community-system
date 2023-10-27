@@ -1,6 +1,7 @@
 package com.gsxy.core.mapper;
 
 import com.gsxy.core.pojo.User;
+import com.gsxy.core.pojo.bo.PagingToGetUserDataBo;
 import com.gsxy.core.pojo.bo.UserLoginBo;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -64,4 +65,19 @@ public interface UserMapper {
      */
     List<User> userFindAll();
 
+    /**
+     * @author hln 2023-10-27
+     *      分页查询
+     * @param pagingToGetUserDataBo
+     * @return
+     */
+    List<User> pagingToGetUserData(PagingToGetUserDataBo pagingToGetUserDataBo);
+
+    /**
+     * @author hln 2023-10-27
+     *      获取活动总数
+     * @param pagingToGetUserDataBo
+     * @return
+     */
+    Long pagingToGetCountOfUserData(PagingToGetUserDataBo pagingToGetUserDataBo);
 }

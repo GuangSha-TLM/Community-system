@@ -1,6 +1,7 @@
 package com.gsxy.core.aop.impl;
 
 import com.gsxy.core.aop.UserControllerAop;
+import com.gsxy.core.pojo.bo.PagingToGetUserDataBo;
 import com.gsxy.core.pojo.bo.UserDeleteByIdBo;
 import com.gsxy.core.pojo.bo.UserSelectByUserIdBo;
 import com.gsxy.core.pojo.bo.UserUpdateByUserIdBo;
@@ -62,8 +63,24 @@ public class UserControllerAopImpl implements UserControllerAop {
     @Before("execution(* com.gsxy.core.controller.UserController.deleteByUserId(..))")
     public String deleteByUserId(JoinPoint joinPoint) {
         Object[] args = joinPoint.getArgs();
-        UserDeleteByIdBo userDeleteByIdBo = (UserDeleteByIdBo) args[0];
-        String token = userDeleteByIdBo.getToken();
+        UserDeleteByIdBo arg = (UserDeleteByIdBo) args[0];
+        String token = arg.getToken();
+        systemService.auth(token);
+
+        return null;
+    }
+
+    /**
+     * @author hln 2023-10-27
+     *      做了权限验证
+     * @param joinPoint
+     * @return
+     */
+    @Override
+    public String pagingToGetUserData(JoinPoint joinPoint) {
+        Object[] args = joinPoint.getArgs();
+        PagingToGetUserDataBo arg = (PagingToGetUserDataBo) args[0];
+        String token = arg.getToken();
         systemService.auth(token);
 
         return null;

@@ -1,11 +1,10 @@
 package com.gsxy.core.service.impl;
 
 import com.gsxy.core.mapper.UserMapper;
+import com.gsxy.core.pojo.Active;
 import com.gsxy.core.pojo.User;
-import com.gsxy.core.pojo.bo.UserDeleteByIdBo;
-import com.gsxy.core.pojo.bo.UserLoginBo;
-import com.gsxy.core.pojo.bo.UserSelectByUserIdBo;
-import com.gsxy.core.pojo.bo.UserUpdateByUserIdBo;
+import com.gsxy.core.pojo.bo.*;
+import com.gsxy.core.pojo.vo.PagingToGetUserDataVo;
 import com.gsxy.core.pojo.vo.ResponseVo;
 import com.gsxy.core.service.SystemService;
 import com.gsxy.core.service.UserAdminService;
@@ -170,6 +169,28 @@ public class UserServiceImpl implements UserService {
         List<User> list = userMapper.userFindAll();
 
         return new ResponseVo("查询成功",list,"0x200");
+    }
+
+    /**
+     * @author hln 2023-10-27
+     *      分页查询
+     * @param pagingToGetUserDataBo
+     * @return
+     */
+    @Override
+    public ResponseVo pagingToGetUserData(PagingToGetUserDataBo pagingToGetUserDataBo) {
+
+        //获取所有活动的数据
+        List<User> userList = userMapper.pagingToGetUserData(pagingToGetUserDataBo);
+
+        //获取活动总数
+        Long count = userMapper.pagingToGetCountOfUserData(pagingToGetUserDataBo);
+
+        PagingToGetUserDataVo pagingToGetUserDataVo = new PagingToGetUserDataVo();
+        pagingToGetUserDataVo.setCount(count);
+        pagingToGetUserDataVo.setList(userList);
+
+        return new ResponseVo(null,pagingToGetUserDataVo,"0x200");
     }
 
 }

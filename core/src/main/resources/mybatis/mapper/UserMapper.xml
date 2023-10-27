@@ -93,9 +93,43 @@
 
     <!-- 查询所有用户信息 -->
     <select id="userFindAll" resultType="com.gsxy.core.pojo.User">
-        select *
-        from user
+        select
+            *
+        from
+            user
         limit 0,15
+    </select>
+
+    <!-- 获取所有活动数据 -->
+    <select id="pagingToGetUserData" resultType="com.gsxy.core.pojo.User"
+            parameterType="com.gsxy.core.pojo.bo.PagingToGetUserDataBo">
+        select
+            *
+        from
+            user
+        where
+            <if test="username != null and username != ''">
+                username = #{username} and
+            </if>
+                status = #{status} and
+                del_flag = #{delFlag}
+        limit
+            #{start},#{size}
+    </select>
+
+    <!-- 获取活动总数 -->
+    <select id="pagingToGetCountOfUserData" resultType="java.lang.Long"
+            parameterType="com.gsxy.core.pojo.bo.PagingToGetUserDataBo">
+        select
+            count(*)
+        from
+            user
+        where
+            <if test="username != null and username != ''">
+                username like #{username} and
+            </if>
+                status = #{status} and
+                del_flag =  #{delFlag}
     </select>
 
 
