@@ -4,7 +4,6 @@ import com.alibaba.fastjson2.JSONArray;
 import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.ResponseVo;
 import com.gsxy.core.service.UserAdminService;
-import com.gsxy.core.util.RoleUtil;
 import com.gsxy.core.util.ThreadLocalUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
