@@ -10,6 +10,7 @@ import java.util.Date;
 public class Community implements Serializable {
     private Long id;
     private String name;    //社团班级
+    private String introduce;//社团介绍
     private Long communityId;//社团id
     private Long createBy;    //创建人
     private Date createTime;    //创建时间
@@ -22,9 +23,10 @@ public class Community implements Serializable {
 
     }
 
-    public Community(Long id, String name, Long communityId, Long createBy, Date createTime, Long updateBy, Date updateTime, Integer status, Integer delFlag, String remark) {
+    public Community(Long id, String name, String introduce, Long communityId, Long createBy, Date createTime, Long updateBy, Date updateTime, Integer status, Integer delFlag, String remark) {
         this.id = id;
         this.name = name;
+        this.introduce = introduce;
         this.communityId = communityId;
         this.createBy = createBy;
         this.createTime = createTime;
@@ -49,6 +51,14 @@ public class Community implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getIntroduce() {
+        return introduce;
+    }
+
+    public void setIntroduce(String introduce) {
+        this.introduce = introduce;
     }
 
     public Long getCommunityId() {
@@ -120,13 +130,14 @@ public class Community implements Serializable {
         return "Community{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", introduce='" + introduce + '\'' +
                 ", communityId=" + communityId +
                 ", createBy=" + createBy +
                 ", createTime=" + createTime +
                 ", updateBy=" + updateBy +
                 ", updateTime=" + updateTime +
                 ", status=" + status +
-                ", del_flag=" + delFlag +
+                ", delFlag=" + delFlag +
                 ", remark='" + remark + '\'' +
                 '}';
     }
