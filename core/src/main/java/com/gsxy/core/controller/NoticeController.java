@@ -3,103 +3,103 @@ package com.gsxy.core.controller;
 import com.alibaba.fastjson2.JSONArray;
 import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.ResponseVo;
+import com.gsxy.core.service.NoticeService;
 import com.gsxy.core.service.UserAdminService;
-import com.gsxy.core.util.RoleUtil;
 import com.gsxy.core.util.ThreadLocalUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
 
-
 /**
- *  2023-10-24
- *  管理员板块接口
+ *  2023-10-27
+ *  通知板块接口
  */
 @CrossOrigin
-@Api(value = "管理员版块接口",tags = {"管理员版块接口"})
+@Api(value = "通知版块接口",tags = {"通知版块接口"})
 @RestController
-@RequestMapping("/user_admin")
-public class UserAdminController {
+@RequestMapping("/notice")
+public class NoticeController {
 
     @Autowired
-    private UserAdminService userAdminService;
+    private NoticeService noticeService;
 
 
     /**
-     * @author Oh… Yeah!!!, 2023-10-24
+     * @author Oh… Yeah!!!, 2023-10-27
      *      根据id查询数据.
-     * @param userAdminSelectByIdBo
+     * @param noticeSelectByIdBo
      * @return String.class
      */
     @PostMapping("/select")
-    @ApiOperation("根据id查询UserAdmin数据")
-    public String userAdminSelect(@RequestBody UserAdminSelectByIdBo userAdminSelectByIdBo){
+    @ApiOperation("根据id查询数据")
+    public String noticeSelectById(@RequestBody NoticeSelectByIdBo noticeSelectByIdBo){
         Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
         if (map.get("error") != null) {
             return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
         }
 
-        return JSONArray.toJSONString(userAdminService.userAdminSelectById(userAdminSelectByIdBo));
+        return JSONArray.toJSONString(noticeService.noticeSelectById(noticeSelectByIdBo));
     }
 
+
+
     /**
-     * @author Oh… Yeah!!!, 2023-10-24
-     *      通过id删除UserAdmin数据.
-     * @param userAdminDeleteByIdBo
+     * @author Oh… Yeah!!!, 2023-10-27
+     *      通过id删除数据.
+     * @param noticeDeleteByIdBo
      * @return String.class
      */
     @PostMapping("/delete")
-    @ApiOperation("通过id删除UserAdmin数据")
-    public String userAdminDeleteById(@RequestBody UserAdminDeleteByIdBo userAdminDeleteByIdBo){
+    @ApiOperation("通过id删除数据.")
+    public String noticeDeleteById(@RequestBody NoticeDeleteByIdBo noticeDeleteByIdBo){
         Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
         if (map.get("error") != null) {
             return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
         }
 
-        return JSONArray.toJSONString(userAdminService.userAdminDeleteById(userAdminDeleteByIdBo));
+        return JSONArray.toJSONString(noticeService.noticeDeleteById(noticeDeleteByIdBo));
     }
 
+
+
     /**
-     * @author Oh… Yeah!!!, 2023-10-24
+     * @author Oh… Yeah!!!, 2023-10-27
      *      增加新数据.
-     * @param userAdminAddByBo
+     * @param noticeAddByBo
      * @return String.class
      */
     @PostMapping("/add")
-    @ApiOperation("增加UserAdmin数据")
-    public String userAdminAdd(@RequestBody UserAdminAddByBo userAdminAddByBo){
+    @ApiOperation("增加数据")
+    public String noticeAdd(@RequestBody NoticeAddByBo noticeAddByBo){
         Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
         if (map.get("error") != null) {
             return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
         }
-        return JSONArray.toJSONString(userAdminService.userAdminAdd(userAdminAddByBo));
+        return JSONArray.toJSONString(noticeService.noticeAdd(noticeAddByBo));
     }
+
 
     /**
-     * @author Oh… Yeah!!!, 2023-10-24
-     *      通过id更新userAdmin数据.
-     * @param userAdminUpdateByIdBo
+     * @author Oh… Yeah!!!, 2023-10-27
+     *      通过id更新数据.
+     * @param noticeUpdateByIdBo
      * @return String.class
      */
-    @ApiOperation("通过id修改UserAdmin数据")
+    @ApiOperation("通过id修改数据")
     @PostMapping("/update")
-    public String userAdminUpdateById(@RequestBody UserAdminUpdateByIdBo userAdminUpdateByIdBo){
+    public String noticeUpdateById(@RequestBody NoticeUpdateByIdBo noticeUpdateByIdBo){
         Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
         if (map.get("error") != null) {
             return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
         }
-        return JSONArray.toJSONString(userAdminService.userAdminUpdateById(userAdminUpdateByIdBo));
+        return JSONArray.toJSONString(noticeService.userAdminUpdateById(noticeUpdateByIdBo));
     }
-
 
 
 
 
 
 }
-
-
