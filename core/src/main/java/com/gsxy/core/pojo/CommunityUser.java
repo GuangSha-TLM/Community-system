@@ -7,9 +7,9 @@ public class CommunityUser implements Serializable {
     private Long id;
     private Long communityId;//社团id
     private Long userId;//用户id
-    private String createBy; //创建人
+    private Long createBy; //创建人
     private Date createTime; //创建时间
-    private String updateBy; //修改人
+    private Long updateBy; //修改人
     private Date updateTime; //修改时间
     private Integer status;  //状态
     private Integer delFlag;//逻辑删除
@@ -18,7 +18,8 @@ public class CommunityUser implements Serializable {
     public CommunityUser(){
 
     }
-    public CommunityUser(Long id, Long communityId, Long userId, String createBy, Date createTime, String updateBy, Date updateTime, Integer status, Integer delFlag) {
+
+    public CommunityUser(Long id, Long communityId, Long userId, Long createBy, Date createTime, Long updateBy, Date updateTime, Integer status, Integer delFlag) {
         this.id = id;
         this.communityId = communityId;
         this.userId = userId;
@@ -54,11 +55,11 @@ public class CommunityUser implements Serializable {
         this.userId = userId;
     }
 
-    public String getCreateBy() {
+    public Long getCreateBy() {
         return createBy;
     }
 
-    public void setCreateBy(String createBy) {
+    public void setCreateBy(Long createBy) {
         this.createBy = createBy;
     }
 
@@ -70,11 +71,11 @@ public class CommunityUser implements Serializable {
         this.createTime = createTime;
     }
 
-    public String getUpdateBy() {
+    public Long getUpdateBy() {
         return updateBy;
     }
 
-    public void setUpdateBy(String updateBy) {
+    public void setUpdateBy(Long updateBy) {
         this.updateBy = updateBy;
     }
 
@@ -108,9 +109,9 @@ public class CommunityUser implements Serializable {
                 "id=" + id +
                 ", communityId=" + communityId +
                 ", userId=" + userId +
-                ", createBy='" + createBy + '\'' +
+                ", createBy=" + createBy +
                 ", createTime=" + createTime +
-                ", updateBy='" + updateBy + '\'' +
+                ", updateBy=" + updateBy +
                 ", updateTime=" + updateTime +
                 ", status=" + status +
                 ", delFlag=" + delFlag +

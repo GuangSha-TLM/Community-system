@@ -5,24 +5,24 @@ import com.gsxy.core.pojo.CommunityUser;
 import java.io.Serializable;
 
 public class CommunityUserUpdateByIdBo implements Serializable {
-    private Long id;
+    private String token;
     private CommunityUser communityUser;
 
     public CommunityUserUpdateByIdBo(){
 
     }
 
-    public CommunityUserUpdateByIdBo(Long id, CommunityUser communityUser) {
-        this.id = id;
+    public CommunityUserUpdateByIdBo(String token, CommunityUser communityUser) {
+        this.token = token;
         this.communityUser = communityUser;
     }
 
-    public Long getId() {
-        return id;
+    public String getToken() {
+        return token;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public CommunityUser getCommunityUser() {
@@ -36,7 +36,7 @@ public class CommunityUserUpdateByIdBo implements Serializable {
     @Override
     public String toString() {
         return "CommunityUserUpdateByIdBo{" +
-                "id=" + id +
+                "id=" + token +
                 ", communityUser=" + communityUser +
                 '}';
     }
