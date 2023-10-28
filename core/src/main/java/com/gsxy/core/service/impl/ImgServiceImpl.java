@@ -3,7 +3,6 @@ package com.gsxy.core.service.impl;
 import com.gsxy.core.pojo.Img;
 import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.ImgPagingToGetDataVo;
-import com.gsxy.core.pojo.vo.PagingToGetImgDataVo;
 import com.gsxy.core.pojo.vo.ResponseVo;
 import com.gsxy.core.mapper.ImgMapper;
 import com.gsxy.core.service.ImgService;

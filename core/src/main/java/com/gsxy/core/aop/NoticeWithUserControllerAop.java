@@ -1,54 +1,56 @@
 package com.gsxy.core.aop;
 
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.Before;
 
 /**
  * @author Oh...Yeah!!! 2023-10-28
- * 图片Aop
+ * 通知和用户的Aop
  */
+public interface NoticeWithUserControllerAop {
 
-public interface ImgControllerAop {
-
-    /**
-     * @author Oh...Yeah!!!  2023-10-25
-     *      Img查询鉴权
-     * @param joinPoint
-     * @return void
-     */
-    public void imgSelect(JoinPoint joinPoint);
-
-    /**
-     * @author Oh...Yeah!!!  2023-10-26
-     *      对Img删除鉴权
-     * @param joinPoint
-     * @return void
-     */
-    public void imgDeleteById(JoinPoint joinPoint);
 
     /**
      * @author Oh...Yeah!!!  2023-10-25
-     *      Img增加鉴权
+     *      查询鉴权
      * @param joinPoint
      * @return void
      */
-    public void imgAdd(JoinPoint joinPoint);
+    public void noticeWithUserSelect(JoinPoint joinPoint);
 
     /**
      * @author Oh...Yeah!!!  2023-10-26
-     *      Img修改鉴权
+     *      删除鉴权
      * @param joinPoint
      * @return void
      */
-    public void imgUpdateById(JoinPoint joinPoint);
+    public void noticeWithUserDeleteById(JoinPoint joinPoint);
+
+    /**
+     * @author Oh...Yeah!!!  2023-10-25
+     *      增加鉴权
+     * @param joinPoint
+     * @return void
+     */
+    public void noticeWithUserAdd(JoinPoint joinPoint);
+
+    /**
+     * @author Oh...Yeah!!!  2023-10-26
+     *      修改鉴权
+     * @param joinPoint
+     * @return void
+     */
+    public void noticeWithUserUpdateById(JoinPoint joinPoint);
 
     /**
      * @author Oh...Yeah!!!  2023-10-28
-     *      Img分页查询鉴权
+     *      分页查询鉴权
      * @param joinPoint
      * @return void
      */
-    public void imgPagingToGetData(JoinPoint joinPoint);
+    public void noticeWithUserPagingToGetData(JoinPoint joinPoint);
+
+
+
 
 
 }

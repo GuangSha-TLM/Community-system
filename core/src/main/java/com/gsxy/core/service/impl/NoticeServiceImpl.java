@@ -14,6 +14,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * @author Oh...Yeah!!! 2023-10-28
+ * 通知业务实现类
+ */
 @Service
 public class NoticeServiceImpl implements NoticeService {
 
@@ -104,7 +108,7 @@ public class NoticeServiceImpl implements NoticeService {
      * @author Oh...Yeah!!! 2023-10-28
      *    分页获取数据
      * @param noticePagingToGetDataBo
-     * @return String.class
+     * @return ResponseVo.class
      */
     @Override
     public ResponseVo pagingToGetNoticeData(NoticePagingToGetDataBo noticePagingToGetDataBo) {

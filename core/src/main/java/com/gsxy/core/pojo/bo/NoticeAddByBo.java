@@ -5,8 +5,8 @@ import com.gsxy.core.pojo.Notice;
 import java.io.Serializable;
 
 /**
- *  2023-10-27
- *  通过增加数据
+ * @author Oh...Yeah!!! 2023-10-28
+ * 通过增加数据
  */
 public class NoticeAddByBo implements Serializable {
 

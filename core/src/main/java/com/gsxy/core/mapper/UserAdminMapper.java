@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 
 /**
- *  2023-10-24
+ *  @author Oh...Yeah!!! 2023-10-28
  *  管理员持久层
  */
 @Mapper

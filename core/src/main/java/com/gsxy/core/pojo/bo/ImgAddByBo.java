@@ -5,7 +5,7 @@ import com.gsxy.core.pojo.Img;
 import java.io.Serializable;
 
 /**
- *  2023-10-23
+ *  @author Oh...Yeah!!! 2023-10-28
  *  增加img
  */
 public class ImgAddByBo implements Serializable {

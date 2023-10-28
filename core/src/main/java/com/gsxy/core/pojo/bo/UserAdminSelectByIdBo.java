@@ -3,8 +3,8 @@ package com.gsxy.core.pojo.bo;
 import java.io.Serializable;
 
 /**
- *  2023-10-24
- *  通过id查询useradmin
+ * @author Oh… Yeah!!!, 2023-10-28
+ * 根据id查询数据.
  */
 public class UserAdminSelectByIdBo implements Serializable {
 

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 2023-10-23
+ * @author Oh...Yeah!!! 2023-10-28
  * 管理员类
  */
 public class UserAdmin implements Serializable {

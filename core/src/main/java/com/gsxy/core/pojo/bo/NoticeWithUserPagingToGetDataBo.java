@@ -6,23 +6,23 @@ import java.io.Serializable;
  * @author Oh...Yeah!!! 2023-10-28
  * 分页查询实体类
  */
-public class UserAdminPagingToGetDataBo implements Serializable {
+public class NoticeWithUserPagingToGetDataBo implements Serializable {
 
     private String token;
+    private String name;
     private Long start;
     private Integer size;
-    private String name;
     private Integer status;
     private Integer delFlag;
 
-    public UserAdminPagingToGetDataBo() {
+    public NoticeWithUserPagingToGetDataBo() {
     }
 
-    public UserAdminPagingToGetDataBo(String token, Long start, Integer size, String name, Integer status, Integer delFlag) {
+    public NoticeWithUserPagingToGetDataBo(String token, String name, Long start, Integer size, Integer status, Integer delFlag) {
         this.token = token;
+        this.name = name;
         this.start = start;
         this.size = size;
-        this.name = name;
         this.status = status;
         this.delFlag = delFlag;
     }
@@ -33,6 +33,14 @@ public class UserAdminPagingToGetDataBo implements Serializable {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Long getStart() {
@@ -49,14 +57,6 @@ public class UserAdminPagingToGetDataBo implements Serializable {
 
     public void setSize(Integer size) {
         this.size = size;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public Integer getStatus() {
@@ -77,11 +77,11 @@ public class UserAdminPagingToGetDataBo implements Serializable {
 
     @Override
     public String toString() {
-        return "UserAdminPagingToGetDataBo{" +
+        return "NoticeWithUserPagingToGetDataBo{" +
                 "token='" + token + '\'' +
+                ", name='" + name + '\'' +
                 ", start=" + start +
                 ", size=" + size +
-                ", name='" + name + '\'' +
                 ", status=" + status +
                 ", delFlag=" + delFlag +
                 '}';

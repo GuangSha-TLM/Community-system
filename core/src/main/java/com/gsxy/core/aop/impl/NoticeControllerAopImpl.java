@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author Oh...Yeah!!! 2023-10-28
- * 图片Aop的实现类
+ * 通知Aop的实现类
  */
 @Component
 @Aspect

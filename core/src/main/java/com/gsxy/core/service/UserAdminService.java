@@ -6,8 +6,8 @@ import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.ResponseVo;
 
 /**
- * 2023-10-24
- * 管理员业务接口
+ *  @author Oh...Yeah!!! 2023-10-28
+ *  管理员业务接口
  */
 public interface UserAdminService {
 

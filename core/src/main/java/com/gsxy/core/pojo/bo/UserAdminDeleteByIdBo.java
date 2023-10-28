@@ -3,8 +3,8 @@ package com.gsxy.core.pojo.bo;
 import java.io.Serializable;
 
 /**
- *  2023-10-24
- *  通过id删除useradmin
+ *  @author Oh...Yeah!!! 2023-10-28
+ *  通过id删除数据
  */
 public class UserAdminDeleteByIdBo implements Serializable {
 
