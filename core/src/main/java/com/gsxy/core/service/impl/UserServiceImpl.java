@@ -72,11 +72,11 @@ public class UserServiceImpl implements UserService {
 
 
         //记录用户当前的登录时间
-        Date nowTime = new Date();
+        user.setLoginTime(new Date());
 
         //使用map将jwt和nowTime返回给前端
-        HashMap<String, Date> map = new HashMap<>();
-        map.put(jwt,nowTime);
+        HashMap<String, User> map = new HashMap<>();
+        map.put(jwt,user);
 
         return new ResponseVo("登录成功",map,"0x200");
     }
