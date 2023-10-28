@@ -1,6 +1,8 @@
 package com.gsxy.core.pojo.bo;
 
-public class OrgSelectByUserBo {
+import java.io.Serializable;
+
+public class OrgSelectByUserBo implements Serializable {
     private Long id;
     private String token;
     private String username;//用户名

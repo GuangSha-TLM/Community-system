@@ -1,8 +1,9 @@
 package com.gsxy.core.pojo.bo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class OrgAndUserBo {
+public class OrgAndUserBo implements Serializable {
     private Long id;
     private Integer college;//学院
     private String professional;//专业
