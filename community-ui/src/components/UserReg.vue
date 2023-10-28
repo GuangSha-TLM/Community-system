@@ -46,13 +46,20 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="exampleInputstudentId">输入你的学号</label>
+                                <input type="text" class="form-control" id="exampleInputstudentId"
+                                    v-model="user.studentId">
+                            </div>
+
+
+                            <div class="form-group">
                                 <label for="exampleInputcollege">选择你的学院</label>
                                 <el-select  v-model="user.college" placeholder="请选择"  style="width: 100%;">
                                 <el-option
                                 v-for="item in options"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="item.value"
+                                :key="item"
+                                :label="item"
+                                :value="item"
                                         >
                                 </el-option>
                             </el-select>
@@ -63,34 +70,49 @@
                                 <el-select  v-model="user.grand" placeholder="请选择"  style="width: 100%;">
                                 <el-option
                                 v-for="item in grandList"
-                                :key="item"
-                                :label="item"
-                                :value="item"
+                                    :key="item"
+                                    :label="item"
+                                    :value="item"
                                              >
                                 </el-option>
                             </el-select>
                             </div>
-                            
-                            
+
+                            <div class="form-group">
+                                <label for="exampleInputprofessional">选择你的专业</label>
+
+                                    <el-select  v-model="user.professional" placeholder="请选择"  style="width: 100%;">
+                                        <el-option
+                                            v-for="item in professionalList"
+                                                :key="item"
+                                                :label="item"
+                                                :value="item"
+                                             >
+                                </el-option>
+                            </el-select>
+                            </div>
+
                             <!-- org:班级 -->
                             <div class="form-group">
                                 <label for="exampleInputorg">选择你的班级</label>
-                                <input type="text" class="form-control" id="exampleInputorg"
-                                    v-model="user.org">
+
+                                    <el-select  v-model="user.org" placeholder="请选择"  style="width: 100%;">
+                                        <el-option
+                                            v-for="item in orgList"
+                                                :key="item"
+                                                :label="item"
+                                                :value="item"
+                                             >
+                                </el-option>
+                            </el-select>
                             </div>
 
-                            <div class="form-group">
-                                <label for="exampleInputstudentId">输入你的学号</label>
-                                <input type="text" class="form-control" id="exampleInputstudentId"
-                                    v-model="user.studentId">
-                            </div>
 
- 
 
                             <button class="btn btn-primary" style="width:100%" @click="submit()"
                                 :disabled="switchbutton">Submit</button>
 
-                            
+
 
                         </div>
                     </div>
@@ -104,7 +126,7 @@
         </footer>
     </div>
 </template>
-  
+
 <script>
 import Foot from './fream/Foot.vue';
 import Top from './fream/LoginTop.vue';
@@ -115,27 +137,15 @@ export default {
     components: {
         Foot, Top
     },
-    
-  
+
+
     data() {
         return {
             grandList: [ 2019 ,2020 ,2021 ,2022 ,2023 ,2024 ,2025],
+            options:['信息学院','财经学院','艺术学院','通识学院'],
+            professionalList:['软件工程','计算机科学与技术','电子商务'],
+            orgList:['1班','2班','3班','4班','5班','6班'],
 
-            options: [{
-                value: 0,
-                label: '信息学院'
-                }, {
-                value: 1,
-                label: '财经学院'
-                }, {
-                value: 2,
-                label: '艺术学院'
-                }, {
-                value: 3,
-                label: '通识学院'
-                }],
-                
-            
             user: {
                 userName: "",
                 passWord: "",
@@ -145,6 +155,7 @@ export default {
                 org: "",
                 grade: "",
                 studentId: "",
+                professional:"",
 
 
             },
@@ -169,7 +180,7 @@ export default {
             }
 
             let obj = await synRequestPost("/user/userReg", this.user);
-  
+
             if (obj.code == '0x200') {
                 this.$router.push("/user/login");
             }
@@ -181,7 +192,7 @@ export default {
 }
 
 </script>
-  
+
   <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
     h1,
@@ -203,4 +214,3 @@ export default {
         color: #42b983;
     }
 </style>
-  
