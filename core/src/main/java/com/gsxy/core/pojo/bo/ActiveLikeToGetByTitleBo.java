@@ -2,21 +2,21 @@ package com.gsxy.core.pojo.bo;
 
 import java.io.Serializable;
 
-public class ActivePagingQueryByTitleBo implements Serializable {
+public class ActiveLikeToGetByTitleBo implements Serializable {
 
     private String token;
     private String title;
     private Integer status;
     private Integer delFlag;
 
-    public ActivePagingQueryByTitleBo(String token, String title, Integer status, Integer delFlag) {
+    public ActiveLikeToGetByTitleBo(String token, String title, Integer status, Integer delFlag) {
         this.token = token;
         this.title = title;
         this.status = status;
         this.delFlag = delFlag;
     }
 
-    public ActivePagingQueryByTitleBo() {
+    public ActiveLikeToGetByTitleBo() {
     }
 
     public String getToken() {

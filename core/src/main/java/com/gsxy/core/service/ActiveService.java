@@ -47,8 +47,16 @@ public interface ActiveService {
     /**
      * @author hln 2023-10-27
      *      根据title进行模糊查询
-     * @param activePagingQueryByTitleBo
+     * @param activeLikeToGetByTitleBo
      * @return
      */
-    ResponseVo pagingQuery(ActivePagingQueryByTitleBo activePagingQueryByTitleBo);
+    ResponseVo activeLikeToGetByTitle(ActiveLikeToGetByTitleBo activeLikeToGetByTitleBo);
+
+    /**
+     * @author hln 2023-10-27
+     *      根据title进行分页查询
+     * @param pagingToGetActiveDataBo
+     * @return
+     */
+    ResponseVo pagingToGetActiveData(PagingToGetActiveDataBo pagingToGetActiveDataBo);
 }

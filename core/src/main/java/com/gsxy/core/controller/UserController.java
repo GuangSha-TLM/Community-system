@@ -2,10 +2,7 @@ package com.gsxy.core.controller;
 
 import com.alibaba.fastjson2.JSONArray;
 import com.gsxy.core.pojo.User;
-import com.gsxy.core.pojo.bo.UserDeleteByIdBo;
-import com.gsxy.core.pojo.bo.UserLoginBo;
-import com.gsxy.core.pojo.bo.UserSelectByUserIdBo;
-import com.gsxy.core.pojo.bo.UserUpdateByUserIdBo;
+import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.ResponseVo;
 import com.gsxy.core.service.UserService;
 import com.gsxy.core.util.ThreadLocalUtil;
@@ -113,6 +110,29 @@ public class UserController {
         }
 
         return JSONArray.toJSONString(userService.updateByUserId(userUpdateByUserIdBo));
+    }
+
+    /**
+     * @author hln 2023-10-27
+     *      分页查询
+     * @param pagingToGetUserDataBo
+     * @return
+     */
+    @PostMapping("/pagingQuery")
+    @ApiOperation("分页查询")
+    public String pagingToGetUserData(@RequestBody PagingToGetUserDataBo pagingToGetUserDataBo){
+
+        Map<String,String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+        if(map.get("error") != null){
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
+
+        if (pagingToGetUserDataBo == null){
+            return JSONArray.toJSONString(new ResponseVo<>("参数为null",null,"455"));
+        }
+
+        return JSONArray.toJSONString(userService.pagingToGetUserData(pagingToGetUserDataBo));
     }
 
     /**
