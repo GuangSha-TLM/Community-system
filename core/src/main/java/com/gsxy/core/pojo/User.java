@@ -17,6 +17,7 @@ public class User implements Serializable {
     private Integer org;
     private String professional;
     private String grade;
+    private Date loginTime;
     private Long createBy;
     private Date createTime;
     private Long updateBy;
@@ -24,7 +25,7 @@ public class User implements Serializable {
     private Integer status;
     private Integer delFlag;
 
-    public User(Long id, String username, String password, String name, Integer college, String studentId, Integer org, String professional, String grade, Long createBy, Date createTime, Long updateBy, Date updateTime, Integer status, Integer delFlag) {
+    public User(Long id, String username, String password, String name, Integer college, String studentId, Integer org, String professional, String grade, Date loginTime, Long createBy, Date createTime, Long updateBy, Date updateTime, Integer status, Integer delFlag) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -34,6 +35,7 @@ public class User implements Serializable {
         this.org = org;
         this.professional = professional;
         this.grade = grade;
+        this.loginTime = loginTime;
         this.createBy = createBy;
         this.createTime = createTime;
         this.updateBy = updateBy;
@@ -117,6 +119,14 @@ public class User implements Serializable {
         this.grade = grade;
     }
 
+    public Date getLoginTime() {
+        return loginTime;
+    }
+
+    public void setLoginTime(Date loginTime) {
+        this.loginTime = loginTime;
+    }
+
     public Long getCreateBy() {
         return createBy;
     }
@@ -177,6 +187,7 @@ public class User implements Serializable {
                 ", org=" + org +
                 ", professional='" + professional + '\'' +
                 ", grade='" + grade + '\'' +
+                ", loginTime=" + loginTime +
                 ", createBy=" + createBy +
                 ", createTime=" + createTime +
                 ", updateBy=" + updateBy +
