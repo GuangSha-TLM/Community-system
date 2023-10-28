@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * @author Oh...Yeah!!! 2023-10-28
- *      分页查询实体类
+ * 分页查询实体类
  */
 public class ImgPagingToGetDataBo implements Serializable {
 

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author Oh...Yeah!!! 2023-10-28
- * 图片Aop的实现类
+ * 通知Aop的实现类
  */
 @Component
 @Aspect
@@ -53,7 +53,7 @@ public class NoticeControllerAopImpl implements NoticeControllerAop {
 
     /**
      * @author Oh...Yeah!!!  2023-10-27
-     *      添加鉴权
+     *      发布通知鉴权
      * @param joinPoint
      * @return void
      */
@@ -63,7 +63,8 @@ public class NoticeControllerAopImpl implements NoticeControllerAop {
         Object[] args = joinPoint.getArgs();
         NoticeAddByBo noticeAddByBo = (NoticeAddByBo) args[0];
         String token = noticeAddByBo.getToken();
-        systemService.auth(token);
+        //对操作通知面板的用户进行权限判定
+        systemService.isAdmin(token, 2);
 
     }
 
@@ -79,7 +80,8 @@ public class NoticeControllerAopImpl implements NoticeControllerAop {
         Object[] args = joinPoint.getArgs();
         NoticeUpdateByIdBo noticeUpdateByIdBo = (NoticeUpdateByIdBo) args[0];
         String token = noticeUpdateByIdBo.getToken();
-        systemService.auth(token);
+        //对操作通知面板的用户进行权限判定
+        systemService.isAdmin(token, 2);
     }
 
 
@@ -97,6 +99,8 @@ public class NoticeControllerAopImpl implements NoticeControllerAop {
         String token = noticePagingToGetDataBo.getToken();
         systemService.auth(token);
     }
+
+
 
 
 }

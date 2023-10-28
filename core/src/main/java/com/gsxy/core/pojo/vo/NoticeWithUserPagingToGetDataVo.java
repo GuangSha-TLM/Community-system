@@ -1,7 +1,7 @@
 package com.gsxy.core.pojo.vo;
 
-import com.gsxy.core.pojo.Img;
-import com.gsxy.core.pojo.Notice;
+import com.gsxy.core.pojo.NoticeWithUser;
+import io.swagger.models.auth.In;
 
 import java.io.Serializable;
 import java.util.List;
@@ -10,25 +10,24 @@ import java.util.List;
  * @author Oh...Yeah!!! 2023-10-28
  * 分页查询返回数据实体类
  */
-public class NoticePagingToGetDataVo implements Serializable {
+public class NoticeWithUserPagingToGetDataVo implements Serializable {
 
-
-    private List<Notice> list;
+    private List<NoticeWithUser> list;
     private Integer count;
 
-    public NoticePagingToGetDataVo() {
+    public NoticeWithUserPagingToGetDataVo() {
     }
 
-    public NoticePagingToGetDataVo(List<Notice> list, Integer count) {
+    public NoticeWithUserPagingToGetDataVo(List<NoticeWithUser> list, Integer count) {
         this.list = list;
         this.count = count;
     }
 
-    public List<Notice> getList() {
+    public List<NoticeWithUser> getList() {
         return list;
     }
 
-    public void setList(List<Notice> list) {
+    public void setList(List<NoticeWithUser> list) {
         this.list = list;
     }
 
@@ -42,7 +41,7 @@ public class NoticePagingToGetDataVo implements Serializable {
 
     @Override
     public String toString() {
-        return "NoticePagingToGetDataVo{" +
+        return "NoticeWithUserPagingToGetDataVo{" +
                 "list=" + list +
                 ", count=" + count +
                 '}';

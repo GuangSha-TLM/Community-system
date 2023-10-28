@@ -5,7 +5,7 @@ import com.gsxy.core.pojo.Notice;
 import java.io.Serializable;
 
 /**
- *  2023-10-27
+ *  @author Oh...Yeah!!! 2023-10-28
  *  通过id修改数据
  */
 public class NoticeUpdateByIdBo implements Serializable {

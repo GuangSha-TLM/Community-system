@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * @author Oh...Yeah!!! 2023-10-28
- *      分页查询返回数据实体类
+ * 分页查询返回数据实体类
  */
 public class ImgPagingToGetDataVo implements Serializable {
 

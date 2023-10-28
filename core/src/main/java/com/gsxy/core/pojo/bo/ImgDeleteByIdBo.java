@@ -3,7 +3,7 @@ package com.gsxy.core.pojo.bo;
 import java.io.Serializable;
 
 /**
- *  2023-10-23
+ *  @author Oh...Yeah!!! 2023-10-28
  *  通过id删除img
  */
 public class ImgDeleteByIdBo implements Serializable{

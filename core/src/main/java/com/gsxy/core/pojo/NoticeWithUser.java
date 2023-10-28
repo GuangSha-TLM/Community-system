@@ -1,18 +1,20 @@
 package com.gsxy.core.pojo;
 
+
 import java.util.Date;
 
 /**
  * @author Oh...Yeah!!! 2023-10-28
- *  通知实体类
+ *  通知和用户实体类
  */
-public class Notice {
+public class NoticeWithUser {
+
 
     private Long id;
-    //通知内容
-    private String context;
-    //关联的图片id
-    private Long imgId;
+    //关联的用户id
+    private Long userId;
+    //关联的通知id
+    private Long noticeId;
     //名字
     private String name;
     //创建人
@@ -28,13 +30,13 @@ public class Notice {
     //逻辑删除
     private Integer delFlag;
 
-    public Notice() {
+    public NoticeWithUser() {
     }
 
-    public Notice(Long id, String context, Long imgId, String name, Long createBy, Date createTime, Long updateBy, Date updateTime, Integer status, Integer delFlag) {
+    public NoticeWithUser(Long id, Long userId, Long noticeId, String name, Long createBy, Date createTime, Long updateBy, Date updateTime, Integer status, Integer delFlag) {
         this.id = id;
-        this.context = context;
-        this.imgId = imgId;
+        this.userId = userId;
+        this.noticeId = noticeId;
         this.name = name;
         this.createBy = createBy;
         this.createTime = createTime;
@@ -52,20 +54,20 @@ public class Notice {
         this.id = id;
     }
 
-    public String getContext() {
-        return context;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setContext(String context) {
-        this.context = context;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public Long getImgId() {
-        return imgId;
+    public Long getNoticeId() {
+        return noticeId;
     }
 
-    public void setImgId(Long imgId) {
-        this.imgId = imgId;
+    public void setNoticeId(Long noticeId) {
+        this.noticeId = noticeId;
     }
 
     public String getName() {
@@ -126,10 +128,10 @@ public class Notice {
 
     @Override
     public String toString() {
-        return "Notice{" +
+        return "NoticeWithUser{" +
                 "id=" + id +
-                ", context='" + context + '\'' +
-                ", imgId=" + imgId +
+                ", userId=" + userId +
+                ", noticeId=" + noticeId +
                 ", name='" + name + '\'' +
                 ", createBy=" + createBy +
                 ", createTime=" + createTime +

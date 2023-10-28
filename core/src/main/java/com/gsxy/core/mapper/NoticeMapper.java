@@ -6,6 +6,10 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
+/**
+ * @author Oh...Yeah!!! 2023-10-28
+ * 通知持久层实现类
+ */
 @Mapper
 public interface NoticeMapper {
 

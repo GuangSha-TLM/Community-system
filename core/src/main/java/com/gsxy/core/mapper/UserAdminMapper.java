@@ -9,12 +9,18 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 
 /**
- *  2023-10-24
+ *  @author Oh...Yeah!!! 2023-10-28
  *  管理员持久层
  */
 @Mapper
 public interface UserAdminMapper {
 
+    /**
+     * 2023-10-28
+     *      在管理员库中查找目标用户.
+     * @param userId
+     * @return UserAdmin.class
+     */
     @Select("select * from user_admin where user_id = #{userId} limit 1")
     public UserAdmin queryByUserId(@Param("userId")Long userId);
 

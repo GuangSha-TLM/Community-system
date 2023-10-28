@@ -11,7 +11,7 @@ public interface NoticeControllerAop {
 
     /**
      * @author Oh...Yeah!!!  2023-10-27
-     *      查询鉴权
+     *      查看通知鉴权
      * @param joinPoint
      * @return void
      */
@@ -27,7 +27,7 @@ public interface NoticeControllerAop {
 
     /**
      * @author Oh...Yeah!!!  2023-10-27
-     *      添加鉴权
+     *      发布通知鉴权
      * @param joinPoint
      * @return void
      */

@@ -15,7 +15,7 @@ import java.util.Map;
 
 
 /**
- *  2023-10-24
+ *  @author Oh...Yeah!!! 2023-10-28
  *  管理员板块接口
  */
 @CrossOrigin
@@ -41,6 +41,8 @@ public class UserAdminController {
         if (map.get("error") != null) {
             return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
         }
+
+
 
         return JSONArray.toJSONString(userAdminService.userAdminSelectById(userAdminSelectByIdBo));
     }
