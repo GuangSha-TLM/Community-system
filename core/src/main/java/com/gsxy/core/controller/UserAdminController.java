@@ -42,6 +42,8 @@ public class UserAdminController {
             return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
         }
 
+
+
         return JSONArray.toJSONString(userAdminService.userAdminSelectById(userAdminSelectByIdBo));
     }
 

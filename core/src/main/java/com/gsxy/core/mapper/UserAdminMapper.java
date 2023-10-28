@@ -15,6 +15,12 @@ import java.util.List;
 @Mapper
 public interface UserAdminMapper {
 
+    /**
+     * 2023-10-28
+     *      在管理员库中查找目标用户.
+     * @param userId
+     * @return UserAdmin.class
+     */
     @Select("select * from user_admin where user_id = #{userId} limit 1")
     public UserAdmin queryByUserId(@Param("userId")Long userId);
 
