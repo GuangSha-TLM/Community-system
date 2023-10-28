@@ -12,6 +12,8 @@ public class Img implements Serializable {
     private Long id;
     //图片url
     private String url;
+    //图片名
+    private String name;
     //创建时间
     private Date createTime;
     //创建人
@@ -28,9 +30,10 @@ public class Img implements Serializable {
     public Img() {
     }
 
-    public Img(Long id, String url, Date createTime, Long createBy, Long updateBy, Date updateTime, Integer status, Integer delFlag) {
+    public Img(Long id, String url, String name, Date createTime, Long createBy, Long updateBy, Date updateTime, Integer status, Integer delFlag) {
         this.id = id;
         this.url = url;
+        this.name = name;
         this.createTime = createTime;
         this.createBy = createBy;
         this.updateBy = updateBy;
@@ -53,6 +56,14 @@ public class Img implements Serializable {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Date getCreateTime() {
@@ -108,6 +119,7 @@ public class Img implements Serializable {
         return "Img{" +
                 "id=" + id +
                 ", url='" + url + '\'' +
+                ", name='" + name + '\'' +
                 ", createTime=" + createTime +
                 ", createBy=" + createBy +
                 ", updateBy=" + updateBy +

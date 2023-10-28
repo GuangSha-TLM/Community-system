@@ -38,9 +38,9 @@
         insert into
             user_admin
         values
-            (null,#{userId},#{role},#{communityId},#{createBy},
-             #{createTime},#{updateBy},#{updateTime},
-             #{status},#{delFlag});
+            (null,#{userId},#{role},#{communityId},#{name},
+             #{createBy},#{createTime},#{updateBy},
+             #{updateTime},#{status},#{delFlag});
     </insert>
 
     <!--
@@ -58,6 +58,9 @@
                 </if>
                 <if test="communityId != null ">
                     community_id = #{communityId},
+                </if>
+                <if test="name != null and name != ''">
+                    name = #{name},
                 </if>
                 <if test="createBy != null ">
                     create_by = #{createBy},
@@ -81,6 +84,30 @@
             where
             id = #{id}
     </update>
+
+
+    <!--
+          @author Oh...Yeah!!! 2023-10-28
+          分页获取用户数据集合
+    -->
+    <select id="userAdminPagingToGetData" resultType="com.gsxy.core.pojo.UserAdmin"
+            parameterType="com.gsxy.core.pojo.bo.UserAdminPagingToGetDataBo">
+        select
+            *
+        from
+            img
+        <where>
+            <if test="name != null and name != ''">
+                  user_admin like concat('%',#{name},'%') and
+            </if>
+        </where>
+            status = #{status} and
+            del_flag = #{delFlag}
+        limit
+            #{start},#{size}
+
+    </select>
+
 
 
 

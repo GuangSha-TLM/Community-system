@@ -1,10 +1,7 @@
 package com.gsxy.core.controller;
 
 import com.alibaba.fastjson2.JSONArray;
-import com.gsxy.core.pojo.bo.ImgAddByBo;
-import com.gsxy.core.pojo.bo.ImgDeleteByIdBo;
-import com.gsxy.core.pojo.bo.ImgSelectByIdBo;
-import com.gsxy.core.pojo.bo.ImgUpdateByIdBo;
+import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.ResponseVo;
 import com.gsxy.core.service.ImgService;
 import com.gsxy.core.util.ThreadLocalUtil;
@@ -16,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 /**
- *  2023-10-12
+ *  @author Oh...Yeah!!! 2023-10-28
  *  图片板块接口
  */
 @CrossOrigin
@@ -99,19 +96,19 @@ public class ImgController {
 
     /**
      * @author Oh...Yeah!!! 2023-10-27
-     *    分页获取用户数据通过条件分页
-     * @param pagingToGetImgDataBo
+     *    分页获取数据
+     * @param imgPagingToGetDataBo
      * @return String.class
      */
-/*    @ApiOperation("分页获取用户数据通过条件分页")
-    @PostMapping("/pagingToGetImgDataBo")
-    public String pagingToGetUserData(@RequestBody PagingToGetImgDataBo pagingToGetImgDataBo){
+    @ApiOperation("分页获取数据")
+    @PostMapping("/pagingToGetData")
+    public String imgPagingToGetData(@RequestBody ImgPagingToGetDataBo imgPagingToGetDataBo){
         Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
         if (map.get("error") != null) {
             return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
         }
-        return JSONArray.toJSONString(imgService.pagingToGetImgData(pagingToGetImgDataBo));
-    }*/
+        return JSONArray.toJSONString(imgService.imgPagingToGetData(imgPagingToGetDataBo));
+    }
 
 
 

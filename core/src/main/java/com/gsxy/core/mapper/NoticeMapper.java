@@ -1,6 +1,7 @@
 package com.gsxy.core.mapper;
 
 import com.gsxy.core.pojo.Notice;
+import com.gsxy.core.pojo.bo.NoticePagingToGetDataBo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -42,6 +43,13 @@ public interface NoticeMapper {
      */
     public Long updateByIdNotice(Notice notice);
 
+    /**
+     * @author Oh...Yeah!!! 2023-10-28
+     *    分页获取数据
+     * @param noticePagingToGetDataBo
+     * @return String.class
+     */
+    public List<Notice> noticePagingToGetData(NoticePagingToGetDataBo noticePagingToGetDataBo);
 
 }
 

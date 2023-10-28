@@ -1,9 +1,6 @@
 package com.gsxy.core.service;
 
-import com.gsxy.core.pojo.bo.NoticeAddByBo;
-import com.gsxy.core.pojo.bo.NoticeDeleteByIdBo;
-import com.gsxy.core.pojo.bo.NoticeSelectByIdBo;
-import com.gsxy.core.pojo.bo.NoticeUpdateByIdBo;
+import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.ResponseVo;
 
 /**
@@ -47,6 +44,15 @@ public interface NoticeService {
      * @return String.class
      */
     public ResponseVo userAdminUpdateById(NoticeUpdateByIdBo noticeUpdateByIdBo);
+
+
+    /**
+     * @author Oh...Yeah!!! 2023-10-28
+     *    分页获取数据
+     * @param noticePagingToGetDataBo
+     * @return String.class
+     */
+    public ResponseVo pagingToGetNoticeData(NoticePagingToGetDataBo noticePagingToGetDataBo);
 
 
 }

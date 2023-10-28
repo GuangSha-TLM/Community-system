@@ -2,6 +2,10 @@ package com.gsxy.core.aop;
 
 import org.aspectj.lang.JoinPoint;
 
+/**
+ * @author Oh...Yeah!!! 2023-10-28
+ * 通知Aop
+ */
 public interface NoticeControllerAop {
 
 
@@ -36,6 +40,16 @@ public interface NoticeControllerAop {
      * @return void
      */
     public void noticeUpdateById(JoinPoint joinPoint);
+
+    /**
+     * @author Oh...Yeah!!!  2023-10-28
+     *      分页查询鉴权
+     * @param joinPoint
+     * @return void
+     */
+    public void userAdminPagingToGetData(JoinPoint joinPoint);
+
+
 
 
 }

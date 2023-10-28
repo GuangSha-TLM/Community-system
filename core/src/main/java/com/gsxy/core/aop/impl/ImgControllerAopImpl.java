@@ -9,6 +9,10 @@ import org.aspectj.lang.annotation.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author Oh...Yeah!!! 2023-10-28
+ * 图片Aop实现类
+ */
 @Component
 @Aspect
 public class ImgControllerAopImpl implements ImgControllerAop {
@@ -20,7 +24,7 @@ public class ImgControllerAopImpl implements ImgControllerAop {
      * @author Oh...Yeah!!!  2023-10-25
      *      对Img查询鉴权
      * @param joinPoint
-     * @return String.class
+     * @return void
      */
     @Override
     @Before("execution(* com.gsxy.core.controller.ImgController.imgSelect(..))")
@@ -36,7 +40,7 @@ public class ImgControllerAopImpl implements ImgControllerAop {
      * @author Oh...Yeah!!!  2023-10-26
      *      对删除鉴权
      * @param joinPoint
-     * @return String.class
+     * @return void
      */
     @Override
     @Before("execution(* com.gsxy.core.controller.ImgController.imgDeleteById(..))")
@@ -53,7 +57,7 @@ public class ImgControllerAopImpl implements ImgControllerAop {
      * @author Oh...Yeah!!!  2023-10-25
      *      对Img增加鉴权
      * @param joinPoint
-     * @return String.class
+     * @return void
      */
     @Override
     @Before("execution(* com.gsxy.core.controller.ImgController.imgAdd(..))")
@@ -69,7 +73,7 @@ public class ImgControllerAopImpl implements ImgControllerAop {
      * @author Oh...Yeah!!!  2023-10-26
      *      对修改鉴权
      * @param joinPoint
-     * @return String.class
+     * @return void
      */
     @Override
     @Before("execution(* com.gsxy.core.controller.ImgController.imgUpdateById(..))")
@@ -81,7 +85,21 @@ public class ImgControllerAopImpl implements ImgControllerAop {
 
     }
 
+    /**
+     * @author Oh...Yeah!!!  2023-10-28
+     *      Img分页查询鉴权
+     * @param joinPoint
+     * @return void
+     */
+    @Override
+    @Before("execution(* com.gsxy.core.controller.ImgController.imgPagingToGetData(..))")
+    public void imgPagingToGetData(JoinPoint joinPoint) {
+        Object[] args = joinPoint.getArgs();
+        ImgPagingToGetDataBo imgPagingToGetDataBo = (ImgPagingToGetDataBo) args[0];
+        String token = imgPagingToGetDataBo.getToken();
+        systemService.auth(token);
+
+    }
 
 }
-
 

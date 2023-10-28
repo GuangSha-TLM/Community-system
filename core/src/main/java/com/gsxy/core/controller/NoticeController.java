@@ -98,7 +98,21 @@ public class NoticeController {
     }
 
 
-
+    /**
+     * @author Oh...Yeah!!! 2023-10-28
+     *    分页获取数据
+     * @param noticePagingToGetDataBo
+     * @return String.class
+     */
+    @ApiOperation("分页获取数据")
+    @PostMapping("/pagingToGetData")
+    public String noticePagingToGetData(@RequestBody NoticePagingToGetDataBo noticePagingToGetDataBo){
+        Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
+        if (map.get("error") != null) {
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
+        return JSONArray.toJSONString(noticeService.pagingToGetNoticeData(noticePagingToGetDataBo));
+    }
 
 
 }

@@ -2,6 +2,10 @@ package com.gsxy.core.aop;
 
 import org.aspectj.lang.JoinPoint;
 
+/**
+ * @author Oh...Yeah!!! 2023-10-28
+ * 管理员Aop
+ */
 public interface UserAdminControllerAop {
 
     /**
@@ -36,6 +40,13 @@ public interface UserAdminControllerAop {
      */
     public void userAdminUpdateById(JoinPoint joinPoint);
 
+    /**
+     * @author Oh...Yeah!!!  2023-10-28
+     *      UserAdmin分页查询鉴权
+     * @param joinPoint
+     * @return void
+     */
+    public void userAdminPagingToGetData(JoinPoint joinPoint);
 
 
 }

@@ -1,13 +1,17 @@
 package com.gsxy.core.service.impl;
 
 import com.gsxy.core.mapper.UserAdminMapper;
+import com.gsxy.core.pojo.Img;
 import com.gsxy.core.pojo.UserAdmin;
 import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.ResponseVo;
+import com.gsxy.core.pojo.vo.UserAdminPagingToGetDataVo;
 import com.gsxy.core.service.UserAdminService;
 import com.gsxy.core.util.ThreadLocalUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  *  2023-10-23
@@ -28,16 +32,7 @@ public class UserAdminServiceImpl implements UserAdminService {
     @Override
     public ResponseVo userAdminSelectById(UserAdminSelectByIdBo userAdminSelectByIdBo) {
 
-        String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
-        Long userId = Long.valueOf(userIdOfStr);
-
-        if(userId == null || userId == 0L){
-            return new ResponseVo("token解析失败",null,"0x501");
-        }
-
-
         UserAdmin userAdmin = userAdminMapper.selectByIdUserAdmin(userAdminSelectByIdBo.getId());
-
         if (userAdmin == null) {
             return new ResponseVo("查询的数据不存在,", null, "0x500");
         }
@@ -54,17 +49,8 @@ public class UserAdminServiceImpl implements UserAdminService {
     @Override
     public ResponseVo userAdminDeleteById(UserAdminDeleteByIdBo userAdminDeleteByIdBo) {
 
-        String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
-        Long userId = Long.valueOf(userIdOfStr);
-
-        if(userId == null || userId == 0L){
-            return new ResponseVo("token解析失败",null,"0x501");
-        }
-
-
         Long id = userAdminDeleteByIdBo.getId();
         Long numbersOfOpetion = userAdminMapper.deleteByIdUserAdmin(id);
-
         if (numbersOfOpetion.longValue() == 0L) {
             return new ResponseVo("删除失败", null, "0x500");
         }
@@ -82,15 +68,7 @@ public class UserAdminServiceImpl implements UserAdminService {
     @Override
     public ResponseVo userAdminAdd(UserAdminAddByBo userAdminAddByBo) {
 
-        String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
-        Long userId = Long.valueOf(userIdOfStr);
-
-        if(userId == null || userId == 0L){
-            return new ResponseVo("token解析失败",null,"0x501");
-        }
-
         Long aLong = userAdminMapper.addUserAdmin(userAdminAddByBo.getUserAdmin());
-
         if (aLong.longValue() == 0){
             return new ResponseVo("增加失败",  null, "0x500");
         }
@@ -107,16 +85,8 @@ public class UserAdminServiceImpl implements UserAdminService {
     @Override
     public ResponseVo userAdminUpdateById(UserAdminUpdateByIdBo userAdminUpdateByIdBo) {
 
-        String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
-        Long userId = Long.valueOf(userIdOfStr);
-
-        if(userId == null || userId == 0L){
-            return new ResponseVo("token解析失败",null,"0x501");
-        }
-
         UserAdmin userAdmin = userAdminUpdateByIdBo.getUserAdmin();
         Long numbersOfOpertion = userAdminMapper.updateByIdUserAdmin(userAdmin);
-
         if (numbersOfOpertion.longValue() == 0L){
             return new ResponseVo("更新失败", null, "0x500");
         }
@@ -125,7 +95,23 @@ public class UserAdminServiceImpl implements UserAdminService {
 
     }
 
+    /**
+     * @author Oh...Yeah!!! 2023-10-28
+     *    分页获取数据
+     * @param userAdminPagingToGetDataBo
+     * @return String.class
+     */
+    @Override
+    public Object pagingToGetUserAdminData(UserAdminPagingToGetDataBo userAdminPagingToGetDataBo) {
 
+        List<UserAdmin> list = userAdminMapper.userAdminPagingToGetData(userAdminPagingToGetDataBo);
+        UserAdminPagingToGetDataVo userAdminPagingToGetDataVo = new UserAdminPagingToGetDataVo();
+        userAdminPagingToGetDataVo.setCount(list.size());
+        userAdminPagingToGetDataVo.setList(list);
+
+        return new ResponseVo<>(null,userAdminPagingToGetDataVo,"0x200");
+
+    }
 
 
 }

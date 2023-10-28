@@ -1,10 +1,9 @@
 package com.gsxy.core.service.impl;
 
 import com.gsxy.core.pojo.Img;
-import com.gsxy.core.pojo.bo.ImgAddByBo;
-import com.gsxy.core.pojo.bo.ImgDeleteByIdBo;
-import com.gsxy.core.pojo.bo.ImgSelectByIdBo;
-import com.gsxy.core.pojo.bo.ImgUpdateByIdBo;
+import com.gsxy.core.pojo.bo.*;
+import com.gsxy.core.pojo.vo.ImgPagingToGetDataVo;
+import com.gsxy.core.pojo.vo.PagingToGetImgDataVo;
 import com.gsxy.core.pojo.vo.ResponseVo;
 import com.gsxy.core.mapper.ImgMapper;
 import com.gsxy.core.service.ImgService;
@@ -12,9 +11,11 @@ import com.gsxy.core.util.ThreadLocalUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
- *  2023-10-23
- *  图片业务接口实现类
+ * @author Oh...Yeah!!! 2023-10-28
+ * 图片业务接口实现类
  */
 @Service
 public class ImgServiceImpl implements ImgService {
@@ -31,14 +32,6 @@ public class ImgServiceImpl implements ImgService {
      */
     @Override
     public ResponseVo imgSelectById(ImgSelectByIdBo imgSelectByIdBo) {
-
-        String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
-        Long userId = Long.valueOf(userIdOfStr);
-
-        if(userId == null || userId == 0L){
-            return new ResponseVo("token解析失败",null,"0x501");
-        }
-
 
         Img img = imgMapper.selectByIdImg(imgSelectByIdBo.getId());
 
@@ -59,13 +52,6 @@ public class ImgServiceImpl implements ImgService {
     @Override
     public ResponseVo imgDeleteById(ImgDeleteByIdBo imgDeleteByIdBo) {
 
-        String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
-        Long userId = Long.valueOf(userIdOfStr);
-
-        if(userId == null || userId == 0L){
-            return new ResponseVo("token解析失败",null,"0x501");
-        }
-
         Long id = imgDeleteByIdBo.getId();
         Long numbersOfOpetion = imgMapper.deleteByIdImg(id);
 
@@ -85,13 +71,6 @@ public class ImgServiceImpl implements ImgService {
     @Override
     public ResponseVo imgAdd(ImgAddByBo imgAddByBo) {
 
-        String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
-        Long userId = Long.valueOf(userIdOfStr);
-
-        if(userId == null || userId == 0L){
-            return new ResponseVo("token解析失败",null,"0x501");
-        }
-
         Long aLong = imgMapper.addImg(imgAddByBo.getImg());
 
         if (aLong.longValue() == 0){
@@ -109,13 +88,6 @@ public class ImgServiceImpl implements ImgService {
     @Override
     public ResponseVo imgUpdateById(ImgUpdateByIdBo imgUpdateByIdBo) {
 
-        String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
-        Long userId = Long.valueOf(userIdOfStr);
-
-        if(userId == null || userId == 0L){
-            return new ResponseVo("token解析失败",null,"0x501");
-        }
-
         Img img = imgUpdateByIdBo.getImg();
         Long numbersOfOpertion = imgMapper.updateByIdImg(img);
 
@@ -126,6 +98,24 @@ public class ImgServiceImpl implements ImgService {
         return new ResponseVo("更新成功", null, "0x200");
     }
 
+
+    /**
+     * @author Oh...Yeah!!! 2023-10-27
+     *    分页获取数据
+     * @param imgPagingToGetDataBo
+     * @return ResponseVo.class
+     */
+    @Override
+    public ResponseVo imgPagingToGetData(ImgPagingToGetDataBo imgPagingToGetDataBo) {
+
+        List<Img> list = imgMapper.imgPagingToGetData(imgPagingToGetDataBo);
+        ImgPagingToGetDataVo imgPagingToGetDataVo = new ImgPagingToGetDataVo();
+        imgPagingToGetDataVo.setCount(list.size());
+        imgPagingToGetDataVo.setList(list);
+
+        return new ResponseVo<>(null,imgPagingToGetDataVo,"0x200");
+
+    }
 
 
 }

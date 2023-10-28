@@ -13,6 +13,8 @@ public class Notice {
     private String context;
     //关联的图片id
     private Long imgId;
+    //名字
+    private String name;
     //创建人
     private Long createBy;
     //创建时间
@@ -29,10 +31,11 @@ public class Notice {
     public Notice() {
     }
 
-    public Notice(Long id, String context, Long imgId, Long createBy, Date createTime, Long updateBy, Date updateTime, Integer status, Integer delFlag) {
+    public Notice(Long id, String context, Long imgId, String name, Long createBy, Date createTime, Long updateBy, Date updateTime, Integer status, Integer delFlag) {
         this.id = id;
         this.context = context;
         this.imgId = imgId;
+        this.name = name;
         this.createBy = createBy;
         this.createTime = createTime;
         this.updateBy = updateBy;
@@ -63,6 +66,14 @@ public class Notice {
 
     public void setImgId(Long imgId) {
         this.imgId = imgId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Long getCreateBy() {
@@ -119,6 +130,7 @@ public class Notice {
                 "id=" + id +
                 ", context='" + context + '\'' +
                 ", imgId=" + imgId +
+                ", name='" + name + '\'' +
                 ", createBy=" + createBy +
                 ", createTime=" + createTime +
                 ", updateBy=" + updateBy +

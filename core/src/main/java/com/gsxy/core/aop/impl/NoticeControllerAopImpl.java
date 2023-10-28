@@ -9,6 +9,10 @@ import org.aspectj.lang.annotation.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author Oh...Yeah!!! 2023-10-28
+ * 图片Aop的实现类
+ */
 @Component
 @Aspect
 public class NoticeControllerAopImpl implements NoticeControllerAop {
@@ -77,5 +81,22 @@ public class NoticeControllerAopImpl implements NoticeControllerAop {
         String token = noticeUpdateByIdBo.getToken();
         systemService.auth(token);
     }
+
+
+    /**
+     * @author Oh...Yeah!!!  2023-10-28
+     *      分页查询鉴权
+     * @param joinPoint
+     * @return void
+     */
+    @Override
+    @Before("execution(* com.gsxy.core.controller.NoticeController.noticePagingToGetData(..))")
+    public void userAdminPagingToGetData(JoinPoint joinPoint) {
+        Object[] args = joinPoint.getArgs();
+        NoticePagingToGetDataBo noticePagingToGetDataBo = (NoticePagingToGetDataBo) args[0];
+        String token = noticePagingToGetDataBo.getToken();
+        systemService.auth(token);
+    }
+
 
 }

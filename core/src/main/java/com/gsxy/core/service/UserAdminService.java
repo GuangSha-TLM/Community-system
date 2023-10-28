@@ -46,6 +46,14 @@ public interface UserAdminService {
     public ResponseVo userAdminUpdateById(UserAdminUpdateByIdBo userAdminUpdateByIdBo);
 
 
+    /**
+     * @author Oh...Yeah!!! 2023-10-28
+     *    分页获取数据
+     * @param userAdminPagingToGetDataBo
+     * @return String.class
+     */
+    public Object pagingToGetUserAdminData(UserAdminPagingToGetDataBo userAdminPagingToGetDataBo);
+
 
 }
 

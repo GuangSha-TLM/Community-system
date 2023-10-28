@@ -1,9 +1,12 @@
 package com.gsxy.core.mapper;
 
 import com.gsxy.core.pojo.UserAdmin;
+import com.gsxy.core.pojo.bo.UserAdminPagingToGetDataBo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 /**
  *  2023-10-24
@@ -50,4 +53,11 @@ public interface UserAdminMapper {
      */
     public Long updateByIdUserAdmin(UserAdmin userAdmin);
 
+    /**
+     * @author Oh...Yeah!!! 2023-10-28
+     *    分页获取数据
+     * @param userAdminPagingToGetDataBo
+     * @return String.class
+     */
+    public List<UserAdmin> userAdminPagingToGetData(UserAdminPagingToGetDataBo userAdminPagingToGetDataBo);
 }

@@ -9,6 +9,11 @@ import org.aspectj.lang.annotation.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+
+/**
+ * @author Oh...Yeah!!! 2023-10-28
+ * 管理员Aop实现类
+ */
 @Component
 @Aspect
 public class UserAdminControllerAopImpl implements UserAdminControllerAop {
@@ -74,6 +79,22 @@ public class UserAdminControllerAopImpl implements UserAdminControllerAop {
         UserAdminUpdateByIdBo userAdminUpdateByIdBo = (UserAdminUpdateByIdBo) args[0];
         String token = userAdminUpdateByIdBo.getToken();
         systemService.auth(token);
+    }
+
+    /**
+     * @author Oh...Yeah!!!  2023-10-28
+     *      UserAdmin分页查询鉴权
+     * @param joinPoint
+     * @return void
+     */
+    @Override
+    @Before("execution(* com.gsxy.core.controller.UserAdminController.userAdminPagingToGetData(..))")
+    public void userAdminPagingToGetData(JoinPoint joinPoint) {
+        Object[] args = joinPoint.getArgs();
+        UserAdminPagingToGetDataBo userAdminPagingToGetDataBo = (UserAdminPagingToGetDataBo) args[0];
+        String token = userAdminPagingToGetDataBo.getToken();
+        systemService.auth(token);
+
     }
 
 

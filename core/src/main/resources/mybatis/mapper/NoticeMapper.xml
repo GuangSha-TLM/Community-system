@@ -44,7 +44,7 @@
         insert into
             notice
         values
-            (null,#{context},#{imgId},
+            (null,#{context},#{imgId},#{name},
              #{createBy},#{createTime},#{updateBy},
              #{updateTime},#{status},#{delFlag});
     </insert>
@@ -61,6 +61,9 @@
             </if>
             <if test="imgId != null ">
                 img_id = #{imgId},
+            </if>
+            <if test="name != null and name != ''">
+                name = #{name},
             </if>
             <if test="createBy != null ">
                 create_by = #{createBy},
@@ -85,6 +88,26 @@
         id = #{id}
     </update>
 
+    <!--
+      @author Oh...Yeah!!! 2023-10-28
+      分页获取用户数据集合
+    -->
+    <select id="noticePagingToGetData" resultType="com.gsxy.core.pojo.Notice"
+            parameterType="com.gsxy.core.pojo.bo.NoticePagingToGetDataBo">
+        select
+            *
+        from
+            notice
+        <where>
+            <if test="name != null and name != ''">
+                name like concat('%',#{name},'%') and
+            </if>
+        </where>
+            status = #{status} and
+            del_flag = #{delFlag}
+        limit
+            #{start},#{size}
+    </select>
 
 
 </mapper>

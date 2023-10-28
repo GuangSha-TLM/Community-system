@@ -16,6 +16,8 @@ public class UserAdmin implements Serializable {
     private Integer role;
     //社团id
     private Long communityId;
+    //名字
+    private String name;
     //创建人
     private Long createBy;
     //创建时间
@@ -33,11 +35,12 @@ public class UserAdmin implements Serializable {
     public UserAdmin() {
     }
 
-    public UserAdmin(Long id, Long userId, Integer role, Long communityId, Long createBy, Date createTime, Long updateBy, Date updateTime, Integer status, Integer delFlag) {
+    public UserAdmin(Long id, Long userId, Integer role, Long communityId, String name, Long createBy, Date createTime, Long updateBy, Date updateTime, Integer status, Integer delFlag) {
         this.id = id;
         this.userId = userId;
         this.role = role;
         this.communityId = communityId;
+        this.name = name;
         this.createBy = createBy;
         this.createTime = createTime;
         this.updateBy = updateBy;
@@ -45,6 +48,7 @@ public class UserAdmin implements Serializable {
         this.status = status;
         this.delFlag = delFlag;
     }
+
 
     public Long getId() {
         return id;
@@ -76,6 +80,14 @@ public class UserAdmin implements Serializable {
 
     public void setCommunityId(Long communityId) {
         this.communityId = communityId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Long getCreateBy() {
@@ -133,6 +145,7 @@ public class UserAdmin implements Serializable {
                 ", userId=" + userId +
                 ", role=" + role +
                 ", communityId=" + communityId +
+                ", name='" + name + '\'' +
                 ", createBy=" + createBy +
                 ", createTime=" + createTime +
                 ", updateBy=" + updateBy +
