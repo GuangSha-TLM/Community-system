@@ -42,7 +42,7 @@ public class CommunityUserController {
     }
 
     @PostMapping("/communityUserSelectById")
-    @ApiOperation("社团用户删除数据")
+    @ApiOperation("社团用户查找数据")
     public String CommunityUserSelectById(@RequestBody CommunityUserSelectByIdBo communityUserSelectByIdBo){
         Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
         ThreadLocalUtil.mapThreadLocal.remove();
@@ -53,7 +53,7 @@ public class CommunityUserController {
     }
 
     @PostMapping("/communityUserUpdateById")
-    @ApiOperation("社团用户删除数据")
+    @ApiOperation("社团用户更新数据")
     public String CommunityUserUpdateById(@RequestBody CommunityUserUpdateByIdBo communityUserUpdateByIdBo){
         Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
         ThreadLocalUtil.mapThreadLocal.remove();
