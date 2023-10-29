@@ -32,7 +32,8 @@ public class NoticeWithUserControllerAopImpl implements NoticeWithUserController
         Object[] args = joinPoint.getArgs();
         NoticeWithUserSelectByIdBo noticeWithUserSelectByIdBo = (NoticeWithUserSelectByIdBo) args[0];
         String token = noticeWithUserSelectByIdBo.getToken();
-        systemService.auth(token);
+        //对操作管理员面板的用户进行权限判定
+        systemService.isAdmin(token, 2);
     }
 
     /**
@@ -47,7 +48,8 @@ public class NoticeWithUserControllerAopImpl implements NoticeWithUserController
         Object[] args = joinPoint.getArgs();
         NoticeWithUserDeleteByIdBo noticeWithUserDeleteByIdBo = (NoticeWithUserDeleteByIdBo) args[0];
         String token = noticeWithUserDeleteByIdBo.getToken();
-        systemService.auth(token);
+        //对操作管理员面板的用户进行权限判定
+        systemService.isAdmin(token, 2);
     }
 
     /**
@@ -62,7 +64,8 @@ public class NoticeWithUserControllerAopImpl implements NoticeWithUserController
         Object[] args = joinPoint.getArgs();
         NoticeWithUserAddByBo noticeWithUserAddByBo = (NoticeWithUserAddByBo) args[0];
         String token = noticeWithUserAddByBo.getToken();
-        systemService.auth(token);
+        //对操作管理员面板的用户进行权限判定
+        systemService.isAdmin(token, 2);
     }
 
     /**
@@ -77,7 +80,8 @@ public class NoticeWithUserControllerAopImpl implements NoticeWithUserController
         Object[] args = joinPoint.getArgs();
         NoticeWithUserUpdateByIdBo noticeWithUserUpdateByIdBo = (NoticeWithUserUpdateByIdBo) args[0];
         String token = noticeWithUserUpdateByIdBo.getToken();
-        systemService.auth(token);
+        //对操作管理员面板的用户进行权限判定
+        systemService.isAdmin(token, 2);
     }
 
     /**
@@ -92,6 +96,7 @@ public class NoticeWithUserControllerAopImpl implements NoticeWithUserController
         Object[] args = joinPoint.getArgs();
         NoticeWithUserPagingToGetDataBo noticeWithUserPagingToGetDataBo = (NoticeWithUserPagingToGetDataBo) args[0];
         String token = noticeWithUserPagingToGetDataBo.getToken();
-        systemService.auth(token);
+        //对操作管理员面板的用户进行权限判定
+        systemService.isAdmin(token, 2);
     }
 }

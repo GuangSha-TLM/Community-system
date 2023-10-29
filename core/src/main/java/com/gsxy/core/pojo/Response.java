@@ -1,28 +1,37 @@
 package com.gsxy.core.pojo;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class CommunityUser implements Serializable {
+public class Response {
+
     private Long id;
-    private Long communityId;//社团id
-    private Long userId;//用户id
-    private Long createBy; //创建人
-    private Date createTime; //创建时间
-    private Long updateBy; //修改人
-    private Date updateTime; //修改时间
-    private Integer status;  //状态
-    private Integer delFlag;//逻辑删除
+    //回复内容
+    private String context;
+    //关联的用户id
+    private Long userId;
+    //关联的通知id
+    private Long noticeId;
+    //创建人
+    private Long createBy;
+    //创建时间
+    private Date createTime;
+    //更新人
+    private Long updateBy;
+    //更新时间
+    private Date updateTime;
+    //状态
+    private Integer status;
+    //逻辑删除
+    private Integer delFlag;
 
-
-    public CommunityUser(){
-
+    public Response() {
     }
 
-    public CommunityUser(Long id, Long communityId, Long userId, Long createBy, Date createTime, Long updateBy, Date updateTime, Integer status, Integer delFlag) {
+    public Response(Long id, String context, Long userId, Long noticeId, Long createBy, Date createTime, Long updateBy, Date updateTime, Integer status, Integer delFlag) {
         this.id = id;
-        this.communityId = communityId;
+        this.context = context;
         this.userId = userId;
+        this.noticeId = noticeId;
         this.createBy = createBy;
         this.createTime = createTime;
         this.updateBy = updateBy;
@@ -39,12 +48,12 @@ public class CommunityUser implements Serializable {
         this.id = id;
     }
 
-    public Long getCommunityId() {
-        return communityId;
+    public String getContext() {
+        return context;
     }
 
-    public void setCommunityId(Long communityId) {
-        this.communityId = communityId;
+    public void setContext(String context) {
+        this.context = context;
     }
 
     public Long getUserId() {
@@ -53,6 +62,14 @@ public class CommunityUser implements Serializable {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public Long getNoticeId() {
+        return noticeId;
+    }
+
+    public void setNoticeId(Long noticeId) {
+        this.noticeId = noticeId;
     }
 
     public Long getCreateBy() {
@@ -105,10 +122,11 @@ public class CommunityUser implements Serializable {
 
     @Override
     public String toString() {
-        return "CommunityUser{" +
+        return "Response{" +
                 "id=" + id +
-                ", communityId=" + communityId +
+                ", context='" + context + '\'' +
                 ", userId=" + userId +
+                ", noticeId=" + noticeId +
                 ", createBy=" + createBy +
                 ", createTime=" + createTime +
                 ", updateBy=" + updateBy +

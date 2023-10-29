@@ -33,7 +33,9 @@ public class UserAdminControllerAopImpl implements UserAdminControllerAop {
         Object[] args = joinPoint.getArgs();
         UserAdminSelectByIdBo userAdminSelectByIdBo = (UserAdminSelectByIdBo) args[0];
         String token = userAdminSelectByIdBo.getToken();
-        systemService.auth(token);
+
+        //对操作管理员面板的用户进行权限判定
+        systemService.isAdmin(token, 2);
     }
 
     /**
@@ -48,7 +50,9 @@ public class UserAdminControllerAopImpl implements UserAdminControllerAop {
         Object[] args = joinPoint.getArgs();
         UserAdminDeleteByIdBo userAdminDeleteByIdBo = (UserAdminDeleteByIdBo) args[0];
         String token = userAdminDeleteByIdBo.getToken();
-        systemService.auth(token);
+
+        //对操作管理员面板的用户进行权限判定
+        systemService.isAdmin(token, 2);
     }
 
     /**
@@ -63,7 +67,9 @@ public class UserAdminControllerAopImpl implements UserAdminControllerAop {
         Object[] args = joinPoint.getArgs();
         UserAdminAddByBo userAdminAddByBo = (UserAdminAddByBo) args[0];
         String token = userAdminAddByBo.getToken();
-        systemService.auth(token);
+
+        //对操作管理员面板的用户进行权限判定
+        systemService.isAdmin(token, 2);
     }
 
     /**
@@ -78,7 +84,9 @@ public class UserAdminControllerAopImpl implements UserAdminControllerAop {
         Object[] args = joinPoint.getArgs();
         UserAdminUpdateByIdBo userAdminUpdateByIdBo = (UserAdminUpdateByIdBo) args[0];
         String token = userAdminUpdateByIdBo.getToken();
-        systemService.auth(token);
+
+        //对操作管理员面板的用户进行权限判定
+        systemService.isAdmin(token, 2);
     }
 
     /**
@@ -93,7 +101,9 @@ public class UserAdminControllerAopImpl implements UserAdminControllerAop {
         Object[] args = joinPoint.getArgs();
         UserAdminPagingToGetDataBo userAdminPagingToGetDataBo = (UserAdminPagingToGetDataBo) args[0];
         String token = userAdminPagingToGetDataBo.getToken();
-        systemService.auth(token);
+
+        //对操作管理员面板的用户进行权限判定
+        systemService.isAdmin(token, 2);
 
     }
 

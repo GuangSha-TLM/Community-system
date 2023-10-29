@@ -66,7 +66,7 @@ public class NoticeController {
 
     /**
      * @author Oh… Yeah!!!, 2023-10-27
-     *      增加新数据.
+     *      发布通知鉴权
      * @param noticeAddByBo
      * @return String.class
      */
