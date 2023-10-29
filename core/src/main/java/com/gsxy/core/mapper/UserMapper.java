@@ -2,6 +2,7 @@ package com.gsxy.core.mapper;
 
 import com.gsxy.core.pojo.User;
 import com.gsxy.core.pojo.bo.PagingToGetUserDataBo;
+import com.gsxy.core.pojo.bo.UserAndUserAdminSelectByIdBo;
 import com.gsxy.core.pojo.bo.UserLoginBo;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -80,4 +81,12 @@ public interface UserMapper {
      * @return
      */
     Long pagingToGetCountOfUserData(PagingToGetUserDataBo pagingToGetUserDataBo);
+
+    /**
+     * @param id
+     * @return
+     * @author hln 2023-10-29
+     * 通过id获取管理员权限
+     */
+    Integer selectByUserAndUserAdminId(Long id);
 }
