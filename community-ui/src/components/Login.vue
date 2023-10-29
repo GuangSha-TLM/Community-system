@@ -81,9 +81,12 @@
             return ;
          }
 
-         setCookie ("token",object.data);
+         setCookie ("token",object.data.token);
+        localStorage.setItem("username",object.data.username);
+        localStorage.setItem("role",object.data.role);
+
          alert(object.message);
-         this.$router.push("/TaskList");
+         this.$router.push("/ActivityManagement");
          this.switchbutton = false;
      },
 }
