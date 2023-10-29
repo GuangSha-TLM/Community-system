@@ -6,6 +6,7 @@ import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.PagingToGetActiveDataVO;
 import com.gsxy.core.pojo.vo.ResponseVo;
 import com.gsxy.core.service.ActiveService;
+import com.gsxy.core.util.ThreadLocalUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -80,13 +81,34 @@ public class ActivityServiceImpl implements ActiveService {
     @Override
     public ResponseVo selectActive(ActiveSelectByIdBo activeSelectByIdBo) {
 
+        String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
+        Long userId = Long.valueOf(userIdOfStr);
+
+        if(userId == null || userId == 0L){
+            return new ResponseVo("token解析失败",null,"0x501");
+        }
+
         Long aLong = activeMapper.selectActiveById(activeSelectByIdBo);
 
         if(aLong == null || aLong == 0L){
             return new ResponseVo("查询失败",null,"0x500");
         }
 
-        return new ResponseVo("查询成功",aLong,"0x200");
+        Long createBY = activeMapper.selectActiveToGetCreateByById(activeSelectByIdBo);
+        CommunityInActiveBo communityInActiveBo = new CommunityInActiveBo();
+        communityInActiveBo.setCreateBy(createBY);
+
+        CommunityInActiveBo communityInActiveBo1 = activeMapper.selectCommunityByCreateBy(communityInActiveBo);
+
+        ActiveToGetBo activeToGetBo = new ActiveToGetBo();
+        activeToGetBo.setId(aLong);
+        ActiveToGetBo activeToGetBo1 = activeMapper.selectActiveToGetById(activeToGetBo);
+
+        ActiveSelectToGetBo activeSelectToGetBo = new ActiveSelectToGetBo();
+        activeSelectToGetBo.setActiveToGetBo(activeToGetBo1);
+        activeSelectToGetBo.setCommunityInActiveBo(communityInActiveBo1);
+
+        return new ResponseVo("查询成功",activeSelectToGetBo,"0x200");
     }
 
     /**

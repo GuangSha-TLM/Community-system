@@ -118,4 +118,43 @@
             del_flag = #{delFlag}
     </select>
 
+    <!-- 获取前端指定社团相关字段实体类 -->
+    <select id="selectCommunityByCreateBy" resultType="com.gsxy.core.pojo.bo.CommunityInActiveBo"
+            parameterType="com.gsxy.core.pojo.bo.CommunityInActiveBo">
+        select
+            community.community_id,community.name,community.create_by,user.username
+        from
+            community
+        inner join
+                user
+        where
+            community.create_by = #{createBy}
+        limit 1
+    </select>
+
+    <!-- 获取前端指定活动相关字段实体类 -->
+    <select id="selectActiveToGetById" resultType="com.gsxy.core.pojo.bo.ActiveToGetBo"
+            parameterType="com.gsxy.core.pojo.bo.ActiveSelectToGetBo">
+        select
+            *
+        from
+            active
+        where
+            id = #{id}
+        limit 1
+    </select>
+
+    <!-- 获取前端指定社团相关字段实体类 -->
+    <select id="selectActiveToGetCreateByById" resultType="java.lang.Long"
+            parameterType="com.gsxy.core.pojo.bo.ActiveSelectByIdBo">
+        select
+            community.*
+        from
+            community
+        inner join
+            active
+        on active.community = community.community_id
+        limit 1
+    </select>
+
 </mapper>
