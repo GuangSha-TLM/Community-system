@@ -43,7 +43,7 @@ export default {
     data() {
         return {
             Admin: false,
-            //颜色属性
+            //颜色属性s
             activeColor: ''
         }
     },
