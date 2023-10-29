@@ -78,14 +78,12 @@ public class UserServiceImpl implements UserService {
         //返回数据库中 user 和 userAdmin 中前端想获取的数据
         int role = userMapper.selectByUserAndUserAdminId(user.getId());
 
-        String userAndAdmin = user + ", role='" + role + '\'';
+        UserAndUserAdminSelectByIdBo userAndUserAdminSelectByIdBo = new UserAndUserAdminSelectByIdBo();
+        BeanUtils.copyProperties(user,userAndUserAdminSelectByIdBo);
+        userAndUserAdminSelectByIdBo.setRole(role);
+        userAndUserAdminSelectByIdBo.setToken(jwt);
 
-        //使用map将jwt和nowTime返回给前端
-        ArrayList list = new ArrayList();
-        list.add(jwt);
-        list.add(userAndAdmin);
-
-        return new ResponseVo("登录成功",list,"0x200");
+        return new ResponseVo("登录成功",userAndUserAdminSelectByIdBo,"0x200");
     }
 
     /**
