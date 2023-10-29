@@ -1,9 +1,7 @@
 package com.gsxy.core.mapper;
 
 import com.gsxy.core.pojo.Active;
-import com.gsxy.core.pojo.bo.ActiveLikeToGetByTitleBo;
-import com.gsxy.core.pojo.bo.ActiveSelectByIdBo;
-import com.gsxy.core.pojo.bo.PagingToGetActiveDataBo;
+import com.gsxy.core.pojo.bo.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -73,4 +71,28 @@ public interface ActiveMapper {
      * @return
      */
     Long pagingToGetCountOfActiveData(PagingToGetActiveDataBo pagingToGetActiveDataBo);
+
+    /**
+     * @author hln 2023-10-29
+     *      获取前端指定活动相关字段实体类
+     * @param communityInActiveBo
+     * @return
+     */
+    CommunityInActiveBo selectCommunityByCreateBy(CommunityInActiveBo communityInActiveBo);
+
+    /**
+     * @author hln 2023-10-29
+     *      获取前端指定活动相关字段实体类
+     * @param activeToGetBo
+     * @return
+     */
+    ActiveToGetBo selectActiveToGetById(ActiveToGetBo activeToGetBo);
+
+    /**
+     * @author hln 2023-10-29
+     *      获取前端指定社团相关字段实体类
+     * @param activeSelectByIdBo
+     * @return
+     */
+    Long selectActiveToGetCreateByById(ActiveSelectByIdBo activeSelectByIdBo);
 }
