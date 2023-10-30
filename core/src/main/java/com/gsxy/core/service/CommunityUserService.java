@@ -15,4 +15,6 @@ public interface CommunityUserService {
     public ResponseVo communityUserSelectById(CommunityUserSelectByIdBo communityUserSelectByIdBo);
 
     public ResponseVo communityUserUpdateById(CommunityUserUpdateByIdBo communityUserUpdateByIdBo);
+
+    public ResponseVo communityUserAndUser();
 }
