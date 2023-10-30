@@ -132,16 +132,5 @@
                 del_flag =  #{delFlag}
     </select>
 
-    <!-- 通过id获取用户的权限 -->
-    <select id="selectByUserAndUserAdminId" resultType="java.lang.Integer" parameterType="java.lang.Integer">
-        select
-            user_admin.role
-        from
-            user_admin
-        inner join
-            user
-        on user.id = user_admin.user_id
-        limit 1
-    </select>
 
 </mapper>
