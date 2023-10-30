@@ -193,4 +193,26 @@ public class UserServiceImpl implements UserService {
         return new ResponseVo(null,pagingToGetUserDataVo,"0x200");
     }
 
+    /**
+     * @quthor hln 2023-10-30
+     *      用户签到
+     * @param userSignInBo
+     * @return
+     */
+    @Override
+    public ResponseVo userSignIn(UserSignInBo userSignInBo) {
+
+        String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
+        Long userId = Long.valueOf(userIdOfStr);
+
+        if(userId == null || userId == 0L){
+            return new ResponseVo("token解析失败",null,"0x501");
+        }
+
+        userSignInBo.setStatus(1);
+//        userMapper.userSignIn(userSignInBo);
+
+        return null;
+    }
+
 }

@@ -57,9 +57,9 @@
                                 <el-select  v-model="user.college" placeholder="请选择"  style="width: 100%;">
                                 <el-option
                                 v-for="item in options"
-                                :key="item"
-                                :label="item"
-                                :value="item"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value"
                                         >
                                 </el-option>
                             </el-select>
@@ -83,7 +83,7 @@
 
                                     <el-select  v-model="user.professional" placeholder="请选择"  style="width: 100%;">
                                         <el-option
-                                            v-for="item in professionalList"
+                                            v-for="item in professionalList[user.college -1]"
                                                 :key="item"
                                                 :label="item"
                                                 :value="item"
@@ -142,8 +142,17 @@ export default {
     data() {
         return {
             grandList: [ 2019 ,2020 ,2021 ,2022 ,2023 ,2024 ,2025],
-            options:['信息学院','财经学院','艺术学院','通识学院'],
-            professionalList:['软件工程','计算机科学与技术','电子商务'],
+            options: [
+            { value: 1, label: "信息学院" },
+            { value: 2, label: "财经学院" },
+            { value: 3, label: "艺术学院" },
+            { value: 4, label: "通识学院" }
+            ],
+
+            professionalList:[['软件工程','计算机科学与技术','电子商务'],
+            ['审计学','会计学','国际经济与贸易','财务管理','工商管理','人力资源管理'],
+            ['汉语言文学','应用心理学','学前教育 (师范类)'],
+            ['视觉传达设计','环境设计','影视摄影与制作']],
             orgList:['1班','2班','3班','4班','5班','6班'],
 
             user: {
