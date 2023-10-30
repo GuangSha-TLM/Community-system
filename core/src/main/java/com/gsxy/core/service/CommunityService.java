@@ -44,5 +44,10 @@ public interface CommunityService {
      */
     public ResponseVo updateByIdCommunity(CommunityUpdateByIdBo communityUpdateByIdBo);
 
+    /**
+     * @author zhuxinyu 2023-10-30
+     *      查找社团的所有用户
+     * @return
+     */
     public ResponseVo communityAndUser();
 }

@@ -3,6 +3,10 @@ package com.gsxy.core.pojo.bo;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * @author zhuxinyu 2023-10-30
+ *      查询用户的所有信息
+ */
 public class CommunityAndUserBo implements Serializable {
     private Long id;
     private String token;

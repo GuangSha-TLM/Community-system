@@ -31,7 +31,10 @@
     <select id="selectByIdcommunity" resultType="com.gsxy.core.pojo.Community">
         select * from Community where id = #{id} 
     </select>
-
+    <!--
+        @author zhuxinyu 2023-10-30
+            根据社团查找所有用户
+    -->
     <select id="communityAndUser" resultType="com.gsxy.core.pojo.bo.CommunityAndUserBo">
         SELECT
             t1.name,

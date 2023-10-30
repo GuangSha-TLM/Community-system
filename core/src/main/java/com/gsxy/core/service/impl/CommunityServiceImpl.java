@@ -103,6 +103,11 @@ public class CommunityServiceImpl implements CommunityService {
         return new ResponseVo("更新成功", community.getId(), "0x200");
     }
 
+    /**
+     * @author zhuxinyu 2023-10-30
+     *  查询用户的所有信息
+     * @return
+     */
     @Override
     public ResponseVo communityAndUser() {
         List<CommunityAndUserBo> list = communityMapper.communityAndUser();
