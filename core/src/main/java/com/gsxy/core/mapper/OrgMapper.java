@@ -2,6 +2,7 @@ package com.gsxy.core.mapper;
 
 import com.gsxy.core.pojo.Org;
 import com.gsxy.core.pojo.bo.OrgAndUserBo;
+import com.gsxy.core.pojo.bo.OrgPagingToGetDataBo;
 import com.gsxy.core.pojo.bo.OrgSelectByUserBo;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -58,5 +59,13 @@ public interface OrgMapper {
      * @return
      */
     public List<OrgSelectByUserBo> selectOrgByUser();
+
+    /**
+     * @author zhuxinyu 2023-10-30
+     *
+     * @param orgPagingToGetDataBo
+     * @return
+     */
+    public List<Org> orgPagingToGetData(OrgPagingToGetDataBo orgPagingToGetDataBo);
 
 }

@@ -110,4 +110,24 @@
             where
                 id = #{id}
         </update>
+    <!--
+        @author zhuxinyu 2023-10-30
+        分页获取用户数据集合
+    -->
+        <select id="orgPagingToGetData" resultType="com.gsxy.core.pojo.Org"
+            parameterType="com.gsxy.core.pojo.bo.OrgPagingToGetDataBo">
+            select
+            *
+            from
+            org
+            <where>
+                <if test="name != null and name != ''">
+                    name like concat('%',#{name},'%') and
+                </if>
+            </where>
+            status = #{status} and
+            del_flag = #{delFlag}
+            limit
+            #{start},#{size}
+        </select>
 </mapper>

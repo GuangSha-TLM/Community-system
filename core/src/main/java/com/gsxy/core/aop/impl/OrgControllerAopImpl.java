@@ -2,6 +2,7 @@ package com.gsxy.core.aop.impl;
 
 import com.gsxy.core.aop.OrgControllerAop;
 import com.gsxy.core.pojo.bo.*;
+import com.gsxy.core.pojo.vo.OrgPagingToGetDataVo;
 import com.gsxy.core.service.SystemService;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -98,4 +99,17 @@ public class OrgControllerAopImpl implements OrgControllerAop {
 //        return null;
 //    }
 
+    /**
+     * @author zhuxinyu 2023-10-30
+     *      org分页查询鉴权
+     * @param joinPoint
+     */
+    @Override
+    @Before("execution(* com.gsxy.core.controller.OrgController.orgPagingToGetData(..))")
+    public void OrgPagingToGetData(JoinPoint joinPoint){
+        Object[] args = joinPoint.getArgs();
+        OrgPagingToGetDataBo orgPagingToGetDataVo =(OrgPagingToGetDataBo) args[0];
+        String token = orgPagingToGetDataVo.getToken();
+        systemService.auth(token);
+    }
 }

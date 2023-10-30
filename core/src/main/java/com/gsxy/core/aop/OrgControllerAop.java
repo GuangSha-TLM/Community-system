@@ -2,6 +2,8 @@ package com.gsxy.core.aop;
 
 import org.aspectj.lang.JoinPoint;
 
+import java.util.List;
+
 public interface OrgControllerAop {
     /**
      * @author zhuxinyu 2023-10-24
@@ -42,4 +44,12 @@ public interface OrgControllerAop {
      * @return
      */
 //    public List<OrgSelectByUserBo> OrgSelectByUser(JoinPoint joinPoint);
+
+    /**
+     * @author zhuxinyu 2023-10-30
+     *      org分页查询鉴权
+     * @param joinPoint
+     */
+    public void OrgPagingToGetData(JoinPoint joinPoint);
+
 }
