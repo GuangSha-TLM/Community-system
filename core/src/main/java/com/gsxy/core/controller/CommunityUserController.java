@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
+/**
+ * @author zhuxinyu 2023-10-30
+ *      社团用户板块控制器
+ */
 @CrossOrigin
 @Api(value = "社团用户板块接口" , tags = {"社团用户板块接口"})
 @RequestMapping("/communityUser")
@@ -20,6 +24,12 @@ public class CommunityUserController {
     @Autowired
     private CommunityUserService communityUserService;
 
+    /**
+     * @author zhuxinyu 2023-10-30
+     *      社团用户添加
+     * @param communityUserAddBo
+     * @return
+     */
     @PostMapping("/communityUserAdd")
     @ApiOperation("社团用户添加数据")
     public String CommunityUserAdd(@RequestBody CommunityUserAddBo communityUserAddBo){
@@ -30,6 +40,13 @@ public class CommunityUserController {
         }
         return JSONArray.toJSONString(communityUserService.communityUseradd(communityUserAddBo));
     }
+
+    /**
+     * @author zhuxinyu 2023-10-30
+     *      社团用户删除
+     * @param communityUserDeleteByIdBo
+     * @return
+     */
     @PostMapping("/communityUserDeleteById")
     @ApiOperation("社团用户删除数据")
     public String CommunityUserDeleteById(@RequestBody CommunityUserDeleteByIdBo communityUserDeleteByIdBo){
@@ -41,6 +58,12 @@ public class CommunityUserController {
         return JSONArray.toJSONString(communityUserService.communityUserDeleteById(communityUserDeleteByIdBo));
     }
 
+    /**
+     * @author zhuxinyu 2023-10-30
+     *      社团用户查找数据
+     * @param communityUserSelectByIdBo
+     * @return
+     */
     @PostMapping("/communityUserSelectById")
     @ApiOperation("社团用户查找数据")
     public String CommunityUserSelectById(@RequestBody CommunityUserSelectByIdBo communityUserSelectByIdBo){
@@ -52,8 +75,14 @@ public class CommunityUserController {
         return JSONArray.toJSONString(communityUserService.communityUserSelectById(communityUserSelectByIdBo));
     }
 
+    /**
+     * @author zhuxinyu 2023-10-30
+     *      社团用户修改数据
+     * @param communityUserUpdateByIdBo
+     * @return
+     */
     @PostMapping("/communityUserUpdateById")
-    @ApiOperation("社团用户更新数据")
+    @ApiOperation("社团用户修改数据")
     public String CommunityUserUpdateById(@RequestBody CommunityUserUpdateByIdBo communityUserUpdateByIdBo){
         Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
         ThreadLocalUtil.mapThreadLocal.remove();
@@ -62,6 +91,12 @@ public class CommunityUserController {
         }
         return JSONArray.toJSONString(communityUserService.communityUserUpdateById(communityUserUpdateByIdBo));
     }
+
+    /**
+     * @author zhuxinyu 2023-10-30
+     *      查询社团所有用户数据
+     * @return
+     */
     @PostMapping("/communityUserAndUser")
     @ApiOperation("社团用户查找")
     public String CommunityUserAndUser(){

@@ -142,7 +142,6 @@ public class OrgServiceImpl implements OrgService {
         OrgPagingToGetDataVo orgPagingToGetDataVo = new OrgPagingToGetDataVo();
         orgPagingToGetDataVo.setCount(list.size());
         orgPagingToGetDataVo.setList(list);
-
         return  new ResponseVo<>(null,orgPagingToGetDataVo,"0x200");
     }
 
