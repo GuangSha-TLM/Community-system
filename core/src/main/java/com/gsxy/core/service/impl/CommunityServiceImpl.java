@@ -2,10 +2,7 @@ package com.gsxy.core.service.impl;
 
 import com.gsxy.core.mapper.CommunityMapper;
 import com.gsxy.core.pojo.Community;
-import com.gsxy.core.pojo.bo.CommunityAddBo;
-import com.gsxy.core.pojo.bo.CommunityDeleteByIdBo;
-import com.gsxy.core.pojo.bo.CommunitySelectByIdBo;
-import com.gsxy.core.pojo.bo.CommunityUpdateByIdBo;
+import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.ResponseVo;
 import com.gsxy.core.service.CommunityService;
 import com.gsxy.core.util.ThreadLocalUtil;
@@ -13,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author zhuxinyu 2023-10-24
@@ -103,6 +101,12 @@ public class CommunityServiceImpl implements CommunityService {
             return new ResponseVo("更新失败", null, "0x500");
         }
         return new ResponseVo("更新成功", community.getId(), "0x200");
+    }
+
+    @Override
+    public ResponseVo communityAndUser() {
+        List<CommunityAndUserBo> list = communityMapper.communityAndUser();
+        return new ResponseVo<>("查询成功",list,"0x200");
     }
 
 }
