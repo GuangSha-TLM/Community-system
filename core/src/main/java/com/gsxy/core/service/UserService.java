@@ -63,4 +63,12 @@ public interface UserService {
      * @return
      */
     ResponseVo pagingToGetUserData(PagingToGetUserDataBo pagingToGetUserDataBo);
+
+    /**
+     * @quthor hln 2023-10-30
+     *      用户签到
+     * @param userSignInBo
+     * @return
+     */
+    ResponseVo userSignIn(UserSignInBo userSignInBo);
 }

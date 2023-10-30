@@ -85,4 +85,21 @@ public class UserControllerAopImpl implements UserControllerAop {
 
         return null;
     }
+
+    /**
+     * @author hln 2023-10-27
+     *      做了用户签到功能权限验证
+     * @param joinPoint
+     * @return
+     */
+    @Override
+    public String userSignIn(JoinPoint joinPoint) {
+        Object[] args = joinPoint.getArgs();
+        PagingToGetUserDataBo arg = (PagingToGetUserDataBo) args[0];
+        String token = arg.getToken();
+        systemService.auth(token);
+
+        return null;
+    }
+
 }
