@@ -2,6 +2,10 @@ package com.gsxy.core.pojo;
 
 import java.util.Date;
 
+/**
+ * @author Oh...Yeah!!! 2023-10-28
+ * 回复类
+ */
 public class Response {
 
     private Long id;

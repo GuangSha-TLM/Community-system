@@ -2,6 +2,10 @@ package com.gsxy.core.pojo.bo;
 
 import java.io.Serializable;
 
+/**
+ *  @author Oh...Yeah!!! 2023-10-28
+ *  通过id删除数据
+ */
 public class ResponseDeleteByIdBo implements Serializable {
 
     private String token;

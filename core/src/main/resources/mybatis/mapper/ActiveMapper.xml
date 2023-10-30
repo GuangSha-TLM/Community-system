@@ -122,7 +122,7 @@
     <select id="selectCommunityByCreateBy" resultType="com.gsxy.core.pojo.bo.CommunityInActiveBo"
             parameterType="com.gsxy.core.pojo.bo.CommunityInActiveBo">
         select
-            community.community_id,community.name,community.create_by,user.username
+            community.id,community.name,community.create_by,user.username
         from
             community
         inner join
