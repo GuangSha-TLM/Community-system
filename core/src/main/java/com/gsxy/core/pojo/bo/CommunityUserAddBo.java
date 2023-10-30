@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 public class CommunityUserAddBo implements Serializable {
     private String token;
-    private CommunityUser communityUser;
+    private CommunityUser communityUser;//社团用户实体类
     public CommunityUserAddBo(){
 
     }

@@ -6,6 +6,7 @@ import java.util.Date;
 public class CommunityUserAndUserBo implements Serializable {
     private Long id;
     private String token;
+    private String communityId;
     private String name;//姓名
     private String studentId;//学号
     private Integer college;//学院
@@ -18,9 +19,11 @@ public class CommunityUserAndUserBo implements Serializable {
     public CommunityUserAndUserBo(){
 
     }
-    public CommunityUserAndUserBo(Long id, String token, String name, String studentId, Integer college, String professional, Integer org, String grade, Date createTime, Date updateTime) {
+
+    public CommunityUserAndUserBo(Long id, String token, String communityId, String name, String studentId, Integer college, String professional, Integer org, String grade, Date createTime, Date updateTime) {
         this.id = id;
         this.token = token;
+        this.communityId = communityId;
         this.name = name;
         this.studentId = studentId;
         this.college = college;
@@ -45,6 +48,14 @@ public class CommunityUserAndUserBo implements Serializable {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getCommunityId() {
+        return communityId;
+    }
+
+    public void setCommunityId(String communityId) {
+        this.communityId = communityId;
     }
 
     public String getName() {
@@ -116,6 +127,7 @@ public class CommunityUserAndUserBo implements Serializable {
         return "CommunityUserAndUserBo{" +
                 "id=" + id +
                 ", token='" + token + '\'' +
+                ", communityId='" + communityId + '\'' +
                 ", name='" + name + '\'' +
                 ", studentId='" + studentId + '\'' +
                 ", college=" + college +
