@@ -1,7 +1,11 @@
 package com.gsxy.core.mapper;
 
 import com.gsxy.core.pojo.Community;
+import com.gsxy.core.pojo.bo.CommunityAndUserBo;
+import com.gsxy.core.pojo.bo.CommunityUserAndUserBo;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 @Mapper
 public interface CommunityMapper {
@@ -36,4 +40,11 @@ public interface CommunityMapper {
      * @return
      */
     public Long updateByIdcommunity(Community community);
+
+    /**
+     * @author zhuxinyu 2023-10-30
+     * 查询社团所有用户
+     * @return
+     */
+    public List<CommunityAndUserBo> communityAndUser();
 }

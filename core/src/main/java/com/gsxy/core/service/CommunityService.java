@@ -43,4 +43,6 @@ public interface CommunityService {
      * @return
      */
     public ResponseVo updateByIdCommunity(CommunityUpdateByIdBo communityUpdateByIdBo);
+
+    public ResponseVo communityAndUser();
 }

@@ -18,6 +18,12 @@ public class CommunityUserControllerAopImpl implements CommunityUserControllerAo
     @Autowired
     private SystemService systemService;
 
+    /**
+     * @author zhuxinyu 2023-10-30
+     *      社团用户添加鉴权
+     * @param joinPoint
+     * @return
+     */
     @Override
     @Before("execution(* com.gsxy.core.controller.CommunityUserController.CommunityUserAdd(..))")
     public String CommunityUserAdd(JoinPoint joinPoint) {
@@ -28,6 +34,12 @@ public class CommunityUserControllerAopImpl implements CommunityUserControllerAo
         return null;
     }
 
+    /**
+     * @author zhuxinyu 2023-10-30
+     *      社团用户删除鉴权
+     * @param joinPoint
+     * @return
+     */
     @Override
     @Before("execution(* com.gsxy.core.controller.CommunityUserController.CommunityUserDeleteById(..))")
     public String CommunityUserDeleteById(JoinPoint joinPoint) {
@@ -38,8 +50,13 @@ public class CommunityUserControllerAopImpl implements CommunityUserControllerAo
         return null;
     }
 
+    /**
+     * @author zhuxinyu 2023-10-30
+     *    社团用户查询鉴权
+     * @param joinPoint
+     * @return
+     */
     @Override
-
     @Before("execution(* com.gsxy.core.controller.CommunityUserController.CommunityUserSelectById(..))")
     public String CommunityUserSelectById(JoinPoint joinPoint) {
         Object[] args = joinPoint.getArgs();
@@ -49,6 +66,12 @@ public class CommunityUserControllerAopImpl implements CommunityUserControllerAo
         return null;
     }
 
+    /**
+     * @author zhuxinyu 2023-10-30
+     *      社团用户修改鉴权
+     * @param joinPoint
+     * @return
+     */
     @Override
     @Before("execution(* com.gsxy.core.controller.CommunityUserController.CommunityUserUpdateById(..))")
     public String CommunityUserUpdateById(JoinPoint joinPoint) {

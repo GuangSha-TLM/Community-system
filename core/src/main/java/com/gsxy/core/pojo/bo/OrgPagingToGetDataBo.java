@@ -2,6 +2,10 @@ package com.gsxy.core.pojo.bo;
 
 import java.io.Serializable;
 
+/**
+ * @author zhuxinyu 2023-10-25
+ *      分页查询实体类
+ */
 public class OrgPagingToGetDataBo implements Serializable {
     private String token;
     private String name;

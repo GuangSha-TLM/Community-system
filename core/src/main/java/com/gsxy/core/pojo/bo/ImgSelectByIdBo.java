@@ -12,6 +12,7 @@ public class ImgSelectByIdBo implements Serializable{
     private String token;
 
     public ImgSelectByIdBo() {
+
     }
 
     public ImgSelectByIdBo(Long id, String token) {

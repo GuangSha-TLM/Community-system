@@ -3,28 +3,32 @@ package com.gsxy.core.pojo.bo;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * @author zhuxinyu 2023-10-25
- *      根据班级查询用户
- */
-public class OrgAndUserBo implements Serializable {
+public class CommunityAndUserBo implements Serializable {
     private Long id;
+    private String token;
+    private String communityId;//社团id
+    private String name;//姓名
+    private String studentId;//学号
     private Integer college;//学院
     private String professional;//专业
-    private Integer name;//班级
+    private Integer org;//班级
     private String grade;//年级
     private Date createTime;//创建时间
     private Date updateTime;//更新时间
 
-    public OrgAndUserBo(){
+    public CommunityAndUserBo(){
 
     }
 
-    public OrgAndUserBo(Long id, Integer college, String professional, Integer name, String grade, Date createTime, Date updateTime) {
+    public CommunityAndUserBo(Long id, String token, String communityId, String name, String studentId, Integer college, String professional, Integer org, String grade, Date createTime, Date updateTime) {
         this.id = id;
+        this.token = token;
+        this.communityId = communityId;
+        this.name = name;
+        this.studentId = studentId;
         this.college = college;
         this.professional = professional;
-        this.name = name;
+        this.org = org;
         this.grade = grade;
         this.createTime = createTime;
         this.updateTime = updateTime;
@@ -36,6 +40,38 @@ public class OrgAndUserBo implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getCommunityId() {
+        return communityId;
+    }
+
+    public void setCommunityId(String communityId) {
+        this.communityId = communityId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
     }
 
     public Integer getCollege() {
@@ -54,12 +90,12 @@ public class OrgAndUserBo implements Serializable {
         this.professional = professional;
     }
 
-    public Integer getName() {
-        return name;
+    public Integer getOrg() {
+        return org;
     }
 
-    public void setName(Integer name) {
-        this.name = name;
+    public void setOrg(Integer org) {
+        this.org = org;
     }
 
     public String getGrade() {
@@ -88,11 +124,15 @@ public class OrgAndUserBo implements Serializable {
 
     @Override
     public String toString() {
-        return "OrgAndUserBo{" +
+        return "CommunityAndUserBo{" +
                 "id=" + id +
+                ", token='" + token + '\'' +
+                ", communityId='" + communityId + '\'' +
+                ", name='" + name + '\'' +
+                ", studentId='" + studentId + '\'' +
                 ", college=" + college +
                 ", professional='" + professional + '\'' +
-                ", name=" + name +
+                ", org=" + org +
                 ", grade='" + grade + '\'' +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +

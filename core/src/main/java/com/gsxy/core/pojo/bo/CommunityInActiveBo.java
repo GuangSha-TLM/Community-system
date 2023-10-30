@@ -4,13 +4,13 @@ import java.io.Serializable;
 
 public class CommunityInActiveBo implements Serializable {
 
-    private Long communityId;//社团id
+    private Long Id;//社团id
     private String name;//社团名称
     private Long createBy;//社团创建人
     private String username;//用户名
 
-    public CommunityInActiveBo(Long communityId, String name, Long createBy, String username) {
-        this.communityId = communityId;
+    public CommunityInActiveBo(Long id, String name, Long createBy, String username) {
+        Id = id;
         this.name = name;
         this.createBy = createBy;
         this.username = username;
@@ -19,12 +19,12 @@ public class CommunityInActiveBo implements Serializable {
     public CommunityInActiveBo() {
     }
 
-    public Long getCommunityId() {
-        return communityId;
+    public Long getId() {
+        return Id;
     }
 
-    public void setCommunityId(Long communityId) {
-        this.communityId = communityId;
+    public void setId(Long id) {
+        Id = id;
     }
 
     public String getName() {
@@ -54,8 +54,9 @@ public class CommunityInActiveBo implements Serializable {
     @Override
     public String toString() {
         return "CommunityInActiveBo{" +
-                "communityId=" + communityId +
+                "Id=" + Id +
                 ", name='" + name + '\'' +
+                ", createBy=" + createBy +
                 ", username='" + username + '\'' +
                 '}';
     }
