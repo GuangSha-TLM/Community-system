@@ -5,6 +5,7 @@ import com.gsxy.core.mapper.UserMapper;
 import com.gsxy.core.pojo.Org;
 import com.gsxy.core.pojo.User;
 import com.gsxy.core.pojo.bo.*;
+import com.gsxy.core.pojo.vo.OrgPagingToGetDataVo;
 import com.gsxy.core.pojo.vo.ResponseVo;
 import com.gsxy.core.service.OrgService;
 import com.gsxy.core.util.ThreadLocalUtil;
@@ -127,6 +128,22 @@ public class OrgServiceImpl implements OrgService {
             return new ResponseVo("更新失败", null, "0x500");
         }
         return new ResponseVo("更新成功", orgId , "0x200");
+    }
+
+    /**
+     * @author zhuxinyu 2023-10-30
+     *      分页获取数据
+     * @param orgPagingToGetDataBo
+     * @return
+     */
+    @Override
+    public ResponseVo orgPagingToGetData(OrgPagingToGetDataBo orgPagingToGetDataBo) {
+        List<Org> list = orgMapper.orgPagingToGetData(orgPagingToGetDataBo);
+        OrgPagingToGetDataVo orgPagingToGetDataVo = new OrgPagingToGetDataVo();
+        orgPagingToGetDataVo.setCount(list.size());
+        orgPagingToGetDataVo.setList(list);
+
+        return  new ResponseVo<>(null,orgPagingToGetDataVo,"0x200");
     }
 
 }

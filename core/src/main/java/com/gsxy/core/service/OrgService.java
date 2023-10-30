@@ -56,4 +56,12 @@ public interface OrgService {
      */
     public ResponseVo orgUpdateById(OrgUpdateByIdBo orgUpdateByIdBo);
 
+    /**
+     * @author zhuxinyu 2023-10-30
+     *      分页查询获取数据
+     * @param orgPagingToGetDataBo
+     * @return
+     */
+    public ResponseVo orgPagingToGetData(OrgPagingToGetDataBo orgPagingToGetDataBo);
+
 }
