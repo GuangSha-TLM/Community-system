@@ -3,51 +3,15 @@
         <!-- Main content -->
         <section v-if="view">
             <div class="container">
-                <!-- 添加功能 -->
-                <div class="addButton">
-                    <el-button @click="drawer = true" type="primary" style="margin-left: 16px;">
-                             点我添加
-                         </el-button>
-                        <el-drawer
-                        title="我是标题"
-                        :visible.sync="drawer"
-                        :direction="direction"
-                        :before-close="handleClose">
-                        <div>
-                            <div>
-                                名字:
-                                <el-input v-model="addInfo.name" placeholder="添加名字"></el-input>
-                            </div>
-                            <br><br>
-                            <div>
-                                用户名:
-                                <el-input v-model="addInfo.username" placeholder="添加用户名"></el-input>
-                            </div>
-                            <br><br>
-                            <div>
-                                密码:
-                                <el-input v-model="addInfo.password" placeholder="添加密码"></el-input>
-                            </div>
-                            <br><br>
-                            <div>
-                                班级:
-                                <el-input v-model="addInfo.org" placeholder="添加班级"></el-input>
-                            </div>
-                             <br><br>
-                            <el-button type="primary" @click="submitAdd()">提交</el-button>
-                        </div>
-                        </el-drawer>
-                </div>
-                <!-- ----------------- -->
                 <table class="table">
                     <thead>
                         <tr>
                             <th scope="col">序号</th>
                             <th scope="col">学院</th>
-                            <th scope="col">专业</th>
                             <th scope="col">班级</th>
+                            <th scope="col">学号</th>
                             <th scope="col">姓名</th>
-                            <!-- <th scope="col">创建时间</th> -->
+                            <th scope="col">创建时间</th>
                             <th scope="col">操作</th>
                         </tr>
 
@@ -56,11 +20,11 @@
                         <tr v-for="obj in list" :key="obj.index">
                             <th scope="row">{{ obj.id }}</th>
                             <td>{{ obj.college }}</td>
-                            <td>{{ obj.professional }}</td>
                             <td>{{ obj.org }}</td>
-                            <td>{{ obj.name }}</td>
-                            <!-- <td>{{ obj.createTime }}</td> -->
-
+                            <td>{{ obj.studentId }}</td>
+                            <td>{{ obj.username }}</td>
+                            <td>{{ obj.create_by }}</td>
+                            
                             <td>
                                 <el-link type="primary" @click="openView(obj)">查看</el-link>
 
@@ -68,6 +32,25 @@
 
                                 <el-drawer title="我是标题" :visible.sync="updateWindows" :with-header="false">
                                     <div>
+                                        <div>
+                                            名字:
+                                            <el-input v-model="userInfo.name" placeholder="更改名字"></el-input>
+                                        </div>
+                                        <br><br>
+                                        <div>
+                                            用户名:
+                                            <el-input v-model="userInfo.username" placeholder="更改用户名"></el-input>
+                                        </div>
+                                        <br><br>
+                                        <div>
+                                            密码:
+                                            <el-input v-model="userInfo.password" placeholder="更改密码"></el-input>
+                                        </div>
+                                        <br><br>
+                                        <div>
+                                            班级:
+                                            <el-input v-model="userInfo.org" placeholder="更改班级"></el-input>
+                                        </div> <br><br>
                                         <div>
                                             学院:
                                             <el-select v-model="input" placeholder="请选择">
@@ -77,58 +60,13 @@
                                             </el-select>
                                         </div> <br><br>
                                         <div>
-                                            专业:
-                                            <el-input v-model="userInfo.professional" placeholder="更改专业"></el-input>
-                                        </div>
-                                        <br><br>
-                                        <div>
-                                            班级:
-                                            <el-input v-model="userInfo.org" placeholder="更改班级"></el-input>
-                                        </div>
-                                        <br><br>
-                                        <div>
-                                            姓名:
-                                            <el-input v-model="userInfo.name" placeholder="更改姓名"></el-input>
-                                        </div>
-                                         <br><br>
-
-                                        <!-- <div>
-                                            创建时间:
-                                            <el-input v-model="userInfo.createTime" placeholder="创建时间"></el-input>
-                                        </div>
-                                        <br><br> -->
-
-                                        <div>
-                                            用户名:
-                                        <el-input v-model="userInfo.username" placeholder="更改用户名"></el-input>
-                                        </div>
-                                        <br><br>
-
-                                        <div>
-                                            密码:
-                                        <el-input v-model="userInfo.password" placeholder="更改密码"></el-input>
-                                        </div>
-                                        <br><br>
-
+                                            年级:
+                                            <el-input v-model="userInfo.grade" placeholder="更改年级"></el-input>
+                                        </div> <br><br>
                                         <div>
                                             学号:
-                                        <el-input v-model="userInfo.studentId" placeholder="更改学号"></el-input>
-                                        </div>
-                                        <br><br>
-
-                                        <!-- <div>
-                                            登录时间:
-                                        <el-input v-model="userInfo.loginTime" placeholder="更改登陆时间"></el-input>
-                                        </div>
-                                        <br><br>
-                                        -->
-                                        <!-- <div>
-                                            创建人:
-                                        <el-input v-model="userInfo.createBy" placeholder="更改创建人"></el-input>
-                                        </div>
-                                        <br><br>  -->
-
-
+                                            <el-input v-model="userInfo.studentId" placeholder="更改学号"></el-input>
+                                        </div> <br><br>
                                         <el-button type="primary" @click="updateUserInfo()">提交</el-button>
                                     </div>
                                 </el-drawer>
@@ -139,6 +77,8 @@
                         </tr>
                     </tbody>
                 </table>
+
+
                 <el-pagination :page-size="100" :pager-count="11" @current-change="getMerchantInformation"
                     layout="prev, pager, next" :total="count">
                 </el-pagination>
@@ -171,42 +111,17 @@
             </div>
             </div>
 
-            <!-- 学号 -->
+            <!-- 名字 -->
                 <div class="row">
                 <div>
-                    <div class=" cell key">
-                        学号
+                    <div class=" cell key" v-if="schoolView.name">
+                        名字
                     </div>
                     <div class="cell value">
-                        {{ schoolView.studentId }}
+                        {{ schoolView.name }}
                     </div>
                 </div>
                 </div>
-
-                <!-- 登录时间 -->
-                <!-- <div class="row">
-                <div>
-                    <div class=" cell key">
-                        登录时间
-                    </div>
-                    <div class="cell value">
-                        {{ schoolView.loginTime }}
-                    </div>
-                </div>
-                </div> -->
-
-                <!-- 创建人 -->
-                <!-- <div class="row">
-                <div>
-                    <div class=" cell key">
-                        创建人
-                    </div>
-                    <div class="cell value">
-                        {{ schoolView.createBy }}
-                    </div>
-                </div>
-                </div> -->
-
             <div class="check">
                 <div >
                     <el-link type="primary" @click="openUpdateUserInfoWindows(schoolView.id)">修改</el-link>
@@ -229,16 +144,6 @@ import { synRequestPost, synRequestGet } from "../../static/request"
 export default {
     data() {
         return {
-            // 添加
-            drawer: false,
-            direction: 'ltr',
-            addInfo: {
-                name: "",
-                username: "",
-                password: "",
-                org: '',
-            },
-
             token: getCookie("token"),
             user: {
                 username: "",
@@ -264,13 +169,13 @@ export default {
             },
 
             //通过id删除
-            userDeleteByIdBo: {
+            deleteByIdBo: {
                 token: "",
                 id: -1
             },
 
             //查重用户通过id
-            userSelectByUserIdBo: {
+            selectByIdBo: {
                 token: "",
                 id: -1,
             },
@@ -284,37 +189,23 @@ export default {
                 username: "",
                 password: "",
                 name: "",
-                college: '',
-                studentId: '',
                 org: '',
-                professional: '',
+                college: '',
                 grade: '',
-                // loginTime: '',
-                // createBy: '',
-                // createTime: '',
-                // updateBy: '',
-                // updateTime: '',
-                // status: '',
+                studentId: '',
             },
             //更新用户信息
-            userUpdateByUserIdBo: {
+            updataByIdBo: {
                 token: "",
                 user: {
                     id: -1,
                     username: "",
                     password: "",
                     name: "",
-                    college: '',
-                    studentId: '',
                     org: '',
-                    professional: '',
+                    college: '',
                     grade: '',
-                    // loginTime: '',
-                    // createBy: '',
-                    // createTime: '',
-                    // updateBy: '',
-                    // updateTime: '',
-                    // status:'',
+                    studentId: '',
                 }
             },
             //查看
@@ -342,7 +233,7 @@ export default {
         }
     },
     mounted() {
-        this.userDeleteByIdBo.token = getCookie("token");
+        this.deleteByIdBo.token = getCookie("token");
         this.getMerchantInformation(1)
     },
 
@@ -352,24 +243,17 @@ export default {
          */
         async updateUserInfo() {
             //todo userInfo 要求username 和password 和name 不可以为空
-            this.userUpdateByUserIdBo.token = this.token;
-            this.userUpdateByUserIdBo.user.id = this.userInfo.id;
-            this.userUpdateByUserIdBo.user.username = this.userInfo.username;
-            this.userUpdateByUserIdBo.user.password = this.userInfo.password;
-            this.userUpdateByUserIdBo.user.name = this.userInfo.name;
-            this.userUpdateByUserIdBo.user.college = this.input;
-            this.userUpdateByUserIdBo.user.studentId = this.userInfo.studentId;
-            this.userUpdateByUserIdBo.user.org = this.userInfo.org;
-            this.userUpdateByUserIdBo.user.professional = this.userInfo.professional;
-            this.userUpdateByUserIdBo.user.grade = this.userInfo.grade;
-            // this.userUpdateByUserIdBo.user.loginTime = this.userInfo.loginTime;
-            this.userUpdateByUserIdBo.user.createTime = this.userInfo.createTime;
-            this.userUpdateByUserIdBo.user.createBy = this.userInfo.createBy;
-            // this.userUpdateByUserIdBo.user.updateBy = this.userInfo.updateBy;
-            // this.userUpdateByUserIdBo.user.updateTime = this.userInfo.updateTime;
-
-            console.log(this.userUpdateByUserIdBo);
-            let obj = await synRequestPost("/user/update", this.userUpdateByUserIdBo);
+            this.updataByIdBo.token = this.token;
+            this.updataByIdBo.user.college = this.input;
+            this.updataByIdBo.user.org = this.userInfo.org;
+            this.updataByIdBo.user.grade = this.userInfo.grade;
+            this.updataByIdBo.user.studentId = this.userInfo.studentId;
+            this.updataByIdBo.user.password = this.userInfo.password;
+            this.updataByIdBo.user.username = this.userInfo.username;
+            this.updataByIdBo.user.name = this.userInfo.name;
+            this.updataByIdBo.user.id = this.userInfo.id;
+            console.log(this.updataByIdBo);
+            let obj = await synRequestPost("/user/update", this.updataByIdBo);
             alert(obj.message);
             this.updateWindows = false
             this.getMerchantInformation(1);
@@ -377,9 +261,9 @@ export default {
 
         //更新用户信息
         async openUpdateUserInfoWindows(id) {
-            this.userSelectByUserIdBo.id = id;
-            this.userSelectByUserIdBo.token = this.token;
-            let obj = await synRequestPost("/user/select", this.userSelectByUserIdBo);
+            this.selectByIdBo.id = id;
+            this.selectByIdBo.token = this.token;
+            let obj = await synRequestPost("/user/select", this.selectByIdBo);
             this.userInfo = obj.data;
             // this.userInfo.college = this.college[this.userInfo.college]
             console.log(this.userInfo);
@@ -400,9 +284,9 @@ export default {
 
         //删除用户通过id
         async deleteById(id) {
-            this.userDeleteByIdBo.id = id;
-            this.userDeleteByIdBo.token = this.token;
-            let obj = await synRequestPost("/user/delete", this.userDeleteByIdBo);
+            this.deleteByIdBo.id = id;
+            this.deleteByIdBo.token = this.token;
+            let obj = await synRequestPost("/user/delete", this.deleteByIdBo);
             alert(obj.message);
             this.getMerchantInformation(1);
 
@@ -416,23 +300,6 @@ export default {
                 obj.college = this.college[obj.college].text
             }
             this.schoolView = obj
-        },
-        // 关闭添加功能
-        // handleClose(done) {
-        //     this.$confirm('确认关闭？')
-        //         .then(_ => {
-        //             done();
-        //         })
-        //         .catch(_ => { });
-        // },
-        // 添加功能
-        submitAdd(obj) {
-            console.log(obj);
-            this.addInfo = obj;
-            if (this.addInfo) {
-                this.list.push(this.addInfo);
-                this.addInfo = '';
-            }
         }
     }
 
