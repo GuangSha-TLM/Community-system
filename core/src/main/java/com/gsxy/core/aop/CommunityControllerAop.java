@@ -34,4 +34,11 @@ public interface CommunityControllerAop {
      * @return
      */
     public String communityUpdateById(JoinPoint joinPoint);
+
+    /**
+     * @author zhuxinyu 2023-10-30
+     *      community分页查询鉴权
+     * @param joinPoint
+     */
+    public void communityPagingToGetData(JoinPoint joinPoint);
 }

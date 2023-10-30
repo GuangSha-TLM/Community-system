@@ -1,10 +1,7 @@
 package com.gsxy.core.aop.impl;
 
 import com.gsxy.core.aop.CommunityControllerAop;
-import com.gsxy.core.pojo.bo.CommunityAddBo;
-import com.gsxy.core.pojo.bo.CommunityDeleteByIdBo;
-import com.gsxy.core.pojo.bo.CommunitySelectByIdBo;
-import com.gsxy.core.pojo.bo.CommunityUpdateByIdBo;
+import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.service.SystemService;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
@@ -80,5 +77,18 @@ public class CommunityControllerAopImpl implements CommunityControllerAop {
         String token = arg.getToken();
         systemService.isAdmin(token,2);
         return null;
+    }
+    /**
+     * @author zhuxinyu 2023-10-30
+     *      community分页查询鉴权
+     * @param joinPoint
+     */
+    @Override
+    @Before("execution(* com.gsxy.core.controller.CommunityController.CommunityPagingToGetData(..))")
+    public void communityPagingToGetData(JoinPoint joinPoint) {
+        Object[] args = joinPoint.getArgs();
+        CommunityPagingToGetDataBo communityPagingToGetDataBo = (CommunityPagingToGetDataBo) args[0];
+        String token = communityPagingToGetDataBo.getToken();
+        systemService.auth(token);
     }
 }

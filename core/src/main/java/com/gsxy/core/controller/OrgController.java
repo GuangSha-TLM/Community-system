@@ -120,7 +120,7 @@ public class OrgController {
 
     /**
      * @author zhuxinyu 2023-10-30
-     *
+     *      分页查询获取数据
      * @param orgPagingToGetDataBo
      * @return
      */

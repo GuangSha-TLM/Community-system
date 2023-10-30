@@ -2,7 +2,7 @@ package com.gsxy.core.mapper;
 
 import com.gsxy.core.pojo.Community;
 import com.gsxy.core.pojo.bo.CommunityAndUserBo;
-import com.gsxy.core.pojo.bo.CommunityUserAndUserBo;
+import com.gsxy.core.pojo.bo.CommunityPagingToGetDataBo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -47,4 +47,11 @@ public interface CommunityMapper {
      * @return
      */
     public List<CommunityAndUserBo> communityAndUser();
+    /**
+     * @author zhuxinyu 2023-10-30
+     *      分页获取查询数据
+     * @param communityPagingToGetDataBo
+     * @return
+     */
+    public List<Community> communityPagingToGetData(CommunityPagingToGetDataBo communityPagingToGetDataBo);
 }
