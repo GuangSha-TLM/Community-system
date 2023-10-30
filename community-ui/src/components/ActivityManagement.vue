@@ -1,147 +1,35 @@
 <template>
     <div>
-        <!-- Main content -->
-        <section v-if="view">
-            <div class="container">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">序号</th>
-                            <th scope="col">学院</th>
-                            <th scope="col">班级</th>
-                            <th scope="col">学号</th>
-                            <th scope="col">姓名</th>
-                            <th scope="col">创建时间</th>
-                            <th scope="col">操作</th>
-                        </tr>
-
-                    </thead>
-                    <tbody>
-                        <tr v-for="obj in list" :key="obj.index">
-                            <th scope="row">{{ obj.id }}</th>
-                            <td>{{ obj.college }}</td>
-                            <td>{{ obj.org }}</td>
-                            <td>{{ obj.studentId }}</td>
-                            <td>{{ obj.username }}</td>
-                            <td>{{ obj.create_by }}</td>
-
-                            <td>
-                                <el-link type="primary" @click="openView(obj)">查看</el-link>
-
-                                <el-link type="primary" @click="openUpdateUserInfoWindows(obj.id)">修改</el-link>
-
-                                <el-drawer title="我是标题" :visible.sync="updateWindows" :with-header="false">
-                                    <div>
-                                        <div>
-                                            名字:
-                                            <el-input v-model="userInfo.name" placeholder="更改名字"></el-input>
-                                        </div>
-                                        <br><br>
-                                        <div>
-                                            用户名:
-                                            <el-input v-model="userInfo.username" placeholder="更改用户名"></el-input>
-                                        </div>
-                                        <br><br>
-                                        <div>
-                                            密码:
-                                            <el-input v-model="userInfo.password" placeholder="更改密码"></el-input>
-                                        </div>
-                                        <br><br>
-                                        <div>
-                                            班级:
-                                            <el-input v-model="userInfo.org" placeholder="更改班级"></el-input>
-                                        </div> <br><br>
-                                        <div>
-                                            学院:
-                                            <el-select v-model="input" placeholder="请选择">
-                                                <el-option v-for="item in college" :key="item.value" :label="item.text"
-                                                    :value="item.value">
-                                                </el-option>
-                                            </el-select>
-                                        </div> <br><br>
-                                        <div>
-                                            年级:
-                                            <el-input v-model="userInfo.grade" placeholder="更改年级"></el-input>
-                                        </div> <br><br>
-                                        <div>
-                                            学号:
-                                            <el-input v-model="userInfo.studentId" placeholder="更改学号"></el-input>
-                                        </div> <br><br>
-                                        <el-button type="primary" @click="updateUserInfo()">提交</el-button>
-                                    </div>
-                                </el-drawer>
+    
+        <!-- <div>
+            <Top></Top>
+        </div> -->
+        <div class="content">
+            <router-link class="item" v-for="item in list" :key="item.index" :to="{name:'ActivityItem',params:{id:item.id}}">
+                <div class="item_id">{{ item.id }}</div>
+                <div class="item_title">{{ item.title }}</div>
+                <div class="item_time">{{ item.startTime }}</div>
+                <div class="item_icon"><i class="el-icon-arrow-right"></i></div>
+            </router-link>
+        </div>
 
 
-                                <el-link type="success" @click="deleteById(obj.id)">删除</el-link>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
 
-
-                <el-pagination :page-size="100" :pager-count="11" @current-change="getMerchantInformation"
-                    layout="prev, pager, next" :total="count">
-                </el-pagination>
-            </div>
-        </section>
-
-        <!-- View content  -->
-        <section v-else class="table">
-            <!-- 用户名 -->
-            <div class="row">
-                <div>
-                    <div class="cell key">
-                        用户名
-                    </div>
-                    <div class="cell value">
-                        {{ schoolView.username }}
-                    </div>
-                </div>
-            </div>
-
-            <!-- 密码 -->
-            <div class="row">
-                <div>
-                    <div class=" cell key">
-                        密码
-                    </div>
-                    <div class="cell value">
-                        {{ schoolView.password }}
-                    </div>
-                </div>
-            </div>
-
-            <!-- 名字 -->
-            <div class="row">
-                <div>
-                    <div class=" cell key" v-if="schoolView.name">
-                        名字
-                    </div>
-                    <div class="cell value">
-                        {{ schoolView.name }}
-                    </div>
-                </div>
-            </div>
-            <div class="check">
-                <div>
-                    <el-link type="primary" @click="openUpdateUserInfoWindows(schoolView.id)">修改</el-link>
-                </div>
-                <div>
-                    <el-link type="success" @click="deleteById(schoolView.id)">删除</el-link>
-                </div>
-            </div>
-
-
-        </section>
-
+        <!-- <footer class="position-relative" id="footer-main">
+            <Foot></Foot>
+        </footer> -->
     </div>
 </template>
 
 <script>
-
+import Foot from './fream/Foot.vue';
+import Top from './fream/LoginTop.vue';
 import { synRequestPost, synRequestGet } from "../../static/request"
 
 export default {
+    components: {
+        Foot, Top
+    },
     data() {
         return {
             token: getCookie("token"),
@@ -149,7 +37,7 @@ export default {
                 username: "",
                 password: "",
             },
-            //查看
+            //查看学院
             schoolView: {
 
             },
@@ -157,6 +45,7 @@ export default {
             switchbutton: false,
             //用户数据集合
             list: null,
+            param:this.$route.params.list,
             count: 0,
 
             //分页查询
@@ -233,8 +122,7 @@ export default {
         }
     },
     mounted() {
-        this.deleteByIdBo.token = getCookie("token");
-        this.getMerchantInformation(1)
+        this.getMerchantInformation()
     },
 
     methods: {
@@ -272,9 +160,8 @@ export default {
         },
 
         //跳转指定页面
-        async getMerchantInformation(val) {
-            this.pagingToGetUserDataBo.start = (val - 1) * this.pagingToGetUserDataBo.size;
-            let obj = await synRequestPost("/user/findAll", this.pagingToGetUserDataBo);
+        async getMerchantInformation() {
+            let obj = await synRequestPost("/activity/findAll");
             console.log(obj);
             if (obj.code == "0x200") {
                 this.list = obj.data;
@@ -301,7 +188,9 @@ export default {
             }
             this.schoolView = obj
         }
-    }
+    },
+    
+    
 
 }
 
@@ -325,48 +214,17 @@ li {
 }
 
 a {
-    color: #42b983;
+    color: black;
 }
 
-.check {
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
+.content{
+    width: 70%;
+    margin: 0 15%;
 }
-
-.check div {
-    margin: 10px;
-}
-
-.key {
-    margin: 15px;
-    font-size: 22px;
-}
-
-.value {
-    margin: 15px;
-    font-size: 20px;
-}
-
-.table {
-    display: table;
+.item{
     width: 100%;
-}
-
-
-.row {
-    display: table-row;
-}
-
-.cell {
-    display: table-cell;
-    padding: 8px;
-    /* 可以调整单元格内边距 */
-    /* border: 1px solid #ccc; 可以添加边框 */
-}
-
-.key {
-    font-weight: bold;
-    /* 可以使键加粗 */
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0 ;
 }
 </style>

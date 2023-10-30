@@ -2,6 +2,10 @@ package com.gsxy.core.pojo.bo;
 
 import java.io.Serializable;
 
+/**
+ * @author Oh… Yeah!!!, 2023-10-28
+ * 根据id查询数据.
+ */
 public class ResponseSelectByIdBo implements Serializable {
 
     private String token;

@@ -62,4 +62,9 @@ public class CommunityUserController {
         }
         return JSONArray.toJSONString(communityUserService.communityUserUpdateById(communityUserUpdateByIdBo));
     }
+    @PostMapping("/communityUserAndUser")
+    @ApiOperation("社团用户查找")
+    public String CommunityUserAndUser(){
+       return JSONArray.toJSONString(communityUserService.communityUserAndUser());
+    }
 }

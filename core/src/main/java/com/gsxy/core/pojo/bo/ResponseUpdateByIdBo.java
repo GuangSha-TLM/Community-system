@@ -4,6 +4,10 @@ import com.gsxy.core.pojo.Response;
 
 import java.io.Serializable;
 
+/**
+ *  @author Oh...Yeah!!! 2023-10-28
+ *  通过id修改数据
+ */
 public class ResponseUpdateByIdBo implements Serializable {
 
     private String token;

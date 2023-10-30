@@ -7,6 +7,7 @@ import com.gsxy.core.service.OrgService;
 import com.gsxy.core.util.ThreadLocalUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -115,5 +116,22 @@ public class OrgController {
     @ApiOperation("通过Org查找user数据")
     public String orgSelectByUser(){
         return JSONArray.toJSONString(orgService.orgSelectByUser());
+    }
+
+    /**
+     * @author zhuxinyu 2023-10-30
+     *
+     * @param orgPagingToGetDataBo
+     * @return
+     */
+    @PostMapping("/pagingToGetData")
+    @ApiOperation("分页获取数据")
+    public String orgPagingToGetData(@RequestBody OrgPagingToGetDataBo orgPagingToGetDataBo){
+        Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+        if (map.get("error") != null) {
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
+        return JSONArray.toJSONString(orgService.orgPagingToGetData(orgPagingToGetDataBo));
     }
 }

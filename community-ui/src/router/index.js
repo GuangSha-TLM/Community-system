@@ -1,3 +1,4 @@
+
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
@@ -5,6 +6,8 @@ import UserManagement from '@/components/UserManagement'
 import ClassManagement from '@/components/ClassManagement'
 import AssociationManager from '@/components/AssociationManager'
 import ActivityManagement from '../components/ActivityManagement.vue'
+import ActivityItem from '../components/ActivityItem.vue'
+
 import Login from '@/components/Login.vue'
 import UserReg from '@/components/UserReg.vue'
 import Home from '@/components/Home';
@@ -81,5 +84,11 @@ export default new Router({
       name: 'ActivityManagement',
       component: ActivityManagement
     },
+    //活动详情面板
+    {
+      path: '/ActivityItem/:id',
+      name: 'ActivityItem',
+      component: ActivityItem
+    }
   ]
 })
