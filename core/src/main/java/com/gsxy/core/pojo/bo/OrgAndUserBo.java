@@ -3,6 +3,10 @@ package com.gsxy.core.pojo.bo;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * @author zhuxinyu 2023-10-25
+ *      根据班级查询用户
+ */
 public class OrgAndUserBo implements Serializable {
     private Long id;
     private Integer college;//学院
