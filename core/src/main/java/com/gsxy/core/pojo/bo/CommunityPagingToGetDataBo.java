@@ -6,18 +6,18 @@ import java.io.Serializable;
  * @author zhuxinyu 2023-10-30
  *      分页查询实体类
  */
-public class OrgPagingToGetDataBo implements Serializable {
+public class CommunityPagingToGetDataBo implements Serializable {
     private String token;
     private String name;
     private Long start;
     private Integer size;
     private Integer status;
     private Integer delFlag;
-    public OrgPagingToGetDataBo(){
+    public CommunityPagingToGetDataBo(){
 
     }
 
-    public OrgPagingToGetDataBo(String token, String name, Long start, Integer size, Integer status, Integer delFlag) {
+    public CommunityPagingToGetDataBo(String token, String name, Long start, Integer size, Integer status, Integer delFlag) {
         this.token = token;
         this.name = name;
         this.start = start;
@@ -76,7 +76,7 @@ public class OrgPagingToGetDataBo implements Serializable {
 
     @Override
     public String toString() {
-        return "OrgPagingToGetDataBo{" +
+        return "CommunityPagingToGetDataBo{" +
                 "token='" + token + '\'' +
                 ", name='" + name + '\'' +
                 ", start=" + start +

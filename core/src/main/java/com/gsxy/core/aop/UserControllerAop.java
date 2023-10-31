@@ -19,4 +19,6 @@ public interface UserControllerAop {
 
     public String pagingToGetUserData(JoinPoint joinPoint);
 
+    public String userSignIn(JoinPoint joinPoint);
+
 }

@@ -62,7 +62,7 @@ public interface OrgMapper {
 
     /**
      * @author zhuxinyu 2023-10-30
-     *
+     *      分页获取查询数据
      * @param orgPagingToGetDataBo
      * @return
      */

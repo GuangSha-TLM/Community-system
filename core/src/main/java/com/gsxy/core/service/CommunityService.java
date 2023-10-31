@@ -1,9 +1,6 @@
 package com.gsxy.core.service;
 
-import com.gsxy.core.pojo.bo.CommunityAddBo;
-import com.gsxy.core.pojo.bo.CommunityDeleteByIdBo;
-import com.gsxy.core.pojo.bo.CommunitySelectByIdBo;
-import com.gsxy.core.pojo.bo.CommunityUpdateByIdBo;
+import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.ResponseVo;
 
 /**
@@ -44,5 +41,18 @@ public interface CommunityService {
      */
     public ResponseVo updateByIdCommunity(CommunityUpdateByIdBo communityUpdateByIdBo);
 
+    /**
+     * @author zhuxinyu 2023-10-30
+     *      查找社团的所有用户
+     * @return
+     */
     public ResponseVo communityAndUser();
+
+    /**
+     * @author zhuxinyu 2023-10-30
+     *      分页查询获取数据
+     * @param communityPagingToGetDataBo
+     * @return
+     */
+    public ResponseVo communityPagingToGetData(CommunityPagingToGetDataBo communityPagingToGetDataBo);
 }

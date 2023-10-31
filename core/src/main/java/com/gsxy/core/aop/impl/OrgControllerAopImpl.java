@@ -108,8 +108,8 @@ public class OrgControllerAopImpl implements OrgControllerAop {
     @Before("execution(* com.gsxy.core.controller.OrgController.orgPagingToGetData(..))")
     public void OrgPagingToGetData(JoinPoint joinPoint){
         Object[] args = joinPoint.getArgs();
-        OrgPagingToGetDataBo orgPagingToGetDataVo =(OrgPagingToGetDataBo) args[0];
-        String token = orgPagingToGetDataVo.getToken();
+        OrgPagingToGetDataBo orgPagingToGetDataBo =(OrgPagingToGetDataBo) args[0];
+        String token = orgPagingToGetDataBo.getToken();
         systemService.auth(token);
     }
 }

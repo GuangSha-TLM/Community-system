@@ -146,5 +146,28 @@ public class UserController {
         return JSONArray.toJSONString(userService.userFindAll());
     }
 
+    /**
+     * @quthor hln 2023-10-30
+     *      用户签到
+     * @param userSignInBo
+     * @return
+     */
+    @PostMapping("/userSignIn")
+    @ApiOperation("用户签到")
+    public String userSignIn(@RequestBody UserSignInBo userSignInBo){
+
+        Map<String,String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+        if(map.get("error") != null){
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
+
+        if (userSignInBo == null){
+            return JSONArray.toJSONString(new ResponseVo<>("参数为null",null,"0x500"));
+        }
+
+        return JSONArray.toJSONString(userService.userSignIn(userSignInBo));
+    }
+
 }
 

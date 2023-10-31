@@ -2,10 +2,7 @@ package com.gsxy.core.controller;
 
 
 import com.alibaba.fastjson2.JSONArray;
-import com.gsxy.core.pojo.bo.CommunityAddBo;
-import com.gsxy.core.pojo.bo.CommunityDeleteByIdBo;
-import com.gsxy.core.pojo.bo.CommunitySelectByIdBo;
-import com.gsxy.core.pojo.bo.CommunityUpdateByIdBo;
+import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.ResponseVo;
 import com.gsxy.core.service.CommunityService;
 import com.gsxy.core.util.ThreadLocalUtil;
@@ -106,5 +103,14 @@ public class CommunityController {
     @ApiOperation("社团用户查找")
     public String CommunityAndUser(){
         return JSONArray.toJSONString(communityService.communityAndUser());
+    }
+
+    public String CommunityPagingToGetData(@RequestBody CommunityPagingToGetDataBo communityPagingToGetDataBo){
+        Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+        if (map.get("error") != null) {
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
+        return JSONArray.toJSONString(communityService.communityPagingToGetData(communityPagingToGetDataBo));
     }
 }
