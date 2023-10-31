@@ -4,9 +4,11 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import UserManagement from '@/components/UserManagement'
 import ClassManagement from '@/components/ClassManagement'
-import AssociationManager from '@/components/AssociationManager'
+import AssociationManager from '../components/AssociationManager.vue'
 import ActivityManagement from '../components/ActivityManagement.vue'
 import ActivityItem from '../components/ActivityItem.vue'
+import UserCenter from '../components/UserCenter.vue'
+
 
 import Login from '@/components/Login.vue'
 import UserReg from '@/components/UserReg.vue'
@@ -16,7 +18,7 @@ Vue.use(Router)
 export default new Router({
   mode: 'history',
   base: '/h',
-  
+
   routes: [
     {
       path: '/',
@@ -41,7 +43,12 @@ export default new Router({
           name: 'ActivityManagement',
           component: ActivityManagement
         }
-      ] 
+        ,{
+          path: '/UserCenter',
+          name: 'UserCenter',
+          component: UserCenter
+        }
+      ]
     },
     {
       path: '/',
@@ -72,12 +79,12 @@ export default new Router({
       name: 'ClassManagement',
       component: ClassManagement
     },
-    //社团管理面板
-    {
-      path: '/AssociationManager',
-      name: 'AssociationManager',
-      component: AssociationManager
-    },
+    // //社团管理面板
+    // {
+    //   path: '/AssociationManager',
+    //   name: 'AssociationManager',
+    //   component: AssociationManager
+    // },
     //活动管理面板
     {
       path: '/ActivityManagement',
@@ -89,6 +96,7 @@ export default new Router({
       path: '/ActivityItem/:id',
       name: 'ActivityItem',
       component: ActivityItem
-    }
+    },
+
   ]
 })
