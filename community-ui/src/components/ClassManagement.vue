@@ -11,7 +11,6 @@
                             <th scope="col">专业</th>
                             <th scope="col">年级</th>
                             <th scope="col">班级名</th>
-                             <th scope="col">创建人</th>
                             <th scope="col">操作</th>
                         </tr>
 
@@ -21,35 +20,16 @@
                             <th scope="row">{{ obj.id }}</th>
                             <td>{{ obj.college }}</td>
                             <td>{{ obj.professional }}</td>
-                            <td>{{ obj.name }}</td>
-                            <td>{{ obj.org }}班</td>
-                            <td>{{ obj.create_by }}</td>
+                            <td>{{ obj.grade }}</td>
+                            <td>{{ obj.name }}班</td>
                             <td>
                                 <el-link type="primary" @click="openView(obj)">查看</el-link>
 
-                                <el-link type="primary" @click="openUpdateUserInfoWindows(obj.id)">修改</el-link>
+                                <el-link type="primary" @click="openUpdateorgInfoWindows(obj.id)">修改</el-link>
 
                                 <el-drawer title="我是标题" :visible.sync="updateWindows" :with-header="false">
                                     <div>
-                                        <div>
-                                            名字:
-                                            <el-input v-model="userInfo.name" placeholder="更改名字"></el-input>
-                                        </div>
-                                        <br><br>
-                                        <div>
-                                            用户名:
-                                            <el-input v-model="userInfo.username" placeholder="更改用户名"></el-input>
-                                        </div>
-                                        <br><br>
-                                        <div>
-                                            密码:
-                                            <el-input v-model="userInfo.password" placeholder="更改密码"></el-input>
-                                        </div>
-                                        <br><br>
-                                        <div>
-                                            班级:
-                                            <el-input v-model="userInfo.org" placeholder="更改班级"></el-input>
-                                        </div> <br><br>
+                        
                                         <div>
                                             学院:
                                             <el-select v-model="input" placeholder="请选择">
@@ -60,13 +40,10 @@
                                         </div> <br><br>
                                         <div>
                                             年级:
-                                            <el-input v-model="userInfo.grade" placeholder="更改年级"></el-input>
+                                            <el-input v-model="orgInfo.grade" placeholder="更改年级"></el-input>
                                         </div> <br><br>
-                                        <div>
-                                            学号:
-                                            <el-input v-model="userInfo.studentId" placeholder="更改学号"></el-input>
-                                        </div> <br><br>
-                                        <el-button type="primary" @click="updateUserInfo()">提交</el-button>
+                                       
+                                        <el-button type="primary" @click="updateorgInfo()">提交</el-button>
                                     </div>
                                 </el-drawer>
 
@@ -95,10 +72,6 @@ export default {
     data() {
         return {
             token: getCookie("token"),
-            user: {
-                username: "",
-                password: "",
-            },
             //查看
             schoolView: {
 
@@ -110,7 +83,7 @@ export default {
             count: 0,
 
             //分页查询
-            pagingToGetUserDataBo: {
+            orgPagingToGetDataBo: {
                 start: 0,
                 size: 100,
                 name: "",
@@ -119,13 +92,13 @@ export default {
             },
 
             //通过id删除
-            deleteByIdBo: {
+            orgDeleteByIdBo: {
                 token: "",
                 id: -1
             },
 
             //查重用户通过id
-            selectByIdBo: {
+            orgSelectByIdBo: {
                 token: "",
                 id: -1,
             },
@@ -134,28 +107,22 @@ export default {
             updateWindows: false,
 
             //用户信息
-            userInfo: {
+            orgInfo: {
                 id: -1,
-                username: "",
-                password: "",
-                name: "",
-                org: '',
                 college: '',
+                professional: '',
                 grade: '',
-                studentId: '',
+                name: '',
             },
             //更新用户信息
-            updataByIdBo: {
+            orgUpdateByIdBo: {
                 token: "",
-                user: {
+                org: {
                     id: -1,
-                    username: "",
-                    password: "",
-                    name: "",
-                    org: '',
                     college: '',
+                    professional: '',
                     grade: '',
-                    studentId: '',
+                    name: '',
                 }
             },
             //查看
@@ -183,7 +150,7 @@ export default {
         }
     },
     mounted() {
-        this.deleteByIdBo.token = getCookie("token");
+        this.orgDeleteByIdBo.token = getCookie("token");
         this.getMerchantInformation(1)
     },
 
@@ -191,40 +158,37 @@ export default {
         /**
          *  修改用户信息
          */
-        async updateUserInfo() {
-            //todo userInfo 要求username 和password 和name 不可以为空
-            this.updataByIdBo.token = this.token;
-            this.updataByIdBo.user.college = this.input;
-            this.updataByIdBo.user.org = this.userInfo.org;
-            this.updataByIdBo.user.grade = this.userInfo.grade;
-            this.updataByIdBo.user.studentId = this.userInfo.studentId;
-            this.updataByIdBo.user.password = this.userInfo.password;
-            this.updataByIdBo.user.username = this.userInfo.username;
-            this.updataByIdBo.user.name = this.userInfo.name;
-            this.updataByIdBo.user.id = this.userInfo.id;
-            console.log(this.updataByIdBo);
-            let obj = await synRequestPost("/user/update", this.updataByIdBo);
+        async updateorgInfo() {
+            //todo orgInfo 要求username 和password 和name 不可以为空
+            this.orgUpdateByIdBo.token = this.token;
+            this.orgUpdateByIdBo.org.college = this.input;
+            this.orgUpdateByIdBo.org.professional = this.orgInfo.professional;
+            this.orgUpdateByIdBo.org.grade = this.orgInfo.grade;
+            this.orgUpdateByIdBo.org.name = this.orgInfo.name;
+            this.orgUpdateByIdBo.org.id = this.orgInfo.id;
+            console.log(this.orgUpdateByIdBo);
+            let obj = await synRequestPost("/org/update", this.orgUpdateByIdBo);
             alert(obj.message);
             this.updateWindows = false
             this.getMerchantInformation(1);
         },
 
         //更新用户信息
-        async openUpdateUserInfoWindows(id) {
-            this.selectByIdBo.id = id;
-            this.selectByIdBo.token = this.token;
-            let obj = await synRequestPost("/user/select", this.selectByIdBo);
-            this.userInfo = obj.data;
-            // this.userInfo.college = this.college[this.userInfo.college]
-            console.log(this.userInfo);
+        async openUpdateorgInfoWindows(id) {
+            this.orgSelectByIdBo.id = id;
+            this.orgSelectByIdBo.token = this.token;
+            let obj = await synRequestPost("/org/select", this.orgSelectByIdBo);
+            this.orgInfo = obj.data;
+            // this.orgInfo.college = this.college[this.orgInfo.college]
+            console.log(this.orgInfo);
             this.view = true
             this.updateWindows = true;
         },
 
         //跳转指定页面
         async getMerchantInformation(val) {
-            this.pagingToGetUserDataBo.start = (val - 1) * this.pagingToGetUserDataBo.size;
-            let obj = await synRequestPost("/user/findAll", this.pagingToGetUserDataBo);
+            this.orgPagingToGetDataBo.start = (val - 1) * this.orgPagingToGetDataBo.size;
+            let obj = await synRequestPost("/org/selectall", this.orgPagingToGetDataBo);
             console.log(obj);
             if (obj.code == "0x200") {
                 this.list = obj.data;
@@ -234,9 +198,9 @@ export default {
 
         //删除用户通过id
         async deleteById(id) {
-            this.deleteByIdBo.id = id;
-            this.deleteByIdBo.token = this.token;
-            let obj = await synRequestPost("/user/delete", this.deleteByIdBo);
+            this.orgDeleteByIdBo.id = id;
+            this.orgDeleteByIdBo.token = this.token;
+            let obj = await synRequestPost("/org/delete", this.orgDeleteByIdBo);
             alert(obj.message);
             this.getMerchantInformation(1);
 
