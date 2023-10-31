@@ -42,5 +42,5 @@ public interface CommunityControllerAop {
      */
     public void communityPagingToGetData(JoinPoint joinPoint);
 
-    public String communityAndUser(JoinPoint joinPoint);
+//    public String communityAndUser(JoinPoint joinPoint);
 }
