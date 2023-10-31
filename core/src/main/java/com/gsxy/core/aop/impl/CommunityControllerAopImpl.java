@@ -91,4 +91,14 @@ public class CommunityControllerAopImpl implements CommunityControllerAop {
         String token = communityPagingToGetDataBo.getToken();
         systemService.auth(token);
     }
+
+    @Override
+    @Before("execution(* com.gsxy.core.controller.CommunityController.CommunityAndUser(..))")
+    public String communityAndUser(JoinPoint joinPoint) {
+        Object[] args = joinPoint.getArgs();
+        CommunityAndUserBo communityAndUserBo = (CommunityAndUserBo) args[0];
+        String token = communityAndUserBo.getToken();
+        systemService.isAdmin(token,1);
+        return null;
+    }
 }
