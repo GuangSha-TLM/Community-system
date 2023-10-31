@@ -64,15 +64,6 @@
             id=#{id}
     </delete>
 
-    <!-- 删除签到记录（如果该社团没有该用户） -->
-    <delete id="deleteSignIn" parameterType="com.gsxy.core.pojo.bo.UserSignInBo">
-        delete
-        from
-            sign_in
-        where
-            id = #{sign}
-    </delete>
-
     <!-- 用户登录 -->
     <select id="userLogin" resultType="com.gsxy.core.pojo.User"
             parameterType="com.gsxy.core.pojo.bo.UserLoginBo">
@@ -166,14 +157,27 @@
             sign_in t2
         on
             t1.user_id = t2.user_id
+        and
+            t2.status = 1
+        limit 1
     </select>
 
-    <!-- 查询用户签到状态 -->
+    <!-- 插入用户签到状态 -->
     <insert id="userSignIn" parameterType="com.gsxy.core.pojo.bo.UserSignInBo">
         insert into
             sign_in
+            (user_id,community_id,status,create_time)
         values
-            (null,#{userId},#{communityId},#{status},#{createTime})
+            (#{userId},#{communityId},#{status},#{createTime})
     </insert>
+
+    <!-- 删除签到记录（如果该社团没有该用户） -->
+    <delete id="deleteSignIn" parameterType="com.gsxy.core.pojo.bo.UserSignInBo">
+        delete
+        from
+            sign_in
+        where
+            user_id = #{userId}
+    </delete>
 
 </mapper>
