@@ -1,10 +1,7 @@
 package com.gsxy.core.aop.impl;
 
 import com.gsxy.core.aop.UserControllerAop;
-import com.gsxy.core.pojo.bo.PagingToGetUserDataBo;
-import com.gsxy.core.pojo.bo.UserDeleteByIdBo;
-import com.gsxy.core.pojo.bo.UserSelectByUserIdBo;
-import com.gsxy.core.pojo.bo.UserUpdateByUserIdBo;
+import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.service.SystemService;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
@@ -77,6 +74,7 @@ public class UserControllerAopImpl implements UserControllerAop {
      * @return
      */
     @Override
+    @Before("execution(* com.gsxy.core.controller.UserController.pagingToGetUserData(..))")
     public String pagingToGetUserData(JoinPoint joinPoint) {
         Object[] args = joinPoint.getArgs();
         PagingToGetUserDataBo arg = (PagingToGetUserDataBo) args[0];
@@ -93,9 +91,10 @@ public class UserControllerAopImpl implements UserControllerAop {
      * @return
      */
     @Override
+    @Before("execution(* com.gsxy.core.controller.UserController.userSignIn(..))")
     public String userSignIn(JoinPoint joinPoint) {
         Object[] args = joinPoint.getArgs();
-        PagingToGetUserDataBo arg = (PagingToGetUserDataBo) args[0];
+        UserSignInBo arg = (UserSignInBo) args[0];
         String token = arg.getToken();
         systemService.auth(token);
 

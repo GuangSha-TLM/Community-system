@@ -1,8 +1,11 @@
 package com.gsxy.core.mapper;
 
+import com.gsxy.core.pojo.CommunityUser;
 import com.gsxy.core.pojo.User;
 import com.gsxy.core.pojo.bo.PagingToGetUserDataBo;
 import com.gsxy.core.pojo.bo.UserLoginBo;
+import com.gsxy.core.pojo.bo.UserSignInBo;
+import com.gsxy.core.pojo.bo.UserSignInStatusBo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -80,4 +83,35 @@ public interface UserMapper {
      * @return
      */
     Long pagingToGetCountOfUserData(PagingToGetUserDataBo pagingToGetUserDataBo);
+
+    /**
+     * @param id
+     * @return
+     * @author hln 2023-10-29
+     * 通过id获取管理员权限
+     */
+    Integer selectByUserAndUserAdminId(Long id);
+
+    /**
+     * @quthor hln 2023-10-30
+     *      查询用户签到状态
+     * @param userSignInBo
+     * @return
+     */
+    void userSignIn(UserSignInBo userSignInBo);
+
+    /**
+     * @quthor hln 2023-10-30
+     *      根据user_id获取社团id
+     * @param userSignInBo
+     * @return
+     */
+    UserSignInBo selectToGetCommunityIdByUserId(UserSignInBo userSignInBo);
+
+    /**
+     * @author hln 2023-10-31
+     *      删除签到记录（如果该社团没有该用户）
+     * @param userSignInBo1
+     */
+    void deleteSignIn(UserSignInBo userSignInBo1);
 }
