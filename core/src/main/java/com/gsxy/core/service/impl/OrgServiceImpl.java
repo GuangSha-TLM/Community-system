@@ -80,12 +80,12 @@ public class OrgServiceImpl implements OrgService {
         Long userId = Long.valueOf(userIdOfStr);
         User user = userMapper.selectByUserId(userId);
         int org = user.getOrg();
-
+        Org org1 = orgMapper.selectByIdOrg(orgSelectByIdBo.getId());
         if (org == 0) {
             return new ResponseVo("查询的数据不存在,", null, "0x500");
         }
 
-        return new ResponseVo("查询成功",org,"0x200");
+        return new ResponseVo("查询成功",org1,"0x200");
     }
 
     /**
