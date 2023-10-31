@@ -78,10 +78,11 @@ public class UserServiceImpl implements UserService {
         //返回数据库中 user 和 userAdmin 中前端想获取的数据
         int role = userMapper.selectByUserAndUserAdminId(user.getId());
 
+        UserAndUserAdminBo userAndUserAdminBo = new UserAndUserAdminBo();
+        BeanUtils.copyProperties(user,userAndUserAdminBo);
         UserAndUserAdminSelectByIdBo userAndUserAdminSelectByIdBo = new UserAndUserAdminSelectByIdBo();
-        BeanUtils.copyProperties(user,userAndUserAdminSelectByIdBo);
-        userAndUserAdminSelectByIdBo.setRole(role);
         userAndUserAdminSelectByIdBo.setToken(jwt);
+        userAndUserAdminSelectByIdBo.setUserAndUserAdminBo(userAndUserAdminBo);
 
         return new ResponseVo("登录成功",userAndUserAdminSelectByIdBo,"0x200");
     }
