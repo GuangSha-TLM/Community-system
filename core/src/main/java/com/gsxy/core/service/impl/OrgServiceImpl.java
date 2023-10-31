@@ -78,14 +78,16 @@ public class OrgServiceImpl implements OrgService {
     public ResponseVo orgSelectById(OrgSelectByIdBo orgSelectByIdBo) {
         String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
         Long userId = Long.valueOf(userIdOfStr);
-        User user = userMapper.selectByUserId(userId);
-        int org = user.getOrg();
+        if(userId == null || userId == 0L){
+            return new ResponseVo("token解析失败",null,"0x501");
+        }
 
-        if (org == 0) {
+        Org org1 = orgMapper.selectByIdOrg(orgSelectByIdBo.getId());
+        if (org1 == null) {
             return new ResponseVo("查询的数据不存在,", null, "0x500");
         }
 
-        return new ResponseVo("查询成功",org,"0x200");
+        return new ResponseVo("查询成功",org1,"0x200");
     }
 
     /**
@@ -124,7 +126,7 @@ public class OrgServiceImpl implements OrgService {
         orgUpdateByIdBo.getOrg().setUpdateTime(new Date());
         Long aLong = orgMapper.updateByIdOrg(orgUpdateByIdBo.getOrg());
 
-        if (aLong.longValue() == 0L) {
+        if (aLong == null || aLong.longValue() == 0L) {
             return new ResponseVo("更新失败", null, "0x500");
         }
         return new ResponseVo("更新成功", orgId , "0x200");
