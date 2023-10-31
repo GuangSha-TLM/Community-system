@@ -46,4 +46,15 @@ public interface CommunityUserMapper {
      * @return
      */
     public List<CommunityUserAndUserBo> communityUserAndUser();
+
+
+
+    /**
+     * @author Oh… Yeah!!!, 2023-10-30
+     *       查看该用户是否已经在这个社团
+     * @param userId
+     * @return CommunityUser.class
+     */
+    public CommunityUser communityUserSelectByUserId(Long id, Long communityId);
+
 }

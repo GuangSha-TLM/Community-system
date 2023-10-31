@@ -1,6 +1,15 @@
+<!--
+ * @Author: tianleiyu 
+ * @Date: 2023-10-29 17:49:10
+ * @LastEditTime: 2023-10-29 17:49:11
+ * @LastEditors: tianleiyu
+ * @Description: 
+ * @FilePath: /community-ui/src/components/UserCenter.vue
+ * 可以输入预定的版权声明、个性签名、空行等
+-->
 <template>
     <div>
-
+       
     </div>
 </template>
 
@@ -24,7 +33,7 @@ export default {
     },
 
     methods: {
-
+        
 
         //跳转指定页面
         async getMerchantInformation() {
@@ -33,12 +42,11 @@ export default {
             console.log(obj);
             if (obj.code == "0x200") {
                 this.list = obj.data;
+
             }
-            let res = await synRequestPost("/community/communityAndUser");
-            console.log(res);
         },
 
-
+        
     }
 
 }

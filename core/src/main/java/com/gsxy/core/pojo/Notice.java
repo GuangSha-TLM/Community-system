@@ -9,8 +9,12 @@ import java.util.Date;
 public class Notice {
 
     private Long id;
+    //收件箱人的id
+    private Long userEmailId;
     //通知内容
     private String context;
+    //用于查找新增的通知
+    private String uuid;
     //关联的图片id
     private Long imgId;
     //名字
@@ -31,9 +35,11 @@ public class Notice {
     public Notice() {
     }
 
-    public Notice(Long id, String context, Long imgId, String name, Long createBy, Date createTime, Long updateBy, Date updateTime, Integer status, Integer delFlag) {
+    public Notice(Long id, Long userEmailId, String context, String uuid, Long imgId, String name, Long createBy, Date createTime, Long updateBy, Date updateTime, Integer status, Integer delFlag) {
         this.id = id;
+        this.userEmailId = userEmailId;
         this.context = context;
+        this.uuid = uuid;
         this.imgId = imgId;
         this.name = name;
         this.createBy = createBy;
@@ -44,6 +50,7 @@ public class Notice {
         this.delFlag = delFlag;
     }
 
+
     public Long getId() {
         return id;
     }
@@ -52,12 +59,28 @@ public class Notice {
         this.id = id;
     }
 
+    public Long getUserEmailId() {
+        return userEmailId;
+    }
+
+    public void setUserEmailId(Long userEmailId) {
+        this.userEmailId = userEmailId;
+    }
+
     public String getContext() {
         return context;
     }
 
     public void setContext(String context) {
         this.context = context;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     public Long getImgId() {
@@ -128,7 +151,9 @@ public class Notice {
     public String toString() {
         return "Notice{" +
                 "id=" + id +
+                ", userEmailId=" + userEmailId +
                 ", context='" + context + '\'' +
+                ", uuid='" + uuid + '\'' +
                 ", imgId=" + imgId +
                 ", name='" + name + '\'' +
                 ", createBy=" + createBy +
