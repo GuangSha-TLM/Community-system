@@ -88,12 +88,6 @@
                 <if test="college != null">
                     college = #{college},
                 </if>
-                <if test="createBy != null ">
-                    create_by = #{createBy},
-                </if>
-                <if test="createTime != null ">
-                    create_time = #{createTime},
-                </if>
                 <if test="updateBy != null">
                     update_by = #{updateBy},
                 </if>
