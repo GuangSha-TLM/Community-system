@@ -214,19 +214,21 @@ public class UserServiceImpl implements UserService {
             return new ResponseVo("token解析失败",null,"0x501");
         }
 
+        userSignInBo.setStatus(1);
         userSignInBo.setUserId(userId);
         userSignInBo.setCreateTime(new Date());
-        userSignInBo.setStatus(1);
         //插入sign_in表中
         userMapper.userSignIn(userSignInBo);
 
         //根据user_id获取社团id
         UserSignInBo userSignInBo1 = userMapper.selectToGetCommunityIdByUserId(userSignInBo);
 
-        if (userSignInBo1.getCommunityId() == null || userSignInBo1.getCommunityId() == 0L){
+        if (userSignInBo1 == null){
             userMapper.deleteSignIn(userSignInBo1);
             return new ResponseVo("签到失败",null,"0x500");
         }
+
+        userSignInBo1.setToken(userSignInBo.getToken());
 
         return new ResponseVo("签到成功",userSignInBo1,"0x200");
     }
