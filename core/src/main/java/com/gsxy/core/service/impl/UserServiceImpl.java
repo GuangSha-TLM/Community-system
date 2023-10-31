@@ -2,6 +2,7 @@ package com.gsxy.core.service.impl;
 
 import com.gsxy.core.mapper.UserMapper;
 import com.gsxy.core.pojo.Active;
+import com.gsxy.core.pojo.CommunityUser;
 import com.gsxy.core.pojo.User;
 import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.PagingToGetUserDataVo;
@@ -11,6 +12,7 @@ import com.gsxy.core.service.UserAdminService;
 import com.gsxy.core.service.UserService;
 import com.gsxy.core.util.JwtUtil;
 import com.gsxy.core.util.ThreadLocalUtil;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -70,15 +72,18 @@ public class UserServiceImpl implements UserService {
 
         String jwt = JwtUtil.createJWT(user);
 
-
         //记录用户当前的登录时间
         user.setLoginTime(new Date());
 
-        //使用map将jwt和nowTime返回给前端
-        HashMap<String, User> map = new HashMap<>();
-        map.put(jwt,user);
+        //返回数据库中 user 和 userAdmin 中前端想获取的数据
+        int role = userMapper.selectByUserAndUserAdminId(user.getId());
 
-        return new ResponseVo("登录成功",map,"0x200");
+        UserAndUserAdminSelectByIdBo userAndUserAdminSelectByIdBo = new UserAndUserAdminSelectByIdBo();
+        BeanUtils.copyProperties(user,userAndUserAdminSelectByIdBo);
+        userAndUserAdminSelectByIdBo.setRole(role);
+        userAndUserAdminSelectByIdBo.setToken(jwt);
+
+        return new ResponseVo("登录成功",userAndUserAdminSelectByIdBo,"0x200");
     }
 
     /**
@@ -203,16 +208,27 @@ public class UserServiceImpl implements UserService {
     public ResponseVo userSignIn(UserSignInBo userSignInBo) {
 
         String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
-        Long userId = Long.valueOf(userIdOfStr);
+        Long userId = Long.valueOf(userIdOfStr);//用户id
 
         if(userId == null || userId == 0L){
             return new ResponseVo("token解析失败",null,"0x501");
         }
 
+        userSignInBo.setUserId(userId);
+        userSignInBo.setCreateTime(new Date());
         userSignInBo.setStatus(1);
-//        userMapper.userSignIn(userSignInBo);
+        //插入sign_in表中
+        userMapper.userSignIn(userSignInBo);
 
-        return null;
+        //根据user_id获取社团id
+        UserSignInBo userSignInBo1 = userMapper.selectToGetCommunityIdByUserId(userSignInBo);
+
+        if (userSignInBo1.getCommunityId() == null || userSignInBo1.getCommunityId() == 0L){
+            userMapper.deleteSignIn(userSignInBo1);
+            return new ResponseVo("签到失败",null,"0x500");
+        }
+
+        return new ResponseVo("签到成功",userSignInBo1,"0x200");
     }
 
 }
