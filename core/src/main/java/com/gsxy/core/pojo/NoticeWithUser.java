@@ -11,8 +11,10 @@ public class NoticeWithUser {
 
 
     private Long id;
-    //关联的用户id
-    private Long userId;
+    //发送人的id
+    private Long sendUserId;
+    //接收人的id
+    private Long receiveUserId;
     //关联的通知id
     private Long noticeId;
     //名字
@@ -33,9 +35,10 @@ public class NoticeWithUser {
     public NoticeWithUser() {
     }
 
-    public NoticeWithUser(Long id, Long userId, Long noticeId, String name, Long createBy, Date createTime, Long updateBy, Date updateTime, Integer status, Integer delFlag) {
+    public NoticeWithUser(Long id, Long sendUserId, Long receiveUserId, Long noticeId, String name, Long createBy, Date createTime, Long updateBy, Date updateTime, Integer status, Integer delFlag) {
         this.id = id;
-        this.userId = userId;
+        this.sendUserId = sendUserId;
+        this.receiveUserId = receiveUserId;
         this.noticeId = noticeId;
         this.name = name;
         this.createBy = createBy;
@@ -46,6 +49,7 @@ public class NoticeWithUser {
         this.delFlag = delFlag;
     }
 
+
     public Long getId() {
         return id;
     }
@@ -54,12 +58,20 @@ public class NoticeWithUser {
         this.id = id;
     }
 
-    public Long getUserId() {
-        return userId;
+    public Long getSendUserId() {
+        return sendUserId;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setSendUserId(Long sendUserId) {
+        this.sendUserId = sendUserId;
+    }
+
+    public Long getReceiveUserId() {
+        return receiveUserId;
+    }
+
+    public void setReceiveUserId(Long receiveUserId) {
+        this.receiveUserId = receiveUserId;
     }
 
     public Long getNoticeId() {
@@ -130,7 +142,8 @@ public class NoticeWithUser {
     public String toString() {
         return "NoticeWithUser{" +
                 "id=" + id +
-                ", userId=" + userId +
+                ", sendUserId=" + sendUserId +
+                ", receiveUserId=" + receiveUserId +
                 ", noticeId=" + noticeId +
                 ", name='" + name + '\'' +
                 ", createBy=" + createBy +

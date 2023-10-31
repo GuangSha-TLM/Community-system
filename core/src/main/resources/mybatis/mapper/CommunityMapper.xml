@@ -90,6 +90,7 @@
         </set>
         where
         id = #{id}
+
     </update>
     <!--
        @author zhuxinyu 2023-10-30
@@ -110,5 +111,20 @@
         del_flag = #{delFlag}
         limit
         #{start},#{size}
+    </select>
+
+
+    <!--
+           @author Oh...Yeah!!! 2023-10-30
+           根据community_id查找社团
+    -->
+    <select id="selectByCommunityId" resultType="com.gsxy.core.pojo.Community">
+        select
+            *
+        from
+            community
+        where
+            community_id = #{communityId}
+        limit 1
     </select>
 </mapper>

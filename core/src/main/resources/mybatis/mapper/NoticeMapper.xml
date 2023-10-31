@@ -14,13 +14,9 @@
         select
             *
         from
-            notice no
-                inner join
-            notice_with_user nu
-            on
-                nu.user_id = #{userId}
+            notice
         where
-            nu.notice_id = no.id;
+            user_email_id = #{userEmailId}
     </select>
 
 
@@ -44,7 +40,7 @@
         insert into
             notice
         values
-            (null,#{context},#{imgId},#{name},
+            (null,#{userEmailId},#{context},#{uuid},#{imgId},#{name},
              #{createBy},#{createTime},#{updateBy},
              #{updateTime},#{status},#{delFlag});
     </insert>
@@ -56,8 +52,14 @@
     <update id="updateByIdNotice" parameterType="com.gsxy.core.pojo.Notice">
         update notice
         <set>
+            <if test="userEmailId != null ">
+                user_email_id = #{userEmailId},
+            </if>
             <if test="context != null and context != ''">
                 context = #{context},
+            </if>
+            <if test="uuid != null and uuid != ''">
+                uuid = #{uuid},
             </if>
             <if test="imgId != null ">
                 img_id = #{imgId},
@@ -107,6 +109,20 @@
             del_flag = #{delFlag}
         limit
             #{start},#{size}
+    </select>
+
+       <!--
+            @author Oh… Yeah!!! 2023-10-27
+            根据UUID查找通知.
+       -->
+    <select id="seleByUUID" resultType="com.gsxy.core.pojo.Notice">
+        select
+            *
+        from
+            notice
+        where
+            uuid = #{string}
+        limit 1
     </select>
 
 
