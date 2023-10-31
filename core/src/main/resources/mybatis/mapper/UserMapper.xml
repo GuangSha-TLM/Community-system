@@ -57,10 +57,11 @@
 
     <!-- 根据id删除用户 -->
     <delete id="deleteByUserId" parameterType="java.lang.Long">
-            delete
-            from user
-            where
-                id=#{id}
+        delete
+        from
+            user
+        where
+            id=#{id}
     </delete>
 
     <!-- 用户登录 -->
@@ -72,6 +73,18 @@
             username = #{username} and
             status = 0 and
             del_flag = 0
+        limit 1
+    </select>
+
+    <!-- 通过id获取用户的权限 -->
+    <select id="selectByUserAndUserAdminId" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+        select
+            user_admin.role
+        from
+            user_admin
+                inner join
+            user
+            on user.id = user_admin.user_id
         limit 1
     </select>
 
@@ -134,5 +147,37 @@
                 del_flag =  #{delFlag}
     </select>
 
+    <!-- 根据user_id获取社团id -->
+    <select id="selectToGetCommunityIdByUserId" resultType="com.gsxy.core.pojo.bo.UserSignInBo">
+        SELECT
+            t2.user_id,t1.community_id,t2.status,t2.create_time
+        FROM
+            community_user t1
+        inner join
+            sign_in t2
+        on
+            t1.user_id = t2.user_id
+        and
+            t2.status = 1
+        limit 1
+    </select>
+
+    <!-- 插入用户签到状态 -->
+    <insert id="userSignIn" parameterType="com.gsxy.core.pojo.bo.UserSignInBo">
+        insert into
+            sign_in
+            (user_id,community_id,status,create_time)
+        values
+            (#{userId},#{communityId},#{status},#{createTime})
+    </insert>
+
+    <!-- 删除签到记录（如果该社团没有该用户） -->
+    <delete id="deleteSignIn" parameterType="com.gsxy.core.pojo.bo.UserSignInBo">
+        delete
+        from
+            sign_in
+        where
+            user_id = #{userId}
+    </delete>
 
 </mapper>

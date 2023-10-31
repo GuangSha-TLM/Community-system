@@ -48,7 +48,7 @@ public class UserController {
      * @param userLoginBo
      * @return
      */
-    @PostMapping("/Login")
+    @PostMapping("/login")
     @ApiOperation("用户登录")
     public String userLogin(@RequestBody UserLoginBo userLoginBo){
         if(userLoginBo == null){
@@ -129,7 +129,7 @@ public class UserController {
         }
 
         if (pagingToGetUserDataBo == null){
-            return JSONArray.toJSONString(new ResponseVo<>("参数为null",null,"455"));
+            return JSONArray.toJSONString(new ResponseVo<>("参数为null",null,"0x455"));
         }
 
         return JSONArray.toJSONString(userService.pagingToGetUserData(pagingToGetUserDataBo));
@@ -160,10 +160,6 @@ public class UserController {
         ThreadLocalUtil.mapThreadLocal.remove();
         if(map.get("error") != null){
             return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
-        }
-
-        if (userSignInBo == null){
-            return JSONArray.toJSONString(new ResponseVo<>("参数为null",null,"0x500"));
         }
 
         return JSONArray.toJSONString(userService.userSignIn(userSignInBo));
