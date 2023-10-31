@@ -191,11 +191,6 @@ public class CommunityServiceImpl implements CommunityService {
         String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
         Long userId = Long.valueOf(userIdOfStr);
 
-        //社长决定是否让该用户进入社团
-        if (communityReplyNoticeBo.getContext() == "拒绝"){
-            return  new ResponseVo("社长拒绝了用户的加入",   null, "0x207");
-        }
-
         //获取目标通知
         NoticeWithUser noticeWithUser1 = noticeWithUserMapper.selectByNoticeId(communityReplyNoticeBo.getNoticeId());
 
@@ -204,6 +199,38 @@ public class CommunityServiceImpl implements CommunityService {
 
         //根据社长的id获取社团的id
         UserAdmin userAdmin = userAdminMapper.selectByIdUserAdmin(userId);
+
+        //社长决定是否让该用户进入社团
+        if (communityReplyNoticeBo.getContext().equals("拒绝") ){
+
+            //获取该社团的信息
+            Community community = communityMapper.selectByCommunityId(userAdmin.getCommunityId());
+
+            //发送拒绝通知
+            Notice notice = new Notice();
+            notice.setContext(community.getName()+"的社长拒绝你加入");
+            notice.setUserEmailId(userId);
+            notice.setName(community.getName() + "拒绝了" + user.getName());
+            UUID uuid = UUID.randomUUID();
+            notice.setUuid(uuid.toString());
+
+            //发送通知
+            noticeMapper.addNotice(notice);
+
+            //获取最新的通知的id
+            Notice notice2 =noticeMapper.seleByUUID(uuid.toString());
+
+            NoticeWithUser noticeWithUser = new NoticeWithUser();
+            noticeWithUser.setReceiveUserId(user.getId());
+            noticeWithUser.setSendUserId(userId);
+            noticeWithUser.setNoticeId(notice2.getId());
+            noticeWithUser.setCreateBy(userId);
+
+
+            return  new ResponseVo("社长已拒绝了" + user.getName() + "的加入",   null, "0x207");
+        }
+
+
 
         //查看该用户是否已经在这个社团
         CommunityUser communityUser = communityUserMapper.communityUserSelectByUserId(user.getId(),userAdmin.getCommunityId());
