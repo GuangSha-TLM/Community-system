@@ -65,7 +65,12 @@ public interface CommunityService {
      */
     public ResponseVo adminReplyNoticeToUser(CommunityReplyNoticeBo communityReplyNoticeBo);
 
-
+    /**
+     * @author zhuxinyu 2023-10-30
+     *      查询社团所有用户数据
+     * @return
+     */
+    public ResponseVo communityAndUser();
 }
 
 

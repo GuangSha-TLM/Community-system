@@ -118,6 +118,18 @@ public class CommunityServiceImpl implements CommunityService {
         }
         return new ResponseVo("更新成功", community.getId(), "0x200");
     }
+
+    /**
+     * @author zhuxinyu 2023-10-30
+     *      查询社团所有用户数据
+     * @return
+     */
+    @Override
+    public ResponseVo communityAndUser() {
+        List<CommunityAndUserBo> list = communityMapper.communityAndUser();
+        return new ResponseVo<>("查询成功",list,"0x200");
+    }
+
     /**
      * @author zhuxinyu 2023-10-29
      *    分页获取数据
