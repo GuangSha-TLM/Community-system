@@ -5,15 +5,15 @@ import java.util.Date;
 
 public class UserAndUserAdminBo implements Serializable {
 
-    private String username;
-    private String name;
-    private Integer college;
-    private String studentId;
-    private Integer org;
-    private String professional;
-    private String grade;
-    private Date loginTime;
-    private Integer role;
+    private String username;//用户名
+    private String name;//姓名
+    private Integer college;//学院
+    private String studentId;//学号
+    private Integer org;//班级
+    private String professional;//专业
+    private String grade;//年级
+    private Date loginTime;//登陆时间
+    private Integer role;//权限
 
     public UserAndUserAdminBo(String username, String name, Integer college, String studentId, Integer org, String professional, String grade, Date loginTime, Integer role) {
         this.username = username;

@@ -1,6 +1,7 @@
 package com.gsxy.core.controller;
 
 import com.alibaba.fastjson2.JSONArray;
+import com.gsxy.core.pojo.SignInAdmin;
 import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.ResponseVo;
 import com.gsxy.core.service.UserAdminService;
@@ -113,7 +114,39 @@ public class UserAdminController {
         return JSONArray.toJSONString(userAdminService.pagingToGetUserAdminData(userAdminPagingToGetDataBo));
     }
 
+    /**
+     * @author hln 2023-10-31
+     *      管理员发起签到
+     * @param signInAdminBo
+     * @return
+     */
+    @PostMapping("/userAdminSignIn")
+    @ApiOperation("管理员发起签到")
+    public String userAdminSignIn(@RequestBody SignInAdminBo signInAdminBo){
+        Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
+        if (map.get("error") != null) {
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
 
+        return JSONArray.toJSONString(userAdminService.userAdminSignIn(signInAdminBo));
+    }
+
+    /**
+     * @author hln 2023-11-01
+     *      管理员查看所有签到状态
+     * @param userSignInStatusBo
+     * @return
+     */
+    @PostMapping("/userAdminFindAllSignInStatus")
+    @ApiOperation("管理员显示所有签到信息")
+    public String userAdminFindAllSignInStatus(@RequestBody UserSignInStatusBo userSignInStatusBo){
+        Map<String,String> map = ThreadLocalUtil.mapThreadLocal.get();
+        if(map.get("error") != null){
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
+
+        return JSONArray.toJSONString(userAdminService.findAllSignInStatus(userSignInStatusBo));
+    }
 
 }
 

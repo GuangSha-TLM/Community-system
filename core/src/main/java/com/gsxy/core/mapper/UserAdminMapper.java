@@ -1,7 +1,10 @@
 package com.gsxy.core.mapper;
 
+import com.gsxy.core.pojo.SignInAdmin;
 import com.gsxy.core.pojo.UserAdmin;
+import com.gsxy.core.pojo.bo.SignInAdminBo;
 import com.gsxy.core.pojo.bo.UserAdminPagingToGetDataBo;
+import com.gsxy.core.pojo.bo.UserSignInStatusBo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -67,5 +70,26 @@ public interface UserAdminMapper {
      */
     public List<UserAdmin> userAdminPagingToGetData(UserAdminPagingToGetDataBo userAdminPagingToGetDataBo);
 
+    /**
+     * @author hln 2023-10-31
+     *      插入发起签到信息到sign_in_admin表中
+     * @param signInAdmin
+     */
+    void insertSignInAdmin(SignInAdmin signInAdmin);
 
+    /**
+     * @author hln 2023-10-31
+     *      根据admin_id查询sign_in_admin表中相应数据
+     * @param signInAdmin
+     * @return
+     */
+    Long selectToGetByAdminId(SignInAdmin signInAdmin);
+
+    /**
+     * @author hln 2023-11-01
+     *      管理员查看所有签到状态
+     * @param userSignInStatusBo
+     * @return
+     */
+    List<UserSignInStatusBo> findAllSignInStatus(UserSignInStatusBo userSignInStatusBo);
 }

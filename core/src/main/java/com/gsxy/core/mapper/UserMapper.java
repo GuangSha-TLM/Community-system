@@ -1,11 +1,7 @@
 package com.gsxy.core.mapper;
 
-import com.gsxy.core.pojo.CommunityUser;
 import com.gsxy.core.pojo.User;
-import com.gsxy.core.pojo.bo.PagingToGetUserDataBo;
-import com.gsxy.core.pojo.bo.UserLoginBo;
-import com.gsxy.core.pojo.bo.UserSignInBo;
-import com.gsxy.core.pojo.bo.UserSignInStatusBo;
+import com.gsxy.core.pojo.bo.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

@@ -6,19 +6,43 @@ import org.aspectj.lang.annotation.Before;
 public interface UserControllerAop {
 
     /**
-     * @author hln
-     * 添加user 主要做了鉴权
+     * @author hln 2023-10-31
+     *      查找user鉴权
      * @param joinPoint
      * @return
      */
     public String selectByUserId(JoinPoint joinPoint);
 
+    /**
+     * @author hln 2023-10-31
+     *      修改user鉴权
+     * @param joinPoint
+     * @return
+     */
     public String updateByUserId(JoinPoint joinPoint);
 
+    /**
+     * @author hln 2023-10-31
+     *      删除user鉴权
+     * @param joinPoint
+     * @return
+     */
     public String deleteByUserId(JoinPoint joinPoint);
 
+    /**
+     * @author hln 2023-10-31
+     *      分页查询user鉴权
+     * @param joinPoint
+     * @return
+     */
     public String pagingToGetUserData(JoinPoint joinPoint);
 
+    /**
+     * @author hln 2023-10-31
+     *      用户签到鉴权
+     * @param joinPoint
+     * @return
+     */
     public String userSignIn(JoinPoint joinPoint);
 
 }

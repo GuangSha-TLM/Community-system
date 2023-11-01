@@ -1,26 +1,21 @@
-package com.gsxy.core.pojo.bo;
+package com.gsxy.core.pojo;
 
 import java.io.Serializable;
-import java.util.Date;
 
-/**
- * 用户签到返回给前端所需字段
- */
-public class UserSignInStatusBo implements Serializable {
+public class SignInUserStatus implements Serializable {
 
-    private String token;
-    private Long adminId;//管理员ID（仅用来进行连表查询）
-    private String name;//用户性名
+    private Long id;
+    private Long adminId;//管理员ID
+    private String name;//姓名（用户）
     private Integer college;//学院
     private String grade;//年级
     private String professional;//专业
     private Integer org;//班级
     private String studentId;//学号
     private Integer status;//状态(0未签，1签到 默认为0)
-    private Date createTime;//签到时间
 
-    public UserSignInStatusBo(String token, Long adminId, String name, Integer college, String grade, String professional, Integer org, String studentId, Integer status, Date createTime) {
-        this.token = token;
+    public SignInUserStatus(Long id, Long adminId, String name, Integer college, String grade, String professional, Integer org, String studentId, Integer status) {
+        this.id = id;
         this.adminId = adminId;
         this.name = name;
         this.college = college;
@@ -29,18 +24,17 @@ public class UserSignInStatusBo implements Serializable {
         this.org = org;
         this.studentId = studentId;
         this.status = status;
-        this.createTime = createTime;
     }
 
-    public UserSignInStatusBo() {
+    public SignInUserStatus() {
     }
 
-    public String getToken() {
-        return token;
+    public Long getId() {
+        return id;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Long getAdminId() {
@@ -107,18 +101,10 @@ public class UserSignInStatusBo implements Serializable {
         this.status = status;
     }
 
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
     @Override
     public String toString() {
-        return "UserSignInStatusBo{" +
-                "token='" + token + '\'' +
+        return "SignInUserStatus{" +
+                "id=" + id +
                 ", adminId=" + adminId +
                 ", name='" + name + '\'' +
                 ", college=" + college +
@@ -127,7 +113,6 @@ public class UserSignInStatusBo implements Serializable {
                 ", org=" + org +
                 ", studentId='" + studentId + '\'' +
                 ", status=" + status +
-                ", createTime=" + createTime +
                 '}';
     }
 }
