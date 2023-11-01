@@ -80,12 +80,12 @@
                             <div class="form-group">
                             <label for="exampleInputprofessional">选择你的专业</label>
                             <el-select v-model="user.professional" placeholder="请选择" style="width: 100%;">
-                                
+
                                 <el-option-group
                                     v-for="group in professionalList[user.college -1]"
                                     :key="group.label"
                                     :label="group.label">
-                                    
+
                                 <el-option
                                     v-for="item in group.professionalList"
                                     :key="item.professionalList"
@@ -129,13 +129,13 @@ export default {
         return {
             grandList: [ 2019 ,2020 ,2021 ,2022 ,2023 ,2024 ,2025],
             options: [
-            { value: 1, label: "信息学院" },
-            { value: 2, label: "财经学院" },
-            { value: 3, label: "艺术学院" },
-            { value: 4, label: "通识学院" }
-            ],
+                   { value: 1, label: "信息学院" },
+                   { value: 2, label: "财经学院" },
+                   { value: 3, label: "艺术学院" },
+                   { value: 4, label: "通识学院" }
+],
 
-professionalList:[ 
+professionalList:[
         //信息学院
         [
         {
@@ -151,9 +151,7 @@ professionalList:[
             value:3,
             label: '电子商务',
             professionalList: ['电子商务1班', '电子商务2班','电子商务3班','电子商务4班','电子商务5班','电子商务6班']
-
             },
-            
 
         ],
         //财经学院
@@ -184,9 +182,8 @@ professionalList:[
             label: '人力资源管理',
             professionalList: ['人力资源管理1班', '人力资源管理2班','人力资源管理3班',
                                 '人力资源管理4班','人力资源管理5班','人力资源管理6班']
-
             },
-            
+
         ],
         //艺术学院
         [
@@ -204,9 +201,8 @@ professionalList:[
             label: '影视摄影与制作',
             professionalList: ['影视摄影与制作1班', '影视摄影与制作2班','影视摄影与制作3班',
                                 '影视摄影与制作4班','影视摄影与制作5班','影视摄影与制作6班']
-
             },
-            
+
         ],
         //通识学院
         [
@@ -227,21 +223,9 @@ professionalList:[
                                 '学前教育 (师范类)4班','学前教育 (师范类)5班','学前教育 (师范类)6班']
 
             },
-            
+
         ]
         ],
- 
-        
-                    
-        //     ['软件工程','计算机科学与技术','电子商务'],
-        //     ['审计学','会计学','国际经济与贸易','财务管理','工商管理','人力资源管理'],
-        //     ['汉语言文学','应用心理学','学前教育 (师范类)'],
-        //     ['视觉传达设计','环境设计','影视摄影与制作']
-        // ],
-
-
-            // orgList:['1班','2班','3班','4班','5班','6班'],
-
             user: {
                 userName: "",
                 passWord: "",
