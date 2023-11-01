@@ -1,9 +1,9 @@
 <!--
- * @Author: tianleiyu 
+ * @Author: tianleiyu
  * @Date: 2023-10-29 13:15:48
- * @LastEditTime: 2023-10-29 17:00:46
+ * @LastEditTime: 2023-10-29 17:30:59
  * @LastEditors: tianleiyu
- * @Description: 
+ * @Description:
  * @FilePath: /community-ui/src/components/ActivityItem.vue
  * 可以输入预定的版权声明、个性签名、空行等
 -->
@@ -22,8 +22,8 @@
                     创建时间: {{ list.activeToGetBo.createTime }}
                 </div>
                 <div class="item">
-                    <router-link :to="{name:'/AssociationManager',params:list.communityInActiveBo.communityId}">社团:{{ list.communityInActiveBo.name }}</router-link>
-                    
+                    <router-link :to="{name:'AssociationManager',params:{id:list.communityInActiveBo.id}}">社团:{{ list.communityInActiveBo.name }}</router-link>
+
                 </div>
                 <div class="item">
                     创建人:{{ list.communityInActiveBo.username }}
@@ -60,7 +60,7 @@ export default {
                 id: this.$route.params.id
             },
             list:{
-                
+
             }
         }
     },

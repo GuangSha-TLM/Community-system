@@ -78,6 +78,17 @@ public class CommunityController {
     }
 
     /**
+     * @author zhuxinyu 2023-10-30
+     *      查询社团所有用户数据
+     * @return
+     */
+    @PostMapping("/communityAndUser")
+    @ApiOperation("社团用户查找")
+    public String CommunityAndUser(){
+        return JSONArray.toJSONString(communityService.communityAndUser());
+    }
+
+    /**
      * @author zhuxinyu 2023-10-24
      *      通过id修改社团数据
      * @param communityUpdateByIdBo
@@ -95,6 +106,22 @@ public class CommunityController {
     }
 
 
+
+    /**
+     * @author zhuxinyu 2023-10-28
+     *    分页获取数据
+     * @param communityPagingToGetDataBo
+     * @return
+     */
+    @ApiOperation("分页获取数据")
+    @PostMapping("/communitypagingToGetData")
+    public String commuityPagingToGetData(@RequestBody CommunityPagingToGetDataBo communityPagingToGetDataBo){
+        Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
+        if (map.get("error") != null) {
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
+        return JSONArray.toJSONString(communityService.communityPagingToGetData(communityPagingToGetDataBo));
+    }
 
     /**
      * @author Oh… Yeah!!!, 2023-10-30

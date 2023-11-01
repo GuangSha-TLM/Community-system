@@ -3,6 +3,7 @@ package com.gsxy.core.service.impl;
 import com.gsxy.core.mapper.*;
 import com.gsxy.core.pojo.*;
 import com.gsxy.core.pojo.bo.*;
+import com.gsxy.core.pojo.vo.CommunityPagingToGetDataVo;
 import com.gsxy.core.pojo.vo.ResponseVo;
 import com.gsxy.core.pojo.vo.UserSendMessageVo;
 import com.gsxy.core.service.CommunityService;
@@ -118,6 +119,31 @@ public class CommunityServiceImpl implements CommunityService {
         return new ResponseVo("更新成功", community.getId(), "0x200");
     }
 
+    /**
+     * @author zhuxinyu 2023-10-30
+     *      查询社团所有用户数据
+     * @return
+     */
+    @Override
+    public ResponseVo communityAndUser() {
+        List<CommunityAndUserBo> list = communityMapper.communityAndUser();
+        return new ResponseVo<>("查询成功",list,"0x200");
+    }
+
+    /**
+     * @author zhuxinyu 2023-10-29
+     *    分页获取数据
+     * @param communityPagingToGetDataBo
+     * @return ResponseVo.class
+     */
+    @Override
+    public ResponseVo communityPagingToGetData(CommunityPagingToGetDataBo communityPagingToGetDataBo) {
+        List <Community> list = communityMapper.communityPagingToGetData(communityPagingToGetDataBo);
+        CommunityPagingToGetDataVo communityPagingToGetDataVo = new CommunityPagingToGetDataVo();
+        communityPagingToGetDataVo.setList(list);
+        communityPagingToGetDataVo.setCount(list.size());
+        return null;
+    }
 
 
     /**

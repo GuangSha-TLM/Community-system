@@ -40,7 +40,13 @@ public interface CommunityService {
      * @return
      */
     public ResponseVo updateByIdCommunity(CommunityUpdateByIdBo communityUpdateByIdBo);
-
+    /**
+     * @author zhuxinyu 2023-10-28
+     *    分页获取数据
+     * @param communityPagingToGetDataBo
+     * @return ResponseVo.class
+     */
+    public ResponseVo communityPagingToGetData(CommunityPagingToGetDataBo communityPagingToGetDataBo);
 
     /**
      * @author Oh… Yeah!!!, 2023-10-30
@@ -59,7 +65,12 @@ public interface CommunityService {
      */
     public ResponseVo adminReplyNoticeToUser(CommunityReplyNoticeBo communityReplyNoticeBo);
 
-
+    /**
+     * @author zhuxinyu 2023-10-30
+     *      查询社团所有用户数据
+     * @return
+     */
+    public ResponseVo communityAndUser();
 }
 
 

@@ -1,7 +1,7 @@
 <!--
  * @Author: tianleiyu 
  * @Date: 2023-10-29 10:33:58
- * @LastEditTime: 2023-10-29 17:06:42
+ * @LastEditTime: 2023-10-31 20:05:19
  * @LastEditors: tianleiyu
  * @Description: 
  * @FilePath: /community-ui/src/components/fream/LoginTop.vue
@@ -46,16 +46,16 @@
                     <!-- Collapse -->
                     <div class="collapse navbar-collapse" id="navbarCollapse">
 
-                        <el-input placeholder="请输入内容" v-if="isActive" v-model="activeLikeToGetByTitleBo.title" @input="searchInfo"
-                            class="input-with-select">
+                        <el-input placeholder="请输入内容" v-if="isActive" v-model="activeLikeToGetByTitleBo.title"
+                            @input="searchInfo" class="input-with-select">
                             <el-button slot="append" icon="el-icon-search" @click="searchInfo"></el-button>
                         </el-input>
-                        <div class="result">
-                            <div class="result-item" v-for="(item,index) in list" :key="index">
-                                {{item.title}}
+                        <div class="result" v-if="isActive">
+                            <div class="result-item" v-for="(item, index) in list" :key="index">
+                                {{ item.title }}
                             </div>
                         </div>
-                        
+
                         <ul class="navbar-nav mt-4 mt-lg-0 ml-auto" v-if="isLogin">
                             <li class="nav-item ">
                                 <a class="nav-link" href="#">{{ username }} </a>
@@ -78,8 +78,6 @@
                     </div>
                 </div>
             </nav>
-
-
         </div>
     </div>
 </template>
@@ -91,35 +89,40 @@ export default {
     name: 'Foot',
     data() {
         return {
-            username: localStorage.getItem('username'),
+            username: "",
             token: getCookie("token"),
             isLogin: false,
-            isActive:false,
+            isActive: false,
             activeLikeToGetByTitleBo: {
                 token: "",
                 title: '',
-                status:0,
-                delFlag:0
+                status: 0,
+                delFlag: 0
             },
-            list:[]
+            list: []
 
         }
     },
     mounted() {
         this.isLoginInfo();
-        console.log(this.$route.path);
+        this.isActiveInfo();
     },
     methods: {
         isLoginInfo() {
-            if (this.token == "" || this.token == null) {
-                this.isLogin = false;
-            } else {
-                this.isLogin = true;
+            if (this.$route.path != "/Login") {
+                this.username = JSON.parse(localStorage.getItem("user")).username
+                if (this.username == null || this.username == "" || this.username == undefined) {
+                    this.$router.push("/Login");
+                    this.isLogin = false;
+                } else {
+                    this.isLogin = true;
+                }
             }
-
+        },
+        isActiveInfo() {
             if (this.$route.path == '/ActivityManagement') {
                 this.isActive = true;
-            }else{
+            } else {
                 this.isActive = false;
             }
         },
@@ -129,12 +132,13 @@ export default {
             console.log(obj);
             if (obj.code == "0x200") {
                 this.list = obj.data;
-
             }
         },
     },
-    watch:{
-        '$route':'isLoginInfo'
+    watch: {
+        '$route': 'isActiveInfo',
+        'username': 'isLoginInfo'
+
     }
 }
 </script>

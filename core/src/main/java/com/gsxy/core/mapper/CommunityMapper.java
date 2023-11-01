@@ -59,6 +59,7 @@ public interface CommunityMapper {
      * @return
      */
     public List<CommunityAndUserBo> communityAndUser();
+
     /**
      * @author zhuxinyu 2023-10-30
      *      分页获取查询数据

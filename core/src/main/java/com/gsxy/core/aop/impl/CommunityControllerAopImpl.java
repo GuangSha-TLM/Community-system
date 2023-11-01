@@ -84,13 +84,24 @@ public class CommunityControllerAopImpl implements CommunityControllerAop {
      * @param joinPoint
      */
     @Override
-    @Before("execution(* com.gsxy.core.controller.CommunityController.CommunityPagingToGetData(..))")
+    @Before("execution(* com.gsxy.core.controller.CommunityController.commuityPagingToGetData(..))")
     public void communityPagingToGetData(JoinPoint joinPoint) {
         Object[] args = joinPoint.getArgs();
         CommunityPagingToGetDataBo communityPagingToGetDataBo = (CommunityPagingToGetDataBo) args[0];
         String token = communityPagingToGetDataBo.getToken();
         systemService.auth(token);
     }
+
+//    @Override
+//    @Before("execution(* com.gsxy.core.controller.CommunityController.CommunityAndUser(..))")
+//    public String communityAndUser(JoinPoint joinPoint) {
+//        Object[] args = joinPoint.getArgs();
+//        CommunityAndUserBo communityAndUserBo = (CommunityAndUserBo) args[0];
+//        String token = communityAndUserBo.getToken();
+//        systemService.isAdmin(token,1);
+//        return null;
+//    }
+
 
     /**
      * @author Oh… Yeah!!!, 2023-10-30
@@ -121,4 +132,6 @@ public class CommunityControllerAopImpl implements CommunityControllerAop {
         String token = communityReplyNoticeBo.getToken();
         systemService.isAdmin(token,2);
     }
+
+
 }
