@@ -79,12 +79,17 @@ public class CommunityController {
 
     /**
      * @author zhuxinyu 2023-10-30
-     *      查询社团所有用户数据
+     *      根据社团Id查询该社团的所有用户数据
      * @return
      */
     @PostMapping("/communityAndUser")
-    @ApiOperation("社团用户查找")
-    public String CommunityAndUser(){
+    @ApiOperation("根据社团Id查询该社团的所有用户数据")
+    public String CommunityAndUser(@RequestParam String token){
+        Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+        if (map.get("error") != null) {
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
         return JSONArray.toJSONString(communityService.communityAndUser());
     }
 

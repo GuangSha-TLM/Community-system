@@ -3,6 +3,7 @@ package com.gsxy.core.service.impl;
 import com.gsxy.core.mapper.*;
 import com.gsxy.core.pojo.*;
 import com.gsxy.core.pojo.bo.*;
+import com.gsxy.core.pojo.vo.CommunityAndUserVo;
 import com.gsxy.core.pojo.vo.CommunityPagingToGetDataVo;
 import com.gsxy.core.pojo.vo.ResponseVo;
 import com.gsxy.core.pojo.vo.UserSendMessageVo;
@@ -126,8 +127,14 @@ public class CommunityServiceImpl implements CommunityService {
      */
     @Override
     public ResponseVo communityAndUser() {
-        List<CommunityAndUserBo> list = communityMapper.communityAndUser();
-        return new ResponseVo<>("查询成功",list,"0x200");
+
+        String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
+        Long userId = Long.valueOf(userIdOfStr);
+
+        //找到所有该社团的用户的id
+        List<CommunityAndUserVo> userList = communityMapper.communityAndUser(userId);
+
+        return new ResponseVo<>("查询成功",userList,"0x200");
     }
 
     /**

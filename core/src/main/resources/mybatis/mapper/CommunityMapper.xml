@@ -33,27 +33,22 @@
     </select>
     <!--
         @author zhuxinyu 2023-10-30
-            根据社团查找所有用户
+            查询社团所有用户数据
     -->
-    <select id="communityAndUser" resultType="com.gsxy.core.pojo.bo.CommunityAndUserBo">
+    <select id="communityAndUser" resultType="com.gsxy.core.pojo.vo.CommunityAndUserVo">
         SELECT
-            t1.name,
-            t1.student_id,
-            t1.college,
-            t1.professional,
-            t1.org,
-            t1.grade,
-            t1.create_time,
-            t1.update_time,
-            t2.community_id
-        FROM
-            community_user t2
-                LEFT JOIN
-            user t1 ON t1.id = t2.user_id AND  t1.id = t2.community_id
-                LEFT JOIN
-            community t3 ON t2.community_id = t3.community_id;
-
+            us.id,us.name,us.student_id,us.college,
+            us.professional,us.grade
+                FROM
+                community_user AS cu
+            INNER JOIN
+	`user` AS us
+        ON(cu.user_id = us.id)
+        WHERE
+            cu.create_by = 1;
     </select>
+
+
     <!--
         @author zhuxinyu 2023-10-24
            更新社团
@@ -131,4 +126,6 @@
             community_id = #{communityId}
         limit 1
     </select>
+
+
 </mapper>

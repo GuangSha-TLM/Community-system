@@ -42,7 +42,12 @@ public interface CommunityControllerAop {
      */
     public void communityPagingToGetData(JoinPoint joinPoint);
 
-//    public String communityAndUser(JoinPoint joinPoint);
+    /**
+     * @author zhuxinyu 2023-10-30
+     *      根据社团Id查询该社团的所有用户数据
+     * @return
+     */
+    public String communityAndUser(JoinPoint joinPoint);
 
 
 

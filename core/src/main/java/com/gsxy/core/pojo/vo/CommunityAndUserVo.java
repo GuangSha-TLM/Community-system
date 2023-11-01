@@ -1,65 +1,39 @@
-package com.gsxy.core.pojo.bo;
+package com.gsxy.core.pojo.vo;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * @author zhuxinyu 2023-10-30
  *      查询用户的所有信息
  */
-public class CommunityAndUserBo implements Serializable {
-    private Long id;
-    private String token;
-    private String communityId;//社团id
+public class CommunityAndUserVo implements Serializable {
+    private Long userId;
     private String name;//姓名
     private String studentId;//学号
     private Integer college;//学院
     private String professional;//专业
     private Integer org;//班级
     private String grade;//年级
-    private Date createTime;//创建时间
-    private Date updateTime;//更新时间
 
-    public CommunityAndUserBo(){
-
+    public CommunityAndUserVo() {
     }
 
-    public CommunityAndUserBo(Long id, String token, String communityId, String name, String studentId, Integer college, String professional, Integer org, String grade, Date createTime, Date updateTime) {
-        this.id = id;
-        this.token = token;
-        this.communityId = communityId;
+    public CommunityAndUserVo(Long userId, String name, String studentId, Integer college, String professional, Integer org, String grade) {
+        this.userId = userId;
         this.name = name;
         this.studentId = studentId;
         this.college = college;
         this.professional = professional;
         this.org = org;
         this.grade = grade;
-        this.createTime = createTime;
-        this.updateTime = updateTime;
     }
 
-    public Long getId() {
-        return id;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public String getCommunityId() {
-        return communityId;
-    }
-
-    public void setCommunityId(String communityId) {
-        this.communityId = communityId;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getName() {
@@ -110,36 +84,16 @@ public class CommunityAndUserBo implements Serializable {
         this.grade = grade;
     }
 
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
     @Override
     public String toString() {
-        return "CommunityAndUserBo{" +
-                "id=" + id +
-                ", token='" + token + '\'' +
-                ", communityId='" + communityId + '\'' +
+        return "CommunityAndUserVo{" +
+                "userId=" + userId +
                 ", name='" + name + '\'' +
                 ", studentId='" + studentId + '\'' +
                 ", college=" + college +
                 ", professional='" + professional + '\'' +
                 ", org=" + org +
                 ", grade='" + grade + '\'' +
-                ", createTime=" + createTime +
-                ", updateTime=" + updateTime +
                 '}';
     }
 }
