@@ -101,4 +101,37 @@ public class CommunityControllerAopImpl implements CommunityControllerAop {
 //        systemService.isAdmin(token,1);
 //        return null;
 //    }
+
+
+    /**
+     * @author Oh… Yeah!!!, 2023-10-30
+     *       用户向社长发送通知，加入社团(鉴权)
+     * @param joinPoint
+     * @return void
+     */
+    @Override
+    @Before("execution(* com.gsxy.core.controller.CommunityController.userSendNoticeToAdmin(..))")
+    public void userSendNoticeToAdmin(JoinPoint joinPoint) {
+        Object[] args = joinPoint.getArgs();
+        CommunitySendNoticeBo sendNoticeBo = (CommunitySendNoticeBo) args[0];
+        String token = sendNoticeBo.getToken();
+        systemService.auth(token);
+    }
+
+    /**
+     * @author Oh… Yeah!!!, 2023-10-30
+     *       社长向用户发送回复通知(鉴权)
+     * @param joinPoint
+     * @return void
+     */
+    @Override
+    @Before("execution(* com.gsxy.core.controller.CommunityController.adminReplyNoticeToUser(..))")
+    public void adminReplyNoticeToUser(JoinPoint joinPoint) {
+        Object[] args = joinPoint.getArgs();
+        CommunityReplyNoticeBo communityReplyNoticeBo = (CommunityReplyNoticeBo) args[0];
+        String token = communityReplyNoticeBo.getToken();
+        systemService.isAdmin(token,2);
+    }
+
+
 }

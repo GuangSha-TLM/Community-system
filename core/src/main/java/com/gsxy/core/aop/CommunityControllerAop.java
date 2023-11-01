@@ -43,4 +43,28 @@ public interface CommunityControllerAop {
     public void communityPagingToGetData(JoinPoint joinPoint);
 
 //    public String communityAndUser(JoinPoint joinPoint);
+
+
+
+    /**
+     * @author Oh… Yeah!!!, 2023-10-30
+     *       用户向社长发送通知，加入社团(鉴权)
+     * @param joinPoint
+     * @return void
+     */
+    public void userSendNoticeToAdmin(JoinPoint joinPoint);
+
+
+    /**
+     * @author Oh… Yeah!!!, 2023-10-30
+     *       社长向用户发送回复通知(鉴权)
+     * @param joinPoint
+     * @return void
+     */
+    public void adminReplyNoticeToUser(JoinPoint joinPoint);
+
+
+
+
+
 }
