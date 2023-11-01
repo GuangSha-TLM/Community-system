@@ -84,7 +84,7 @@ public class CommunityControllerAopImpl implements CommunityControllerAop {
      * @param joinPoint
      */
     @Override
-    @Before("execution(* com.gsxy.core.controller.CommunityController.CommunityPagingToGetData(..))")
+    @Before("execution(* com.gsxy.core.controller.CommunityController.commuityPagingToGetData(..))")
     public void communityPagingToGetData(JoinPoint joinPoint) {
         Object[] args = joinPoint.getArgs();
         CommunityPagingToGetDataBo communityPagingToGetDataBo = (CommunityPagingToGetDataBo) args[0];
