@@ -5,20 +5,18 @@
         </div>
         <div class="content">
             <div class="left">
-                <div class="complaint tab" @click="colorChange(1)"
-                    :class="{ 'my-button': true, 'clicked': activeColor === 1 }">
+                <div class="complaintManagement tab" >
                     <router-link to="/ClassManagement">班级管理</router-link>
                 </div>
-                <div class="user tab" @click="colorChange(2)" :class="{ 'my-button': true, 'clicked': activeColor === 2 }">
+                <div class="userMangement tab" >
                     <router-link to="/userManagement">用户管理</router-link>
                 </div>
-                <div class="Associa tab" @click="colorChange(3)"
-                    :class="{ 'my-button': true, 'clicked': activeColor === 3 }">
+                <div class="AssociationManager tab">
                     <router-link to="/AssociationManager">社团管理</router-link>
                 </div>
-                <div class="Activity tab" @click="colorChange(4)" :class="{ 'my-button': true, 'clicked': activeColor === 4 }">
-                    <router-link to="/ActivityManagement">活动管理</router-link>
-                </div>
+                <div class="ActivityManagement tab">
+                        <router-link to="/ActivityManagement">活动管理</router-link>
+                    </div>
             </div>
             <div class="rigth">
                 <router-view />
@@ -42,15 +40,11 @@ export default {
     },
     data() {
         return {
-            Admin: false,
-            //颜色属性12
-            activeColor: ''
+            Admin: false
+
         }
     },
     methods: {
-        colorChange(num) {
-            this.activeColor = num;
-        }
     },
     mounted() {
     }
@@ -80,18 +74,4 @@ export default {
 
 a {
     color: black;
-}
-
-.my-button {
-    background-color: #fff;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-}
-
-.clicked {
-    background-color: #3498db;
-}
-</style>
-
+}</style>

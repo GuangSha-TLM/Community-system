@@ -66,4 +66,6 @@ public interface UserAdminMapper {
      * @return String.class
      */
     public List<UserAdmin> userAdminPagingToGetData(UserAdminPagingToGetDataBo userAdminPagingToGetDataBo);
+
+
 }

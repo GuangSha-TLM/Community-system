@@ -78,6 +78,17 @@ public class CommunityController {
     }
 
     /**
+     * @author zhuxinyu 2023-10-30
+     *      查询社团所有用户数据
+     * @return
+     */
+    @PostMapping("/communityAndUser")
+    @ApiOperation("社团用户查找")
+    public String CommunityAndUser(){
+        return JSONArray.toJSONString(communityService.communityAndUser());
+    }
+
+    /**
      * @author zhuxinyu 2023-10-24
      *      通过id修改社团数据
      * @param communityUpdateByIdBo
@@ -94,23 +105,58 @@ public class CommunityController {
         return JSONArray.toJSONString(communityService.updateByIdCommunity(communityUpdateByIdBo));
     }
 
+
+
     /**
-     * @author zhuxinyu 2023-10-30
-     *      查询社团所有用户数据
+     * @author zhuxinyu 2023-10-28
+     *    分页获取数据
+     * @param communityPagingToGetDataBo
      * @return
      */
-    @PostMapping("/communityAndUser")
-    @ApiOperation("社团用户查找")
-    public String CommunityAndUser(){
-        return JSONArray.toJSONString(communityService.communityAndUser());
-    }
-
-    public String CommunityPagingToGetData(@RequestBody CommunityPagingToGetDataBo communityPagingToGetDataBo){
+    @ApiOperation("分页获取数据")
+    @PostMapping("/communitypagingToGetData")
+    public String commuityPagingToGetData(@RequestBody CommunityPagingToGetDataBo communityPagingToGetDataBo){
         Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
-        ThreadLocalUtil.mapThreadLocal.remove();
         if (map.get("error") != null) {
             return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
         }
         return JSONArray.toJSONString(communityService.communityPagingToGetData(communityPagingToGetDataBo));
     }
+
+    /**
+     * @author Oh… Yeah!!!, 2023-10-30
+     *       用户向社长发送通知，加入社团
+     * @param communitySendNoticeBo
+     * @return String.class
+     */
+    @PostMapping("/send_notice")
+    @ApiOperation("用户向社长发送通知，加入社团")
+    public String userSendNoticeToAdmin(@RequestBody CommunitySendNoticeBo communitySendNoticeBo){
+        Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+        if (map.get("error") != null) {
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
+        return JSONArray.toJSONString(communityService.userSendNoticeToAdmin(communitySendNoticeBo));
+    }
+
+    /**
+     * @author Oh… Yeah!!!, 2023-10-30
+     *       社长向用户发送回复通知
+     * @param communityReplyNoticeBo
+     * @return String.class
+     */
+    @PostMapping("/reply_notice")
+    @ApiOperation("社长向用户发送回复通知")
+    public String adminReplyNoticeToUser(@RequestBody CommunityReplyNoticeBo communityReplyNoticeBo){
+        Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+        if (map.get("error") != null) {
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
+        return JSONArray.toJSONString(communityService.adminReplyNoticeToUser(communityReplyNoticeBo));
+    }
+
+
+
 }

@@ -84,7 +84,7 @@ public class CommunityControllerAopImpl implements CommunityControllerAop {
      * @param joinPoint
      */
     @Override
-    @Before("execution(* com.gsxy.core.controller.CommunityController.CommunityPagingToGetData(..))")
+    @Before("execution(* com.gsxy.core.controller.CommunityController.commuityPagingToGetData(..))")
     public void communityPagingToGetData(JoinPoint joinPoint) {
         Object[] args = joinPoint.getArgs();
         CommunityPagingToGetDataBo communityPagingToGetDataBo = (CommunityPagingToGetDataBo) args[0];
@@ -92,13 +92,46 @@ public class CommunityControllerAopImpl implements CommunityControllerAop {
         systemService.auth(token);
     }
 
+//    @Override
+//    @Before("execution(* com.gsxy.core.controller.CommunityController.CommunityAndUser(..))")
+//    public String communityAndUser(JoinPoint joinPoint) {
+//        Object[] args = joinPoint.getArgs();
+//        CommunityAndUserBo communityAndUserBo = (CommunityAndUserBo) args[0];
+//        String token = communityAndUserBo.getToken();
+//        systemService.isAdmin(token,1);
+//        return null;
+//    }
+
+
+    /**
+     * @author Oh… Yeah!!!, 2023-10-30
+     *       用户向社长发送通知，加入社团(鉴权)
+     * @param joinPoint
+     * @return void
+     */
     @Override
-    @Before("execution(* com.gsxy.core.controller.CommunityController.CommunityAndUser(..))")
-    public String communityAndUser(JoinPoint joinPoint) {
+    @Before("execution(* com.gsxy.core.controller.CommunityController.userSendNoticeToAdmin(..))")
+    public void userSendNoticeToAdmin(JoinPoint joinPoint) {
         Object[] args = joinPoint.getArgs();
-        CommunityAndUserBo communityAndUserBo = (CommunityAndUserBo) args[0];
-        String token = communityAndUserBo.getToken();
-        systemService.isAdmin(token,1);
-        return null;
+        CommunitySendNoticeBo sendNoticeBo = (CommunitySendNoticeBo) args[0];
+        String token = sendNoticeBo.getToken();
+        systemService.auth(token);
     }
+
+    /**
+     * @author Oh… Yeah!!!, 2023-10-30
+     *       社长向用户发送回复通知(鉴权)
+     * @param joinPoint
+     * @return void
+     */
+    @Override
+    @Before("execution(* com.gsxy.core.controller.CommunityController.adminReplyNoticeToUser(..))")
+    public void adminReplyNoticeToUser(JoinPoint joinPoint) {
+        Object[] args = joinPoint.getArgs();
+        CommunityReplyNoticeBo communityReplyNoticeBo = (CommunityReplyNoticeBo) args[0];
+        String token = communityReplyNoticeBo.getToken();
+        systemService.isAdmin(token,2);
+    }
+
+
 }

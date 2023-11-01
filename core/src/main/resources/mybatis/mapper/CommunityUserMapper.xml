@@ -67,4 +67,24 @@
         </set>
         where id = #{id}
     </update>
+
+
+
+    <!--
+        @author Oh...Yeah!!! 2023-10-30
+        查看该用户是否已经在这个社团
+    -->
+    <select id="communityUserSelectByUserId" resultType="com.gsxy.core.pojo.CommunityUser">
+        select
+            *
+        from
+            community_user
+        where
+            user_id = #{id}
+        and
+            community_id = #{communityId}
+        limit 1
+    </select>
+
+
 </mapper>

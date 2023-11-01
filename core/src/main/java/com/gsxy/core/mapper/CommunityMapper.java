@@ -9,6 +9,18 @@ import java.util.List;
 
 @Mapper
 public interface CommunityMapper {
+
+
+    /**
+     * @author Oh...Yeah!!! 2023-10-30
+     *      根据community_id查找社团
+     * @param CommunityId
+     * @return
+     */
+    public Community selectByCommunityId(Long CommunityId);
+
+
+
     /**
      * @author zhuxinyu 2023-10-24
      *      添加社团
@@ -47,6 +59,7 @@ public interface CommunityMapper {
      * @return
      */
     public List<CommunityAndUserBo> communityAndUser();
+
     /**
      * @author zhuxinyu 2023-10-30
      *      分页获取查询数据

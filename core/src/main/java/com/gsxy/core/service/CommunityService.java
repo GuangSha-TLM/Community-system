@@ -40,19 +40,39 @@ public interface CommunityService {
      * @return
      */
     public ResponseVo updateByIdCommunity(CommunityUpdateByIdBo communityUpdateByIdBo);
+    /**
+     * @author zhuxinyu 2023-10-28
+     *    分页获取数据
+     * @param communityPagingToGetDataBo
+     * @return ResponseVo.class
+     */
+    public ResponseVo communityPagingToGetData(CommunityPagingToGetDataBo communityPagingToGetDataBo);
+
+    /**
+     * @author Oh… Yeah!!!, 2023-10-30
+     *       用户向社长发送通知，加入社团
+     * @param communitySendNoticeBo
+     * @return String.class
+     */
+    public ResponseVo userSendNoticeToAdmin(CommunitySendNoticeBo communitySendNoticeBo);
+
+
+    /**
+     * @author Oh… Yeah!!!, 2023-10-30
+     *       社长向用户发送回复通知
+     * @param communityReplyNoticeBo
+     * @return String.class
+     */
+    public ResponseVo adminReplyNoticeToUser(CommunityReplyNoticeBo communityReplyNoticeBo);
 
     /**
      * @author zhuxinyu 2023-10-30
-     *      查找社团的所有用户
+     *      查询社团所有用户数据
      * @return
      */
     public ResponseVo communityAndUser();
-
-    /**
-     * @author zhuxinyu 2023-10-30
-     *      分页查询获取数据
-     * @param communityPagingToGetDataBo
-     * @return
-     */
-    public ResponseVo communityPagingToGetData(CommunityPagingToGetDataBo communityPagingToGetDataBo);
 }
+
+
+
+

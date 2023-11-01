@@ -16,7 +16,7 @@ public interface NoticeMapper {
 
     /**
      * @author Oh… Yeah!!!, 2023-10-27
-     *      用户查看通知.
+     *      根据用户id查看所有的通知.
      * @param userId
      * @return List<Notice>.class
      */
@@ -54,6 +54,14 @@ public interface NoticeMapper {
      * @return String.class
      */
     public List<Notice> noticePagingToGetData(NoticePagingToGetDataBo noticePagingToGetDataBo);
+
+    /**
+     * @author Oh… Yeah!!!, 2023-10-27
+     *      根据UUID查找通知.
+     * @param string
+     * @return Notice.class
+     */
+    public Notice seleByUUID(String string);
 
 }
 

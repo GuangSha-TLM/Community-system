@@ -39,7 +39,7 @@
         insert into
             notice_with_user
         values
-            (null,#{userId},#{noticeId},#{name},#{createBy},
+            (null,#{sendUserId},#{receiveUserId},#{noticeId},#{name},#{createBy},
              #{createTime},#{updateBy},#{updateTime},
              #{status},#{delFlag});
     </insert>
@@ -51,8 +51,11 @@
     <update id="updateByIdNoticeWithUser" parameterType="com.gsxy.core.pojo.NoticeWithUser">
         update notice_with_user
         <set>
-            <if test="userId != null ">
-                user_id = #{userId},
+            <if test="sendUserId != null ">
+                send_user_id = #{sendUserId},
+            </if>
+            <if test="receiveUserId != null ">
+                receive_user_id = #{receiveUserId},
             </if>
             <if test="noticeId != null ">
                 notice_id = #{noticeId},
@@ -103,6 +106,21 @@
         del_flag = #{delFlag}
         limit
         #{start},#{size}
+    </select>
+
+
+    <!--
+      @author Oh...Yeah!!! 2023-10-30
+      根据通知id来获取历史记录
+    -->
+    <select id="selectByNoticeId" resultType="com.gsxy.core.pojo.NoticeWithUser">
+        select
+            *
+        from
+            notice_with_user
+        where
+            notice_id = #{noticeId}
+        limit 1
     </select>
 
 </mapper>

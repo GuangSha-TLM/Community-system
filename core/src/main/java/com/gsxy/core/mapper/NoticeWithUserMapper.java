@@ -52,4 +52,13 @@ public interface NoticeWithUserMapper {
      * @return List<NoticeWithUser>.class
      */
     public List<NoticeWithUser> noticeWithUserPagingToGetData(NoticeWithUserPagingToGetDataBo noticeWithUserPagingToGetDataBo);
+
+
+    /**
+     * @author Oh...Yeah!!! 2023-10-28
+     *    根据通知id来获取历史记录
+     * @param noticeId
+     * @return NoticeWithUser
+     */
+    public NoticeWithUser selectByNoticeId(Long noticeId);
 }
