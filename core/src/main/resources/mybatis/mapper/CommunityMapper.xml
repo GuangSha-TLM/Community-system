@@ -55,16 +55,14 @@
     <select id="communityAndActive" resultType="com.gsxy.core.pojo.vo.CommunityAndActiveVo"
             parameterType="com.gsxy.core.pojo.bo.CommunityAndActiveBo">
         SELECT
-            us.community,
-            us.title,
-            us.context
+            ac.title,
+            ac.context,
+            ac.community
         FROM
             community AS co
-                INNER JOIN
-            active AS ac
-            ON(co.community_id = ac.community)
+                INNER JOIN active AS ac ON(co.community_id = ac.community)
         WHERE
-            c.community_id = #{communtiyId};
+            co.community_id = #{communityId};
     </select>
     <!--
           @author  zhuxinyu 2023-11-02
