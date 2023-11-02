@@ -101,6 +101,12 @@ public class CommunityControllerAopImpl implements CommunityControllerAop {
         return null;
     }
 
+    /**
+     * @author  zhuxinyu 2023-11-02
+     *      根据社团Id查询社团的所有活动
+     * @param joinPoint
+     * @return
+     */
     @Override
     @Before("execution(* com.gsxy.core.controller.CommunityController.CommuntiyAndActive(..))")
     public String communityAndActive(JoinPoint joinPoint) {

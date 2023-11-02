@@ -54,6 +54,12 @@ public interface CommunityMapper {
      */
     public Long updateByIdcommunity(Community community);
 
+    /**
+     * @author  zhuxinyu 2023-11-02
+     *      根据社团Id查询社团的所有活动
+     * @param communityId
+     * @return
+     */
     public List<CommunityAndActiveVo> communityAndActive(Long communityId);
 
     /**

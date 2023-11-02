@@ -2,6 +2,10 @@ package com.gsxy.core.pojo.bo;
 
 import java.io.Serializable;
 
+/**
+ * @author  zhuxinyu 2023-11-02
+ *      根据社团Id查询社团的所有活动
+ */
 public class CommunityAndActiveBo implements Serializable {
     private String token;
     private Long communtiyId;//社团id

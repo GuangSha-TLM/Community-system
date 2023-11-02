@@ -134,6 +134,12 @@ public class CommunityServiceImpl implements CommunityService {
         return new ResponseVo<>("查询成功",userList,"0x200");
     }
 
+    /**
+     * @author  zhuxinyu 2023-11-02
+     *      根据社团Id查询社团的所有活动
+     * @param communityAndActiveBo
+     * @return
+     */
     @Override
     public ResponseVo communityAndActive(CommunityAndActiveBo communityAndActiveBo) {
         String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");

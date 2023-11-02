@@ -92,6 +92,13 @@ public class CommunityController {
         }
         return JSONArray.toJSONString(communityService.communityAndUser());
     }
+
+    /**
+     * @author  zhuxinyu 2023-11-02
+     *      根据社团Id查询社团的所有活动
+     * @param communityAndActiveBo
+     * @return
+     */
     @PostMapping("/communityAndActive")
     @ApiOperation("根据社团Id查询社团的所有活动信息")
     public String CommuntiyAndActive(@RequestBody CommunityAndActiveBo communityAndActiveBo){
