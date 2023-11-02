@@ -92,6 +92,16 @@ public class CommunityController {
         }
         return JSONArray.toJSONString(communityService.communityAndUser());
     }
+    @PostMapping("/communityAndActive")
+    @ApiOperation("根据社团Id查询社团的所有活动信息")
+    public String CommuntiyAndActive(@RequestBody CommunityAndActiveBo communityAndActiveBo){
+        Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+        if (map.get("error") != null) {
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
+        return JSONArray.toJSONString(communityService.communityAndActive(communityAndActiveBo));
+    }
 
     /**
      * @author zhuxinyu 2023-10-24

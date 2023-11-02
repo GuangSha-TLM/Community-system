@@ -2,6 +2,7 @@ package com.gsxy.core.mapper;
 
 import com.gsxy.core.pojo.Community;
 import com.gsxy.core.pojo.bo.CommunityPagingToGetDataBo;
+import com.gsxy.core.pojo.vo.CommunityAndActiveVo;
 import com.gsxy.core.pojo.vo.CommunityAndUserVo;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -52,6 +53,8 @@ public interface CommunityMapper {
      * @return
      */
     public Long updateByIdcommunity(Community community);
+
+    public List<CommunityAndActiveVo> communityAndActive(Long communityId);
 
     /**
      * @author zhuxinyu 2023-10-30

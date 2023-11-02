@@ -50,7 +50,7 @@ public interface CommunityControllerAop {
     public String communityAndUser(JoinPoint joinPoint);
 
 
-
+    public String communityAndActive(JoinPoint joinPoint);
     /**
      * @author Oh… Yeah!!!, 2023-10-30
      *       用户向社长发送通知，加入社团(鉴权)

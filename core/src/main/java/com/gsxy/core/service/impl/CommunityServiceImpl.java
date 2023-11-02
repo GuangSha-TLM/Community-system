@@ -3,10 +3,7 @@ package com.gsxy.core.service.impl;
 import com.gsxy.core.mapper.*;
 import com.gsxy.core.pojo.*;
 import com.gsxy.core.pojo.bo.*;
-import com.gsxy.core.pojo.vo.CommunityAndUserVo;
-import com.gsxy.core.pojo.vo.CommunityPagingToGetDataVo;
-import com.gsxy.core.pojo.vo.ResponseVo;
-import com.gsxy.core.pojo.vo.UserSendMessageVo;
+import com.gsxy.core.pojo.vo.*;
 import com.gsxy.core.service.CommunityService;
 import com.gsxy.core.util.ThreadLocalUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -136,6 +133,22 @@ public class CommunityServiceImpl implements CommunityService {
 
         return new ResponseVo<>("查询成功",userList,"0x200");
     }
+
+    @Override
+    public ResponseVo communityAndActive(CommunityAndActiveBo communityAndActiveBo) {
+        String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
+        Long userId = Long.valueOf(userIdOfStr);
+        if(userId == null || userId == 0L){
+            return new ResponseVo("token解析失败",null,"0x501");
+        }
+        Long communtiyId = communityAndActiveBo.getCommuntiyId();
+        List<CommunityAndActiveVo> community = communityMapper.communityAndActive(communtiyId);
+        if (community == null) {
+            return new ResponseVo<>("查询失败",communtiyId,"0x500");
+        }
+        return new ResponseVo<>("查询成功",community,"0x200");
+    }
+
 
     /**
      * @author zhuxinyu 2023-10-29

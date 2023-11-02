@@ -101,7 +101,15 @@ public class CommunityControllerAopImpl implements CommunityControllerAop {
         return null;
     }
 
-
+    @Override
+    @Before("execution(* com.gsxy.core.controller.CommunityController.CommuntiyAndActive(..))")
+    public String communityAndActive(JoinPoint joinPoint) {
+        Object[] args = joinPoint.getArgs();
+        CommunityAndActiveBo communityAndActiveBo = (CommunityAndActiveBo) args[0];
+        String token = communityAndActiveBo.getToken();
+        systemService.isAdmin(token,0);
+        return null;
+    }
     /**
      * @author Oh… Yeah!!!, 2023-10-30
      *       用户向社长发送通知，加入社团(鉴权)
