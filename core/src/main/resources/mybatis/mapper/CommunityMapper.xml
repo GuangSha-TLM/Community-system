@@ -52,17 +52,17 @@
         @author zhuxinyu 2023-11-02
             查询社团所有活动
     -->
-    <select id="communityAndActive" resultType="com.gsxy.core.pojo.vo.CommunityAndUserVo"
+    <select id="communityAndActive" resultType="com.gsxy.core.pojo.vo.CommunityAndActiveVo"
             parameterType="com.gsxy.core.pojo.bo.CommunityAndActiveBo">
         SELECT
             us.community,
             us.title,
             us.context
         FROM
-            community AS c
+            community AS co
                 INNER JOIN
-            active AS us
-            ON(c.community_id = us.community)
+            active AS ac
+            ON(co.community_id = ac.community)
         WHERE
             c.community_id = #{communtiyId};
     </select>
