@@ -110,6 +110,11 @@ public class CommunityController {
         return JSONArray.toJSONString(communityService.communityAndActive(communityAndActiveBo));
     }
 
+    @PostMapping("/communityAllname")
+    @ApiOperation("查询所有社团")
+    public String CommnuityAllname(){
+        return JSONArray.toJSONString(communityService.communityAllname());
+    }
     /**
      * @author zhuxinyu 2023-10-24
      *      通过id修改社团数据

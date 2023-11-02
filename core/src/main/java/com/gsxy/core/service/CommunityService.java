@@ -79,6 +79,8 @@ public interface CommunityService {
      * @return
      */
     public ResponseVo communityAndActive(CommunityAndActiveBo communityAndActiveBo);
+
+    public ResponseVo communityAllname();
 }
 
 

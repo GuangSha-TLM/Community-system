@@ -66,6 +66,14 @@
         WHERE
             c.community_id = #{communtiyId};
     </select>
+
+    <select id="communityAllname" resultType="com.gsxy.core.pojo.bo.CommunityAllname">
+        SELECT
+            `name`, introduce, create_by
+        FROM
+            community
+
+    </select>
     <!--
         @author zhuxinyu 2023-10-24
            更新社团

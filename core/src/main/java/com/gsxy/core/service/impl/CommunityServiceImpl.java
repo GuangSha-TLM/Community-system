@@ -155,7 +155,11 @@ public class CommunityServiceImpl implements CommunityService {
         return new ResponseVo<>("查询成功",community,"0x200");
     }
 
-
+    @Override
+    public ResponseVo communityAllname(){
+        List<CommunityAllname> list = communityMapper.communityAllname();
+        return new ResponseVo<>("查询成功",list,"0x200");
+    }
     /**
      * @author zhuxinyu 2023-10-29
      *    分页获取数据
