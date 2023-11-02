@@ -71,6 +71,21 @@ public interface CommunityService {
      * @return
      */
     public ResponseVo communityAndUser();
+
+    /**
+     * @author  zhuxinyu 2023-11-02
+     *      根据社团Id查询社团的所有活动
+     * @param communityAndActiveBo
+     * @return
+     */
+    public ResponseVo communityAndActive(CommunityAndActiveBo communityAndActiveBo);
+
+    /**
+     * @author zhuxinyu 2023-11-02
+     *      查询所有的社团
+     * @return
+     */
+    public ResponseVo communityAllname();
 }
 
 

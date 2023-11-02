@@ -49,8 +49,13 @@ public interface CommunityControllerAop {
      */
     public String communityAndUser(JoinPoint joinPoint);
 
-
-
+    /**
+     * @author  zhuxinyu 2023-11-02
+     *      根据社团Id查询社团的所有活动
+     * @param joinPoint
+     * @return
+     */
+    public String communityAndActive(JoinPoint joinPoint);
     /**
      * @author Oh… Yeah!!!, 2023-10-30
      *       用户向社长发送通知，加入社团(鉴权)
