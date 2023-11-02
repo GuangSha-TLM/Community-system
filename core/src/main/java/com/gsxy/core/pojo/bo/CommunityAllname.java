@@ -10,17 +10,17 @@ public class CommunityAllname implements Serializable {
     private Long   communityId;//社团id
     private String name;//社团名字
     private String introduce;//社团介绍
-    private String names;//创建人姓名
+    private String username;//创建人姓名
 
     public CommunityAllname(){
 
     }
 
-    public CommunityAllname(Long communityId, String name, String introduce, String names) {
+    public CommunityAllname(Long communityId, String name, String introduce, String username) {
         this.communityId = communityId;
         this.name = name;
         this.introduce = introduce;
-        this.names = names;
+        this.username = username;
     }
 
     public Long getCommunityId() {
@@ -47,12 +47,12 @@ public class CommunityAllname implements Serializable {
         this.introduce = introduce;
     }
 
-    public String getNames() {
-        return names;
+    public String getUsername() {
+        return username;
     }
 
-    public void setNames(String names) {
-        this.names = names;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     @Override
@@ -61,7 +61,7 @@ public class CommunityAllname implements Serializable {
                 "communityId=" + communityId +
                 ", name='" + name + '\'' +
                 ", introduce='" + introduce + '\'' +
-                ", names='" + names + '\'' +
+                ", username='" + username + '\'' +
                 '}';
     }
 }
