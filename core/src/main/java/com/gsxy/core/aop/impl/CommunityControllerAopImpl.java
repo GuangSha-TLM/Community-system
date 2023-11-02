@@ -92,6 +92,11 @@ public class CommunityControllerAopImpl implements CommunityControllerAop {
         systemService.auth(token);
     }
 
+    /**
+     * @author zhuxinyu 2023-10-30
+     *      根据社团Id查询该社团的所有用户数据
+     * @return String
+     */
     @Override
     @Before("execution(* com.gsxy.core.controller.CommunityController.CommunityAndUser(..))")
     public String communityAndUser(JoinPoint joinPoint) {
