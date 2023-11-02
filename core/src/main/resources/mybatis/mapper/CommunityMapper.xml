@@ -66,7 +66,11 @@
         WHERE
             c.community_id = #{communtiyId};
     </select>
+    <!--
+          @author  zhuxinyu 2023-11-02
+          根据社团Id查询社团的所有活动
 
+    -->
     <select id="communityAllname" resultType="com.gsxy.core.pojo.bo.CommunityAllname">
         SELECT
             c.`name`, c.introduce, c.community_id,u.username

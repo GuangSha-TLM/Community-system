@@ -155,6 +155,11 @@ public class CommunityServiceImpl implements CommunityService {
         return new ResponseVo<>("查询成功",community,"0x200");
     }
 
+    /**
+     * @author zhuxinyu 2023-11-02
+     *      查询所有的社团
+     * @return
+     */
     @Override
     public ResponseVo communityAllname(){
         List<CommunityAllname> list = communityMapper.communityAllname();

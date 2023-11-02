@@ -80,6 +80,11 @@ public interface CommunityService {
      */
     public ResponseVo communityAndActive(CommunityAndActiveBo communityAndActiveBo);
 
+    /**
+     * @author zhuxinyu 2023-11-02
+     *      查询所有的社团
+     * @return
+     */
     public ResponseVo communityAllname();
 }
 

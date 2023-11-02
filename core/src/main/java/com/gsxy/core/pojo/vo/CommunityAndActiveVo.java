@@ -1,7 +1,10 @@
 package com.gsxy.core.pojo.vo;
 
 import java.io.Serializable;
-
+/**
+ * @author  zhuxinyu 2023-11-02
+ *      根据社团Id查询社团的所有活动
+ */
 public class CommunityAndActiveVo implements Serializable {
     private Long   community;//社团id
     private String title;//活动标题
