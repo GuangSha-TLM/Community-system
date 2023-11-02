@@ -69,10 +69,12 @@
 
     <select id="communityAllname" resultType="com.gsxy.core.pojo.bo.CommunityAllname">
         SELECT
-            `name`, introduce, create_by
+            c.`name`, c.introduce, c.community_id,u.`name`
         FROM
-            community
-
+            community AS c
+                INNER JOIN
+            user AS u
+            ON(c.create_by = u.id)
     </select>
     <!--
         @author zhuxinyu 2023-10-24

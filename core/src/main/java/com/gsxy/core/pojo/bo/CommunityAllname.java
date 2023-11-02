@@ -2,18 +2,33 @@ package com.gsxy.core.pojo.bo;
 
 import java.io.Serializable;
 
+/**
+ * @author zhuxinyu 2023-11-02
+ *      查找所有社团
+ */
 public class CommunityAllname implements Serializable {
+    private Long   communityId;//社团id
     private String name;//社团名字
     private String introduce;//社团介绍
-    private Long createBy;//社团创建人
+    private String names;//创建人姓名
+
     public CommunityAllname(){
 
     }
 
-    public CommunityAllname(String name, String introduce, Long createBy) {
+    public CommunityAllname(Long communityId, String name, String introduce, String names) {
+        this.communityId = communityId;
         this.name = name;
         this.introduce = introduce;
-        this.createBy = createBy;
+        this.names = names;
+    }
+
+    public Long getCommunityId() {
+        return communityId;
+    }
+
+    public void setCommunityId(Long communityId) {
+        this.communityId = communityId;
     }
 
     public String getName() {
@@ -32,20 +47,21 @@ public class CommunityAllname implements Serializable {
         this.introduce = introduce;
     }
 
-    public Long getCreateBy() {
-        return createBy;
+    public String getNames() {
+        return names;
     }
 
-    public void setCreateBy(Long createBy) {
-        this.createBy = createBy;
+    public void setNames(String names) {
+        this.names = names;
     }
 
     @Override
     public String toString() {
         return "CommunityAllname{" +
-                "name='" + name + '\'' +
+                "communityId=" + communityId +
+                ", name='" + name + '\'' +
                 ", introduce='" + introduce + '\'' +
-                ", createBy=" + createBy +
+                ", names='" + names + '\'' +
                 '}';
     }
 }
