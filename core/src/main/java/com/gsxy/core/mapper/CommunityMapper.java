@@ -63,6 +63,11 @@ public interface CommunityMapper {
      */
     public List<CommunityAndActiveVo> communityAndActive(Long communityId);
 
+    /**
+     * @author zhuxinyu 2023-11-02
+     *      查询所有社团
+     * @return
+     */
     public List<CommunityAllname> communityAllname();
 
     /**
