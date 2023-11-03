@@ -139,10 +139,10 @@ public class UserAdminController {
     @PostMapping("/userAdminFindAllSignInStatus")
     @ApiOperation("管理员显示所有签到信息")
     public String userAdminFindAllSignInStatus(){
-        Map<String,String> map = ThreadLocalUtil.mapThreadLocal.get();
-        if(map.get("error") != null){
-            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
-        }
+//        Map<String,String> map = ThreadLocalUtil.mapThreadLocal.get();
+//        if(map.get("error") != null){
+//            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+//        }
 
         return JSONArray.toJSONString(userAdminService.findAllSignInStatus());
     }
