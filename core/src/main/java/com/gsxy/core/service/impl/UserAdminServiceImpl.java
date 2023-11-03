@@ -154,34 +154,6 @@ public class UserAdminServiceImpl implements UserAdminService {
 
         signInAdminBo.setSignInAdmin(signInAdmin1);
 
-        //- ------------
-        //插入最终实体数据到sign_in_user_status表中
-        UserSignInStatusBo userSignInStatusBo = new UserSignInStatusBo();
-
-        //获取需要使用的user表中字段
-        UserSignBo userSignBo = new UserSignBo();
-        userSignBo.setUserId(adminId);
-
-        //映射user和signInAdmin中需要的字段值到userSignInStatusBo中
-        userSignInStatusBo.setAdminId(signInAdmin1.getAdminId());
-        userSignInStatusBo.setCommunityId(signInAdmin1.getCommunityId());
-        userSignInStatusBo.setCreateTime(signInAdmin1.getCreateTime());
-
-        //先将sign_in_admin中查找出的字段放到sign_in_user_status表中
-        userAdminMapper.insertSignInUserStatus(userSignInStatusBo);//bug
-
-        //查询实体类所需返回全部字段
-        UserSignInStatusBo userSignInStatusBo1 = userAdminMapper.selectToGetUserBo(userSignInStatusBo);
-
-        if (userSignInStatusBo1 != null) {
-            //删除实体类中的不全信息
-            userAdminMapper.deleteBYIdToStatus(userSignInStatusBo1);
-
-            //插入所有的实体类信息
-            userAdminMapper.insertSignInUserStatusAll(userSignInStatusBo1);
-        }
-// ---------------------
-
         return new ResponseVo("签到已发起",signInAdminBo,"0x200");
     }
 

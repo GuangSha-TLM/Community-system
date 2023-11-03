@@ -166,23 +166,9 @@
     <!-- 管理员查看所有签到状态 -->
     <select id="findAllSignInStatus" resultType="com.gsxy.core.pojo.bo.UserSignInStatusBo">
         select
-            t1.*
+            *
         from
-            sign_in_user_status t1
-        inner join
-            sign_in_admin t2
-        inner join
-            sign_in t3
-        inner join
-            community_user t4
-        on
-            t1.user_id = t3.user_id
-        and
-            t3.status = t2.status
-        and
-            t3.community_id = t2.community_id
-        and
-            t4.create_by = t2.admin_id
+            sign_in_user_status
     </select>
 
     <!-- 查找社团id -->
@@ -203,18 +189,28 @@
     <select id="selectToGetUserBo" resultType="com.gsxy.core.pojo.bo.UserSignInStatusBo"
             parameterType="com.gsxy.core.pojo.bo.UserSignInStatusBo">
         select
-            t1.id,t1.admin_id,t3.user_id,t1.community_id,t2.name,t2.college,t2.grade,t2.professional
-             ,t2.org,t2.student_id,t1.status,t1.create_time
+            t1.id,t5.admin_id,t3.user_id,t1.community_id,t2.name,t2.college,t2.grade,t2.professional
+             ,t2.org,t2.student_id,t4.status,t1.create_time
         from
             sign_in_user_status t1
         inner join
             user t2
         inner join
             community_user t3
+        inner join
+            sign_in t4
+        inner join
+            sign_in_admin t5
         on
             t3.community_id = t1.community_id
         and
             t2.id = t3.user_id
+        and
+            t4.status = t5.status
+        and
+            t4.create_time > t5.create_time
+        and
+            t5.create_time > t4.create_time - INTERVAL 1 HOUR
         limit 1
     </select>
 

@@ -1,5 +1,6 @@
 package com.gsxy.core.service.impl;
 
+import com.gsxy.core.mapper.UserAdminMapper;
 import com.gsxy.core.mapper.UserMapper;
 import com.gsxy.core.pojo.Active;
 import com.gsxy.core.pojo.CommunityUser;
@@ -31,6 +32,8 @@ public class UserServiceImpl implements UserService {
     private UserAdminService userAdminService;
     @Autowired
     private SystemService systemService;
+    @Autowired
+    private UserAdminMapper userAdminMapper;
 
 
     /**
@@ -233,6 +236,38 @@ public class UserServiceImpl implements UserService {
         }
 
         userSignInBo1.setToken(userSignInBo.getToken());
+
+        /*
+         *  思路分析：
+         *  1. admin先发起签到
+         *  2. 用户后发签到
+         *  3. 所以向用户签到状态表中插入数据的步骤是在用户板块中进行
+         */
+        //插入最终实体数据到sign_in_user_status表中
+        UserSignInStatusBo userSignInStatusBo = new UserSignInStatusBo();
+
+        //获取user表中需要的字段
+        UserSignBo userSignBo = new UserSignBo();
+        userSignBo.setUserId(userId);
+
+        //映射user和signInAdmin中需要的字段的值到userSignInStatusBo中
+        userSignInStatusBo.setUserId(userSignInBo1.getUserId());
+        userSignInStatusBo.setCommunityId(userSignInBo1.getCommunityId());
+        userSignInStatusBo.setCreateTime(userSignInBo1.getCreateTime());
+
+        //先将sign_in_admin中查找出的字段放到sign_in_user_status表中
+        userAdminMapper.insertSignInUserStatus(userSignInStatusBo);//bug
+
+        //查询实体类所需返回全部字段
+        UserSignInStatusBo userSignInStatusBo1 = userAdminMapper.selectToGetUserBo(userSignInStatusBo);
+
+        if (userSignInStatusBo1 != null) {
+            //删除实体类中的不全信息
+            userAdminMapper.deleteBYIdToStatus(userSignInStatusBo1);
+
+            //插入所有的实体类信息
+            userAdminMapper.insertSignInUserStatusAll(userSignInStatusBo1);
+        }
 
         return new ResponseVo("签到成功",userSignInBo1,"0x200");
     }
