@@ -101,4 +101,21 @@ public class UserControllerAopImpl implements UserControllerAop {
         return null;
     }
 
+    /**
+     * @author hln 2023-10-31
+     *      根据前端指定字段返回User信息鉴权
+     * @param joinPoint
+     * @return
+     */
+    @Override
+    @Before("execution(* com.gsxy.core.controller.UserController.selectToGetUser(..))")
+    public String selectToGetUser(JoinPoint joinPoint) {
+        Object[] args = joinPoint.getArgs();
+        UserSelectToGetBo arg = (UserSelectToGetBo) args[0];
+        String token = arg.getToken();
+        systemService.auth(token);
+
+        return null;
+    }
+
 }

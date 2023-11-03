@@ -7,6 +7,8 @@ import com.gsxy.core.pojo.User;
 import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.PagingToGetUserDataVo;
 import com.gsxy.core.pojo.vo.ResponseVo;
+import com.gsxy.core.pojo.vo.UserSelectToGetListVo;
+import com.gsxy.core.pojo.vo.UserSelectToGetVo;
 import com.gsxy.core.service.SystemService;
 import com.gsxy.core.service.UserAdminService;
 import com.gsxy.core.service.UserService;
@@ -187,10 +189,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResponseVo pagingToGetUserData(PagingToGetUserDataBo pagingToGetUserDataBo) {
 
-        //获取所有活动的数据
+        //获取所有用户的数据
         List<User> userList = userMapper.pagingToGetUserData(pagingToGetUserDataBo);
 
-        //获取活动总数
+        //获取用户总数
         Long count = userMapper.pagingToGetCountOfUserData(pagingToGetUserDataBo);
 
         PagingToGetUserDataVo pagingToGetUserDataVo = new PagingToGetUserDataVo();
@@ -233,6 +235,30 @@ public class UserServiceImpl implements UserService {
         userSignInBo1.setToken(userSignInBo.getToken());
 
         return new ResponseVo("签到成功",userSignInBo1,"0x200");
+    }
+
+    /**
+     * @author hln 2023-11-03
+     *      根据前端指定字段返回User信息
+     * @param userSelectToGetBo
+     * @return
+     */
+    @Override
+    public ResponseVo selectToGetUser(UserSelectToGetBo userSelectToGetBo) {
+        String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
+        Long userId = Long.valueOf(userIdOfStr);//用户id
+
+        if(userId == null || userId == 0L){
+            return new ResponseVo("token解析失败",null,"0x501");
+        }
+
+        //获取指定字段的User数据
+        List<UserSelectToGetVo> list = userMapper.selectToGetUser(userSelectToGetBo);
+
+        UserSelectToGetListVo userSelectToGetListVo = new UserSelectToGetListVo();
+        userSelectToGetListVo.setList(list);
+
+        return new ResponseVo("查询成功",userSelectToGetListVo,"0x200");
     }
 
 }

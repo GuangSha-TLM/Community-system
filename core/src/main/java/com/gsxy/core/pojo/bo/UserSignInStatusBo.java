@@ -9,7 +9,10 @@ import java.util.Date;
 public class UserSignInStatusBo implements Serializable {
 
     private String token;
+    private Long id;
     private Long adminId;//管理员ID（仅用来进行连表查询）
+    private Long userId;//用户ID
+    private Long communityId;//社团ID
     private String name;//用户性名
     private Integer college;//学院
     private String grade;//年级
@@ -19,9 +22,12 @@ public class UserSignInStatusBo implements Serializable {
     private Integer status;//状态(0未签，1签到 默认为0)
     private Date createTime;//签到时间
 
-    public UserSignInStatusBo(String token, Long adminId, String name, Integer college, String grade, String professional, Integer org, String studentId, Integer status, Date createTime) {
+    public UserSignInStatusBo(String token, Long id, Long adminId, Long userId, Long communityId, String name, Integer college, String grade, String professional, Integer org, String studentId, Integer status, Date createTime) {
         this.token = token;
+        this.id = id;
         this.adminId = adminId;
+        this.userId = userId;
+        this.communityId = communityId;
         this.name = name;
         this.college = college;
         this.grade = grade;
@@ -43,12 +49,36 @@ public class UserSignInStatusBo implements Serializable {
         this.token = token;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Long getAdminId() {
         return adminId;
     }
 
     public void setAdminId(Long adminId) {
         this.adminId = adminId;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public Long getCommunityId() {
+        return communityId;
+    }
+
+    public void setCommunityId(Long communityId) {
+        this.communityId = communityId;
     }
 
     public String getName() {
@@ -119,7 +149,10 @@ public class UserSignInStatusBo implements Serializable {
     public String toString() {
         return "UserSignInStatusBo{" +
                 "token='" + token + '\'' +
+                ", id=" + id +
                 ", adminId=" + adminId +
+                ", userId=" + userId +
+                ", communityId=" + communityId +
                 ", name='" + name + '\'' +
                 ", college=" + college +
                 ", grade='" + grade + '\'' +
