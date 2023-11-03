@@ -78,6 +78,13 @@ public class CommunityUserControllerAopImpl implements CommunityUserControllerAo
         systemService.isAdmin(token,2);
         return null;
     }
+
+    /**
+     * @author zhuxinyu 2023-11-03
+     *      删除社员
+     * @param joinPoint
+     * @return
+     */
     @Override
     @Before("execution(* com.gsxy.core.controller.CommunityUserController.CommunityUserdeleteUser(..))")
     public String CommunityUserdeleteUser(JoinPoint joinPoint){

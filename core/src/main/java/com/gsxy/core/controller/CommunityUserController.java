@@ -92,6 +92,12 @@ public class CommunityUserController {
         return JSONArray.toJSONString(communityUserService.communityUserUpdateById(communityUserUpdateByIdBo));
     }
 
+    /**
+     * @author zhuxinyu 2023-11-03
+     *      删除社员
+     * @param communityUserdeleteUserBo
+     * @return
+     */
     @PostMapping("/communityUserdeleteUser")
     @ApiOperation("删除社员")
     public String CommunityUserdeleteUser(@RequestBody CommunityUserdeleteUserBo communityUserdeleteUserBo){

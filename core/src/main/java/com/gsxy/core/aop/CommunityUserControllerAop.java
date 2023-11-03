@@ -35,5 +35,11 @@ public interface CommunityUserControllerAop {
      */
     public String CommunityUserUpdateById(JoinPoint joinPoint);
 
+    /**
+     * @author zhuxinyu 2023-11-03
+     *      删除社员
+     * @param joinPoint
+     * @return
+     */
     public String CommunityUserdeleteUser(JoinPoint joinPoint);
 }
