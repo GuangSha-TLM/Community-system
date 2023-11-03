@@ -1,23 +1,18 @@
-package com.gsxy.core.pojo;
+package com.gsxy.core.pojo.bo;
 
 import java.io.Serializable;
 
-public class SignInUserStatus implements Serializable {
+public class UserSignBo implements Serializable {
 
-    private Long id;
-    private Long adminId;//管理员ID
     private Long userId;//用户ID
-    private String name;//姓名（用户）
+    private String name;//用户性名
     private Integer college;//学院
     private String grade;//年级
     private String professional;//专业
     private Integer org;//班级
     private String studentId;//学号
-    private Integer status;//状态(0未签，1签到 默认为0)
 
-    public SignInUserStatus(Long id, Long adminId, Long userId, String name, Integer college, String grade, String professional, Integer org, String studentId, Integer status) {
-        this.id = id;
-        this.adminId = adminId;
+    public UserSignBo(Long userId, String name, Integer college, String grade, String professional, Integer org, String studentId) {
         this.userId = userId;
         this.name = name;
         this.college = college;
@@ -25,26 +20,9 @@ public class SignInUserStatus implements Serializable {
         this.professional = professional;
         this.org = org;
         this.studentId = studentId;
-        this.status = status;
     }
 
-    public SignInUserStatus() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getAdminId() {
-        return adminId;
-    }
-
-    public void setAdminId(Long adminId) {
-        this.adminId = adminId;
+    public UserSignBo() {
     }
 
     public Long getUserId() {
@@ -103,27 +81,16 @@ public class SignInUserStatus implements Serializable {
         this.studentId = studentId;
     }
 
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
     @Override
     public String toString() {
-        return "SignInUserStatus{" +
-                "id=" + id +
-                ", adminId=" + adminId +
-                ", userId=" + userId +
+        return "UserSignBo{" +
+                "userId=" + userId +
                 ", name='" + name + '\'' +
                 ", college=" + college +
                 ", grade='" + grade + '\'' +
                 ", professional='" + professional + '\'' +
                 ", org=" + org +
                 ", studentId='" + studentId + '\'' +
-                ", status=" + status +
                 '}';
     }
 }

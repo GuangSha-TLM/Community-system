@@ -162,6 +162,21 @@
         limit 1
     </select>
 
+    <!-- 根据前端指定字段返回User信息 -->
+    <select id="selectToGetUser" resultType="com.gsxy.core.pojo.vo.UserSelectToGetVo"
+            parameterType="com.gsxy.core.pojo.vo.UserSelectToGetVo">
+        select
+            name,college,grade,professional
+        from
+            user
+        where
+            college = #{college}
+          and
+            grade like concat('%',#{grade},'%')
+          and
+            professional like concat('%',#{grade},'%')
+    </select>
+
     <!-- 插入用户签到状态 -->
     <insert id="userSignIn" parameterType="com.gsxy.core.pojo.bo.UserSignInBo">
         insert into

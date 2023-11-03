@@ -35,9 +35,8 @@ public class SignInAdminBo implements Serializable {
 
     @Override
     public String toString() {
-        return "SignInAdminBo{" +
+        return
                 "token='" + token + '\'' +
-                ", signInAdmin=" + signInAdmin +
-                '}';
+                ", signInAdmin=" + signInAdmin;
     }
 }

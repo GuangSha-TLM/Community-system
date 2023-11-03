@@ -15,6 +15,22 @@
             id = #{id}
     </delete>
 
+    <!-- 删除实体类中的不全信息 -->
+    <delete id="deleteBYIdToStatus" parameterType="com.gsxy.core.pojo.bo.UserSignInStatusBo">
+        delete from
+            sign_in_user_status
+        where
+            id = #{id}
+    </delete>
+
+    <!-- 插入所有的实体类信息 -->
+    <delete id="deleteByIdSignIn" parameterType="com.gsxy.core.pojo.SignInAdmin">
+        delete
+        from
+            sign_in_admin
+        where
+            id = #{id}
+    </delete>
 
     <!--
          @author Oh… Yeah!!! 2023-10-24
@@ -47,9 +63,27 @@
     <insert id="insertSignInAdmin" parameterType="com.gsxy.core.pojo.SignInAdmin">
         insert into
             sign_in_admin
-            (admin_id,create_time)
+            (admin_id,community_id,create_time)
         values
-            (#{adminId},#{createTime})
+            (#{adminId},#{communityId},#{createTime})
+    </insert>
+
+    <!-- 将sign_in_admin中查找出的字段放到sign_in_user_status表中 -->
+    <insert id="insertSignInUserStatus" parameterType="com.gsxy.core.pojo.bo.UserSignInStatusBo">
+        insert into
+            sign_in_user_status
+            (admin_id,community_id,status,create_time)
+        values
+            (#{adminId},#{communityId},#{status},#{createTime})
+    </insert>
+
+    <!-- 插入所有的实体类信息 -->
+    <insert id="insertSignInUserStatusAll" parameterType="com.gsxy.core.pojo.bo.UserSignInStatusBo">
+        insert into
+            sign_in_user_status
+            (admin_id,user_id,community_id,name,college,grade,professional,org,student_id,status,create_time)
+        values
+            (#{adminId},#{userId},#{communityId},#{name},#{college},#{grade},#{professional},#{org},#{studentId},#{status},#{createTime})
     </insert>
 
     <!--
@@ -130,9 +164,58 @@
     </select>
 
     <!-- 管理员查看所有签到状态 -->
-    <select id="findAllSignInStatus" resultType="com.gsxy.core.pojo.bo.UserSignInStatusBo"
-            parameterType="com.gsxy.core.pojo.bo.UserSignInStatusBo">
+    <select id="findAllSignInStatus" resultType="com.gsxy.core.pojo.bo.UserSignInStatusBo">
+        select
+            t1.*
+        from
+            sign_in_user_status t1
+        inner join
+            sign_in_admin t2
+        inner join
+            sign_in t3
+        inner join
+            community_user t4
+        on
+            t1.user_id = t3.user_id
+        and
+            t3.status = t2.status
+        and
+            t3.community_id = t2.community_id
+        and
+            t4.create_by = t2.admin_id
+    </select>
 
+    <!-- 查找社团id -->
+    <select id="selectToGetCommunityId" resultType="com.gsxy.core.pojo.SignInAdmin"
+            parameterType="com.gsxy.core.pojo.SignInAdmin">
+        select
+            t1.id,t1.admin_id,t2.community_id,t1.status,t1.create_time
+        from
+            sign_in_admin t1
+        inner join
+            community_user t2
+        on
+            t1.admin_id = t2.create_by
+        limit 1
+    </select>
+
+    <!-- 获取所需的所有字段 -->
+    <select id="selectToGetUserBo" resultType="com.gsxy.core.pojo.bo.UserSignInStatusBo"
+            parameterType="com.gsxy.core.pojo.bo.UserSignInStatusBo">
+        select
+            t1.id,t1.admin_id,t3.user_id,t1.community_id,t2.name,t2.college,t2.grade,t2.professional
+             ,t2.org,t2.student_id,t1.status,t1.create_time
+        from
+            sign_in_user_status t1
+        inner join
+            user t2
+        inner join
+            community_user t3
+        on
+            t3.community_id = t1.community_id
+        and
+            t2.id = t3.user_id
+        limit 1
     </select>
 
 </mapper>

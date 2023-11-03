@@ -2,6 +2,7 @@ package com.gsxy.core.mapper;
 
 import com.gsxy.core.pojo.User;
 import com.gsxy.core.pojo.bo.*;
+import com.gsxy.core.pojo.vo.UserSelectToGetVo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -110,4 +111,12 @@ public interface UserMapper {
      * @param userSignInBo1
      */
     void deleteSignIn(UserSignInBo userSignInBo1);
+
+    /**
+     * @author hln 2023-11-03
+     *      根据前端指定字段返回User信
+     * @param userSelectToGetBo
+     * @return
+     */
+    List<UserSelectToGetVo> selectToGetUser(UserSelectToGetBo userSelectToGetBo);
 }
