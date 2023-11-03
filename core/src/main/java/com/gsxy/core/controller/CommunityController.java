@@ -79,15 +79,47 @@ public class CommunityController {
 
     /**
      * @author zhuxinyu 2023-10-30
-     *      查询社团所有用户数据
+     *      根据社团Id查询该社团的所有用户数据
      * @return
      */
     @PostMapping("/communityAndUser")
-    @ApiOperation("社团用户查找")
-    public String CommunityAndUser(){
+    @ApiOperation("根据社团Id查询该社团的所有用户数据")
+    public String CommunityAndUser(@RequestParam String token){
+        Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+        if (map.get("error") != null) {
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
         return JSONArray.toJSONString(communityService.communityAndUser());
     }
 
+    /**
+     * @author  zhuxinyu 2023-11-02
+     *      根据社团Id查询社团的所有活动
+     * @param communityAndActiveBo
+     * @return
+     */
+    @PostMapping("/communityAndActive")
+    @ApiOperation("根据社团Id查询社团的所有活动信息")
+    public String CommuntiyAndActive(@RequestBody CommunityAndActiveBo communityAndActiveBo){
+        Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+        if (map.get("error") != null) {
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
+        return JSONArray.toJSONString(communityService.communityAndActive(communityAndActiveBo));
+    }
+
+    /**
+     * @author  zhuxinyu 2023-11-02
+     *      根据社团Id查询社团的所有活动
+     * @return
+     */
+    @PostMapping("/communityAllname")
+    @ApiOperation("查询所有社团")
+    public String CommnuityAllname(){
+        return JSONArray.toJSONString(communityService.communityAllname());
+    }
     /**
      * @author zhuxinyu 2023-10-24
      *      通过id修改社团数据

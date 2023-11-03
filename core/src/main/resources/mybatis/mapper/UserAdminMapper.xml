@@ -43,6 +43,15 @@
              #{updateTime},#{status},#{delFlag});
     </insert>
 
+    <!-- 插入发起签到信息到sign_in_admin表中 -->
+    <insert id="insertSignInAdmin" parameterType="com.gsxy.core.pojo.SignInAdmin">
+        insert into
+            sign_in_admin
+            (admin_id,create_time)
+        values
+            (#{adminId},#{createTime})
+    </insert>
+
     <!--
          @author Oh… Yeah!!! 2023-10-24
          更新UserAdmin数据
@@ -108,8 +117,22 @@
 
     </select>
 
+    <!-- 根据admin_id查询sign_in_admin表中相应数据 -->
+    <select id="selectToGetByAdminId" resultType="java.lang.Long"
+            parameterType="com.gsxy.core.pojo.SignInAdmin">
+        select
+            id
+        from
+            sign_in_admin
+        where
+            admin_id = #{adminId}
+        limit 1
+    </select>
 
+    <!-- 管理员查看所有签到状态 -->
+    <select id="findAllSignInStatus" resultType="com.gsxy.core.pojo.bo.UserSignInStatusBo"
+            parameterType="com.gsxy.core.pojo.bo.UserSignInStatusBo">
 
-
+    </select>
 
 </mapper>

@@ -67,10 +67,25 @@ public interface CommunityService {
 
     /**
      * @author zhuxinyu 2023-10-30
-     *      查询社团所有用户数据
+     *      根据社团Id查询该社团的所有用户数据
      * @return
      */
     public ResponseVo communityAndUser();
+
+    /**
+     * @author  zhuxinyu 2023-11-02
+     *      根据社团Id查询社团的所有活动
+     * @param communityAndActiveBo
+     * @return
+     */
+    public ResponseVo communityAndActive(CommunityAndActiveBo communityAndActiveBo);
+
+    /**
+     * @author zhuxinyu 2023-11-02
+     *      查询所有的社团
+     * @return
+     */
+    public ResponseVo communityAllname();
 }
 
 

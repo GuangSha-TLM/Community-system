@@ -1,7 +1,7 @@
 package com.gsxy.core.service.impl;
 
 import com.gsxy.core.mapper.UserAdminMapper;
-import com.gsxy.core.pojo.Img;
+import com.gsxy.core.pojo.SignInAdmin;
 import com.gsxy.core.pojo.UserAdmin;
 import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.ResponseVo;
@@ -11,6 +11,7 @@ import com.gsxy.core.util.ThreadLocalUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -113,5 +114,63 @@ public class UserAdminServiceImpl implements UserAdminService {
 
     }
 
+    /**
+     * @author hln 2023-10-31
+     *      管理员发起签到
+     * @param signInAdminBo
+     * @return
+     */
+    @Override
+    public ResponseVo userAdminSignIn(SignInAdminBo signInAdminBo) {
+
+        String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
+        Long adminId = Long.valueOf(userIdOfStr);
+
+        if (adminId == null || adminId == 0L){
+            return new ResponseVo("token解析失败",null,"0x501");
+        }
+
+        SignInAdmin signInAdmin = new SignInAdmin();
+        signInAdmin.setAdminId(adminId);
+        signInAdmin.setCreateTime(new Date());
+
+        //插入发起签到信息到sign_in_admin表中
+        userAdminMapper.insertSignInAdmin(signInAdmin);
+
+        //根据admin_id查询sign_in_admin表中相应数据
+        Long id = userAdminMapper.selectToGetByAdminId(signInAdmin);
+
+        if (id == null){
+            return new ResponseVo("签到发起失败",null,"0x500");
+        }
+
+        signInAdminBo.setSignInAdmin(signInAdmin);
+
+        return new ResponseVo("签到已发起",signInAdminBo,"0x200");
+    }
+
+    /**
+     * @author hln 2023-11-01
+     *      管理员查看所有签到状态
+     * @param userSignInStatusBo
+     * @return
+     */
+    @Override
+    public ResponseVo findAllSignInStatus(UserSignInStatusBo userSignInStatusBo) {
+        String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
+        Long adminId = Long.valueOf(userIdOfStr);
+
+        if (adminId == null || adminId == 0L){
+            return new ResponseVo("token解析失败",null,"0x501");
+        }
+
+        userSignInStatusBo.setAdminId(adminId);
+
+//        userAdminMapper.;
+
+        List<UserSignInStatusBo> list = userAdminMapper.findAllSignInStatus(userSignInStatusBo);
+
+        return null;
+    }
 
 }

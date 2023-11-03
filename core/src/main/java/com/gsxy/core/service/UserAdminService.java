@@ -54,11 +54,21 @@ public interface UserAdminService {
      */
     public Object pagingToGetUserAdminData(UserAdminPagingToGetDataBo userAdminPagingToGetDataBo);
 
+    /**
+     * @author hln 2023-10-31
+     *      管理员发起签到
+     * @param signInAdminBo
+     * @return
+     */
+    ResponseVo userAdminSignIn(SignInAdminBo signInAdminBo);
 
-
-
-
-
+    /**
+     * @author hln 2023-11-01
+     *      管理员查看所有签到状态
+     * @param userSignInStatusBo
+     * @return
+     */
+    ResponseVo findAllSignInStatus(UserSignInStatusBo userSignInStatusBo);
 }
 
 

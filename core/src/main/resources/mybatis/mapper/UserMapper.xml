@@ -150,7 +150,7 @@
     <!-- 根据user_id获取社团id -->
     <select id="selectToGetCommunityIdByUserId" resultType="com.gsxy.core.pojo.bo.UserSignInBo">
         SELECT
-            t2.user_id,t1.community_id,t2.status,t2.create_time
+            t2.id,t2.user_id,t2.status,t1.community_id,t2.create_time
         FROM
             community_user t1
         inner join
@@ -177,7 +177,7 @@
         from
             sign_in
         where
-            user_id = #{userId}
+            id = #{Id}
     </delete>
 
 </mapper>

@@ -17,8 +17,8 @@ public class UserControllerAopImpl implements UserControllerAop {
     private SystemService systemService;
 
     /**
-     * @author hln 2023-10-25
-     *      做了权限验证
+     * @author hln 2023-10-31
+     *      查找user鉴权
      * @param joinPoint
      * @return
      */
@@ -34,8 +34,8 @@ public class UserControllerAopImpl implements UserControllerAop {
     }
 
     /**
-     * @author hln 2023-10-25
-     *      做了权限验证
+     * @author hln 2023-10-31
+     *      修改user鉴权
      * @param joinPoint
      * @return
      */
@@ -51,8 +51,8 @@ public class UserControllerAopImpl implements UserControllerAop {
     }
 
     /**
-     * @author hln 2023-10-25
-     *      做了权限验证
+     * @author hln 2023-10-31
+     *      删除user鉴权
      * @param joinPoint
      * @return
      */
@@ -68,8 +68,8 @@ public class UserControllerAopImpl implements UserControllerAop {
     }
 
     /**
-     * @author hln 2023-10-27
-     *      做了权限验证
+     * @author hln 2023-10-31
+     *      分页查找user鉴权
      * @param joinPoint
      * @return
      */

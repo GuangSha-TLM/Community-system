@@ -48,5 +48,20 @@ public interface UserAdminControllerAop {
      */
     public void userAdminPagingToGetData(JoinPoint joinPoint);
 
+    /**
+     * @author hln 2023-10-31
+     *      管理员发起签到鉴权
+     * @param joinPoint
+     * @return
+     */
+    public String userAdminSignIn(JoinPoint joinPoint);
+
+    /**
+     * @author hln 2023-11-01
+     *      管理员查看所有用户签到鉴权(相应社团)
+     * @param joinPoint
+     * @return
+     */
+    public String userAdminFindAllSignInStatus(JoinPoint joinPoint);
 
 }

@@ -80,6 +80,7 @@ public class UserServiceImpl implements UserService {
 
         UserAndUserAdminBo userAndUserAdminBo = new UserAndUserAdminBo();
         BeanUtils.copyProperties(user,userAndUserAdminBo);
+        userAndUserAdminBo.setRole(role);
         UserAndUserAdminSelectByIdBo userAndUserAdminSelectByIdBo = new UserAndUserAdminSelectByIdBo();
         userAndUserAdminSelectByIdBo.setToken(jwt);
         userAndUserAdminSelectByIdBo.setUserAndUserAdminBo(userAndUserAdminBo);

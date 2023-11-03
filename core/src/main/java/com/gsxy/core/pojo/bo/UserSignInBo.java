@@ -9,13 +9,15 @@ import java.util.Date;
 public class UserSignInBo implements Serializable {
 
     private String token;
+    private Long Id;
     private Long userId;//用户ID
     private Long communityId;//社团ID
     private Integer status;//状态(0未签，1签到 默认为0)
     private Date createTime;//签到时间
 
-    public UserSignInBo(String token, Long userId, Long communityId, Integer status, Date createTime) {
+    public UserSignInBo(String token, Long id, Long userId, Long communityId, Integer status, Date createTime) {
         this.token = token;
+        Id = id;
         this.userId = userId;
         this.communityId = communityId;
         this.status = status;
@@ -31,6 +33,14 @@ public class UserSignInBo implements Serializable {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public Long getId() {
+        return Id;
+    }
+
+    public void setId(Long id) {
+        Id = id;
     }
 
     public Long getUserId() {
@@ -69,6 +79,7 @@ public class UserSignInBo implements Serializable {
     public String toString() {
         return "UserSignInBo{" +
                 "token='" + token + '\'' +
+                ", Id=" + Id +
                 ", userId=" + userId +
                 ", communityId=" + communityId +
                 ", status=" + status +
