@@ -1,8 +1,10 @@
 package com.gsxy.core.mapper;
 
 import com.gsxy.core.pojo.Community;
-import com.gsxy.core.pojo.bo.CommunityAndUserBo;
+import com.gsxy.core.pojo.bo.CommunityAllname;
 import com.gsxy.core.pojo.bo.CommunityPagingToGetDataBo;
+import com.gsxy.core.pojo.vo.CommunityAndActiveVo;
+import com.gsxy.core.pojo.vo.CommunityAndUserVo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -54,11 +56,26 @@ public interface CommunityMapper {
     public Long updateByIdcommunity(Community community);
 
     /**
-     * @author zhuxinyu 2023-10-30
-     * 查询社团所有用户
+     * @author  zhuxinyu 2023-11-02
+     *      根据社团Id查询社团的所有活动
+     * @param communityId
      * @return
      */
-    public List<CommunityAndUserBo> communityAndUser();
+    public List<CommunityAndActiveVo> communityAndActive(Long communityId);
+
+    /**
+     * @author zhuxinyu 2023-11-02
+     *      查询所有社团
+     * @return
+     */
+    public List<CommunityAllname> communityAllname();
+
+    /**
+     * @author zhuxinyu 2023-10-30
+     * 查询社团所有用户数据
+     * @return
+     */
+    public List<CommunityAndUserVo> communityAndUser(Long userId);
 
     /**
      * @author zhuxinyu 2023-10-30
@@ -67,4 +84,5 @@ public interface CommunityMapper {
      * @return
      */
     public List<Community> communityPagingToGetData(CommunityPagingToGetDataBo communityPagingToGetDataBo);
+
 }

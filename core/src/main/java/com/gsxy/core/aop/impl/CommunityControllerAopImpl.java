@@ -92,17 +92,35 @@ public class CommunityControllerAopImpl implements CommunityControllerAop {
         systemService.auth(token);
     }
 
-//    @Override
-//    @Before("execution(* com.gsxy.core.controller.CommunityController.CommunityAndUser(..))")
-//    public String communityAndUser(JoinPoint joinPoint) {
-//        Object[] args = joinPoint.getArgs();
-//        CommunityAndUserBo communityAndUserBo = (CommunityAndUserBo) args[0];
-//        String token = communityAndUserBo.getToken();
-//        systemService.isAdmin(token,1);
-//        return null;
-//    }
+    /**
+     * @author zhuxinyu 2023-10-30
+     *      根据社团Id查询该社团的所有用户数据
+     * @return String
+     */
+    @Override
+    @Before("execution(* com.gsxy.core.controller.CommunityController.CommunityAndUser(..))")
+    public String communityAndUser(JoinPoint joinPoint) {
+        Object[] args = joinPoint.getArgs();
+        String token = (String) args[0];
+        systemService.isAdmin(token,1);
+        return null;
+    }
 
-
+    /**
+     * @author  zhuxinyu 2023-11-02
+     *      根据社团Id查询社团的所有活动
+     * @param joinPoint
+     * @return
+     */
+    @Override
+    @Before("execution(* com.gsxy.core.controller.CommunityController.CommuntiyAndActive(..))")
+    public String communityAndActive(JoinPoint joinPoint) {
+        Object[] args = joinPoint.getArgs();
+        CommunityAndActiveBo communityAndActiveBo = (CommunityAndActiveBo) args[0];
+        String token = communityAndActiveBo.getToken();
+        systemService.isAdmin(token,0);
+        return null;
+    }
     /**
      * @author Oh… Yeah!!!, 2023-10-30
      *       用户向社长发送通知，加入社团(鉴权)
