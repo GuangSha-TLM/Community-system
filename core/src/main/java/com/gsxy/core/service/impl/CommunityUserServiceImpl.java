@@ -76,6 +76,20 @@ public class CommunityUserServiceImpl implements CommunityUserService {
     }
 
     @Override
+    public ResponseVo communityUserdeleteUser(CommunityUserdeleteUserBo communityUserdeleteUserBo) {
+        String communityUserIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
+        Long communityUserId = Long.valueOf(communityUserIdOfStr);
+        if(communityUserId == null || communityUserId == 0L){
+            return new ResponseVo("token解析失败",null,"0x501");
+        }
+        Long userId = communityUserdeleteUserBo.getUserId();
+        if (userId == 0L ) {
+            return new ResponseVo("删除失败", null, "0x500");
+        }
+        return new ResponseVo("删除成功",userId, "0x200");
+    }
+
+    @Override
     public ResponseVo communityUserAndUser() {
         List <CommunityUserAndUserBo> list = communityUserMapper.communityUserAndUser();
         return new ResponseVo("查询成功",list,"0x200");

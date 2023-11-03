@@ -1,10 +1,7 @@
 package com.gsxy.core.aop.impl;
 
 import com.gsxy.core.aop.CommunityUserControllerAop;
-import com.gsxy.core.pojo.bo.CommunityUserAddBo;
-import com.gsxy.core.pojo.bo.CommunityUserDeleteByIdBo;
-import com.gsxy.core.pojo.bo.CommunityUserSelectByIdBo;
-import com.gsxy.core.pojo.bo.CommunityUserUpdateByIdBo;
+import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.service.SystemService;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
@@ -77,6 +74,15 @@ public class CommunityUserControllerAopImpl implements CommunityUserControllerAo
     public String CommunityUserUpdateById(JoinPoint joinPoint) {
         Object[] args = joinPoint.getArgs();
         CommunityUserUpdateByIdBo arg = (CommunityUserUpdateByIdBo) args[0];
+        String token = arg.getToken();
+        systemService.isAdmin(token,2);
+        return null;
+    }
+    @Override
+    @Before("execution(* com.gsxy.core.controller.CommunityUserController.CommunityUserdeleteUser(..))")
+    public String CommunityUserdeleteUser(JoinPoint joinPoint){
+        Object[] args = joinPoint.getArgs();
+        CommunityUserdeleteUserBo arg = (CommunityUserdeleteUserBo) args[0];
         String token = arg.getToken();
         systemService.isAdmin(token,2);
         return null;

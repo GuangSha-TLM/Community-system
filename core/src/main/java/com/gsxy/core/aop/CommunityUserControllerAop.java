@@ -34,4 +34,6 @@ public interface CommunityUserControllerAop {
      * @return
      */
     public String CommunityUserUpdateById(JoinPoint joinPoint);
+
+    public String CommunityUserdeleteUser(JoinPoint joinPoint);
 }

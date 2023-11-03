@@ -92,6 +92,16 @@ public class CommunityUserController {
         return JSONArray.toJSONString(communityUserService.communityUserUpdateById(communityUserUpdateByIdBo));
     }
 
+    @PostMapping("/communityUserdeleteUser")
+    @ApiOperation("删除社员")
+    public String CommunityUserdeleteUser(@RequestBody CommunityUserdeleteUserBo communityUserdeleteUserBo){
+        Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+        if (map.get("error") != null) {
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
+        return JSONArray.toJSONString(communityUserService.communityUserdeleteUser(communityUserdeleteUserBo));
+    }
     /**
      * @author zhuxinyu 2023-10-30
      *      查询社团所有用户数据
