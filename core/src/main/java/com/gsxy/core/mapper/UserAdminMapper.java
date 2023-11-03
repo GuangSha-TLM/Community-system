@@ -88,8 +88,56 @@ public interface UserAdminMapper {
     /**
      * @author hln 2023-11-01
      *      管理员查看所有签到状态
+     * @return
+     */
+    List<UserSignInStatusBo> findAllSignInStatus();
+
+    /**
+     * @author hln 2023-11-01
+     *      查找社团id
+     * @param signInAdmin
+     * @return
+     */
+    SignInAdmin selectToGetCommunityId(SignInAdmin signInAdmin);
+
+    //--------------------------
+    /**
+     * @author hln 2023-11-01
+     *      获取所需返回的user中的字段
      * @param userSignInStatusBo
      * @return
      */
-    List<UserSignInStatusBo> findAllSignInStatus(UserSignInStatusBo userSignInStatusBo);
+    UserSignInStatusBo selectToGetUserBo(UserSignInStatusBo userSignInStatusBo);
+
+    //---------------------------------
+    /**
+     * @author hln 2023-11-01
+     *      先将sign_in_admin中查找出的字段放到sign_in_user_status表中
+     * @param userSignInStatusBo
+     * @return
+     */
+    void insertSignInUserStatus(UserSignInStatusBo userSignInStatusBo);
+
+    //-------------------------------
+    /**
+     * @author hln 2023-11-01
+     *      删除实体类中的不全信息
+     * @param userSignInStatusBo1
+     */
+    void deleteBYIdToStatus(UserSignInStatusBo userSignInStatusBo1);
+
+    //--------------------------------
+    /**
+     * @author hln 2023-11-01
+     *      插入所有的实体类信息
+     * @param userSignInStatusBo1
+     */
+    void insertSignInUserStatusAll(UserSignInStatusBo userSignInStatusBo1);
+
+    /**
+     * @author hln 2023-11-01
+     *      删除先前插入不完整的信息
+     * @param signInAdmin
+     */
+    void deleteByIdSignIn(SignInAdmin signInAdmin);
 }

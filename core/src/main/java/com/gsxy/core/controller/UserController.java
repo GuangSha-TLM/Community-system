@@ -4,6 +4,7 @@ import com.alibaba.fastjson2.JSONArray;
 import com.gsxy.core.pojo.User;
 import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.ResponseVo;
+import com.gsxy.core.pojo.vo.UserSelectToGetVo;
 import com.gsxy.core.service.UserService;
 import com.gsxy.core.util.ThreadLocalUtil;
 import io.swagger.annotations.Api;
@@ -163,6 +164,24 @@ public class UserController {
         }
 
         return JSONArray.toJSONString(userService.userSignIn(userSignInBo));
+    }
+
+    /**
+     * @author hln 2023-11-03
+     *      根据前端指定字段返回User信息
+     * @param userSelectToGetBo
+     * @return
+     */
+    @PostMapping("/selectToGetUser")
+    @ApiOperation("根据前端指定字段返回User信息")
+    public String selectToGetUser(@RequestBody UserSelectToGetBo userSelectToGetBo){
+        Map<String,String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+        if(map.get("error") != null){
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
+
+        return JSONArray.toJSONString(userService.selectToGetUser(userSelectToGetBo));
     }
 
 }

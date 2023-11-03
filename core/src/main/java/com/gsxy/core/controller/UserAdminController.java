@@ -134,18 +134,17 @@ public class UserAdminController {
     /**
      * @author hln 2023-11-01
      *      管理员查看所有签到状态
-     * @param userSignInStatusBo
      * @return
      */
     @PostMapping("/userAdminFindAllSignInStatus")
     @ApiOperation("管理员显示所有签到信息")
-    public String userAdminFindAllSignInStatus(@RequestBody UserSignInStatusBo userSignInStatusBo){
-        Map<String,String> map = ThreadLocalUtil.mapThreadLocal.get();
-        if(map.get("error") != null){
-            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
-        }
+    public String userAdminFindAllSignInStatus(){
+//        Map<String,String> map = ThreadLocalUtil.mapThreadLocal.get();
+//        if(map.get("error") != null){
+//            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+//        }
 
-        return JSONArray.toJSONString(userAdminService.findAllSignInStatus(userSignInStatusBo));
+        return JSONArray.toJSONString(userAdminService.findAllSignInStatus());
     }
 
 }

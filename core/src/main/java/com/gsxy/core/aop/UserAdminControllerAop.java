@@ -56,12 +56,12 @@ public interface UserAdminControllerAop {
      */
     public String userAdminSignIn(JoinPoint joinPoint);
 
-    /**
-     * @author hln 2023-11-01
-     *      管理员查看所有用户签到鉴权(相应社团)
-     * @param joinPoint
-     * @return
-     */
-    public String userAdminFindAllSignInStatus(JoinPoint joinPoint);
+//    /**
+//     * @author hln 2023-11-01
+//     *      管理员查看所有用户签到鉴权(相应社团)
+//     * @param joinPoint
+//     * @return
+//     */
+//    public String userAdminFindAllSignInStatus(JoinPoint joinPoint);
 
 }

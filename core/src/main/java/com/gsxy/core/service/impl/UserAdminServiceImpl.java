@@ -137,14 +137,22 @@ public class UserAdminServiceImpl implements UserAdminService {
         //插入发起签到信息到sign_in_admin表中
         userAdminMapper.insertSignInAdmin(signInAdmin);
 
+        //查找社团id
+        SignInAdmin signInAdmin1 = userAdminMapper.selectToGetCommunityId(signInAdmin);
+
+        if (signInAdmin1 != null){
+            userAdminMapper.deleteByIdSignIn(signInAdmin1);
+            userAdminMapper.insertSignInAdmin(signInAdmin1);
+        }
+
         //根据admin_id查询sign_in_admin表中相应数据
-        Long id = userAdminMapper.selectToGetByAdminId(signInAdmin);
+        Long id = userAdminMapper.selectToGetByAdminId(signInAdmin1);
 
         if (id == null){
             return new ResponseVo("签到发起失败",null,"0x500");
         }
 
-        signInAdminBo.setSignInAdmin(signInAdmin);
+        signInAdminBo.setSignInAdmin(signInAdmin1);
 
         return new ResponseVo("签到已发起",signInAdminBo,"0x200");
     }
@@ -152,25 +160,17 @@ public class UserAdminServiceImpl implements UserAdminService {
     /**
      * @author hln 2023-11-01
      *      管理员查看所有签到状态
-     * @param userSignInStatusBo
      * @return
      */
     @Override
-    public ResponseVo findAllSignInStatus(UserSignInStatusBo userSignInStatusBo) {
-        String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
-        Long adminId = Long.valueOf(userIdOfStr);
+    public ResponseVo findAllSignInStatus() {
+        List<UserSignInStatusBo> list = userAdminMapper.findAllSignInStatus();
 
-        if (adminId == null || adminId == 0L){
-            return new ResponseVo("token解析失败",null,"0x501");
+        if(list == null){
+            return new ResponseVo("查询失败",null,"0x500");
         }
 
-        userSignInStatusBo.setAdminId(adminId);
-
-//        userAdminMapper.;
-
-        List<UserSignInStatusBo> list = userAdminMapper.findAllSignInStatus(userSignInStatusBo);
-
-        return null;
+        return new ResponseVo("查询成功",list,"0x200");
     }
 
 }

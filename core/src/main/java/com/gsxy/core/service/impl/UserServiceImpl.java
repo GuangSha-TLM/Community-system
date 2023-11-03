@@ -1,5 +1,6 @@
 package com.gsxy.core.service.impl;
 
+import com.gsxy.core.mapper.UserAdminMapper;
 import com.gsxy.core.mapper.UserMapper;
 import com.gsxy.core.pojo.Active;
 import com.gsxy.core.pojo.CommunityUser;
@@ -7,6 +8,8 @@ import com.gsxy.core.pojo.User;
 import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.PagingToGetUserDataVo;
 import com.gsxy.core.pojo.vo.ResponseVo;
+import com.gsxy.core.pojo.vo.UserSelectToGetListVo;
+import com.gsxy.core.pojo.vo.UserSelectToGetVo;
 import com.gsxy.core.service.SystemService;
 import com.gsxy.core.service.UserAdminService;
 import com.gsxy.core.service.UserService;
@@ -29,6 +32,8 @@ public class UserServiceImpl implements UserService {
     private UserAdminService userAdminService;
     @Autowired
     private SystemService systemService;
+    @Autowired
+    private UserAdminMapper userAdminMapper;
 
 
     /**
@@ -187,10 +192,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResponseVo pagingToGetUserData(PagingToGetUserDataBo pagingToGetUserDataBo) {
 
-        //获取所有活动的数据
+        //获取所有用户的数据
         List<User> userList = userMapper.pagingToGetUserData(pagingToGetUserDataBo);
 
-        //获取活动总数
+        //获取用户总数
         Long count = userMapper.pagingToGetCountOfUserData(pagingToGetUserDataBo);
 
         PagingToGetUserDataVo pagingToGetUserDataVo = new PagingToGetUserDataVo();
@@ -232,7 +237,63 @@ public class UserServiceImpl implements UserService {
 
         userSignInBo1.setToken(userSignInBo.getToken());
 
+        /*
+         *  思路分析：
+         *  1. admin先发起签到
+         *  2. 用户后发签到
+         *  3. 所以向用户签到状态表中插入数据的步骤是在用户板块中进行
+         */
+        //插入最终实体数据到sign_in_user_status表中
+        UserSignInStatusBo userSignInStatusBo = new UserSignInStatusBo();
+
+        //获取user表中需要的字段
+        UserSignBo userSignBo = new UserSignBo();
+        userSignBo.setUserId(userId);
+
+        //映射user和signInAdmin中需要的字段的值到userSignInStatusBo中
+        userSignInStatusBo.setUserId(userSignInBo1.getUserId());
+        userSignInStatusBo.setCommunityId(userSignInBo1.getCommunityId());
+        userSignInStatusBo.setCreateTime(userSignInBo1.getCreateTime());
+
+        //先将sign_in_admin中查找出的字段放到sign_in_user_status表中
+        userAdminMapper.insertSignInUserStatus(userSignInStatusBo);//bug
+
+        //查询实体类所需返回全部字段
+        UserSignInStatusBo userSignInStatusBo1 = userAdminMapper.selectToGetUserBo(userSignInStatusBo);
+
+        if (userSignInStatusBo1 != null) {
+            //删除实体类中的不全信息
+            userAdminMapper.deleteBYIdToStatus(userSignInStatusBo1);
+
+            //插入所有的实体类信息
+            userAdminMapper.insertSignInUserStatusAll(userSignInStatusBo1);
+        }
+
         return new ResponseVo("签到成功",userSignInBo1,"0x200");
+    }
+
+    /**
+     * @author hln 2023-11-03
+     *      根据前端指定字段返回User信息
+     * @param userSelectToGetBo
+     * @return
+     */
+    @Override
+    public ResponseVo selectToGetUser(UserSelectToGetBo userSelectToGetBo) {
+        String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
+        Long userId = Long.valueOf(userIdOfStr);//用户id
+
+        if(userId == null || userId == 0L){
+            return new ResponseVo("token解析失败",null,"0x501");
+        }
+
+        //获取指定字段的User数据
+        List<UserSelectToGetVo> list = userMapper.selectToGetUser(userSelectToGetBo);
+
+        UserSelectToGetListVo userSelectToGetListVo = new UserSelectToGetListVo();
+        userSelectToGetListVo.setList(list);
+
+        return new ResponseVo("查询成功",userSelectToGetListVo,"0x200");
     }
 
 }

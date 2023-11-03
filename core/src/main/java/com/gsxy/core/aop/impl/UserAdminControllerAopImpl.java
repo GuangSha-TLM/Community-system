@@ -124,21 +124,21 @@ public class UserAdminControllerAopImpl implements UserAdminControllerAop {
         return null;
     }
 
-    /**
-     * @author hln 2023-11-01
-     *      管理员查看所有用户签到鉴权(相应社团)
-     * @param joinPoint
-     * @return
-     */
-    @Override
-    public String userAdminFindAllSignInStatus(JoinPoint joinPoint) {
-        Object[] args = joinPoint.getArgs();
-        UserSignInStatusBo arg = (UserSignInStatusBo) args[0];
-        String token = arg.getToken();
-        systemService.isAdmin(token,2);
-
-        return null;
-    }
+//    /**
+//     * @author hln 2023-11-01
+//     *      管理员查看所有用户签到鉴权(相应社团)
+//     * @param joinPoint
+//     * @return
+//     */
+//    @Override
+//    public String userAdminFindAllSignInStatus(JoinPoint joinPoint) {
+//        Object[] args = joinPoint.getArgs();
+//        UserSignInStatusBo arg = (UserSignInStatusBo) args[0];
+//        String token = arg.getToken();
+//        systemService.isAdmin(token,2);
+//
+//        return null;
+//    }
 
 
 }

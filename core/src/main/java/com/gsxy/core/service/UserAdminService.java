@@ -65,10 +65,9 @@ public interface UserAdminService {
     /**
      * @author hln 2023-11-01
      *      管理员查看所有签到状态
-     * @param userSignInStatusBo
      * @return
      */
-    ResponseVo findAllSignInStatus(UserSignInStatusBo userSignInStatusBo);
+    ResponseVo findAllSignInStatus();
 }
 
 

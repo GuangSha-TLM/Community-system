@@ -45,4 +45,12 @@ public interface UserControllerAop {
      */
     public String userSignIn(JoinPoint joinPoint);
 
+    /**
+     * @author hln 2023-10-31
+     *      根据前端指定字段返回User信息鉴权
+     * @param joinPoint
+     * @return
+     */
+    public String selectToGetUser(JoinPoint joinPoint);
+
 }
