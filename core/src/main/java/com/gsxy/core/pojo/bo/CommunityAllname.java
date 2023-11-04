@@ -7,6 +7,7 @@ import java.io.Serializable;
  *      查找所有社团
  */
 public class CommunityAllname implements Serializable {
+    private Long    createBy;//用户id
     private Long   communityId;//社团id
     private String name;//社团名字
     private String introduce;//社团介绍
@@ -16,11 +17,20 @@ public class CommunityAllname implements Serializable {
 
     }
 
-    public CommunityAllname(Long communityId, String name, String introduce, String username) {
+    public CommunityAllname(Long createBy, Long communityId, String name, String introduce, String username) {
+        this.createBy = createBy;
         this.communityId = communityId;
         this.name = name;
         this.introduce = introduce;
         this.username = username;
+    }
+
+    public Long getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(Long createBy) {
+        this.createBy = createBy;
     }
 
     public Long getCommunityId() {
@@ -58,7 +68,8 @@ public class CommunityAllname implements Serializable {
     @Override
     public String toString() {
         return "CommunityAllname{" +
-                "communityId=" + communityId +
+                "createBy=" + createBy +
+                ", communityId=" + communityId +
                 ", name='" + name + '\'' +
                 ", introduce='" + introduce + '\'' +
                 ", username='" + username + '\'' +
