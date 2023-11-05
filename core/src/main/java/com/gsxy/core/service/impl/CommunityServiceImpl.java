@@ -201,7 +201,7 @@ public class CommunityServiceImpl implements CommunityService {
 
         //创建通知
         Notice  notice= new Notice();
-        notice.setContext(userSendMessageVo+"");
+        notice.setContext(userSendMessageVo.getApplyContext()+"");
 
         //查找对应社团
         Community community = communityMapper.selectByCommunityId(communitySendNoticeBo.getCommunityId());
