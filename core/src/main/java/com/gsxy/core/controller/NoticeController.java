@@ -45,12 +45,12 @@ public class NoticeController {
 
     /**
      * @author Oh… Yeah!!!, 2023-10-27
-     *      用户根据通知Id来查看通知.
+     *      更改通知阅读状态.
      * @param
      * @return String.class
      */
     @PostMapping("/select_id")
-    @ApiOperation("用户根据通知Id来查看通知")
+    @ApiOperation("更改通知阅读状态")
     public String noticeSelectByNoticeId(@RequestBody NoticeSelectByNoticeIdBo noticeSelectByNoticeIdBo){
         Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
         if (map.get("error") != null) {
