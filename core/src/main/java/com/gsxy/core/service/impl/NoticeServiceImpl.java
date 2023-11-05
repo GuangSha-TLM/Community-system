@@ -1,18 +1,24 @@
 package com.gsxy.core.service.impl;
 
 import com.gsxy.core.mapper.NoticeMapper;
+import com.gsxy.core.mapper.UserMapper;
 import com.gsxy.core.pojo.Notice;
+import com.gsxy.core.pojo.User;
 import com.gsxy.core.pojo.UserAdmin;
 import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.NoticePagingToGetDataVo;
 import com.gsxy.core.pojo.vo.ResponseVo;
 import com.gsxy.core.pojo.vo.UserAdminPagingToGetDataVo;
+import com.gsxy.core.pojo.vo.UserSendMessageVo;
 import com.gsxy.core.service.NoticeService;
 import com.gsxy.core.util.ThreadLocalUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Oh...Yeah!!! 2023-10-28
@@ -23,6 +29,9 @@ public class NoticeServiceImpl implements NoticeService {
 
     @Autowired
     private NoticeMapper noticeMapper;
+    @Autowired
+    private UserMapper userMapper;
+
 
     /**
      * @author Oh… Yeah!!!, 2023-10-27
@@ -42,7 +51,21 @@ public class NoticeServiceImpl implements NoticeService {
             return new ResponseVo("查询的数据不存在,", null, "0x500");
         }
 
-        return new ResponseVo("查询成功", list, "0x200");
+        User user = userMapper.selectByUserId(userId);
+
+        Map<Notice,UserSendMessageVo> map = new HashMap<>();
+
+        for (Notice notice : list) {
+            map.put(notice,new UserSendMessageVo(
+                    user.getUsername(),
+                    user.getProfessional(),
+                    user.getGrade(),
+                    notice.getContext()
+                    ));
+        }
+
+
+        return new ResponseVo("查询成功", map, "0x200");
 
     }
 
