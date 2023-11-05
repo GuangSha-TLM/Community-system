@@ -63,6 +63,29 @@ public interface NoticeMapper {
      */
     public Notice seleByUUID(String string);
 
+    /**
+     * @author Oh… Yeah!!!, 2023-10-27
+     *      根据通知Id设置通知的阅读状态.
+     * @param id
+     * @return void
+     */
+    public void updateByIdToRead(Long id);
+
+    /**
+     * @author Oh… Yeah!!!, 2023-10-27
+     *      查找所有未阅读的通知.
+     * @param userId
+     * @return Long.class
+     */
+    public Long selectReadNotice(Long userId);
+
+    /**
+     * @author Oh… Yeah!!!, 2023-10-24
+     *      根据id查询数据.
+     * @param id
+     * @return Notice.class
+     */
+    public Notice noticeSelectByNoticeId(Long id);
 }
 
 

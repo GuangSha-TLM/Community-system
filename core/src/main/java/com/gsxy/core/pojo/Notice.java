@@ -19,6 +19,8 @@ public class Notice {
     private Long imgId;
     //名字
     private String name;
+    //通知的阅读状态
+    private Integer read;
     //创建人
     private Long createBy;
     //创建时间
@@ -35,13 +37,14 @@ public class Notice {
     public Notice() {
     }
 
-    public Notice(Long id, Long userEmailId, String context, String uuid, Long imgId, String name, Long createBy, Date createTime, Long updateBy, Date updateTime, Integer status, Integer delFlag) {
+    public Notice(Long id, Long userEmailId, String context, String uuid, Long imgId, String name, Integer read, Long createBy, Date createTime, Long updateBy, Date updateTime, Integer status, Integer delFlag) {
         this.id = id;
         this.userEmailId = userEmailId;
         this.context = context;
         this.uuid = uuid;
         this.imgId = imgId;
         this.name = name;
+        this.read = read;
         this.createBy = createBy;
         this.createTime = createTime;
         this.updateBy = updateBy;
@@ -49,7 +52,6 @@ public class Notice {
         this.status = status;
         this.delFlag = delFlag;
     }
-
 
     public Long getId() {
         return id;
@@ -97,6 +99,14 @@ public class Notice {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getRead() {
+        return read;
+    }
+
+    public void setRead(Integer read) {
+        this.read = read;
     }
 
     public Long getCreateBy() {
@@ -156,6 +166,7 @@ public class Notice {
                 ", uuid='" + uuid + '\'' +
                 ", imgId=" + imgId +
                 ", name='" + name + '\'' +
+                ", read=" + read +
                 ", createBy=" + createBy +
                 ", createTime=" + createTime +
                 ", updateBy=" + updateBy +

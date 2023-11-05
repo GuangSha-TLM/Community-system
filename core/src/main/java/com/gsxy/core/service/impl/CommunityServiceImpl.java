@@ -123,13 +123,16 @@ public class CommunityServiceImpl implements CommunityService {
      * @return
      */
     @Override
-    public ResponseVo communityAndUser() {
+    public ResponseVo communityAndUser(CommunityAndUserBo communityAndUserBo) {
 
         String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
         Long userId = Long.valueOf(userIdOfStr);
-
+        if(userId == null || userId == 0L){
+            return new ResponseVo("token解析失败",null,"0x501");
+        }
+        Long communityId = communityAndUserBo.getCommunityId();
         //找到所有该社团的用户的id
-        List<CommunityAndUserVo> userList = communityMapper.communityAndUser(userId);
+        List<CommunityAndUserVo> userList = communityMapper.communityAndUser(communityId);
 
         return new ResponseVo<>("查询成功",userList,"0x200");
     }
@@ -201,7 +204,7 @@ public class CommunityServiceImpl implements CommunityService {
 
         //创建通知
         Notice  notice= new Notice();
-        notice.setContext(userSendMessageVo+"");
+        notice.setContext(userSendMessageVo.getApplyContext()+"");
 
         //查找对应社团
         Community community = communityMapper.selectByCommunityId(communitySendNoticeBo.getCommunityId());
