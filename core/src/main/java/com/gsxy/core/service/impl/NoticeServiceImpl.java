@@ -67,10 +67,11 @@ public class NoticeServiceImpl implements NoticeService {
 
         }
 
-        Long nums = noticeMapper.selectReadNotice(userId);
+        Long counts = noticeMapper.selectReadNotice(userId);
 
+        NoticeListCountVo noticeListCountVo = new NoticeListCountVo(list2,counts);
 
-        return new ResponseVo("查询成功,未阅读的信息总共有：" + nums + "条", list2, "0x200");
+        return new ResponseVo("查询成功", noticeListCountVo, "0x200");
 
     }
 
@@ -152,7 +153,7 @@ public class NoticeServiceImpl implements NoticeService {
     /**
      * @author Oh… Yeah!!!, 2023-10-24
      *      根据id查询数据.
-     * @param noticeSelectByIdBo
+     * @param noticeSelectByNoticeIdBo
      * @return ResponseVo.class
      */
     @Override
