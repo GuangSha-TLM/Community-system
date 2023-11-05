@@ -2,6 +2,7 @@ package com.gsxy.core.mapper;
 
 import com.gsxy.core.pojo.Community;
 import com.gsxy.core.pojo.bo.CommunityAllname;
+import com.gsxy.core.pojo.bo.CommunityAndUserBo;
 import com.gsxy.core.pojo.bo.CommunityPagingToGetDataBo;
 import com.gsxy.core.pojo.vo.CommunityAndActiveVo;
 import com.gsxy.core.pojo.vo.CommunityAndUserVo;
@@ -75,7 +76,7 @@ public interface CommunityMapper {
      * 查询社团所有用户数据
      * @return
      */
-    public List<CommunityAndUserVo> communityAndUser(Long userId);
+    public List<CommunityAndUserVo> communityAndUser(Long communityId);
 
     /**
      * @author zhuxinyu 2023-10-30

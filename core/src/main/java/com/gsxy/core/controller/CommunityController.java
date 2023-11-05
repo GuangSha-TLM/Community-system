@@ -84,13 +84,13 @@ public class CommunityController {
      */
     @PostMapping("/communityAndUser")
     @ApiOperation("根据社团Id查询该社团的所有用户数据")
-    public String CommunityAndUser(@RequestParam String token){
+    public String CommunityAndUser(@RequestBody CommunityAndUserBo communityAndUserBo){
         Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
         ThreadLocalUtil.mapThreadLocal.remove();
         if (map.get("error") != null) {
             return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
         }
-        return JSONArray.toJSONString(communityService.communityAndUser());
+        return JSONArray.toJSONString(communityService.communityAndUser(communityAndUserBo));
     }
 
     /**

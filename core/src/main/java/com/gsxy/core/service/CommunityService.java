@@ -70,7 +70,7 @@ public interface CommunityService {
      *      根据社团Id查询该社团的所有用户数据
      * @return
      */
-    public ResponseVo communityAndUser();
+    public ResponseVo communityAndUser(CommunityAndUserBo communityAndUserBo);
 
     /**
      * @author  zhuxinyu 2023-11-02

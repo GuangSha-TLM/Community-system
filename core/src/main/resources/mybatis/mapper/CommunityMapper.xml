@@ -35,15 +35,17 @@
         @author zhuxinyu 2023-10-30
             查询社团所有用户数据
     -->
-    <select id="communityAndUser" resultType="com.gsxy.core.pojo.vo.CommunityAndUserVo">
+    <select id="communityAndUser" resultType="com.gsxy.core.pojo.vo.CommunityAndUserVo"
+            parameterType="com.gsxy.core.pojo.bo.CommunityAndUserBo">
         SELECT
             us.id,us.name,us.student_id,us.college,
             us.professional,us.grade
                 FROM
                 community_user AS cu
-            INNER JOIN
-	`user` AS us
+        INNER JOIN
+	        `user` AS us
         ON(cu.user_id = us.id)
+        WHERE community_id=#{communityId}
     </select>
 
     <!--
@@ -59,10 +61,11 @@
         FROM
             community AS co
                 INNER JOIN active AS ac ON(co.community_id = ac.community)
+        WHERE community_id = #{communityId}
     </select>
     <!--
           @author  zhuxinyu 2023-11-02
-          根据社团Id查询社团的所有活动
+          根据社团Id查询社团的所有社团
 
     -->
     <select id="communityAllname" resultType="com.gsxy.core.pojo.bo.CommunityAllname">
