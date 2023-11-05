@@ -44,8 +44,6 @@
             INNER JOIN
 	`user` AS us
         ON(cu.user_id = us.id)
-        WHERE
-            cu.create_by = #{createBy};
     </select>
 
     <!--
