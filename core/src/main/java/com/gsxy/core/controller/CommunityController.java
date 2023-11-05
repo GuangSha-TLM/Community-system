@@ -112,7 +112,7 @@ public class CommunityController {
 
     /**
      * @author  zhuxinyu 2023-11-02
-     *      根据社团Id查询社团的所有活动
+     *      查询所有社团
      * @return
      */
     @PostMapping("/communityAllname")

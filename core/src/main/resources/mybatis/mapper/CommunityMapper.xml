@@ -71,7 +71,7 @@
     -->
     <select id="communityAllname" resultType="com.gsxy.core.pojo.bo.CommunityAllname">
         SELECT
-            c.`name`, c.introduce, c.community_id,u.username
+            c.`name`, c.introduce, c.community_id,u.username,c.create_by
         FROM
             community AS c
                 INNER JOIN

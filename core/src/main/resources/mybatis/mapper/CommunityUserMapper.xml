@@ -85,6 +85,12 @@
             community_id = #{communityId}
         limit 1
     </select>
-
+    <!--
+        @author zhuxinyu 2023-11-03
+            删除社员
+    -->
+    <delete id="communityUserdeleteUser" >
+        delete from community_user where community_id=#{communityId} AND user_id=#{userId}
+    </delete>
 
 </mapper>
