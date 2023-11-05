@@ -27,11 +27,11 @@ public class NoticeServiceImpl implements NoticeService {
     /**
      * @author Oh… Yeah!!!, 2023-10-27
      *      用户查看通知.
-     * @param noticeSelectByIdBo
+     * @param
      * @return ResponseVo.class
      */
     @Override
-    public ResponseVo noticeSelectById(NoticeSelectByIdBo noticeSelectByIdBo) {
+    public ResponseVo noticeSelectById() {
 
         String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
         Long userId = Long.valueOf(userIdOfStr);

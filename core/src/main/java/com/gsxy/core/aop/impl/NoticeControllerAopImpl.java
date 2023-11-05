@@ -31,8 +31,7 @@ public class NoticeControllerAopImpl implements NoticeControllerAop {
     @Before("execution(* com.gsxy.core.controller.NoticeController.noticeSelectById(..))")
     public void noticeSelect(JoinPoint joinPoint) {
         Object[] args = joinPoint.getArgs();
-        NoticeSelectByIdBo noticeSelectByIdBo = (NoticeSelectByIdBo) args[0];
-        String token = noticeSelectByIdBo.getToken();
+        String token =  (String) args[0];
         systemService.auth(token);
     }
 

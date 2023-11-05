@@ -29,18 +29,18 @@ public class NoticeController {
     /**
      * @author Oh… Yeah!!!, 2023-10-27
      *      用户查看通知.
-     * @param noticeSelectByIdBo
+     * @param
      * @return String.class
      */
     @PostMapping("/select")
     @ApiOperation("用户查看通知")
-    public String noticeSelectById(@RequestBody NoticeSelectByIdBo noticeSelectByIdBo){
+    public String noticeSelectById(@RequestParam String token){
         Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
         if (map.get("error") != null) {
             return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
         }
 
-        return JSONArray.toJSONString(noticeService.noticeSelectById(noticeSelectByIdBo));
+        return JSONArray.toJSONString(noticeService.noticeSelectById());
     }
 
 

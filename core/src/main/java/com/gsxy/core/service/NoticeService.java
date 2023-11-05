@@ -13,10 +13,10 @@ public interface NoticeService {
     /**
      * @author Oh… Yeah!!!, 2023-10-27
      *      用户查看通知.
-     * @param noticeSelectByIdBo
+     * @param
      * @return ResponseVo.class
      */
-    public ResponseVo noticeSelectById(NoticeSelectByIdBo noticeSelectByIdBo);
+    public ResponseVo noticeSelectById();
 
 
 
