@@ -52,8 +52,16 @@ public class NoticeServiceImpl implements NoticeService {
 
         for (Notice notice : list) {
 
-            list2.add(new NoticeWithCreateByVo(notice,userMapper.selectByUserId(notice.getCreateBy())));
-
+            User user = userMapper.selectByUserId(notice.getCreateBy());
+            list2.add(new NoticeWithCreateByVo(
+                    notice.getId(),
+                    notice.getName(),
+                    notice.getUserEmailId(),
+                    notice.getCreateBy(),
+                    notice.getContext(),
+                    user.getUsername(),
+                    user.getProfessional(),
+                    user.getGrade()));
         }
 
 
