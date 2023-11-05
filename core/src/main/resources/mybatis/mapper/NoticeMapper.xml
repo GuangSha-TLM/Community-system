@@ -41,7 +41,7 @@
             notice
         values
             (null,#{userEmailId},#{context},#{uuid},#{imgId},#{name},
-             #{createBy},#{createTime},#{updateBy},
+             #{read},#{createBy},#{createTime},#{updateBy},
              #{updateTime},#{status},#{delFlag});
     </insert>
 
@@ -67,6 +67,9 @@
             <if test="name != null and name != ''">
                 name = #{name},
             </if>
+            <if test="read != null ">
+                read = #{read},
+            </if>
             <if test="createBy != null ">
                 create_by = #{createBy},
             </if>
@@ -89,6 +92,7 @@
         where
         id = #{id}
     </update>
+
 
     <!--
       @author Oh...Yeah!!! 2023-10-28
@@ -124,6 +128,41 @@
             uuid = #{string}
         limit 1
     </select>
+
+    <!--
+     @author Oh… Yeah!!! 2023-10-27
+     查找所有未阅读的通知.
+    -->
+    <select id="selectReadNotice" resultType="java.lang.Long" parameterType="java.lang.Long">
+        SELECT
+            count(*)
+        FROM
+            notice
+        WHERE
+            `read` = 0;
+    </select>
+    <select id="noticeSelectByNoticeId" resultType="com.gsxy.core.pojo.Notice" parameterType="java.lang.Long">
+        select
+            *
+        from
+            notice
+        where
+            id = #{id}
+        limit 1
+    </select>
+
+    <!--
+         @author Oh… Yeah!!! 2023-10-27
+         更新通知的阅读状态
+    -->
+    <update id="updateByIdToRead" parameterType="java.lang.Long">
+        update
+            notice
+        set
+            `read` = 1
+        where
+            id = #{id};
+    </update>
 
 
 </mapper>

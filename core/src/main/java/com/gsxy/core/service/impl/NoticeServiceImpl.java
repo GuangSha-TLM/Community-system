@@ -59,13 +59,18 @@ public class NoticeServiceImpl implements NoticeService {
                     notice.getUserEmailId(),
                     notice.getCreateBy(),
                     notice.getContext(),
-                    user.getUsername(),
+                    user.getName(),
                     user.getProfessional(),
-                    user.getGrade()));
+                    user.getGrade(),
+                    notice.getRead()
+            ));
+
         }
 
+        Long nums = noticeMapper.selectReadNotice(userId);
 
-        return new ResponseVo("查询成功", list2, "0x200");
+
+        return new ResponseVo("查询成功,未阅读的信息总共有：" + nums + "条", list2, "0x200");
 
     }
 
@@ -144,6 +149,26 @@ public class NoticeServiceImpl implements NoticeService {
 
     }
 
+    /**
+     * @author Oh… Yeah!!!, 2023-10-24
+     *      根据id查询数据.
+     * @param noticeSelectByIdBo
+     * @return ResponseVo.class
+     */
+    @Override
+    public ResponseVo noticeSelectByNoticeId(NoticeSelectByNoticeIdBo noticeSelectByNoticeIdBo) {
+
+        Notice notice = noticeMapper.noticeSelectByNoticeId(noticeSelectByNoticeIdBo.getId());
+
+        //设置阅读状态
+        noticeMapper.updateByIdToRead(noticeSelectByNoticeIdBo.getId());
+
+        if (notice == null) {
+            return new ResponseVo("查询的数据不存在,", null, "0x500");
+        }
+
+        return new ResponseVo("查询成功", notice, "0x200");
+    }
 
 
 }

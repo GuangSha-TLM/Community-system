@@ -50,6 +50,14 @@ public interface NoticeControllerAop {
     public void userAdminPagingToGetData(JoinPoint joinPoint);
 
 
+    /**
+     * @author Oh...Yeah!!!  2023-10-27
+     *      查看通知鉴权
+     * @param joinPoint
+     * @return void
+     */
+    public void noticeSelectByNoticeId(JoinPoint joinPoint);
+
 
 
 }
