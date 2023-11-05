@@ -6,10 +6,7 @@ import com.gsxy.core.pojo.Notice;
 import com.gsxy.core.pojo.User;
 import com.gsxy.core.pojo.UserAdmin;
 import com.gsxy.core.pojo.bo.*;
-import com.gsxy.core.pojo.vo.NoticePagingToGetDataVo;
-import com.gsxy.core.pojo.vo.ResponseVo;
-import com.gsxy.core.pojo.vo.UserAdminPagingToGetDataVo;
-import com.gsxy.core.pojo.vo.UserSendMessageVo;
+import com.gsxy.core.pojo.vo.*;
 import com.gsxy.core.service.NoticeService;
 import com.gsxy.core.util.ThreadLocalUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,21 +48,16 @@ public class NoticeServiceImpl implements NoticeService {
             return new ResponseVo("查询的数据不存在,", null, "0x500");
         }
 
-        User user = userMapper.selectByUserId(userId);
-
-        Map<Notice,UserSendMessageVo> map = new HashMap<>();
+        List<NoticeWithCreateByVo> list2 = new ArrayList<>();
 
         for (Notice notice : list) {
-            map.put(notice,new UserSendMessageVo(
-                    user.getUsername(),
-                    user.getProfessional(),
-                    user.getGrade(),
-                    notice.getContext()
-                    ));
+
+            list2.add(new NoticeWithCreateByVo(notice,userMapper.selectByUserId(notice.getCreateBy())));
+
         }
 
 
-        return new ResponseVo("查询成功", map, "0x200");
+        return new ResponseVo("查询成功", list2, "0x200");
 
     }
 
