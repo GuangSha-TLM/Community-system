@@ -9,19 +9,30 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.gsxy</groupId>
-    <artifactId>core</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>core</name>
-    <description>core</description>
-    <properties>
-        <java.version>8</java.version>
-    </properties>
     <dependencies>
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
             <version>2.9.2</version>
         </dependency>
+
+        <!-- websocket -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.78</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+        <!-- websocket -->
 
         <dependency>
             <groupId>io.springfox</groupId>
@@ -84,6 +95,13 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+    <artifactId>core</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>core</name>
+    <description>core</description>
+    <properties>
+        <java.version>8</java.version>
+    </properties>
 
     <build>
         <plugins>

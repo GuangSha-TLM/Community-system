@@ -51,6 +51,8 @@ public class UserServiceImpl implements UserService {
 
         user.setCreateTime(new Date());
 
+        user.setStatus(0);
+        user.setDelFlag(0);
         Long aLong = userMapper.userReg(user);
 
         if(aLong.longValue() == 0L){

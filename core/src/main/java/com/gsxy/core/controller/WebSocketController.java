@@ -11,6 +11,7 @@ public class WebSocketController {
 
     private static Set<Session> sessions = new HashSet<>();
 
+
     @OnOpen
     public void onOpen(Session session){
         System.out.println("WebSocket连接已建立");
