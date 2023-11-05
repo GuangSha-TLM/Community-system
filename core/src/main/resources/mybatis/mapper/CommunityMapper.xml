@@ -45,7 +45,7 @@
 	`user` AS us
         ON(cu.user_id = us.id)
         WHERE
-            cu.create_by = 1;
+            cu.create_by = #{createBy};
     </select>
 
     <!--
