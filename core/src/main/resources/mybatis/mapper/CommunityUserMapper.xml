@@ -13,6 +13,7 @@
              #{status}, #{delFlag})
     </insert>
 
+
     <delete id="communityUserDeleteById">
         delete from community_user where id = #{id}
     </delete>
