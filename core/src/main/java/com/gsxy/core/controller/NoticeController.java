@@ -43,6 +43,26 @@ public class NoticeController {
         return JSONArray.toJSONString(noticeService.noticeSelectById());
     }
 
+    /**
+     * @author Oh… Yeah!!!, 2023-10-27
+     *      用户根据通知Id来查看通知.
+     * @param
+     * @return String.class
+     */
+    @PostMapping("/select_id")
+    @ApiOperation("用户根据通知Id来查看通知")
+    public String noticeSelectByNoticeId(@RequestBody NoticeSelectByNoticeIdBo noticeSelectByNoticeIdBo){
+        Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
+        if (map.get("error") != null) {
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
+
+        return JSONArray.toJSONString(noticeService.noticeSelectByNoticeId(noticeSelectByNoticeIdBo));
+    }
+
+
+
+
 
 
     /**

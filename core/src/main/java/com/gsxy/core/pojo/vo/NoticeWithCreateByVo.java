@@ -10,26 +10,28 @@ import com.gsxy.core.pojo.User;
 public class NoticeWithCreateByVo {
 
     private Long id;
-    private String name;
+    private String noticeName;
     private Long UserEmailId;
     private Long createBy;
-    private String  context;
-    private String userName;
+    private String context;
+    private String name;
     private String professional;
     private String grade;
+    private Integer read;
 
     public NoticeWithCreateByVo() {
     }
 
-    public NoticeWithCreateByVo(Long id, String name, Long userEmailId, Long createBy, String context, String userName, String professional, String grade) {
+    public NoticeWithCreateByVo(Long id, String noticeName, Long userEmailId, Long createBy, String context, String name, String professional, String grade, Integer read) {
         this.id = id;
-        this.name = name;
+        this.noticeName = noticeName;
         UserEmailId = userEmailId;
         this.createBy = createBy;
         this.context = context;
-        this.userName = userName;
+        this.name = name;
         this.professional = professional;
         this.grade = grade;
+        this.read = read;
     }
 
     public Long getId() {
@@ -40,12 +42,12 @@ public class NoticeWithCreateByVo {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNoticeName() {
+        return noticeName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNoticeName(String noticeName) {
+        this.noticeName = noticeName;
     }
 
     public Long getUserEmailId() {
@@ -72,12 +74,12 @@ public class NoticeWithCreateByVo {
         this.context = context;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getName() {
+        return name;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getProfessional() {
@@ -96,17 +98,26 @@ public class NoticeWithCreateByVo {
         this.grade = grade;
     }
 
+    public Integer getRead() {
+        return read;
+    }
+
+    public void setRead(Integer read) {
+        this.read = read;
+    }
+
     @Override
     public String toString() {
         return "NoticeWithCreateByVo{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", noticeName='" + noticeName + '\'' +
                 ", UserEmailId=" + UserEmailId +
                 ", createBy=" + createBy +
                 ", context='" + context + '\'' +
-                ", userName='" + userName + '\'' +
+                ", name='" + name + '\'' +
                 ", professional='" + professional + '\'' +
                 ", grade='" + grade + '\'' +
+                ", read=" + read +
                 '}';
     }
 }
