@@ -44,8 +44,6 @@
             INNER JOIN
 	`user` AS us
         ON(cu.user_id = us.id)
-        WHERE
-            cu.create_by = 1;
     </select>
 
     <!--
@@ -61,8 +59,6 @@
         FROM
             community AS co
                 INNER JOIN active AS ac ON(co.community_id = ac.community)
-        WHERE
-            co.community_id = #{communityId};
     </select>
     <!--
           @author  zhuxinyu 2023-11-02
