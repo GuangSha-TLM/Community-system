@@ -61,8 +61,6 @@
         FROM
             community AS co
                 INNER JOIN active AS ac ON(co.community_id = ac.community)
-        WHERE
-            co.community_id = #{communityId};
     </select>
     <!--
           @author  zhuxinyu 2023-11-02
