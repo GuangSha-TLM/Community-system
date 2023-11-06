@@ -130,6 +130,7 @@ public class CommunityServiceImpl implements CommunityService {
         if(userId == null || userId == 0L){
             return new ResponseVo("token解析失败",null,"0x501");
         }
+        communityAndUserBo.setCommunityId(userId);
         Long communityId = communityAndUserBo.getCommunityId();
         //找到所有该社团的用户的id
         List<CommunityAndUserVo> userList = communityMapper.communityAndUser(communityId);
@@ -150,6 +151,7 @@ public class CommunityServiceImpl implements CommunityService {
         if(userId == null || userId == 0L){
             return new ResponseVo("token解析失败",null,"0x501");
         }
+
         Long communtiyId = communityAndActiveBo.getCommuntiyId();
         List<CommunityAndActiveVo> community = communityMapper.communityAndActive(communtiyId);
         if (community == null) {
