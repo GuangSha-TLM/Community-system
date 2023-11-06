@@ -9,14 +9,14 @@ import java.util.List;
 public class NoticeListCountVo {
 
     private List<NoticeWithCreateByVo> list;
-    private Long counts;
+    private Long noReadCounts;
 
     public NoticeListCountVo() {
     }
 
-    public NoticeListCountVo(List<NoticeWithCreateByVo> list, Long counts) {
+    public NoticeListCountVo(List<NoticeWithCreateByVo> list, Long noReadCounts) {
         this.list = list;
-        this.counts = counts;
+        this.noReadCounts = noReadCounts;
     }
 
     public List<NoticeWithCreateByVo> getList() {
@@ -27,19 +27,19 @@ public class NoticeListCountVo {
         this.list = list;
     }
 
-    public Long getCounts() {
-        return counts;
+    public Long getNoReadCounts() {
+        return noReadCounts;
     }
 
-    public void setCounts(Long counts) {
-        this.counts = counts;
+    public void setNoReadCounts(Long noReadCounts) {
+        this.noReadCounts = noReadCounts;
     }
 
     @Override
     public String toString() {
         return "NoticeListCountVo{" +
                 "list=" + list +
-                ", counts=" + counts +
+                ", noReadCounts=" + noReadCounts +
                 '}';
     }
 }
