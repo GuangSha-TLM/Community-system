@@ -279,7 +279,7 @@ public class CommunityServiceImpl implements CommunityService {
             notice.setName(community.getName() + "拒绝了" + user.getName());
             UUID uuid = UUID.randomUUID();
             notice.setUuid(uuid.toString());
-
+            notice.setCreateBy(userId);
             //发送通知
             noticeMapper.addNotice(notice);
 
