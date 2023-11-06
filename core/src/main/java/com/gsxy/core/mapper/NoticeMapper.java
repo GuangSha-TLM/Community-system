@@ -63,13 +63,6 @@ public interface NoticeMapper {
      */
     public Notice seleByUUID(String string);
 
-    /**
-     * @author Oh… Yeah!!!, 2023-10-27
-     *      根据通知Id设置通知的阅读状态.
-     * @param id
-     * @return void
-     */
-    public void updateByIdToRead(Long id);
 
     /**
      * @author Oh… Yeah!!!, 2023-10-27
@@ -86,6 +79,15 @@ public interface NoticeMapper {
      * @return Notice.class
      */
     public Notice noticeSelectByNoticeId(Long id);
+
+    /**
+     * @author Oh… Yeah!!!, 2023-10-27
+     *      根据通知Id设置通知的阅读状态.
+     * @param id
+     * @return void
+     */
+    public Long updateByIdToRead(Long id);
+
 }
 
 

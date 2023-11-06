@@ -152,23 +152,21 @@ public class NoticeServiceImpl implements NoticeService {
 
     /**
      * @author Oh… Yeah!!!, 2023-10-24
-     *      根据id查询数据.
+     *      更改通知阅读状态.
      * @param noticeSelectByNoticeIdBo
      * @return ResponseVo.class
      */
     @Override
     public ResponseVo noticeSelectByNoticeId(NoticeSelectByNoticeIdBo noticeSelectByNoticeIdBo) {
 
-        Notice notice = noticeMapper.noticeSelectByNoticeId(noticeSelectByNoticeIdBo.getId());
-
         //设置阅读状态
-        noticeMapper.updateByIdToRead(noticeSelectByNoticeIdBo.getId());
+        Long  numRead = noticeMapper.updateByIdToRead(noticeSelectByNoticeIdBo.getId());
 
-        if (notice == null) {
-            return new ResponseVo("查询的数据不存在,", null, "0x500");
+        if (numRead == null || numRead == 0L) {
+            return new ResponseVo("更改的通知不存在", null, "0x500");
         }
 
-        return new ResponseVo("查询成功", notice, "0x200");
+        return new ResponseVo("更改通知阅读状态成功", null, "0x200");
     }
 
 

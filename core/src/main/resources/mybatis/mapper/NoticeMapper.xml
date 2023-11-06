@@ -139,7 +139,9 @@
         FROM
             notice
         WHERE
-            `read` = 0;
+            `read` = 0
+        and
+            user_email_id = #{userId}
     </select>
     <select id="noticeSelectByNoticeId" resultType="com.gsxy.core.pojo.Notice" parameterType="java.lang.Long">
         select
@@ -153,7 +155,7 @@
 
     <!--
          @author Oh… Yeah!!! 2023-10-27
-         更新通知的阅读状态
+         更改通知阅读状态.
     -->
     <update id="updateByIdToRead" parameterType="java.lang.Long">
         update
@@ -163,6 +165,5 @@
         where
             id = #{id};
     </update>
-
 
 </mapper>
