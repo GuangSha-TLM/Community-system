@@ -127,9 +127,14 @@ public class CommunityServiceImpl implements CommunityService {
 
         String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
         Long userId = Long.valueOf(userIdOfStr);
+        if(userId == null || userId == 0L){
+            return new ResponseVo("token解析失败",null,"0x501");
+        }
+
+        UserAdmin userAdmin = userAdminMapper.selectByIdUserAdmin(userId);
 
         //找到所有该社团的用户的id
-        List<CommunityAndUserVo> userList = communityMapper.communityAndUser(userId);
+        List<CommunityAndUserVo> userList = communityMapper.communityAndUser(userAdmin.getCommunityId());
 
         return new ResponseVo<>("查询成功",userList,"0x200");
     }
@@ -201,7 +206,7 @@ public class CommunityServiceImpl implements CommunityService {
 
         //创建通知
         Notice  notice= new Notice();
-        notice.setContext(userSendMessageVo+"");
+        notice.setContext(userSendMessageVo.getApplyContext()+"");
 
         //查找对应社团
         Community community = communityMapper.selectByCommunityId(communitySendNoticeBo.getCommunityId());
@@ -262,7 +267,7 @@ public class CommunityServiceImpl implements CommunityService {
         UserAdmin userAdmin = userAdminMapper.selectByIdUserAdmin(userId);
 
         //社长决定是否让该用户进入社团
-        if (communityReplyNoticeBo.getContext().equals("拒绝") ){
+        if (communityReplyNoticeBo.getStatus() == 1){
 
             //获取该社团的信息
             Community community = communityMapper.selectByCommunityId(userAdmin.getCommunityId());
@@ -274,7 +279,7 @@ public class CommunityServiceImpl implements CommunityService {
             notice.setName(community.getName() + "拒绝了" + user.getName());
             UUID uuid = UUID.randomUUID();
             notice.setUuid(uuid.toString());
-
+            notice.setCreateBy(userId);
             //发送通知
             noticeMapper.addNotice(notice);
 

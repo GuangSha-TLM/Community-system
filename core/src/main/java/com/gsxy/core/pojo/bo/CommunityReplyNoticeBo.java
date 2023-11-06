@@ -13,14 +13,16 @@ public class CommunityReplyNoticeBo implements Serializable {
     private String token;
     private String context;
     private Long NoticeId;
+    private Integer status;
 
     public CommunityReplyNoticeBo() {
     }
 
-    public CommunityReplyNoticeBo(String token, String context, Long noticeId) {
+    public CommunityReplyNoticeBo(String token, String context, Long noticeId, Integer status) {
         this.token = token;
         this.context = context;
         NoticeId = noticeId;
+        this.status = status;
     }
 
     public String getToken() {
@@ -47,12 +49,21 @@ public class CommunityReplyNoticeBo implements Serializable {
         NoticeId = noticeId;
     }
 
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "CommunityReplyNoticeBo{" +
                 "token='" + token + '\'' +
                 ", context='" + context + '\'' +
                 ", NoticeId=" + NoticeId +
+                ", status=" + status +
                 '}';
     }
 }

@@ -1,5 +1,6 @@
 package com.gsxy.core.service;
 
+import com.gsxy.core.pojo.Response;
 import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.ResponseVo;
 
@@ -13,10 +14,10 @@ public interface NoticeService {
     /**
      * @author Oh… Yeah!!!, 2023-10-27
      *      用户查看通知.
-     * @param noticeSelectByIdBo
+     * @param
      * @return ResponseVo.class
      */
-    public ResponseVo noticeSelectById(NoticeSelectByIdBo noticeSelectByIdBo);
+    public ResponseVo noticeSelectById();
 
 
 
@@ -54,6 +55,12 @@ public interface NoticeService {
      */
     public ResponseVo pagingToGetNoticeData(NoticePagingToGetDataBo noticePagingToGetDataBo);
 
-
+    /**
+     * @author Oh… Yeah!!!, 2023-10-24
+     *      更改通知阅读状态.
+     * @param noticeSelectByIdBo
+     * @return ResponseVo.class
+     */
+    public ResponseVo noticeSelectByNoticeId(NoticeSelectByNoticeIdBo noticeSelectByIdBo);
 }
 

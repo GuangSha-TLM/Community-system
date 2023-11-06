@@ -27,7 +27,7 @@ public class CommunityUserServiceImpl implements CommunityUserService {
     public ResponseVo communityUseradd(CommunityUserAddBo communityUserAddBo) {
         String communityUserIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
         Long communityUserId = Long.valueOf(communityUserIdOfStr);
-        communityUserAddBo.getCommunityUser().setUserId(communityUserId);
+        communityUserAddBo.getCommunityUser().setCommunityId(communityUserId);
         communityUserAddBo.getCommunityUser().setCreateBy(communityUserId);
         communityUserAddBo.getCommunityUser().setCreateTime(new Date());
         Long aLong = communityUserMapper.communityUseAdd(communityUserAddBo.getCommunityUser());

@@ -31,8 +31,7 @@ public class NoticeControllerAopImpl implements NoticeControllerAop {
     @Before("execution(* com.gsxy.core.controller.NoticeController.noticeSelectById(..))")
     public void noticeSelect(JoinPoint joinPoint) {
         Object[] args = joinPoint.getArgs();
-        NoticeSelectByIdBo noticeSelectByIdBo = (NoticeSelectByIdBo) args[0];
-        String token = noticeSelectByIdBo.getToken();
+        String token =  (String) args[0];
         systemService.auth(token);
     }
 
@@ -101,6 +100,20 @@ public class NoticeControllerAopImpl implements NoticeControllerAop {
     }
 
 
+    /**
+     * @author Oh...Yeah!!!  2023-10-27
+     *      查看通知鉴权
+     * @param joinPoint
+     * @return void
+     */
+    @Override
+    @Before("execution(* com.gsxy.core.controller.NoticeController.noticeSelectByNoticeId(..))")
+    public void noticeSelectByNoticeId(JoinPoint joinPoint) {
+        Object[] args = joinPoint.getArgs();
+        NoticeSelectByNoticeIdBo noticeSelectByNoticeIdBo = (NoticeSelectByNoticeIdBo) args[0];
+        String token = noticeSelectByNoticeIdBo.getToken();
+        systemService.auth(token);
+    }
 
 
 }

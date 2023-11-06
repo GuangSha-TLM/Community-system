@@ -1,18 +1,21 @@
 package com.gsxy.core.service.impl;
 
 import com.gsxy.core.mapper.NoticeMapper;
+import com.gsxy.core.mapper.UserMapper;
 import com.gsxy.core.pojo.Notice;
+import com.gsxy.core.pojo.User;
 import com.gsxy.core.pojo.UserAdmin;
 import com.gsxy.core.pojo.bo.*;
-import com.gsxy.core.pojo.vo.NoticePagingToGetDataVo;
-import com.gsxy.core.pojo.vo.ResponseVo;
-import com.gsxy.core.pojo.vo.UserAdminPagingToGetDataVo;
+import com.gsxy.core.pojo.vo.*;
 import com.gsxy.core.service.NoticeService;
 import com.gsxy.core.util.ThreadLocalUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Oh...Yeah!!! 2023-10-28
@@ -23,15 +26,18 @@ public class NoticeServiceImpl implements NoticeService {
 
     @Autowired
     private NoticeMapper noticeMapper;
+    @Autowired
+    private UserMapper userMapper;
+
 
     /**
      * @author Oh… Yeah!!!, 2023-10-27
      *      用户查看通知.
-     * @param noticeSelectByIdBo
+     * @param
      * @return ResponseVo.class
      */
     @Override
-    public ResponseVo noticeSelectById(NoticeSelectByIdBo noticeSelectByIdBo) {
+    public ResponseVo noticeSelectById() {
 
         String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
         Long userId = Long.valueOf(userIdOfStr);
@@ -42,7 +48,40 @@ public class NoticeServiceImpl implements NoticeService {
             return new ResponseVo("查询的数据不存在,", null, "0x500");
         }
 
-        return new ResponseVo("查询成功", list, "0x200");
+        List<NoticeWithCreateByVo> list2 = new ArrayList<>();
+
+        for (Notice notice : list) {
+
+            User user = userMapper.selectByUserId(notice.getCreateBy());
+
+            if (user != null){
+
+                //有用户数据
+                list2.add(new NoticeWithCreateByVo(
+                        notice.getId(),
+                        notice.getName(),
+                        notice.getUserEmailId(),
+                        notice.getCreateBy(),
+                        notice.getContext(),
+                        user.getName(),
+                        user.getProfessional(),
+                        user.getGrade(),
+                        notice.getRead()
+                ));
+            }else {
+
+                //没有用户数据
+                list2.add(new NoticeWithCreateByVo("这条通知的发送者未找到,这条数据id是："+notice.getId()));
+            }
+
+
+        }
+
+        Long counts = noticeMapper.selectReadNotice(userId);
+
+        NoticeListCountVo noticeListCountVo = new NoticeListCountVo(list2,counts);
+
+        return new ResponseVo("查询成功", noticeListCountVo, "0x200");
 
     }
 
@@ -121,6 +160,24 @@ public class NoticeServiceImpl implements NoticeService {
 
     }
 
+    /**
+     * @author Oh… Yeah!!!, 2023-10-24
+     *      更改通知阅读状态.
+     * @param noticeSelectByNoticeIdBo
+     * @return ResponseVo.class
+     */
+    @Override
+    public ResponseVo noticeSelectByNoticeId(NoticeSelectByNoticeIdBo noticeSelectByNoticeIdBo) {
+
+        //设置阅读状态
+        Long  numRead = noticeMapper.updateByIdToRead(noticeSelectByNoticeIdBo.getId());
+
+        if (numRead == null || numRead == 0L) {
+            return new ResponseVo("更改的通知不存在", null, "0x500");
+        }
+
+        return new ResponseVo("更改通知阅读状态成功", null, "0x200");
+    }
 
 
 }
