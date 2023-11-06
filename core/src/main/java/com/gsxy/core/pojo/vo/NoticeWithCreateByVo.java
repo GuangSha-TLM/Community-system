@@ -22,10 +22,14 @@ public class NoticeWithCreateByVo {
     public NoticeWithCreateByVo() {
     }
 
+    public NoticeWithCreateByVo(String name) {
+        this.name = name;
+    }
+
     public NoticeWithCreateByVo(Long id, String noticeName, Long userEmailId, Long createBy, String context, String name, String professional, String grade, Integer read) {
         this.id = id;
         this.noticeName = noticeName;
-        UserEmailId = userEmailId;
+        this.UserEmailId = userEmailId;
         this.createBy = createBy;
         this.context = context;
         this.name = name;
