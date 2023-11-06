@@ -1,8 +1,10 @@
 package com.gsxy.core.mapper;
 
 import com.gsxy.core.pojo.SignInAdmin;
+import com.gsxy.core.pojo.SignInAdminWebSocket;
 import com.gsxy.core.pojo.UserAdmin;
 import com.gsxy.core.pojo.bo.SignInAdminBo;
+import com.gsxy.core.pojo.bo.SignInAdminWebSocketBo;
 import com.gsxy.core.pojo.bo.UserAdminPagingToGetDataBo;
 import com.gsxy.core.pojo.bo.UserSignInStatusBo;
 import org.apache.ibatis.annotations.Mapper;
@@ -140,4 +142,19 @@ public interface UserAdminMapper {
      * @param signInAdmin
      */
     void deleteByIdSignIn(SignInAdmin signInAdmin);
+
+    /**
+     * @author hln 2023-11-05
+     *      插入所有的实体类SignInAdminWebSocket的信息到sign_in_admin_websocket
+     * @param socketBo
+     */
+    void insertSignInAdminWebSocket(SignInAdminWebSocketBo socketBo);
+
+    /**
+     * @author hln 2023-11-05
+     *      查询所有的实体类SignInAdminWebSocket的信息到sign_in_admin_websocket
+     * @param adminId
+     * @return
+     */
+    SignInAdminWebSocketBo selectToGetWebByAdminId(Long adminId);
 }
