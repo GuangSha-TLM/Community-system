@@ -61,16 +61,6 @@
         limit 0,15
     </select>
 
-    <!-- 根据id查询活动 -->
-    <select id="selectActiveById" resultType="java.lang.Long">
-        select
-            *
-        from
-            active
-        where
-            id = #{id}
-    </select>
-
     <!-- 根据title进行模糊查询 -->
     <select id="activeLikeToGetByTitle" resultType="com.gsxy.core.pojo.Active"
             parameterType="com.gsxy.core.pojo.bo.ActiveLikeToGetByTitleBo">
@@ -127,8 +117,8 @@
             community
         inner join
                 user
-        where
-            community.create_by = #{createBy}
+        on
+            community.create_by = (select create_by from community where create_by = #{createBy})
         limit 1
     </select>
 
@@ -148,13 +138,24 @@
     <select id="selectActiveToGetCreateByById" resultType="java.lang.Long"
             parameterType="com.gsxy.core.pojo.bo.ActiveSelectByIdBo">
         select
-            community.*
+            community.create_by
         from
             community
         inner join
             active
-        on active.community = community.community_id
+        on
+            community.community_id = (select create_by from active where id = #{id})
         limit 1
+    </select>
+
+    <!-- 根据id查询活动 -->
+    <select id="selectActiveById" resultType="java.lang.Long">
+        select
+            id
+        from
+            active
+        where
+            id = #{id}
     </select>
 
 </mapper>
