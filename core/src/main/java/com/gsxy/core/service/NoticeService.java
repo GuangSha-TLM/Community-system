@@ -57,7 +57,7 @@ public interface NoticeService {
 
     /**
      * @author Oh… Yeah!!!, 2023-10-24
-     *      根据id查询数据.
+     *      更改通知阅读状态.
      * @param noticeSelectByIdBo
      * @return ResponseVo.class
      */
