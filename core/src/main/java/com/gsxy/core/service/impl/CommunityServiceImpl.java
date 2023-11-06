@@ -257,6 +257,9 @@ public class CommunityServiceImpl implements CommunityService {
         String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
         Long userId = Long.valueOf(userIdOfStr);
 
+        //设置通知的处理状态
+        noticeMapper.updateByIdToDealt(communityReplyNoticeBo.getNoticeId());
+
         //获取目标通知
         NoticeWithUser noticeWithUser1 = noticeWithUserMapper.selectByNoticeId(communityReplyNoticeBo.getNoticeId());
 
