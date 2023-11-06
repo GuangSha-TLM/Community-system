@@ -71,7 +71,7 @@ public class NoticeServiceImpl implements NoticeService {
             }else {
 
                 //没有用户数据
-                list2.add(new NoticeWithCreateByVo("这条通知的发送者未找到"));
+                list2.add(new NoticeWithCreateByVo("这条通知的发送者未找到,这条数据id是："+notice.getId()));
             }
 
 
