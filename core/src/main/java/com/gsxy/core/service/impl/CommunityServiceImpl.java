@@ -267,7 +267,7 @@ public class CommunityServiceImpl implements CommunityService {
         UserAdmin userAdmin = userAdminMapper.selectByIdUserAdmin(userId);
 
         //社长决定是否让该用户进入社团
-        if (communityReplyNoticeBo.getContext().equals("拒绝") ){
+        if (communityReplyNoticeBo.getStatus() == 1){
 
             //获取该社团的信息
             Community community = communityMapper.selectByCommunityId(userAdmin.getCommunityId());
