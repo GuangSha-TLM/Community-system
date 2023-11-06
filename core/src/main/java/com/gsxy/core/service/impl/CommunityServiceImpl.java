@@ -280,6 +280,8 @@ public class CommunityServiceImpl implements CommunityService {
             UUID uuid = UUID.randomUUID();
             notice.setUuid(uuid.toString());
             notice.setCreateBy(userId);
+            notice.setStatus(0);
+            notice.setDelFlag(0);
             //发送通知
             noticeMapper.addNotice(notice);
 
@@ -291,7 +293,8 @@ public class CommunityServiceImpl implements CommunityService {
             noticeWithUser.setSendUserId(userId);
             noticeWithUser.setNoticeId(notice2.getId());
             noticeWithUser.setCreateBy(userId);
-
+            noticeWithUser.setStatus(0);
+            noticeWithUser.setDelFlag(0);
 
             return  new ResponseVo("社长已拒绝了" + user.getName() + "的加入",   null, "0x207");
         }
@@ -318,6 +321,8 @@ public class CommunityServiceImpl implements CommunityService {
         notice.setUserEmailId(noticeWithUser1.getSendUserId());
         notice.setCreateBy(userId);
         notice.setContext(communityReplyNoticeBo.getContext());
+        notice.setStatus(0);
+        notice.setDelFlag(0);
         noticeMapper.addNotice(notice);
 
 
@@ -326,6 +331,8 @@ public class CommunityServiceImpl implements CommunityService {
         noticeWithUser2.setReceiveUserId(user.getId());
         noticeWithUser2.setSendUserId(userId);
         noticeWithUser2.setCreateBy(userId);
+        noticeWithUser2.setStatus(0);
+        noticeWithUser2.setDelFlag(0);
 
         //增添历史记录
         noticeWithUserMapper.addNoticeWithUser(noticeWithUser2);
