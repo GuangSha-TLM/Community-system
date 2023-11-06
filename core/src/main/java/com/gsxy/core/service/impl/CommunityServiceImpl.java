@@ -123,17 +123,18 @@ public class CommunityServiceImpl implements CommunityService {
      * @return
      */
     @Override
-    public ResponseVo communityAndUser(CommunityAndUserBo communityAndUserBo) {
+    public ResponseVo communityAndUser() {
 
         String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
         Long userId = Long.valueOf(userIdOfStr);
         if(userId == null || userId == 0L){
             return new ResponseVo("token解析失败",null,"0x501");
         }
-        communityAndUserBo.setCommunityId(userId);
-        Long communityId = communityAndUserBo.getCommunityId();
+
+        UserAdmin userAdmin = userAdminMapper.selectByIdUserAdmin(userId);
+
         //找到所有该社团的用户的id
-        List<CommunityAndUserVo> userList = communityMapper.communityAndUser(communityId);
+        List<CommunityAndUserVo> userList = communityMapper.communityAndUser(userAdmin.getCommunityId());
 
         return new ResponseVo<>("查询成功",userList,"0x200");
     }
@@ -151,7 +152,6 @@ public class CommunityServiceImpl implements CommunityService {
         if(userId == null || userId == 0L){
             return new ResponseVo("token解析失败",null,"0x501");
         }
-
         Long communtiyId = communityAndActiveBo.getCommuntiyId();
         List<CommunityAndActiveVo> community = communityMapper.communityAndActive(communtiyId);
         if (community == null) {
