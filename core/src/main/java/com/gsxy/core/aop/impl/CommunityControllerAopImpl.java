@@ -101,8 +101,7 @@ public class CommunityControllerAopImpl implements CommunityControllerAop {
     @Before("execution(* com.gsxy.core.controller.CommunityController.CommunityAndUser(..))")
     public String communityAndUser(JoinPoint joinPoint) {
         Object[] args = joinPoint.getArgs();
-        CommunityAndUserBo arg = (CommunityAndUserBo) args[0];
-        String token = arg.getToken();
+        String token = (String) args[0];
         systemService.isAdmin(token,1);
         return null;
     }

@@ -174,7 +174,7 @@
           and
             grade like concat('%',#{grade},'%')
           and
-            professional like concat('%',#{grade},'%')
+            professional like concat('%',#{professional},'%')
     </select>
 
     <!-- 插入用户签到状态 -->

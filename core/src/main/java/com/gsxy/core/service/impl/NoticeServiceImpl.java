@@ -53,17 +53,27 @@ public class NoticeServiceImpl implements NoticeService {
         for (Notice notice : list) {
 
             User user = userMapper.selectByUserId(notice.getCreateBy());
-            list2.add(new NoticeWithCreateByVo(
-                    notice.getId(),
-                    notice.getName(),
-                    notice.getUserEmailId(),
-                    notice.getCreateBy(),
-                    notice.getContext(),
-                    user.getName(),
-                    user.getProfessional(),
-                    user.getGrade(),
-                    notice.getRead()
-            ));
+
+            if (user != null){
+
+                //有用户数据
+                list2.add(new NoticeWithCreateByVo(
+                        notice.getId(),
+                        notice.getName(),
+                        notice.getUserEmailId(),
+                        notice.getCreateBy(),
+                        notice.getContext(),
+                        user.getName(),
+                        user.getProfessional(),
+                        user.getGrade(),
+                        notice.getRead()
+                ));
+            }else {
+
+                //没有用户数据
+                list2.add(new NoticeWithCreateByVo("这条通知的发送者未找到,这条数据id是："+notice.getId()));
+            }
+
 
         }
 
