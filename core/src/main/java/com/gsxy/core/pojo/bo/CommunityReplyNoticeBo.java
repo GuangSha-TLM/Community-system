@@ -12,21 +12,21 @@ public class CommunityReplyNoticeBo implements Serializable {
 
     private String token;
     private String context;
-    private Long NoticeId;
+    private Long noticeId;
     private Integer status;
-
-    public CommunityReplyNoticeBo() {
-    }
-
-    public CommunityReplyNoticeBo(String token, String context, Long noticeId, Integer status) {
-        this.token = token;
-        this.context = context;
-        NoticeId = noticeId;
-        this.status = status;
-    }
 
     public String getToken() {
         return token;
+    }
+
+    @Override
+    public String toString() {
+        return "CommunityReplyNoticeBo{" +
+                "token='" + token + '\'' +
+                ", context='" + context + '\'' +
+                ", noticeId=" + noticeId +
+                ", status=" + status +
+                '}';
     }
 
     public void setToken(String token) {
@@ -42,11 +42,11 @@ public class CommunityReplyNoticeBo implements Serializable {
     }
 
     public Long getNoticeId() {
-        return NoticeId;
+        return noticeId;
     }
 
     public void setNoticeId(Long noticeId) {
-        NoticeId = noticeId;
+        this.noticeId = noticeId;
     }
 
     public Integer getStatus() {
@@ -57,13 +57,13 @@ public class CommunityReplyNoticeBo implements Serializable {
         this.status = status;
     }
 
-    @Override
-    public String toString() {
-        return "CommunityReplyNoticeBo{" +
-                "token='" + token + '\'' +
-                ", context='" + context + '\'' +
-                ", NoticeId=" + NoticeId +
-                ", status=" + status +
-                '}';
+    public CommunityReplyNoticeBo() {
+    }
+
+    public CommunityReplyNoticeBo(String token, String context, Long noticeId, Integer status) {
+        this.token = token;
+        this.context = context;
+        this.noticeId = noticeId;
+        this.status = status;
     }
 }
