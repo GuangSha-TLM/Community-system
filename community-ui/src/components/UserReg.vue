@@ -267,6 +267,44 @@ export default {
         //提交登入
         async submit() {
             this.switchbutton = true;
+            const { username, password, againPassword, name, org, grade, college, professional } = this.user;
+            // 判断用户名是否为空
+            if (this.user.username === '') {
+                alert('用户名不能为空');
+                this.switchbutton = false;
+                return;
+            }
+            if (this.user.password === ''|| againPassword === '') {
+                alert('密码不能为空');
+                this.switchbutton = false;
+                return;
+            }
+            if (this.user.name === '') {
+                alert('姓名不能为空');
+                this.switchbutton = false;
+                return;
+            }
+            if (this.user.studentId === '') {
+                alert('学号不能为空');
+                this.switchbutton = false;
+                return;
+            }
+            if (this.user.grade === '') {
+                alert('年级不能为空');
+                this.switchbutton = false;
+                return;
+            }
+            if (this.user.college === '') {
+                alert('学院不能为空');
+                this.switchbutton = false;
+                return;
+            }
+            if (this.user.professional === '') {
+                alert('专业不能为空');
+                this.switchbutton = false;
+                return;
+            }
+
             //密码的重复输入正确判断
             if (this.user.password !== this.user.againPassword) {
                 alert('密码设置失败');
