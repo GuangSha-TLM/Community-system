@@ -132,6 +132,23 @@ public class UserAdminController {
     }
 
     /**
+     * @author hln 2023-11-07
+     *      管理员发起签到-WebSocket
+     * @param signInAdminWebSocketBo
+     * @return
+     */
+    @PostMapping("/adminsigninweb")
+    @ApiOperation("管理员发起签到")
+    public String userAdminSignInWebSocket(@RequestBody SignInAdminWebSocketBo signInAdminWebSocketBo){
+        Map<String,String> map = ThreadLocalUtil.mapThreadLocal.get();
+        if(map.get("error") != null){
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
+
+        return JSONArray.toJSONString(userAdminService.adminSignInWeb(signInAdminWebSocketBo));
+    }
+
+    /**
      * @author hln 2023-11-01
      *      管理员查看所有签到状态
      * @return

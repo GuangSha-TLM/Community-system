@@ -166,7 +166,7 @@
     <select id="selectToGetUser" resultType="com.gsxy.core.pojo.vo.UserSelectToGetVo"
             parameterType="com.gsxy.core.pojo.vo.UserSelectToGetVo">
         select
-            name,college,grade,professional
+            id,name,college,grade,professional
         from
             user
         where

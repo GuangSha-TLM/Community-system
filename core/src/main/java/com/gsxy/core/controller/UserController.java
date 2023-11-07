@@ -167,6 +167,18 @@ public class UserController {
     }
 
     /**
+     * @quthor hln 2023-10-30
+     *      用户签到-WebSocket
+     * @param userSignInBo
+     * @return
+     */
+    @PostMapping("/usersignweb")
+    @ApiOperation("用户签到")
+    public String userSignInWebSocket(@RequestBody UserSignInBo userSignInBo){
+        return null;
+    }
+
+    /**
      * @author hln 2023-11-03
      *      根据前端指定字段返回User信息
      * @param userSelectToGetBo

@@ -7,12 +7,14 @@ import java.io.Serializable;
  */
 public class UserSelectToGetVo implements Serializable {
 
+    private Long id;
     private String name;
     private Integer college;
     private String grade;
     private String professional;
 
-    public UserSelectToGetVo(String name, Integer college, String grade, String professional) {
+    public UserSelectToGetVo(Long id, String name, Integer college, String grade, String professional) {
+        this.id = id;
         this.name = name;
         this.college = college;
         this.grade = grade;
@@ -20,6 +22,14 @@ public class UserSelectToGetVo implements Serializable {
     }
 
     public UserSelectToGetVo() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -57,7 +67,8 @@ public class UserSelectToGetVo implements Serializable {
     @Override
     public String toString() {
         return "UserSelectToGetVo{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", college=" + college +
                 ", grade='" + grade + '\'' +
                 ", professional='" + professional + '\'' +
