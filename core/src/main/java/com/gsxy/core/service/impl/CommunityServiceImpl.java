@@ -218,7 +218,8 @@ public class CommunityServiceImpl implements CommunityService {
         notice.setName(user.getName() +"申请加入"+ community.getName() +"社团");
         notice.setUserEmailId(createBy);
         notice.setCreateBy(userId);
-
+        notice.setRead(0);
+        notice.setDealt(0);
         UUID uuid = UUID.randomUUID();
         notice.setUuid(uuid.toString());
 
@@ -285,6 +286,8 @@ public class CommunityServiceImpl implements CommunityService {
             notice.setCreateBy(userId);
             notice.setStatus(0);
             notice.setDelFlag(0);
+            notice.setRead(0);
+            notice.setDealt(0);
             //发送通知
             noticeMapper.addNotice(notice);
 
@@ -326,6 +329,8 @@ public class CommunityServiceImpl implements CommunityService {
         notice.setContext(communityReplyNoticeBo.getContext());
         notice.setStatus(0);
         notice.setDelFlag(0);
+        notice.setRead(0);
+        notice.setDealt(0);
         noticeMapper.addNotice(notice);
 
 
