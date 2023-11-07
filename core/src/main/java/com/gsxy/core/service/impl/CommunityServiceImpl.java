@@ -287,7 +287,7 @@ public class CommunityServiceImpl implements CommunityService {
             notice.setStatus(0);
             notice.setDelFlag(0);
             notice.setRead(0);
-            notice.setDealt(0);
+            notice.setDealt(1);
             //发送通知
             noticeMapper.addNotice(notice);
 
@@ -332,7 +332,7 @@ public class CommunityServiceImpl implements CommunityService {
         notice.setStatus(0);
         notice.setDelFlag(0);
         notice.setRead(0);
-        notice.setDealt(0);
+        notice.setDealt(1);
         noticeMapper.addNotice(notice);
 
 
