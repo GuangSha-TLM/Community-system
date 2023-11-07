@@ -94,4 +94,18 @@ public class CommunityUserControllerAopImpl implements CommunityUserControllerAo
         systemService.isAdmin(token,2);
         return null;
     }
+
+    /**
+     * @author zhuxinyu 2023-11-07
+     *       社长向用户发送已加入通知
+     * @param joinPoint
+     */
+    @Override
+    @Before("execution(* com.gsxy.core.controller.CommunityUserController.CommunityToUserNotice(..))")
+    public void CommunityToUserNotice(JoinPoint joinPoint) {
+        Object[] args = joinPoint.getArgs();
+        CommunityUserAndUserNoticeBo arg = (CommunityUserAndUserNoticeBo) args[0];
+        String token = arg.getToken();
+        systemService.isAdmin(token,2);
+    }
 }

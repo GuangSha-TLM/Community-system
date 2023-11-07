@@ -118,4 +118,21 @@ public class CommunityUserController {
     public String CommunityUserAndUser(){
        return JSONArray.toJSONString(communityUserService.communityUserAndUser());
     }
+
+    /**
+     * @author zhuxinyu 2023-11-07
+     *       用户发送通知
+     * @param communityUserAndUserNoticeBo
+     * @return String.class
+     */
+    @PostMapping("/communityToUserNotice")
+    @ApiOperation("社长向用户发送拉取入团的通知")
+    public String CommunityToUserNotice(@RequestBody CommunityUserAndUserNoticeBo communityUserAndUserNoticeBo){
+        Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+        if (map.get("error") != null) {
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
+        return JSONArray.toJSONString(communityUserService.communityToUserNotice(communityUserAndUserNoticeBo));
+    }
 }

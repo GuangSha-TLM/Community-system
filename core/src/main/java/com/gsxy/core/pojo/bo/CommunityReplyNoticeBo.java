@@ -13,6 +13,7 @@ public class CommunityReplyNoticeBo implements Serializable {
     private String token;
     private String context;
     private Long noticeId;
+    //社长同意或拒绝用户的申请(0:同意,1:拒绝)
     private Integer status;
 
     public String getToken() {
