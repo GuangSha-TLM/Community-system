@@ -1,5 +1,6 @@
 package com.gsxy.core.service;
 
+import com.baomidou.mybatisplus.extension.api.R;
 import com.gsxy.core.pojo.User;
 import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.ResponseVo;
@@ -80,4 +81,12 @@ public interface UserService {
      * @return
      */
     ResponseVo selectToGetUser(UserSelectToGetBo userSelectToGetBo);
+
+    /**
+     * @author hln 2023-11-07
+     *      用户签到（响应）功能
+     * @param signInWebSocketBo
+     * @return
+     */
+    ResponseVo userSignInWebSocket(SignInWebSocketBo signInWebSocketBo);
 }
