@@ -77,9 +77,9 @@ public class NoticeServiceImpl implements NoticeService {
 
         }
 
-        Long counts = noticeMapper.selectReadNotice(userId);
+        Long noReadCounts = noticeMapper.selectReadNotice(userId);
 
-        NoticeListCountVo noticeListCountVo = new NoticeListCountVo(list2,counts);
+        NoticeListCountVo noticeListCountVo = new NoticeListCountVo(list2,noReadCounts);
 
         return new ResponseVo("查询成功", noticeListCountVo, "0x200");
 

@@ -41,7 +41,7 @@
             notice
         values
             (null,#{userEmailId},#{context},#{uuid},#{imgId},#{name},
-             #{read},#{createBy},#{createTime},#{updateBy},
+             #{read},#{dealt},#{createBy},#{createTime},#{updateBy},
              #{updateTime},#{status},#{delFlag});
     </insert>
 
@@ -69,6 +69,9 @@
             </if>
             <if test="read != null ">
                 read = #{read},
+            </if>
+            <if test="dealt != null ">
+                dealt = #{dealt},
             </if>
             <if test="createBy != null ">
                 create_by = #{createBy},
@@ -165,5 +168,16 @@
         where
             id = #{id};
     </update>
+
+
+    <update id="updateByIdToDealt" parameterType="java.lang.Long">
+        update
+            notice
+        set
+            dealt = 1
+        where
+            id = #{noticeId};
+    </update>
+
 
 </mapper>

@@ -88,6 +88,15 @@ public interface NoticeMapper {
      */
     public Long updateByIdToRead(Long id);
 
+
+
+    /**
+     * @author Oh… Yeah!!!, 2023-10-27
+     *      设置通知的处理状态.
+     * @param noticeId
+     * @return void
+     */
+    public void updateByIdToDealt(Long noticeId);
 }
 
 
