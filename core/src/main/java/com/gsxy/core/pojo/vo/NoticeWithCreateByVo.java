@@ -18,6 +18,7 @@ public class NoticeWithCreateByVo {
     private String professional;
     private String grade;
     private Integer read;
+    private Integer dealt;
 
     public NoticeWithCreateByVo() {
     }
@@ -26,16 +27,17 @@ public class NoticeWithCreateByVo {
         this.name = name;
     }
 
-    public NoticeWithCreateByVo(Long id, String noticeName, Long userEmailId, Long createBy, String context, String name, String professional, String grade, Integer read) {
+    public NoticeWithCreateByVo(Long id, String noticeName, Long userEmailId, Long createBy, String context, String name, String professional, String grade, Integer read, Integer dealt) {
         this.id = id;
         this.noticeName = noticeName;
-        this.UserEmailId = userEmailId;
+        UserEmailId = userEmailId;
         this.createBy = createBy;
         this.context = context;
         this.name = name;
         this.professional = professional;
         this.grade = grade;
         this.read = read;
+        this.dealt = dealt;
     }
 
     public Long getId() {
@@ -110,6 +112,14 @@ public class NoticeWithCreateByVo {
         this.read = read;
     }
 
+    public Integer getDealt() {
+        return dealt;
+    }
+
+    public void setDealt(Integer dealt) {
+        this.dealt = dealt;
+    }
+
     @Override
     public String toString() {
         return "NoticeWithCreateByVo{" +
@@ -122,6 +132,7 @@ public class NoticeWithCreateByVo {
                 ", professional='" + professional + '\'' +
                 ", grade='" + grade + '\'' +
                 ", read=" + read +
+                ", dealt=" + dealt +
                 '}';
     }
 }
