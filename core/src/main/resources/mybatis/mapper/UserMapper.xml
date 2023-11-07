@@ -109,7 +109,7 @@
     <!-- 查询所有用户信息 -->
     <select id="userFindAll" resultType="com.gsxy.core.pojo.User">
         select
-            *
+            id,username,name,college,student_id,grade,professional
         from
             user
         limit 0,15
