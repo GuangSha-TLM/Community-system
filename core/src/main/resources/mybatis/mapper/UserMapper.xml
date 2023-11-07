@@ -177,6 +177,17 @@
             professional like concat('%',#{professional},'%')
     </select>
 
+    <!-- 根据userId获取communityId -->
+    <select id="selectToGetCommunityId" resultType="java.lang.Long" parameterType="java.lang.Long">
+        SELECT
+            community_id
+        FROM
+            community_user
+        where
+            user_id = #{userId}
+        limit 1
+    </select>
+
     <!-- 插入用户签到状态 -->
     <insert id="userSignIn" parameterType="com.gsxy.core.pojo.bo.UserSignInBo">
         insert into
@@ -184,6 +195,15 @@
             (user_id,community_id,status,create_time)
         values
             (#{userId},#{communityId},#{status},#{createTime})
+    </insert>
+
+    <!-- 将用户签到响应数据插入到sign_in_websocket -->
+    <insert id="insertSignInWeb" parameterType="com.gsxy.core.pojo.SignInWebSocket">
+        insert into
+            sign_in_websocket
+            (user_id,content,community_id,create_time)
+        values
+            (#{userId},#{content},#{communityId},#{createTime})
     </insert>
 
     <!-- 删除签到记录（如果该社团没有该用户） -->

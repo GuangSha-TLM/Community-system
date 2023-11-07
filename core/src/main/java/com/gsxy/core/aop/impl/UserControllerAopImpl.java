@@ -118,4 +118,21 @@ public class UserControllerAopImpl implements UserControllerAop {
         return null;
     }
 
+    /**
+     * @author hln 2023-11-07
+     *      用户签到-WebSocket鉴权
+     * @param joinPoint
+     * @return
+     */
+    @Override
+    @Before("execution(* com.gsxy.core.controller.UserController.userSignInWebSocket(..))")
+    public String userSignInWebSocket(JoinPoint joinPoint) {
+        Object[] args = joinPoint.getArgs();
+        SignInWebSocketBo arg = (SignInWebSocketBo) args[0];
+        String token = arg.getToken();
+        systemService.auth(token);
+
+        return null;
+    }
+
 }
