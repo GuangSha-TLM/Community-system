@@ -2,6 +2,7 @@ package com.gsxy.core.service.impl;
 
 import com.gsxy.core.mapper.UserAdminMapper;
 import com.gsxy.core.pojo.SignInAdmin;
+import com.gsxy.core.pojo.SignInAdminWebSocket;
 import com.gsxy.core.pojo.UserAdmin;
 import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.ResponseVo;
@@ -171,6 +172,33 @@ public class UserAdminServiceImpl implements UserAdminService {
         }
 
         return new ResponseVo("查询成功",list,"0x200");
+    }
+
+    /**
+     * @author hln 2023-11-07
+     *      管理员发起签到-WebSocket
+     * @param signInAdminWebSocketBo
+     * @return
+     */
+    @Override
+    public ResponseVo adminSignInWeb(SignInAdminWebSocketBo signInAdminWebSocketBo) {
+        String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
+        Long adminId = Long.valueOf(userIdOfStr);
+
+        if (adminId == null || adminId == 0L){
+            return new ResponseVo("token解析失败",null,"0x501");
+        }
+
+        SignInAdminWebSocket signInAdminWebSocket = new SignInAdminWebSocket();
+
+        signInAdminWebSocket.setAdminId(adminId);
+        signInAdminWebSocket.setCommunityId(adminId);
+        signInAdminWebSocket.setReleaseTime(new Date());
+        signInAdminWebSocket.setContent(signInAdminWebSocketBo.getContent());
+
+        userAdminMapper.insertPutSignIn(signInAdminWebSocket);
+
+        return new ResponseVo("签到已发起",signInAdminWebSocketBo,"0x200");
     }
 
 }

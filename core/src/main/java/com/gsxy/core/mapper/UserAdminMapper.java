@@ -157,4 +157,11 @@ public interface UserAdminMapper {
      * @return
      */
     SignInAdminWebSocketBo selectToGetWebByAdminId(Long adminId);
+
+    /**
+     * @author hln 2023-11-07
+     *      插入所有的实体类SignInAdminWebSocketBo的信息到sign_in_admin_websocket
+     * @param signInAdminWebSocket
+     */
+    void insertPutSignIn(SignInAdminWebSocket signInAdminWebSocket);
 }
