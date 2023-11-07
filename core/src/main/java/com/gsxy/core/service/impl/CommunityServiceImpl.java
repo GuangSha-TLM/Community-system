@@ -302,6 +302,8 @@ public class CommunityServiceImpl implements CommunityService {
             noticeWithUser.setStatus(0);
             noticeWithUser.setDelFlag(0);
 
+            noticeWithUserMapper.addNoticeWithUser(noticeWithUser);
+
             return  new ResponseVo("社长已拒绝了" + user.getName() + "的加入",   null, "0x207");
         }
 
