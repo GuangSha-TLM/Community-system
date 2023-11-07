@@ -268,7 +268,7 @@ export default {
         async submit() {
             this.switchbutton = true;
             const { username, password, againPassword, name, org, grade, college, professional } = this.user;
-            // 判断用户名是否为空
+            // 判断不为空提示弹窗
             if (this.user.username === '') {
                 alert('用户名不能为空');
                 this.switchbutton = false;
