@@ -1,7 +1,7 @@
 <!--
  * @Author: tianleiyu
  * @Date: 2023-10-29 13:15:48
- * @LastEditTime: 2023-10-29 17:30:59
+ * @LastEditTime: 2023-11-02 14:10:55
  * @LastEditors: tianleiyu
  * @Description:
  * @FilePath: /community-ui/src/components/ActivityItem.vue
@@ -22,7 +22,7 @@
                     创建时间: {{ list.activeToGetBo.createTime }}
                 </div>
                 <div class="item">
-                    <router-link :to="{name:'AssociationManager',params:{id:list.communityInActiveBo.id}}">社团:{{ list.communityInActiveBo.name }}</router-link>
+                    <router-link :to="{name:'ApplyAddAssociation',params:{id:list.communityInActiveBo.id}}">社团:{{ list.communityInActiveBo.name }}</router-link>
 
                 </div>
                 <div class="item">

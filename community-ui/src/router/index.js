@@ -8,7 +8,8 @@ import AssociationManager from '../components/AssociationManager.vue'
 import ActivityManagement from '../components/ActivityManagement.vue'
 import ActivityItem from '../components/ActivityItem.vue'
 import UserCenter from '../components/UserCenter.vue'
-
+import ApplyAddAssociation from '../components/ApplyAddAssociation.vue'
+import MessageLists from '../components/MessageLists.vue'
 
 import Login from '@/components/Login.vue'
 import UserReg from '@/components/UserReg.vue'
@@ -47,6 +48,15 @@ export default new Router({
           path: '/UserCenter',
           name: 'UserCenter',
           component: UserCenter
+        },
+        {
+          path: '/ApplyAddAssociation/:id',
+          name: 'ApplyAddAssociation',
+          component: ApplyAddAssociation
+        },{
+          path: '/MessageLists',
+          name: 'MessageLists',
+          component: MessageLists
         }
       ]
     },
