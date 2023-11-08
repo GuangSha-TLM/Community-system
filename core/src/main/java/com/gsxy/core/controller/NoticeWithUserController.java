@@ -20,7 +20,7 @@ import java.util.Map;
 @CrossOrigin
 @Api(value = "通知和用户版块接口",tags = {"通知和用户版块接口"})
 @RestController
-@RequestMapping("/notice_with_user")
+@RequestMapping("/noticeWithUser")
 public class NoticeWithUserController {
 
     @Autowired

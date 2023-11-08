@@ -22,7 +22,7 @@ import java.util.Map;
 @CrossOrigin
 @Api(value = "管理员版块接口",tags = {"管理员版块接口"})
 @RestController
-@RequestMapping("/user_admin")
+@RequestMapping("/userAdmin")
 public class UserAdminController {
 
     @Autowired
