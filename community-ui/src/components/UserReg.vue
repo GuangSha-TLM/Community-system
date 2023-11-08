@@ -231,8 +231,8 @@ export default {
                 ],
         
         user: {
-                userName: "",
-                passWord: "",
+                username: "",
+                password: "",
                 againPassword: "",
                 name: "",
                 college: null,
