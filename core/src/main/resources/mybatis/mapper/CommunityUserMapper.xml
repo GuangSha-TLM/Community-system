@@ -69,8 +69,6 @@
         where id = #{id}
     </update>
 
-
-
     <!--
         @author Oh...Yeah!!! 2023-10-30
         查看该用户是否已经在这个社团

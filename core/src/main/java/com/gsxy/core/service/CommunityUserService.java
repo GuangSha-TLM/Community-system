@@ -45,6 +45,14 @@ public interface CommunityUserService {
     public ResponseVo communityUserdeleteUser(CommunityUserdeleteUserBo communityUserdeleteUserBo);
 
     /**
+     * @author zhuxinyu 2023-11-06
+     *      社长向用户发送已加入通知
+     * @param communityUserAndUserNoticeBo
+     * @return
+     */
+    public ResponseVo communityToUserNotice(CommunityUserAndUserNoticeBo communityUserAndUserNoticeBo);
+
+    /**
      * @author zhuxinyu 2023-10-30
      * 查询社团所有用户
      * @return

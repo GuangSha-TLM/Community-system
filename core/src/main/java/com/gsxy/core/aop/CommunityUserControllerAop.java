@@ -42,4 +42,11 @@ public interface CommunityUserControllerAop {
      * @return
      */
     public String CommunityUserdeleteUser(JoinPoint joinPoint);
+    /**
+     * @author zhuxinyu 2023-11-07
+     *       社长向用户发送已加入通知
+     * @param joinPoint
+     * @return void
+     */
+    public void CommunityToUserNotice(JoinPoint joinPoint);
 }

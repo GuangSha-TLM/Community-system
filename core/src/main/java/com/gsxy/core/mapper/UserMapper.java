@@ -1,5 +1,6 @@
 package com.gsxy.core.mapper;
 
+import com.gsxy.core.pojo.SignInWebSocket;
 import com.gsxy.core.pojo.User;
 import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.UserSelectToGetVo;
@@ -119,4 +120,19 @@ public interface UserMapper {
      * @return
      */
     List<UserSelectToGetVo> selectToGetUser(UserSelectToGetBo userSelectToGetBo);
+
+    /**
+     * @author hln 2023-11-03
+     *      根据userId获取communityId
+     * @param userId
+     * @return
+     */
+    Long selectToGetCommunityId(Long userId);
+
+    /**
+     * @author hln 2023-11-07
+     *      将用户签到响应数据插入到sign_in_websocket
+     * @param signInWebSocket
+     */
+    void insertSignInWeb(SignInWebSocket signInWebSocket);
 }

@@ -95,6 +95,15 @@
             (#{adminId},#{communityId},#{content},#{releaseTime})
     </insert>
 
+    <!-- 插入管理员发起的签到功能 -->
+    <insert id="insertPutSignIn" parameterType="com.gsxy.core.pojo.SignInAdminWebSocket">
+        insert into
+            sign_in_admin_websocket
+            (admin_id,community_id,content,release_time)
+        values
+            (#{adminId},#{communityId},#{content},#{releaseTime})
+    </insert>
+
     <!--
          @author Oh… Yeah!!! 2023-10-24
          更新UserAdmin数据

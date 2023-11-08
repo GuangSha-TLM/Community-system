@@ -68,6 +68,14 @@ public interface UserAdminService {
      * @return
      */
     ResponseVo findAllSignInStatus();
+
+    /**
+     * @author hln 2023-11-07
+     *      管理员发起签到-WebSocket
+     * @param signInAdminWebSocketBo
+     * @return
+     */
+    ResponseVo adminSignInWeb(SignInAdminWebSocketBo signInAdminWebSocketBo);
 }
 
 

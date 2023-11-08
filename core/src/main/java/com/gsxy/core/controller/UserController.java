@@ -1,6 +1,7 @@
 package com.gsxy.core.controller;
 
 import com.alibaba.fastjson2.JSONArray;
+import com.gsxy.core.pojo.SignInWebSocket;
 import com.gsxy.core.pojo.User;
 import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.ResponseVo;
@@ -164,6 +165,24 @@ public class UserController {
         }
 
         return JSONArray.toJSONString(userService.userSignIn(userSignInBo));
+    }
+
+    /**
+     * @quthor hln 2023-10-30
+     *      用户签到-WebSocket
+     * @param signInWebSocketBo
+     * @return
+     */
+    @PostMapping("/usersignweb")
+    @ApiOperation("用户签到")
+    public String userSignInWebSocket(@RequestBody SignInWebSocketBo signInWebSocketBo){
+        Map<String,String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+        if(map.get("error") != null){
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
+
+        return JSONArray.toJSONString(userService.userSignInWebSocket(signInWebSocketBo));
     }
 
     /**

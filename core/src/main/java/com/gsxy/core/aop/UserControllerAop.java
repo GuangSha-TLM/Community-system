@@ -53,4 +53,12 @@ public interface UserControllerAop {
      */
     public String selectToGetUser(JoinPoint joinPoint);
 
+    /**
+     * @author hln 2023-11-07
+     *      用户签到-WebSocket鉴权
+     * @param joinPoint
+     * @return
+     */
+    public String userSignInWebSocket(JoinPoint joinPoint);
+
 }
