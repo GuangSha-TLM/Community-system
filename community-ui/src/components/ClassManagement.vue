@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- Main content -->
-        <section v-if="view">
+        <section >
             <div class="container">
                 <!-- 下拉表格 -->
                  <div class="bigfrom">
@@ -262,7 +262,7 @@ export default {
                 ]
                 ],
 
-            //token值获取
+            //token值获取1
             token: getCookie("token"),
             //查看方法
             schoolView: {
@@ -390,16 +390,16 @@ export default {
         },
 
         //拉取功能
-        async Pulling() {
-            this.list=[];
-            this.communityUserAddBo.token = this.token;
-            this.communityUserAddBo.college = this.selectInfo.college;
-            this.communityUserAddBo.grade = this.selectInfo.grade;
-            this.communityUserAddBo.professional = this.selectInfo.professional;
-            let obj = await synRequestPost("/communityUser/communityUserAddBo", this.communityUserAddBo);
-            console.log(obj);
-            this.list = obj.data.list;
-        },
+        // async Pulling() {
+        //     this.list=[];
+        //     this.communityUserAddBo.token = this.token;
+        //     this.communityUserAddBo.college = this.selectInfo.college;
+        //     this.communityUserAddBo.grade = this.selectInfo.grade;
+        //     this.communityUserAddBo.professional = this.selectInfo.professional;
+        //     let obj = await synRequestPost("/communityUser/communityUserAddBo", this.communityUserAddBo);
+        //     console.log(obj);
+        //     this.list = obj.data.list;
+        // },
 
     },
 }
