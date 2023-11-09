@@ -8,15 +8,13 @@ import java.io.Serializable;
  */
 public class CommunityUserdeleteUserBo implements Serializable {
     private String token;
-    private Long communityId;//社团id
     private Long userId;//用户id
     public CommunityUserdeleteUserBo(){
 
     }
 
-    public CommunityUserdeleteUserBo(String token, Long communityId, Long userId) {
+    public CommunityUserdeleteUserBo(String token, Long userId) {
         this.token = token;
-        this.communityId = communityId;
         this.userId = userId;
     }
 
@@ -26,14 +24,6 @@ public class CommunityUserdeleteUserBo implements Serializable {
 
     public void setToken(String token) {
         this.token = token;
-    }
-
-    public Long getCommunityId() {
-        return communityId;
-    }
-
-    public void setCommunityId(Long communityId) {
-        this.communityId = communityId;
     }
 
     public Long getUserId() {
@@ -48,7 +38,6 @@ public class CommunityUserdeleteUserBo implements Serializable {
     public String toString() {
         return "CommunityUserdeleteUserBo{" +
                 "token='" + token + '\'' +
-                ", communityId=" + communityId +
                 ", userId=" + userId +
                 '}';
     }

@@ -5,6 +5,7 @@ import java.util.Date;
 
 public class UserAndUserAdminBo implements Serializable {
 
+    private Long id;
     private String username;//用户名
     private String name;//姓名
     private Integer college;//学院
@@ -15,7 +16,8 @@ public class UserAndUserAdminBo implements Serializable {
     private Date loginTime;//登陆时间
     private Integer role;//权限
 
-    public UserAndUserAdminBo(String username, String name, Integer college, String studentId, Integer org, String professional, String grade, Date loginTime, Integer role) {
+    public UserAndUserAdminBo(Long id, String username, String name, Integer college, String studentId, Integer org, String professional, String grade, Date loginTime, Integer role) {
+        this.id = id;
         this.username = username;
         this.name = name;
         this.college = college;
@@ -28,6 +30,14 @@ public class UserAndUserAdminBo implements Serializable {
     }
 
     public UserAndUserAdminBo() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -104,8 +114,9 @@ public class UserAndUserAdminBo implements Serializable {
 
     @Override
     public String toString() {
-        return "user" +
-                "username='" + username + '\'' +
+        return "UserAndUserAdminBo{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
                 ", name='" + name + '\'' +
                 ", college=" + college +
                 ", studentId='" + studentId + '\'' +

@@ -125,6 +125,11 @@ public class CommunityUserServiceImpl implements CommunityUserService {
         if(communityUserId == null || communityUserId == 0L){
             return new ResponseVo("token解析失败",null,"0x501");
         }
+
+        Community community = communityMapper.selectByCommunityId(communityUserId);
+
+        communityUserMapper.communityUserdeleteUser(community.getCommunityId(),communityUserdeleteUserBo.getUserId());
+
         Long userId = communityUserdeleteUserBo.getUserId();
         if (userId == 0L ) {
             return new ResponseVo("删除失败", null, "0x500");
