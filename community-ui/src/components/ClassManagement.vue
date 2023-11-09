@@ -1,8 +1,59 @@
 <template>
     <div>
         <!-- Main content -->
-        <section v-if="view">
+        <section >
             <div class="container">
+                <!-- 下拉表格 -->
+                 <div class="bigfrom">
+                            <div class="form-group">
+                                <label for="exampleInputgrand">选择你的学院</label>
+                                <el-select  v-model="selectInfo.college" placeholder="请选择"  style="width: 100%;">
+                                <el-option
+                                v-for="item in options"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value">
+                                </el-option>
+                            </el-select>
+                            </div>
+
+
+
+                            <div class="form-group">
+                            <label for="exampleInputprofessional">选择你的专业</label>
+                            <el-select v-model="selectInfo.professional" placeholder="请选择" style="width: 100%;">
+
+                                <el-option-group
+                                    v-for="group in professionalList[selectInfo.college -1]"
+                                    :key="group.value"
+                                    :label="group.label">
+                                <el-option
+                                    v-for="item in group.professionalList"
+                                    :key="item.professionalList"
+                                    :label="item.label"
+                                    :value="item">
+                                </el-option>
+                                </el-option-group>
+
+                            </el-select></div>
+
+                            <div class="form-group">
+                                <label for="exampleInputgrand">选择你的年级</label>
+                                <el-select  v-model="selectInfo.grade" placeholder="请选择"  style="width: 100%;">
+                                <el-option
+                                v-for="item in grandList"
+                                    :key="item"
+                                    :label="item"
+                                    :value="item">
+                                </el-option>
+                            </el-select>
+                            </div>
+                            <div class="form-group but">
+                                <button class="btn btn-primary" style="width:10%,margin-top:10px" @click="selectForm()"
+                                :disabled="switchbutton">查询</button>
+                            </div>
+                        </div>
+                <!-- =========================================== -->
                 <table class="table">
                     <thead>
                         <tr>
@@ -11,62 +62,63 @@
                             <th scope="col">专业</th>
                             <th scope="col">年级</th>
                             <th scope="col">班级名</th>
-                             <th scope="col">创建人</th>
                             <th scope="col">操作</th>
                         </tr>
 
                     </thead>
                     <tbody>
-                        <tr v-for="obj in list" :key="obj.index">
-                            <th scope="row">{{ obj.id }}</th>
+                        <tr v-for="(obj,index) in list" :key="obj.index">
+                            <th scope="row">{{ index + 1 }}</th>
                             <td>{{ obj.college }}</td>
                             <td>{{ obj.professional }}</td>
-                            <td>{{ obj.name }}</td>
-                            <td>{{ obj.org }}班</td>
-                            <td>{{ obj.create_by }}</td>
+                            <td>{{ obj.grade }}</td>
+                            <td>{{ obj.name }}班</td>
                             <td>
-                                <el-link type="primary" @click="openView(obj)">查看</el-link>
+                                <!-- 拉取功能 -->
+                                <el-link type="primary" @click="Pulling()">查看</el-link>
 
-                                <el-link type="primary" @click="openUpdateUserInfoWindows(obj.id)">修改</el-link>
-
+                                <el-link type="primary" @click="openUpdateuserInfoWindows(obj.id)">修改</el-link>
+                                <!-- 修改窗口 -->
                                 <el-drawer title="我是标题" :visible.sync="updateWindows" :with-header="false">
                                     <div>
-                                        <div>
-                                            名字:
-                                            <el-input v-model="userInfo.name" placeholder="更改名字"></el-input>
-                                        </div>
-                                        <br><br>
-                                        <div>
-                                            用户名:
-                                            <el-input v-model="userInfo.username" placeholder="更改用户名"></el-input>
-                                        </div>
-                                        <br><br>
-                                        <div>
-                                            密码:
-                                            <el-input v-model="userInfo.password" placeholder="更改密码"></el-input>
-                                        </div>
-                                        <br><br>
-                                        <div>
-                                            班级:
-                                            <el-input v-model="userInfo.org" placeholder="更改班级"></el-input>
-                                        </div> <br><br>
+
                                         <div>
                                             学院:
-                                            <el-select v-model="input" placeholder="请选择">
-                                                <el-option v-for="item in college" :key="item.value" :label="item.text"
+                                            <el-select v-model="college" placeholder="请选择">
+                                                <el-option v-for="item in options" :key="item.value" :label="item.label"
                                                     :value="item.value">
                                                 </el-option>
                                             </el-select>
-                                        </div> <br><br>
+                                        </div>
+                                        <br>
+                                            专业:
+                                        <el-select v-model="userInfo.professional" placeholder="请选择">
+                                        <el-option-group
+                                            v-for="group in professionalList[userInfo.college-1]"
+                                            :key="group.value"
+                                            :label="group.label">
+                                        <el-option
+                                            v-for="item in group.professionalList"
+                                            :key="item.professionalList"
+                                            :label="item.label"
+                                            :value="item">
+                                        </el-option>
+                                        </el-option-group>
+                                        </el-select>
+                                        <br><br>
                                         <div>
                                             年级:
-                                            <el-input v-model="userInfo.grade" placeholder="更改年级"></el-input>
-                                        </div> <br><br>
-                                        <div>
-                                            学号:
-                                            <el-input v-model="userInfo.studentId" placeholder="更改学号"></el-input>
-                                        </div> <br><br>
-                                        <el-button type="primary" @click="updateUserInfo()">提交</el-button>
+                                            <el-select  v-model="userInfo.grade" placeholder="请选择" >
+                                            <el-option v-for="item in grandList"
+                                                :key="item"
+                                                :label="item"
+                                                :value="item">
+                                            </el-option>
+                                            </el-select>
+                                        </div>
+                                        <br><br>
+
+                                        <el-button type="primary" @click="updateuserInfo()">提交</el-button>
                                     </div>
                                 </el-drawer>
 
@@ -94,12 +146,125 @@ import { synRequestPost, synRequestGet } from "../../static/request"
 export default {
     data() {
         return {
-            token: getCookie("token"),
-            user: {
-                username: "",
-                password: "",
+            //下拉表选择
+            //年级
+            grandList: [2019, 2020, 2021, 2022, 2023, 2024, 2025],
+            userSelectToGetBo: {
+                token: "",
+                college: '',
+                professional: '',
+                grade: '',
+
             },
-            //查看
+            //属性
+            selectInfo: {
+                college: '',
+                professional: '',
+                grade: ''
+            },
+            //学院
+             options: [
+                        { value: 1, label: "信息学院" },
+                        { value: 2, label: "财经学院" },
+                        { value: 3, label: "艺术学院" },
+                        { value: 4, label: "通识学院" }
+                        ],
+            //专业
+        professionalList:[
+                //信息学院
+                [
+                {
+                    value:1,
+                    label: '软件工程',
+                    professionalList: ['软件工程1班', '软件工程2班','软件工程3班','软件工程4班','软件工程5班','软件工程6班']
+                }, {
+                    value:2,
+                    label: '计算机科学与技术',
+                    professionalList: ['计算机科学与技术1班', '计算机科学与技术2班','计算机科学与技术3班',
+                                        '计算机科学与技术4班','计算机科学与技术5班','计算机科学与技术6班']
+                },{
+                    value:3,
+                    label: '电子商务',
+                    professionalList: ['电子商务1班', '电子商务2班','电子商务3班','电子商务4班','电子商务5班','电子商务6班']
+                    },
+
+                ],
+                //财经学院
+                [
+                {
+                    value:1,
+                    label: '审计学',
+                    professionalList: ['审计学1班', '审计学2班','审计学3班','审计学4班','审计学5班','审计学6班']
+                },{
+                    value:2,
+                    label: '会计学',
+                    professionalList: ['会计学1班', '会计学2班','会计学3班','会计学4班','会计学5班','会计学6班']
+                },{
+                    value:3,
+                    label: '国际经济与贸易',
+                    professionalList: ['国际经济与贸易1班', '国际经济与贸易2班','国际经济与贸易3班',
+                                        '国际经济与贸易4班','国际经济与贸易5班','国际经济与贸易6班']
+                },{
+                    value:4,
+                    label: '财务管理',
+                    professionalList: ['财务管理1班', '财务管理2班','财务管理3班','财务管理4班','财务管理5班','财务管理6班']
+                },{
+                    value:5,
+                    label: '工商管理',
+                    professionalList: ['工商管理1班', '工商管理2班','工商管理3班','工商管理4班','工商管理5班','工商管理6班']
+                },{
+                    value:6,
+                    label: '人力资源管理',
+                    professionalList: ['人力资源管理1班', '人力资源管理2班','人力资源管理3班',
+                                        '人力资源管理4班','人力资源管理5班','人力资源管理6班']
+                    },
+
+                ],
+                //艺术学院
+                [
+                {
+                    value:1,
+                    label: '视觉传达设计',
+                    professionalList: ['视觉传达设计1班', '视觉传达设计2班','视觉传达设计3班',
+                                        '视觉传达设计4班','视觉传达设计5班','视觉传达设计6班']
+                }, {
+                    value:2,
+                    label: '环境设计',
+                    professionalList: ['环境设计1班', '环境设计2班','环境设计3班','环境设计4班','环境设计5班','环境设计6班']
+                },{
+                    value:3,
+                    label: '影视摄影与制作',
+                    professionalList: ['影视摄影与制作1班', '影视摄影与制作2班','影视摄影与制作3班',
+                                        '影视摄影与制作4班','影视摄影与制作5班','影视摄影与制作6班']
+                    },
+
+                ],
+                //通识学院
+                [
+                {
+                    value:1,
+                    label: '汉语言文学',
+                    professionalList: ['汉语言文学1班', '汉语言文学2班','汉语言文学3班',
+                                        '汉语言文学4班','汉语言文学5班','汉语言文学6班']
+                }, {
+                    value:2,
+                    label: '应用心理学',
+                    professionalList: ['应用心理学1班', '应用心理学2班','应用心理学3班',
+                                        '应用心理学4班','应用心理学5班','应用心理学6班']
+                },{
+                    value:3,
+                    label: '学前教育 (师范类)',
+                    professionalList: ['学前教育 (师范类)1班', '学前教育 (师范类)2班','学前教育 (师范类)3班',
+                                        '学前教育 (师范类)4班','学前教育 (师范类)5班','学前教育 (师范类)6班']
+
+                    },
+
+                ]
+                ],
+
+            //token值获取1
+            token: getCookie("token"),
+            //查看方法
             schoolView: {
 
             },
@@ -119,13 +284,13 @@ export default {
             },
 
             //通过id删除
-            deleteByIdBo: {
+            userDeleteByIdBo: {
                 token: "",
                 id: -1
             },
 
             //查重用户通过id
-            selectByIdBo: {
+            userSelectByUserIdBo: {
                 token: "",
                 id: -1,
             },
@@ -136,86 +301,55 @@ export default {
             //用户信息
             userInfo: {
                 id: -1,
-                username: "",
-                password: "",
-                name: "",
-                org: '',
                 college: '',
+                professional: '',
                 grade: '',
-                studentId: '',
+                name: '',
             },
             //更新用户信息
-            updataByIdBo: {
+            userUpdateByUserIdBo: {
                 token: "",
                 user: {
                     id: -1,
-                    username: "",
-                    password: "",
-                    name: "",
-                    org: '',
                     college: '',
+                    professional: '',
                     grade: '',
-                    studentId: '',
+                    name: '',
                 }
             },
-            //查看
-            view: true,
-            input: '',
-            //学院信息
-            college: [
-                {
-                    value: 1,
-                    text: '信息学院'
-                },
-                {
-                    value: 2,
-                    text: '财经学院'
-                },
-                {
-                    value: 3,
-                    text: '艺术与传媒学院'
-                },
-                {
-                    value: 4,
-                    text: '通识学院'
-                }
-            ],
+            //学院的
+            college: '',
         }
     },
     mounted() {
-        this.deleteByIdBo.token = getCookie("token");
-        this.getMerchantInformation(1)
+        this.userDeleteByIdBo.token = getCookie("token");
+        this.getMerchantInformation()
     },
-
     methods: {
         /**
          *  修改用户信息
          */
-        async updateUserInfo() {
+        async updateuserInfo() {
             //todo userInfo 要求username 和password 和name 不可以为空
-            this.updataByIdBo.token = this.token;
-            this.updataByIdBo.user.college = this.input;
-            this.updataByIdBo.user.org = this.userInfo.org;
-            this.updataByIdBo.user.grade = this.userInfo.grade;
-            this.updataByIdBo.user.studentId = this.userInfo.studentId;
-            this.updataByIdBo.user.password = this.userInfo.password;
-            this.updataByIdBo.user.username = this.userInfo.username;
-            this.updataByIdBo.user.name = this.userInfo.name;
-            this.updataByIdBo.user.id = this.userInfo.id;
-            console.log(this.updataByIdBo);
-            let obj = await synRequestPost("/user/update", this.updataByIdBo);
+            this.userUpdateByUserIdBo.token = this.token;
+            this.userUpdateByUserIdBo.user.college = this.college;
+            this.userUpdateByUserIdBo.user.professional = this.userInfo.professional;
+            this.userUpdateByUserIdBo.user.grade = this.userInfo.grade;
+            this.userUpdateByUserIdBo.user.name = this.userInfo.name;
+            this.userUpdateByUserIdBo.user.id = this.userInfo.id;
+            console.log(this.userUpdateByUserIdBo);
+            let obj = await synRequestPost("/user/update", this.userUpdateByUserIdBo);
             alert(obj.message);
             this.updateWindows = false
             this.getMerchantInformation(1);
         },
 
         //更新用户信息
-        async openUpdateUserInfoWindows(id) {
-            this.selectByIdBo.id = id;
-            this.selectByIdBo.token = this.token;
-            let obj = await synRequestPost("/user/select", this.selectByIdBo);
+        async openUpdateuserInfoWindows(id) {
+            this.userSelectByUserIdBo.id = id;
+            this.userSelectByUserIdBo.token = this.token;
+            let obj = await synRequestPost("/user/select", this.userSelectByUserIdBo);
             this.userInfo = obj.data;
-            // this.userInfo.college = this.college[this.userInfo.college]
             console.log(this.userInfo);
             this.view = true
             this.updateWindows = true;
@@ -228,31 +362,46 @@ export default {
             console.log(obj);
             if (obj.code == "0x200") {
                 this.list = obj.data;
-
+                for (let i = 0; i < this.list.length; i++) {
+                   this.list[i].college =  this.options[this.list[i].college - 1].label
+                }
             }
         },
 
         //删除用户通过id
         async deleteById(id) {
-            this.deleteByIdBo.id = id;
-            this.deleteByIdBo.token = this.token;
-            let obj = await synRequestPost("/user/delete", this.deleteByIdBo);
+            this.userDeleteByIdBo.id = id;
+            this.userDeleteByIdBo.token = this.token;
+            let obj = await synRequestPost("/user/delete", this.userDeleteByIdBo);
             alert(obj.message);
             this.getMerchantInformation(1);
 
         },
-
-        //查看功能
-        openView(obj) {
-            this.view = false
+         //下拉列表接口
+        async selectForm() {
+            this.list=[];
+            this.userSelectToGetBo.token = this.token;
+            this.userSelectToGetBo.college = this.selectInfo.college;
+            this.userSelectToGetBo.grade = this.selectInfo.grade;
+            this.userSelectToGetBo.professional = this.selectInfo.professional;
+            let obj = await synRequestPost("/user/selectToGetUser", this.userSelectToGetBo);
             console.log(obj);
-            if (obj.college) {
-                obj.college = this.college[obj.college].text
-            }
-            this.schoolView = obj
-        }
-    }
+            this.list = obj.data.list;
+        },
 
+        //拉取功能
+        // async Pulling() {
+        //     this.list=[];
+        //     this.communityUserAddBo.token = this.token;
+        //     this.communityUserAddBo.college = this.selectInfo.college;
+        //     this.communityUserAddBo.grade = this.selectInfo.grade;
+        //     this.communityUserAddBo.professional = this.selectInfo.professional;
+        //     let obj = await synRequestPost("/communityUser/communityUserAddBo", this.communityUserAddBo);
+        //     console.log(obj);
+        //     this.list = obj.data.list;
+        // },
+
+    },
 }
 
 </script>
@@ -318,5 +467,17 @@ a {
 .key {
     font-weight: bold;
     /* 可以使键加粗 */
+}
+.form-group {
+    margin-right: 10px;
+    float: left;
+    width: 20%;
+}
+.but{
+    display: flex;
+}
+.bigfrom {
+    display: flex;
+    align-items: flex-end;
 }
 </style>

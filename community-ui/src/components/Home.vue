@@ -17,9 +17,6 @@
                 <div class="ActivityManagement tab">
                         <router-link to="/ActivityManagement">活动管理</router-link>
                     </div>
-                <div class="UserCenter tab">
-                    <router-link to="/UserCenter">个人中心</router-link>
-                </div>
             </div>
             <div class="rigth">
                 <router-view />

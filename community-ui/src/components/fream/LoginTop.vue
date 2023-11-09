@@ -1,9 +1,9 @@
 <!--
- * @Author: tianleiyu 
+ * @Author: tianleiyu
  * @Date: 2023-10-29 10:33:58
- * @LastEditTime: 2023-10-31 20:05:19
+ * @LastEditTime: 2023-11-08 15:18:50
  * @LastEditors: tianleiyu
- * @Description: 
+ * @Description:
  * @FilePath: /community-ui/src/components/fream/LoginTop.vue
  * 可以输入预定的版权声明、个性签名、空行等
 -->
@@ -50,16 +50,27 @@
                             @input="searchInfo" class="input-with-select">
                             <el-button slot="append" icon="el-icon-search" @click="searchInfo"></el-button>
                         </el-input>
-                        <div class="result" v-if="isActive">
-                            <div class="result-item" v-for="(item, index) in list" :key="index">
-                                {{ item.title }}
+                        <div class="result" v-if="searchList.length > 0 && activeLikeToGetByTitleBo.title != ''">
+                            <div class="result-item" v-for="(item, index) in searchList" :key="index">
+                                <div @click="emitBus">{{ item.title }}</div>
                             </div>
                         </div>
 
                         <ul class="navbar-nav mt-4 mt-lg-0 ml-auto" v-if="isLogin">
-                            <li class="nav-item ">
-                                <a class="nav-link" href="#">{{ username }} </a>
-                            </li>
+                            <el-dropdown>
+                                <li class="nav-item ">
+                                    {{ username }}
+                                </li>
+                                <el-dropdown-menu slot="dropdown">
+                                    <el-dropdown-item>
+                                        <el-badge :value="count"  class="item">
+                                            <router-link :to="{name:'MessageLists', params:{list:messageList}}">消息</router-link>
+                                        </el-badge>
+                                    </el-dropdown-item>
+                                    <el-dropdown-item>退出登陆</el-dropdown-item>
+
+                                </el-dropdown-menu>
+                            </el-dropdown>
                         </ul>
 
                         <ul class="navbar-nav mt-4 mt-lg-0 ml-auto" v-else>
@@ -81,8 +92,9 @@
         </div>
     </div>
 </template>
-  
+
 <script>
+import { param } from 'jquery';
 
 import { synRequestPost, synRequestGet } from "../../../static/request"
 export default {
@@ -91,15 +103,21 @@ export default {
         return {
             username: "",
             token: getCookie("token"),
+            //登陆状态
             isLogin: false,
+            //是否为活动面板
             isActive: false,
+            //模糊查询
             activeLikeToGetByTitleBo: {
                 token: "",
                 title: '',
                 status: 0,
                 delFlag: 0
             },
-            list: []
+            //查询
+            searchList: [],
+            messageList:[],
+            count:0
 
         }
     },
@@ -108,7 +126,9 @@ export default {
         this.isActiveInfo();
     },
     methods: {
-        isLoginInfo() {
+
+        //判断是否为登陆
+        async isLoginInfo() {
             if (this.$route.path != "/Login") {
                 this.username = JSON.parse(localStorage.getItem("user")).username
                 if (this.username == null || this.username == "" || this.username == undefined) {
@@ -116,9 +136,15 @@ export default {
                     this.isLogin = false;
                 } else {
                     this.isLogin = true;
+                    //查询是否有消息
+                    let res = await synRequestPost(`/notice/select?token=${this.token}`);
+
+                    this.messageList = res.data.list;
+                    this.count = res.data.count;
                 }
             }
         },
+        // 判断是否为活动面板
         isActiveInfo() {
             if (this.$route.path == '/ActivityManagement') {
                 this.isActive = true;
@@ -126,14 +152,19 @@ export default {
                 this.isActive = false;
             }
         },
+        // 模糊查询
         async searchInfo() {
             this.activeLikeToGetByTitleBo.token = this.token;
             let obj = await synRequestPost("/activity/likeToGet", this.activeLikeToGetByTitleBo);
-            console.log(obj);
             if (obj.code == "0x200") {
-                this.list = obj.data;
+                this.searchList = obj.data;
+
             }
         },
+        emitBus(){
+            this.$bus.$emit('searchList', this.searchList);
+            this.searchList = [];
+        }
     },
     watch: {
         '$route': 'isActiveInfo',
@@ -141,7 +172,7 @@ export default {
 
     }
 }
+
 </script>
-  
-  
-  
+
+
