@@ -88,7 +88,7 @@ public interface UserMapper {
      * @author hln 2023-10-29
      * 通过id获取管理员权限
      */
-    Integer selectByUserAndUserAdminId(Long id);
+    int selectByUserAndUserAdminId(Long id);
 
     /**
      * @quthor hln 2023-10-30
@@ -135,4 +135,6 @@ public interface UserMapper {
      * @param signInWebSocket
      */
     void insertSignInWeb(SignInWebSocket signInWebSocket);
+
+
 }

@@ -4,12 +4,10 @@ import com.gsxy.core.pojo.bo.SignInAdminWebSocketBo;
 import com.gsxy.core.pojo.bo.SignInWebSocketBo;
 import com.gsxy.core.service.UserAdminService;
 import com.gsxy.core.service.UserService;
-import com.gsxy.core.util.SpringContextUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.CrossOrigin;
-
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;

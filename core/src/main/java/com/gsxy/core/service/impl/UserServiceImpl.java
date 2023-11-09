@@ -20,6 +20,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -327,6 +328,8 @@ public class UserServiceImpl implements UserService {
         signInWebSocket.setCommunityId(communityId);
 
         userMapper.insertSignInWeb(signInWebSocket);
+
+//        userMapper.insertSignInUserWithAdmin();
 
         return new ResponseVo("签到成功",signInWebSocketBo,"0x200");
     }
