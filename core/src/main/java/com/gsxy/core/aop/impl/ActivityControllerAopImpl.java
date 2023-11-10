@@ -128,8 +128,7 @@ public class ActivityControllerAopImpl implements ActivityControllerAop {
     @Before("execution(* com.gsxy.core.controller.ActivityController.selectByToken(..))")
     public String selectByToken(JoinPoint joinPoint) {
         Object[] argS = joinPoint.getArgs();
-        ActiveSelectByTokenBo arg = (ActiveSelectByTokenBo) argS[0];
-        String token = arg.getToken();
+        String token = (String) argS[0];
         systemService.auth(token);
 
         return null;
