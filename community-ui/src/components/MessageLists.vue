@@ -75,7 +75,13 @@ export default {
         }
     },
     mounted() {
-        this.getMerchantInformation()
+        this.getMerchantInformation(),
+        //接收信息
+            this.$bus.$on('hello',(data)=>{
+                if(this.list.length == 0){
+                    this.list = data
+                }
+            })
     },
 
     methods: {
@@ -113,6 +119,7 @@ export default {
                 this.getMerchantInformation()
             }
         },
+        
         //关闭的回调
         close() {
             this.dialogVisible = false;
