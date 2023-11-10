@@ -191,7 +191,9 @@ public class ActivityServiceImpl implements ActiveService {
             return new ResponseVo("token解析失败",null,"0x501");
         }
 
-        List<Active> activeList = activeMapper.findAllByCommunityId(userId);
+        Long communityId = activeMapper.selectToGetCommunityId(userId);
+
+        List<Active> activeList = activeMapper.findAllByCommunityId(communityId);
 
         if(activeList == null){
             return new ResponseVo("查询无数据",null,"0x500");

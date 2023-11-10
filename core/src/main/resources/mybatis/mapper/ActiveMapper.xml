@@ -170,7 +170,18 @@
         on
             t1.community = t2.community_id
         and
-            t2.user_id = #{userId}
+            t1.community = #{communityId}
+    </select>
+
+    <!-- 获取对应的社团ID -->
+    <select id="selectToGetCommunityId" resultType="java.lang.Long">
+        select
+            community_id
+        from
+            community_user
+        where
+            user_id = #{userId}
+        limit 1
     </select>
 
 </mapper>

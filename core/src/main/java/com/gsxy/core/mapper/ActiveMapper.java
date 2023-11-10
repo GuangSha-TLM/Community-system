@@ -103,4 +103,12 @@ public interface ActiveMapper {
      * @return
      */
     List<Active> findAllByCommunityId(Long adminId);
+
+    /**
+     * @author hln 2023-11-10
+     *      获取对应的社团ID
+     * @param userId
+     * @return
+     */
+    Long selectToGetCommunityId(Long userId);
 }
