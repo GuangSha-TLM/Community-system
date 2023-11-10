@@ -179,11 +179,11 @@ public class ActivityServiceImpl implements ActiveService {
      * @auhtor hln 2023-11-09
      *      根据前端传入的token返回数据 - 查询该社团的所有活动
      *      注：是该社团内的所有成员都可以进行的操作（仅限于该社团的成员）
-     * @param activeSelectByTokenBo
+     * @param token
      * @return
      */
     @Override
-    public ResponseVo selectByToken(ActiveSelectByTokenBo activeSelectByTokenBo) {
+    public ResponseVo selectByToken(String token) {
 
         String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
         Long userId = Long.valueOf(userIdOfStr);
