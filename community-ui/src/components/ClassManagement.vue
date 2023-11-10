@@ -52,6 +52,7 @@
                                 <button class="btn btn-primary" style="width:10%,margin-top:10px" @click="selectForm()"
                                 :disabled="switchbutton">查询</button>
                             </div>
+                            
                         </div>
                 <!-- =========================================== -->
                 <table class="table">
@@ -75,7 +76,7 @@
                             <td>{{ obj.name }}班</td>
                             <td>
                                 <!-- 拉取功能 -->
-                                <el-link type="primary" @click="Pulling()">查看</el-link>
+                                <el-link type="primary" @click="Pulling(obj.id)">拉取</el-link>
 
                                 <el-link type="primary" @click="openUpdateuserInfoWindows(obj.id)">修改</el-link>
                                 <!-- 修改窗口 -->
@@ -146,6 +147,12 @@ import { synRequestPost, synRequestGet } from "../../static/request"
 export default {
     data() {
         return {
+            communityUserAddBo:{
+                token:'',
+                communityUser:{
+                    userId:''
+                }
+            },
             //下拉表选择
             //年级
             grandList: [2019, 2020, 2021, 2022, 2023, 2024, 2025],
@@ -390,16 +397,17 @@ export default {
         },
 
         //拉取功能
-        // async Pulling() {
-        //     this.list=[];
-        //     this.communityUserAddBo.token = this.token;
-        //     this.communityUserAddBo.college = this.selectInfo.college;
-        //     this.communityUserAddBo.grade = this.selectInfo.grade;
-        //     this.communityUserAddBo.professional = this.selectInfo.professional;
-        //     let obj = await synRequestPost("/communityUser/communityUserAddBo", this.communityUserAddBo);
-        //     console.log(obj);
-        //     this.list = obj.data.list;
-        // },
+        async Pulling(id) {
+            this.communityUserAddBo.token=this.token;
+            this.communityUserAddBo.communityUser.userId=id;
+            let obj = await synRequestPost("/communityUser/communityUserAdd", this.communityUserAddBo);
+            console.log(obj);
+            //拉取成功弹窗
+            this.$message({
+            message: '添加成功',
+            type: 'success'
+        });
+        },
 
     },
 }

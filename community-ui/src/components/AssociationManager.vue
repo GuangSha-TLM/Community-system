@@ -12,6 +12,7 @@
                                 <th scope="col">班级</th>
                                 <th scope="col">学号</th>
                                 <th scope="col">操作</th>
+                                <th><button @click="dialogVisible = true">拉取</button></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -25,8 +26,16 @@
                                     <el-link type="success" @click="deleteById(obj.id)">删除</el-link>
                                 </td>
                             </tr>
+                            
                         </tbody>
                     </table>
+                   
+                    <el-dialog
+                        title="拉取用户"
+                        :visible.sync="dialogVisible"
+                        width="80%">
+                        <ClassManagement></ClassManagement>
+                    </el-dialog>
                 </div>
             </section>
         </div>
@@ -35,12 +44,18 @@
 </template>
 
 <script>
-
+import ClassManagement from "./ClassManagement.vue"
 import { synRequestPost, synRequestGet } from "../../static/request"
 
 export default {
     data() {
         return {
+            //控制弹窗
+            dialogVisible: false,
+            communityUserdeleteUserBo:{
+                token: '',
+                userId: ''
+            },
             token: getCookie("token"),
             communitySelectByIdBo: {
                 token: "",
@@ -53,6 +68,9 @@ export default {
         this.getMerchantInformation()
     },
 
+    components:{
+        ClassManagement
+    },
     methods: {
 
 
@@ -69,7 +87,20 @@ export default {
                 this.list = res.data;
             }
         },
-
+        async deleteById(id) {
+            if (confirm('确定要删除该用户吗？')) {
+                this.communityUserdeleteUserBo.token=this.token;
+                this.communityUserdeleteUserBo.userId=id;
+            let obj = await synRequestPost("/communityUser/communityUserdeleteUser",
+                this.communityUserdeleteUserBo
+            );
+            if (obj.code === "0x200") {
+                alert("删除成功");
+            } else {
+                alert("删除失败：" + obj.message);
+            }
+            }
+        }
 
     }
 
