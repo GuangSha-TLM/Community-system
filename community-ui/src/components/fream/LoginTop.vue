@@ -64,7 +64,7 @@
                                 <el-dropdown-menu slot="dropdown">
                                     <el-dropdown-item>
                                         <el-badge :value="count"  class="item">
-                                            <router-link :to="{name:'MessageLists', params:{list:messageList}}">消息</router-link>
+                                            <router-link :to="{name:'MessageLists', params:{list:messageList}}" @click="emitMessageList">消息</router-link>
                                         </el-badge>
                                     </el-dropdown-item>
                                     <el-dropdown-item>退出登陆</el-dropdown-item>
@@ -161,9 +161,14 @@ export default {
 
             }
         },
+        //发送searchList
         emitBus(){
             this.$bus.$emit('searchList', this.searchList);
             this.searchList = [];
+        },
+        //发送messageList
+        emitMessageList(){
+            this.$bus.$emit('hello',this.messageList);
         }
     },
     watch: {
