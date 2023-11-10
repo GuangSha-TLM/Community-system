@@ -186,7 +186,7 @@
         select
             *
         from
-            sign_in_user_status
+            sign_in_user_status_web
     </select>
 
     <!-- 查找社团id -->

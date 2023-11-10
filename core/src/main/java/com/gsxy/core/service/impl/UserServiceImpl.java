@@ -2,10 +2,7 @@ package com.gsxy.core.service.impl;
 
 import com.gsxy.core.mapper.UserAdminMapper;
 import com.gsxy.core.mapper.UserMapper;
-import com.gsxy.core.pojo.Active;
-import com.gsxy.core.pojo.CommunityUser;
-import com.gsxy.core.pojo.SignInWebSocket;
-import com.gsxy.core.pojo.User;
+import com.gsxy.core.pojo.*;
 import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.PagingToGetUserDataVo;
 import com.gsxy.core.pojo.vo.ResponseVo;
@@ -328,8 +325,14 @@ public class UserServiceImpl implements UserService {
         signInWebSocket.setCommunityId(communityId);
 
         userMapper.insertSignInWeb(signInWebSocket);
-        
-//        userMapper.insertSignInUserWithAdmin();
+
+        SignInUserStatusWeb signInUserStatusWeb = userMapper.selectToGetUserAndAdminSignIn();
+
+        if (signInUserStatusWeb == null){
+            return new ResponseVo("签到失败",null,"0x500");
+        }
+
+        userMapper.insertSignInUserWithAdmin(signInUserStatusWeb);
 
         return new ResponseVo("签到成功",signInWebSocketBo,"0x200");
     }

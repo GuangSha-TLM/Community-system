@@ -1,5 +1,6 @@
 package com.gsxy.core.mapper;
 
+import com.gsxy.core.pojo.SignInUserStatusWeb;
 import com.gsxy.core.pojo.SignInWebSocket;
 import com.gsxy.core.pojo.User;
 import com.gsxy.core.pojo.bo.*;
@@ -136,5 +137,17 @@ public interface UserMapper {
      */
     void insertSignInWeb(SignInWebSocket signInWebSocket);
 
+    /**
+     * @author hln 2023-11-10
+     *      查询UserAndAdminSignIn实体类信息
+     * @return
+     */
+    SignInUserStatusWeb selectToGetUserAndAdminSignIn();
 
+    /**
+     * @author hln 2023-11-10
+     *      插入数据到 sign_in_user_status_web
+     * @param signInUserStatusWeb
+     */
+    void insertSignInUserWithAdmin(SignInUserStatusWeb signInUserStatusWeb);
 }

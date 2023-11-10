@@ -188,6 +188,26 @@
         limit 1
     </select>
 
+    <!-- 查询UserAndAdminSignIn实体类信息 -->
+    <select id="selectToGetUserAndAdminSignIn" resultType="com.gsxy.core.pojo.SignInUserStatusWeb">
+        select
+            t1.user_id,t2.admin_id,t1.community_id,t3.name,t3.college,t3.grade,t3.professional,
+            t3.org,t3.student_id,t2.release_time,t1.create_time
+        from
+            sign_in_websocket t1
+        inner join
+            sign_in_admin_websocket t2
+        inner join
+            user t3
+        on
+            t1.user_id = t3.id
+        and
+            t2.community_id = t1.community_id
+        and
+            t1.content = t2.content
+        limit 1
+    </select>
+
     <!-- 插入用户签到状态 -->
     <insert id="userSignIn" parameterType="com.gsxy.core.pojo.bo.UserSignInBo">
         insert into
@@ -204,6 +224,17 @@
             (user_id,content,community_id,create_time)
         values
             (#{userId},#{content},#{communityId},#{createTime})
+    </insert>
+
+    <!-- 插入数据到 sign_in_user_status_web -->
+    <insert id="insertSignInUserWithAdmin" parameterType="com.gsxy.core.pojo.SignInUserStatusWeb">
+        insert into
+            sign_in_user_status_web
+            (user_id,admin_id,community_id,name,college,grade
+            ,professional,org,student_id,status,release_time,create_time)
+        values
+            (#{userId},#{adminId},#{communityId},#{name},#{college},#{grade}
+            ,#{professional},#{org},#{studentId},1,#{releaseTime},#{createTime})
     </insert>
 
     <!-- 删除签到记录（如果该社团没有该用户） -->
