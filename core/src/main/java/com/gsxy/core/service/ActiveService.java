@@ -63,8 +63,7 @@ public interface ActiveService {
     /**
      * @auhtor hln 2023-11-09
      *      根据前端传入的token返回数据 - 查询该社团的所有活动
-     * @param token
      * @return
      */
-    ResponseVo selectByToken(String token);
+    ResponseVo selectByToken();
 }

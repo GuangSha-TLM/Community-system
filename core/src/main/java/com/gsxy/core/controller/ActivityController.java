@@ -47,14 +47,14 @@ public class ActivityController {
      */
     @PostMapping("/selectByToken")
     @ApiOperation("查询该社团的所有活动")
-    public String selectByToken(@RequestBody String token){
+    public String selectByToken(@RequestParam String token){
         Map<String,String> map = ThreadLocalUtil.mapThreadLocal.get();
         ThreadLocalUtil.mapThreadLocal.remove();
         if(map.get("error") != null){
             return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
         }
 
-        return JSONArray.toJSONString(activeService.selectByToken(token));
+        return JSONArray.toJSONString(activeService.selectByToken());
     }
 
     /**
