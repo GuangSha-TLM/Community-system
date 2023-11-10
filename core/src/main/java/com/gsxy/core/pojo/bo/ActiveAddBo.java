@@ -1,16 +1,19 @@
 package com.gsxy.core.pojo.bo;
 
-import com.gsxy.core.pojo.Active;
 import java.io.Serializable;
 
 public class ActiveAddBo implements Serializable {
 
     private String token;
-    private Active active;
 
-    public ActiveAddBo(String token, Active active) {
+    private String context;
+
+    private String title;
+
+    public ActiveAddBo(String token, String context, String title) {
         this.token = token;
-        this.active = active;
+        this.context = context;
+        this.title = title;
     }
 
     public ActiveAddBo() {
@@ -24,19 +27,29 @@ public class ActiveAddBo implements Serializable {
         this.token = token;
     }
 
-    public Active getActive() {
-        return active;
+    public String getContext() {
+        return context;
     }
 
-    public void setActive(Active active) {
-        this.active = active;
+    public void setContext(String context) {
+        this.context = context;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     @Override
     public String toString() {
         return "ActiveAddBo{" +
                 "token='" + token + '\'' +
-                ", active=" + active +
+                ", context='" + context + '\'' +
+                ", title='" + title + '\'' +
                 '}';
     }
 }
+

@@ -28,7 +28,27 @@ public class ActivityServiceImpl implements ActiveService {
     @Override
     public ResponseVo addActive(ActiveAddBo activeAddBo) {
 
-        Long aLong = activeMapper.addActive(activeAddBo.getActive());
+        String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
+        Long userId = Long.valueOf(userIdOfStr);//用户id
+
+        if(userId == null || userId == 0L){
+            return new ResponseVo("token解析失败",null,"0x501");
+        }
+
+        Active active = new Active();
+        Long createBy = activeMapper.selectToGetByUserId(userId);
+        Long communityId = activeMapper.selectToGetCommunityId(userId);
+
+        active.setContext(activeAddBo.getContext());
+        active.setCommunityList(activeAddBo.getContext());
+        active.setCreateBy(createBy);
+        active.setCommunity(communityId);
+        active.setTitle(activeAddBo.getTitle());
+        active.setCreateTime(new Date());
+        active.setStartTime(new Date());
+
+        //在数据库表中插入数据
+        Long aLong = activeMapper.addActive(active);
 
         if (aLong == null){
             return new ResponseVo("增加失败",null,"0x500");

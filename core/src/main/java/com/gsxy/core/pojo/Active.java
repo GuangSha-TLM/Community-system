@@ -8,7 +8,7 @@ public class Active implements Serializable {
     private Long id;//ID
     private String title;//活动标题
     private String context;//活动内容
-    private Integer community;//所属社团活动
+    private Long community;//所属社团活动
     private String communityList;//status为1的时候存放所有参加社团的json str
     private Date startTime;//开始时间
     private Date endTime;//结束时间
@@ -19,7 +19,7 @@ public class Active implements Serializable {
     private Integer status;//0为私有活动 1多个社团活动 2 所有社团活动
     private Integer delFlag;//逻辑删除
 
-    public Active(Long id, String title, String context, Integer community, String communityList, Date startTime, Date endTime, Date createTime, Date updateTime, Long updateBy, Long createBy, Integer status, Integer delFlag) {
+    public Active(Long id, String title, String context, Long community, String communityList, Date startTime, Date endTime, Date createTime, Date updateTime, Long updateBy, Long createBy, Integer status, Integer delFlag) {
         this.id = id;
         this.title = title;
         this.context = context;
@@ -62,11 +62,11 @@ public class Active implements Serializable {
         this.context = context;
     }
 
-    public Integer getCommunity() {
+    public Long getCommunity() {
         return community;
     }
 
-    public void setCommunity(Integer community) {
+    public void setCommunity(Long community) {
         this.community = community;
     }
 
@@ -144,7 +144,7 @@ public class Active implements Serializable {
 
     @Override
     public String toString() {
-        return "Activity{" +
+        return "Active{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", context='" + context + '\'' +

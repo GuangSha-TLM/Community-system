@@ -111,4 +111,12 @@ public interface ActiveMapper {
      * @return
      */
     Long selectToGetCommunityId(Long userId);
+
+    /**
+     * @author hln 2023-11-10
+     *      根据userId查询数据
+     * @param userId
+     * @return
+     */
+    Long selectToGetByUserId(Long userId);
 }
