@@ -95,4 +95,12 @@ public interface ActiveMapper {
      * @return
      */
     Long selectActiveToGetCreateByById(ActiveSelectByIdBo activeSelectByIdBo);
+
+    /**
+     * @author hln 2023-11-10
+     *      查询该社团所有活动
+     * @param adminId
+     * @return
+     */
+    List<Active> findAllByCommunityId(Long adminId);
 }

@@ -23,4 +23,12 @@ public interface ActivityControllerAop {
 
     public String pagingToGetActiveData(JoinPoint joinPoint);
 
+    /**
+     * @author hln 2023-11-10
+     *      根据前端传入的token返回数据 - 查询该社团的所有活动
+     * @param joinPoint
+     * @return
+     */
+    public String selectByToken(JoinPoint joinPoint);
+
 }

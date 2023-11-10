@@ -117,4 +117,21 @@ public class ActivityControllerAopImpl implements ActivityControllerAop {
 
         return null;
     }
+
+    /**
+     * @author hln 2023-11-10
+     *      根据前端传入的token返回数据 - 查询该社团的所有活动(用户鉴权)
+     * @param joinPoint
+     * @return
+     */
+    @Override
+    @Before("execution(* com.gsxy.core.controller.ActivityController.selectByToken(..))")
+    public String selectByToken(JoinPoint joinPoint) {
+        Object[] argS = joinPoint.getArgs();
+        ActiveSelectByTokenBo arg = (ActiveSelectByTokenBo) argS[0];
+        String token = arg.getToken();
+        systemService.auth(token);
+
+        return null;
+    }
 }

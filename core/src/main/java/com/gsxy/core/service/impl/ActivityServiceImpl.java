@@ -175,4 +175,30 @@ public class ActivityServiceImpl implements ActiveService {
         return new ResponseVo(null,pagingToGetActiveDataVO,"0x200");
     }
 
+    /**
+     * @auhtor hln 2023-11-09
+     *      根据前端传入的token返回数据 - 查询该社团的所有活动
+     *      注：是该社团内的所有成员都可以进行的操作（仅限于该社团的成员）
+     * @param activeSelectByTokenBo
+     * @return
+     */
+    @Override
+    public ResponseVo selectByToken(ActiveSelectByTokenBo activeSelectByTokenBo) {
+
+        String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
+        Long userId = Long.valueOf(userIdOfStr);
+
+        if(userId == null || userId == 0L){
+            return new ResponseVo("token解析失败",null,"0x501");
+        }
+
+        List<Active> activeList = activeMapper.findAllByCommunityId(userId);
+
+        if(activeList == null){
+            return new ResponseVo("查询无数据",null,"0x500");
+        }
+
+        return new ResponseVo("查询成功",activeList,"0x200");
+    }
+
 }

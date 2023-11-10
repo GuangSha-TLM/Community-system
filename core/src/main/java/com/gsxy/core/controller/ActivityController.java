@@ -40,6 +40,24 @@ public class ActivityController {
     }
 
     /**
+     * @auhtor hln 2023-11-09
+     *      根据前端传入的token返回数据 - 查询该社团的所有活动
+     * @param activeSelectByTokenBo
+     * @return
+     */
+    @PostMapping("/selectByToken")
+    @ApiOperation("查询该社团的所有活动")
+    public String selectByToken(@RequestBody ActiveSelectByTokenBo activeSelectByTokenBo){
+        Map<String,String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+        if(map.get("error") != null){
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
+
+        return JSONArray.toJSONString(activeService.selectByToken(activeSelectByTokenBo));
+    }
+
+    /**
      * @author hln 2023-10-26
      *      根据id删除活动
      * @param activeDeleteByIdBo

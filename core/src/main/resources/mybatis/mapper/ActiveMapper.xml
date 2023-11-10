@@ -158,4 +158,19 @@
             id = #{id}
     </select>
 
+    <!-- 查询该社团所有活动 -->
+    <select id="findAllByCommunityId" resultType="com.gsxy.core.pojo.Active" parameterType="java.lang.Long">
+        select
+            t1.title,t1.context,t1.community,t1.community_list,t1.start_time,t1.end_time
+            ,t1.create_time,t1.create_by,t1.status
+        from
+            active t1
+        inner join
+            community_user t2
+        on
+            t1.community = t2.community_id
+        and
+            t2.user_id = #{userId}
+    </select>
+
 </mapper>

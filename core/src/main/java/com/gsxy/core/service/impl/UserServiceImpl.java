@@ -328,7 +328,7 @@ public class UserServiceImpl implements UserService {
         signInWebSocket.setCommunityId(communityId);
 
         userMapper.insertSignInWeb(signInWebSocket);
-
+        
 //        userMapper.insertSignInUserWithAdmin();
 
         return new ResponseVo("签到成功",signInWebSocketBo,"0x200");
