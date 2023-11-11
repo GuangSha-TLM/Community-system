@@ -5,17 +5,14 @@
             <Top></Top>
         </div> -->
         <div class="content">
-            <router-link class="item" v-for="item in list" :key="item.index"
+            <router-link class="item" v-for="(item,index) in list" :key="item.id"
                 :to="{ name: 'ActivityItem', params: { id: item.id } }">
-                <div class="item_id">{{ item.id }}</div>
+                <div class="item_id">{{ index + 1 }}</div>
                 <div class="item_title">{{ item.title }}</div>
                 <div class="item_time">{{ item.startTime }}</div>
                 <div class="item_icon"><i class="el-icon-arrow-right"></i></div>
             </router-link>
         </div>
-
-
-
         <!-- <footer class="position-relative" id="footer-main">
             <Foot></Foot>
         </footer> -->

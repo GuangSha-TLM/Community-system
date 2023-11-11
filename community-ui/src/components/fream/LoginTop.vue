@@ -1,7 +1,7 @@
 <!--
  * @Author: tianleiyu
  * @Date: 2023-10-29 10:33:58
- * @LastEditTime: 2023-11-08 15:18:50
+ * @LastEditTime: 2023-11-09 12:08:10
  * @LastEditors: tianleiyu
  * @Description:
  * @FilePath: /community-ui/src/components/fream/LoginTop.vue
@@ -58,17 +58,22 @@
 
                         <ul class="navbar-nav mt-4 mt-lg-0 ml-auto" v-if="isLogin">
                             <el-dropdown>
-                                <li class="nav-item ">
-                                    {{ username }}
-                                </li>
+                                <router-link to="/UserCenter">
+                                    <li class="nav-item ">
+                                        {{ username }}
+                                    </li>
+                                </router-link>
                                 <el-dropdown-menu slot="dropdown">
-                                    <el-dropdown-item>
-                                        <el-badge :value="count"  class="item">
-                                            <router-link :to="{name:'MessageLists', params:{list:messageList}}" @click="emitMessageList">消息</router-link>
-                                        </el-badge>
-                                    </el-dropdown-item>
-                                    <el-dropdown-item>退出登陆</el-dropdown-item>
-
+                                    <router-link :to="{ name: 'MessageLists', params: { list: messageList } }">
+                                        <el-dropdown-item>
+                                            <el-badge :value="count" class="item">
+                                                消息
+                                            </el-badge>
+                                        </el-dropdown-item>
+                                    </router-link>
+                                    <div @click="loginOut()">
+                                        <el-dropdown-item>退出登陆</el-dropdown-item>
+                                    </div>
                                 </el-dropdown-menu>
                             </el-dropdown>
                         </ul>
@@ -116,8 +121,8 @@ export default {
             },
             //查询
             searchList: [],
-            messageList:[],
-            count:0
+            messageList: [],
+            count: 0
 
         }
     },
@@ -130,17 +135,18 @@ export default {
         //判断是否为登陆
         async isLoginInfo() {
             if (this.$route.path != "/Login") {
-                this.username = JSON.parse(localStorage.getItem("user")).username
-                if (this.username == null || this.username == "" || this.username == undefined) {
-                    this.$router.push("/Login");
-                    this.isLogin = false;
-                } else {
+                var user = JSON.parse(localStorage.getItem("user"))
+
+                if (user && user.username) {
+                    this.username = user.username;
                     this.isLogin = true;
                     //查询是否有消息
                     let res = await synRequestPost(`/notice/select?token=${this.token}`);
-
-                    this.messageList = res.data.list;
+                    this.messageList = res.data.noReadCounts;
                     this.count = res.data.count;
+                } else {
+                    this.$router.push("/Login");
+                    this.isLogin = false;
                 }
             }
         },
@@ -161,15 +167,17 @@ export default {
 
             }
         },
-        //发送searchList
-        emitBus(){
+        emitBus() {
             this.$bus.$emit('searchList', this.searchList);
             this.searchList = [];
         },
-        //发送messageList
-        emitMessageList(){
-            this.$bus.$emit('hello',this.messageList);
+        loginOut() {
+            this.username = "";
+            localStorage.removeItem('user')
+            delCookie('token')
+            this.$router.push('/Login');
         }
+
     },
     watch: {
         '$route': 'isActiveInfo',
