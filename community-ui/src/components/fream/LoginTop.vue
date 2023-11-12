@@ -1,7 +1,7 @@
 <!--
  * @Author: tianleiyu
  * @Date: 2023-10-29 10:33:58
- * @LastEditTime: 2023-11-09 12:08:10
+ * @LastEditTime: 2023-11-12 08:53:38
  * @LastEditors: tianleiyu
  * @Description:
  * @FilePath: /community-ui/src/components/fream/LoginTop.vue
@@ -64,7 +64,7 @@
                                     </li>
                                 </router-link>
                                 <el-dropdown-menu slot="dropdown">
-                                    <router-link :to="{ name: 'MessageLists', params: { list: messageList } }">
+                                    <router-link to="/MessageLists">
                                         <el-dropdown-item>
                                             <el-badge :value="count" class="item">
                                                 消息
@@ -127,8 +127,12 @@ export default {
         }
     },
     mounted() {
+
+    },
+    created() {
         this.isLoginInfo();
         this.isActiveInfo();
+        this.$bus.$on('messageListEmpty', this.handleMessageListEmpty);
     },
     methods: {
 
@@ -140,14 +144,23 @@ export default {
                 if (user && user.username) {
                     this.username = user.username;
                     this.isLogin = true;
-                    //查询是否有消息
-                    let res = await synRequestPost(`/notice/select?token=${this.token}`);
-                    this.messageList = res.data.noReadCounts;
-                    this.count = res.data.count;
+                    // this.getMessageList()
                 } else {
                     this.$router.push("/Login");
                     this.isLogin = false;
                 }
+            }
+        },
+        //获取message List
+        async getMessageList() {
+            try {
+                // 查询是否有消息
+                let res = await synRequestPost(`/notice/select?token=${this.token}`);
+                this.messageList = res.data.list;
+                this.count = res.data.noReadCounts;
+                // console.log(22222+this.messageList);
+            } catch (error) {
+                console.error('获取消息列表失败:', error);
             }
         },
         // 判断是否为活动面板
@@ -167,6 +180,7 @@ export default {
 
             }
         },
+        //发送给search组件
         emitBus() {
             this.$bus.$emit('searchList', this.searchList);
             this.searchList = [];
@@ -176,8 +190,14 @@ export default {
             localStorage.removeItem('user')
             delCookie('token')
             this.$router.push('/Login');
-        }
-
+        },
+        handleMessageListEmpty() {
+            this.getMessageList().then(() => {
+            // console.log(1111+this.messageList);
+            // 发送更新后的 messageList 给 message 组件
+            this.$bus.$emit('MessageList', this.messageList);
+        })
+    }
     },
     watch: {
         '$route': 'isActiveInfo',
