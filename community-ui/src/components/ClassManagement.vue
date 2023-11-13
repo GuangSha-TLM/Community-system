@@ -32,7 +32,11 @@
                     <div class="form-group">
                         <label for="exampleInputgrand">选择你的年级</label>
                         <el-select v-model="selectInfo.grade" placeholder="请选择" style="width: 100%;">
-                            <el-option v-for="item in grandList" :key="item" :label="item" :value="item">
+                          <el-option v-for="item in yearsList"
+                                     :key="item"
+                                     :label="item"
+                                     :value="item"
+                          >
                             </el-option>
                         </el-select>
                     </div>
@@ -128,6 +132,7 @@ import { synRequestPost, synRequestGet } from "../../static/request"
 export default {
     data() {
         return {
+          yearsList: [],
             communityUserAddBo: {
                 token: '',
                 communityUser: {
@@ -136,7 +141,9 @@ export default {
             },
             //下拉表选择
             //年级
-            grandList: [2019, 2020, 2021, 2022, 2023, 2024, 2025],
+            //获取今年年份-5，开始循环
+            startYear: 2019,
+            numYearsToShow: 5, // 显示最新的5个年份选项,
             userSelectToGetBo: {
                 token: "",
                 college: '',
@@ -311,7 +318,13 @@ export default {
     },
     mounted() {
         this.userDeleteByIdBo.token = getCookie("token");
-        this.getMerchantInformation()
+        this.getMerchantInformation();
+          const currentDate = new Date();
+          const currentYear = currentDate.getFullYear();
+          for (let i = currentYear - 4; i <= currentYear; i++) {
+            this.yearsList.push(i);
+          }
+          console.log(this.yearsList);
     },
     methods: {
         /**
