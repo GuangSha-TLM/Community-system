@@ -35,18 +35,22 @@ public interface SystemService {
     public String getNonPower();
 
     /**
-     * @author zhuxinyu 2023-10-24
-     * 文件下载
-     * @return byte[]
-     */
-    @ApiOperation("文件下载")
-    @GetMapping(value ="/getimage",produces = MediaType.IMAGE_JPEG_VALUE)
-    public byte[] getPhoto(@RequestParam("imgUrl") String imgUrl) throws IOException;
-
-    /**
-     * @author zhuxinyu 2023-10-24
-     * 上传图片
+     * @author Oh...Yeah!!! 2023-11-13
+     *    图片上传
+     * @param token
+     * @param file
      * @return String.class
      */
     public String imgUpDown(@RequestParam("file") MultipartFile file, @RequestParam("token")String token) throws IOException;
+
+    /**
+     * @author Oh...Yeah!!! 2023-11-13
+     *    图片下载
+     * @param imgUrl
+     * @return byte[]
+     */
+    @ApiOperation("图片下载")
+    @GetMapping(value ="/getimage",produces = MediaType.IMAGE_JPEG_VALUE)
+    public byte[] getPhoto(@RequestParam("imgUrl") String imgUrl) throws IOException;
+
 }
