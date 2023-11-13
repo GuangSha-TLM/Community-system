@@ -37,7 +37,7 @@
                         </el-select>
                     </div>
                     <div class="form-group but">
-                        <button class="btn btn-primary" style="width:10%,margin-top:10px" @click="selectForm()"
+                        <button class="btn btn-primary" style="width:10%;margin-top:10px" @click="selectForm()"
                             :disabled="switchbutton">查询</button>
                     </div>
 
