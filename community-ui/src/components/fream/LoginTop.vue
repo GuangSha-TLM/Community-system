@@ -1,7 +1,7 @@
 <!--
  * @Author: tianleiyu
  * @Date: 2023-10-29 10:33:58
- * @LastEditTime: 2023-11-08 15:18:50
+ * @LastEditTime: 2023-11-12 08:53:38
  * @LastEditors: tianleiyu
  * @Description:
  * @FilePath: /community-ui/src/components/fream/LoginTop.vue
@@ -58,17 +58,22 @@
 
                         <ul class="navbar-nav mt-4 mt-lg-0 ml-auto" v-if="isLogin">
                             <el-dropdown>
-                                <li class="nav-item ">
-                                    {{ username }}
-                                </li>
+                                <router-link to="/UserCenter">
+                                    <li class="nav-item ">
+                                        {{ username }}
+                                    </li>
+                                </router-link>
                                 <el-dropdown-menu slot="dropdown">
-                                    <el-dropdown-item>
-                                        <el-badge :value="count"  class="item">
-                                            <router-link :to="{name:'MessageLists', params:{list:messageList}}" @click="emitMessageList">消息</router-link>
-                                        </el-badge>
-                                    </el-dropdown-item>
-                                    <el-dropdown-item>退出登陆</el-dropdown-item>
-
+                                    <router-link to="/MessageLists">
+                                        <el-dropdown-item>
+                                            <el-badge :value="count" class="item">
+                                                消息
+                                            </el-badge>
+                                        </el-dropdown-item>
+                                    </router-link>
+                                    <div @click="loginOut()">
+                                        <el-dropdown-item>退出登陆</el-dropdown-item>
+                                    </div>
                                 </el-dropdown-menu>
                             </el-dropdown>
                         </ul>
@@ -116,32 +121,46 @@ export default {
             },
             //查询
             searchList: [],
-            messageList:[],
-            count:0
+            messageList: [],
+            count: 0
 
         }
     },
     mounted() {
+
+    },
+    created() {
         this.isLoginInfo();
         this.isActiveInfo();
+        this.$bus.$on('messageListEmpty', this.handleMessageListEmpty);
     },
     methods: {
 
         //判断是否为登陆
         async isLoginInfo() {
             if (this.$route.path != "/Login") {
-                this.username = JSON.parse(localStorage.getItem("user")).username
-                if (this.username == null || this.username == "" || this.username == undefined) {
+                var user = JSON.parse(localStorage.getItem("user"))
+
+                if (user && user.username) {
+                    this.username = user.username;
+                    this.isLogin = true;
+                    // this.getMessageList()
+                } else {
                     this.$router.push("/Login");
                     this.isLogin = false;
-                } else {
-                    this.isLogin = true;
-                    //查询是否有消息
-                    let res = await synRequestPost(`/notice/select?token=${this.token}`);
-
-                    this.messageList = res.data.list;
-                    this.count = res.data.count;
                 }
+            }
+        },
+        //获取message List
+        async getMessageList() {
+            try {
+                // 查询是否有消息
+                let res = await synRequestPost(`/notice/select?token=${this.token}`);
+                this.messageList = res.data.list;
+                this.count = res.data.noReadCounts;
+                // console.log(22222+this.messageList);
+            } catch (error) {
+                console.error('获取消息列表失败:', error);
             }
         },
         // 判断是否为活动面板
@@ -161,15 +180,24 @@ export default {
 
             }
         },
-        //发送searchList
-        emitBus(){
+        //发送给search组件
+        emitBus() {
             this.$bus.$emit('searchList', this.searchList);
             this.searchList = [];
         },
-        //发送messageList
-        emitMessageList(){
-            this.$bus.$emit('hello',this.messageList);
-        }
+        loginOut() {
+            this.username = "";
+            localStorage.removeItem('user')
+            delCookie('token')
+            this.$router.push('/Login');
+        },
+        handleMessageListEmpty() {
+            this.getMessageList().then(() => {
+            // console.log(1111+this.messageList);
+            // 发送更新后的 messageList 给 message 组件
+            this.$bus.$emit('MessageList', this.messageList);
+        })
+    }
     },
     watch: {
         '$route': 'isActiveInfo',

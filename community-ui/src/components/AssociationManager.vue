@@ -12,7 +12,7 @@
                                 <th scope="col">班级</th>
                                 <th scope="col">学号</th>
                                 <th scope="col">操作</th>
-                                <th><button @click="dialogVisible = true">拉取</button></th>
+                                <th><button class="but" @click="dialogVisible = true">拉取</button></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -26,14 +26,15 @@
                                     <el-link type="success" @click="deleteById(obj.id)">删除</el-link>
                                 </td>
                             </tr>
-                            
+
                         </tbody>
                     </table>
-                   
+
                     <el-dialog
                         title="拉取用户"
                         :visible.sync="dialogVisible"
-                        width="80%">
+                        width="80%"
+                        top="0">
                         <ClassManagement></ClassManagement>
                     </el-dialog>
                 </div>
@@ -76,12 +77,6 @@ export default {
 
         //跳转指定页面
         async getMerchantInformation() {
-            // this.communitySelectByIdBo.token = this.token;
-            // let obj = await synRequestPost("/community/select", this.communitySelectByIdBo);
-            // console.log(obj);
-            // if (obj.code == "0x200") {
-            //     this.list = obj.data;
-            // }
             let res = await synRequestPost(`/community/communityAndUser?token=${this.token}`);
             if (res.code == "0x200") {
                 this.list = res.data;
@@ -95,9 +90,13 @@ export default {
                 this.communityUserdeleteUserBo
             );
             if (obj.code === "0x200") {
-                alert("删除成功");
+                this.$message({
+                    showClose: true,
+                    message: '删除成功!',
+                    type: 'success'
+                });
             } else {
-                alert("删除失败：" + obj.message);
+                this.$message.error(`修改失败,${obj.message}!`);
             }
             }
         }
@@ -169,5 +168,10 @@ a {
 .key {
     font-weight: bold;
     /* 可以使键加粗 */
+}
+.but{
+    border: none;
+    background-color: #fff;
+    color: #42b983;
 }
 </style>

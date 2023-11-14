@@ -10,6 +10,7 @@ import ActivityItem from '../components/ActivityItem.vue'
 import UserCenter from '../components/UserCenter.vue'
 import ApplyAddAssociation from '../components/ApplyAddAssociation.vue'
 import MessageLists from '../components/MessageLists.vue'
+import AssociationActivityManagement from '../components/AssociationActivityManagement.vue'
 
 import Login from '@/components/Login.vue'
 import UserReg from '@/components/UserReg.vue'
@@ -25,26 +26,37 @@ export default new Router({
       path: '/',
       component: Home,
       children: [
+        //活动管理面板
+        {
+          path: '/ActivityManagement',
+          name: 'ActivityManagement',
+          component: ActivityManagement
+        },
+        //活动详情面板
+        {
+          path: '/ActivityItem/:id',
+          name: 'ActivityItem',
+          component: ActivityItem
+        },
+        //用户管理面板
+        {
+          path: '/UserManagement',
+          name: 'UserManagement',
+          component: UserManagement
+        },
+        //班级管理面板
         {
           path: '/ClassManagement',
           name: 'ClassManagement',
-          component: ClassManagement,
+          component: ClassManagement
         },
+        // //社团管理面板
         {
-          path: '/userManagement',
-          name: 'UserManagement',
-          component: UserManagement
-        },{
           path: '/AssociationManager',
           name: 'AssociationManager',
           component: AssociationManager
         }
-        ,{
-          path: '/ActivityManagement',
-          name: 'ActivityManagement',
-          component: ActivityManagement
-        }
-        ,{
+        , {
           path: '/UserCenter',
           name: 'UserCenter',
           component: UserCenter
@@ -53,10 +65,15 @@ export default new Router({
           path: '/ApplyAddAssociation/:id',
           name: 'ApplyAddAssociation',
           component: ApplyAddAssociation
-        },{
+        }, {
           path: '/MessageLists',
           name: 'MessageLists',
           component: MessageLists
+        },
+        {
+          path: '/AssociationActivityManagement',
+          name: 'AssociationActivityManagement',
+          component: AssociationActivityManagement
         }
       ]
     },
@@ -77,36 +94,7 @@ export default new Router({
       name: 'UserReg',
       component: UserReg
     },
-    //用户管理面板
-    {
-      path: '/UserManagement',
-      name: 'UserManagement',
-      component: UserManagement
-    },
-    //班级管理面板
-    {
-      path: '/ClassManagement',
-      name: 'ClassManagement',
-      component: ClassManagement
-    },
-    // //社团管理面板
-    // {
-    //   path: '/AssociationManager',
-    //   name: 'AssociationManager',
-    //   component: AssociationManager
-    // },
-    //活动管理面板
-    {
-      path: '/ActivityManagement',
-      name: 'ActivityManagement',
-      component: ActivityManagement
-    },
-    //活动详情面板
-    {
-      path: '/ActivityItem/:id',
-      name: 'ActivityItem',
-      component: ActivityItem
-    },
+
 
   ]
 })

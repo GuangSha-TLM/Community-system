@@ -60,11 +60,13 @@ public class SystemServiceImpl implements SystemService {
     }
 
     /**
-     * @author zhuxinyu 2023-10-24
-     * 文件下载
+     * @author Oh...Yeah!!! 2023-11-13
+     *    图片下载
+     * @param imgUrl
+     * @return byte[]
      */
     @Override
-    @ApiOperation("文件下载")
+    @ApiOperation("图片下载")
     @GetMapping(value ="/getimage",produces = MediaType.IMAGE_JPEG_VALUE)
     public byte[] getPhoto(@RequestParam("imgUrl") String imgUrl) throws IOException{
 
@@ -90,8 +92,11 @@ public class SystemServiceImpl implements SystemService {
     }
 
     /**
-     * @author zhuxinyu 2023-10-24
-     * 上传图片
+     * @author Oh...Yeah!!! 2023-11-13
+     *    图片上传
+     * @param token
+     * @param file
+     * @return String.class
      */
     @Override
     public String imgUpDown(@RequestParam("file") MultipartFile file, @RequestParam("token")String token) throws IOException{
@@ -119,10 +124,11 @@ public class SystemServiceImpl implements SystemService {
 
 
     /**
-     *
+     * @author Oh...Yeah!!! 2023-11-13
+     *    图片上传
      * @param token
-     * @param leave
-     * @return
+     * @param file
+     * @return String.class
      */
     @Override
     public ResponseVo isAdmin(String token,Integer leave){

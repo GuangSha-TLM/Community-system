@@ -1,7 +1,7 @@
 <!--
  * @Author: tianleiyu 
  * @Date: 2023-11-05 20:12:55
- * @LastEditTime: 2023-11-07 20:19:57
+ * @LastEditTime: 2023-11-12 08:50:21
  * @LastEditors: tianleiyu
  * @Description: 
  * @FilePath: /community-ui/src/components/MessageLists.vue
@@ -9,7 +9,6 @@
 -->
 <template>
     <div>
-
         <div class="content">
             <section>
                 <div class="container">
@@ -24,7 +23,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="(obj, index) in list" :key="obj.id" :class="{ active: (obj.read == 0) }">
+                            <tr v-for="(obj, index) in messageList" :key="obj.id" :class="{ active: (obj.read == 0) }">
                                 <th scope="row">{{ index + 1 }}</th>
                                 <td>{{ obj.noticeName }}</td>
                                 <td>{{ obj.name }}</td>
@@ -59,7 +58,7 @@ export default {
     data() {
         return {
             token: getCookie("token"),
-            list: [],
+            messageList: [],
             noticeSelectByNoticeIdBo: {
                 token: '',
                 id: ''
@@ -74,34 +73,29 @@ export default {
 
         }
     },
-    mounted() {
-        this.getMerchantInformation(),
-        //接收信息
-            this.$bus.$on('hello',(data)=>{
-                if(this.list.length == 0){
-                    this.list = data
-                }
-            })
+    created() {
+        this.$bus.$on('MessageList', this.UpdatedMessageList);
     },
-
+    mounted() {
+        this.getMerchantInformation()
+    },
     methods: {
         //跳转指定页面
         async getMerchantInformation() {
-            this.list = this.$route.params.list
+            this.$bus.$emit('messageListEmpty');
         },
         async manage(index) {
-
             this.noticeSelectByNoticeIdBo.token = this.token
-            this.noticeSelectByNoticeIdBo.id = this.list[index].id
-            this.communityReplyNoticeBo.noticeId = this.list[index].id
+            this.noticeSelectByNoticeIdBo.id = this.messageList[index].id
+            this.communityReplyNoticeBo.noticeId = this.messageList[index].id
             let obj = await synRequestPost("/notice/select_id", this.noticeSelectByNoticeIdBo);
-            if (this.list[index].dealt != 0) {
+            if (this.messageList[index].dealt != 0) {
                 this.$message({
                     showClose: true,
                     message: '你已经处理过该条数据!',
                     type: 'warning'
                 });
-            }else{
+            } else {
                 this.dialogVisible = true;
             }
         },
@@ -119,15 +113,23 @@ export default {
                 this.getMerchantInformation()
             }
         },
-        
         //关闭的回调
         close() {
             this.dialogVisible = false;
             this.communityReplyNoticeBo.context = ''
+        },
+        UpdatedMessageList(MessageList) {
+            // 处理更新后的 messageList
+            this.messageList = MessageList;
         }
-
-
     },
+    watch: {
+        messageList(newMessageList) {
+            if (newMessageList==undefined||newMessageList.length == 0){
+                this.getMerchantInformation()
+            }
+        }
+    }
 
 }
 

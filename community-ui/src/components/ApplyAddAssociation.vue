@@ -1,7 +1,7 @@
 <!--
  * @Author: tianleiyu 
  * @Date: 2023-11-02 14:08:57
- * @LastEditTime: 2023-11-07 18:30:53
+ * @LastEditTime: 2023-11-11 11:18:07
  * @LastEditors: tianleiyu
  * @Description: 
  * @FilePath: /community-ui/src/components/ApplyAddAssociation.vue
@@ -87,12 +87,13 @@ export default {
             this.communitySendNoticeBo.communityAdminName = this.applyIndexCommunity.communityAdminName;
             let obj = await synRequestPost("/community/send_notice", this.communitySendNoticeBo);
             if (obj.code == "0x200") {
-            this.$message({
-          showClose: true,
-          message: '发送成功!',
-          type: 'success'
-        });
-            this.dialogVisible = false;}
+                this.$message({
+                    showClose: true,
+                    message: '发送成功!',
+                    type: 'success'
+                });
+                this.dialogVisible = false;
+            }
         },
         applyCommunity(index) {
             this.applyIndexCommunity.communityId = this.list[index].communityId;
@@ -102,7 +103,7 @@ export default {
         //跳转指定页面
         async getMerchantInformation() {
             let obj = await synRequestPost("/community/communityAllname");
-            
+
             if (obj.code == "0x200") {
                 this.list = obj.data;
             }

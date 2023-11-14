@@ -51,8 +51,11 @@
                             <div class="form-group">
                                 <label for="exampleInputgrand">选择你的年级</label>
                                 <el-select v-model="user.grade" placeholder="请选择" style="width: 100%;">
-                                    <el-option v-for="item in grandList" :key="item.value" :label="item.label"
-                                        :value="item.value">
+                                    <el-option v-for="item in yearsList"
+                                               :key="item"
+                                               :label="item"
+                                               :value="item"
+                                               >
                                     </el-option>
                                 </el-select>
                             </div>
@@ -112,13 +115,10 @@ export default {
 
     data() {
         return {
-            grandList: [{ value: 1, label: '2019' },
-            { value: 2, label: '2020' },
-            { value: 3, label: '2021' },
-            { value: 4, label: '2022' },
-            { value: 5, label: '2023' },
-            { value: 6, label: '2024' },
-            { value: 7, label: '2025' }],
+          //获取今年年份-5，开始循环
+          startYear: 2019,
+          numYearsToShow: 5, // 显示最新的5个年份选项,
+
             options: [
                 { value: 1, label: "信息学院" },
                 { value: 2, label: "财经学院" },
@@ -233,11 +233,17 @@ export default {
             input: "",
             //按钮开关
             switchbutton: false,
+            yearsList: []
         }
 
     },
     mounted() {
-
+      const currentDate = new Date();
+      const currentYear = currentDate.getFullYear();
+      for (let i = currentYear - 4; i <= currentYear; i++) {
+        this.yearsList.push(i);
+      }
+      console.log(this.yearsList);
     },
 
     methods: {

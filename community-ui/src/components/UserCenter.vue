@@ -1,52 +1,50 @@
 <!--
- * @Author: tianleiyu 
+ * @Author: tianleiyu
  * @Date: 2023-10-29 17:49:10
- * @LastEditTime: 2023-10-29 17:49:11
+ * @LastEditTime: 2023-11-10 13:41:25
  * @LastEditors: tianleiyu
- * @Description: 
+ * @Description:
  * @FilePath: /community-ui/src/components/UserCenter.vue
  * 可以输入预定的版权声明、个性签名、空行等
 -->
 <template>
     <div>
-       
+        <el-collapse v-model="activeName" accordion>
+            <el-collapse-item title="用户信息" name="1">
+                <Userinfo/>
+            </el-collapse-item>
+            <router-link to="/AssociationManager">
+                <el-collapse-item title="社团管理" name="2"/>
+            </router-link>
+            <router-link to="/AssociationActivityManagement">
+            <el-collapse-item title="活动管理" name="3"/>
+        </router-link>
+        </el-collapse>
     </div>
 </template>
 
 <script>
-
+import Userinfo from "./Userinfo";
 import { synRequestPost, synRequestGet } from "../../static/request"
 
 export default {
     data() {
         return {
             token: getCookie("token"),
-            communitySelectByIdBo:{
-                token:"",
-                id:this.$route.params.id
-            }
+            user: JSON.parse(localStorage.getItem("user")),
+            activeName:0,
         }
     },
     mounted() {
-        this.getMerchantInformation()
-        console.log(this.$route.params);
+
     },
-
     methods: {
-        
-
         //跳转指定页面
         async getMerchantInformation() {
-            this.communitySelectByIdBo.token = this.token;
-            let obj = await synRequestPost("/community/select", this.communitySelectByIdBo);
-            console.log(obj);
-            if (obj.code == "0x200") {
-                this.list = obj.data;
-
-            }
         },
-
-        
+    },
+    components: {
+        Userinfo,
     }
 
 }

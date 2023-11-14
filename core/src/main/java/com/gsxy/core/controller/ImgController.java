@@ -4,12 +4,16 @@ import com.alibaba.fastjson2.JSONArray;
 import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.ResponseVo;
 import com.gsxy.core.service.ImgService;
+import com.gsxy.core.service.SystemService;
 import com.gsxy.core.util.ThreadLocalUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Map;
 
 /**
@@ -24,6 +28,8 @@ public class ImgController {
 
     @Autowired
     private ImgService imgService;
+    @Autowired
+    private SystemService systemService;
 
     /**
      * @author Oh… Yeah!!!, 2023-10-23
@@ -109,6 +115,34 @@ public class ImgController {
         }
         return JSONArray.toJSONString(imgService.imgPagingToGetData(imgPagingToGetDataBo));
     }
+
+    /**
+     * @author Oh...Yeah!!! 2023-11-13
+     *    上传图片
+     * @param token
+     * @param file
+     * @return String.class
+     */
+    @ApiOperation("上传图片")
+    @RequestMapping(value = "imgUpDown",method = {RequestMethod.POST})
+    public String imgUpDown(@RequestParam("file") MultipartFile file, @RequestParam("token")String token) throws IOException {
+        return systemService.imgUpDown(file,token);
+    }
+
+
+    /**
+     * @author Oh...Yeah!!! 2023-11-13
+     *    图片下载
+     * @param imgUrl
+     * @return byte[]
+     */
+    @ApiOperation("图片下载")
+    @GetMapping(value ="/getimage",produces = MediaType.IMAGE_JPEG_VALUE)
+    public byte[] getPhoto(@RequestParam("imgUrl") String imgUrl) throws IOException {
+        return systemService.getPhoto(imgUrl);
+    }
+
+
 
 
 
