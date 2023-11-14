@@ -1,14 +1,19 @@
 package com.gsxy.core.service.impl;
 
+import com.gsxy.core.controller.UserAdminController;
+import com.gsxy.core.controller.UserController;
 import com.gsxy.core.mapper.*;
 import com.gsxy.core.pojo.*;
 import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.*;
 import com.gsxy.core.service.CommunityService;
+import com.gsxy.core.service.UserAdminService;
+import com.gsxy.core.service.UserService;
 import com.gsxy.core.util.ThreadLocalUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -31,8 +36,10 @@ public class CommunityServiceImpl implements CommunityService {
     private UserAdminMapper userAdminMapper;
     @Autowired
     private CommunityUserMapper communityUserMapper;
-
-
+    @Autowired
+    private UserAdminController userAdminController;
+    @Autowired
+    private UserController userController;
 
     /**
      * @author zhuxinyu 2023-10-24
@@ -170,6 +177,77 @@ public class CommunityServiceImpl implements CommunityService {
         List<CommunityAllname> list = communityMapper.communityAllname();
         return new ResponseVo<>("查询成功",list,"0x200");
     }
+
+    /**
+     * @author hln 2023-11-13
+     *      社长（管理员）向社团成员发起签到通知
+     * @param sendNotificationBo
+     * @return
+     */
+    @Override
+    public ResponseVo adminSendNotification(SendNotificationBo sendNotificationBo) {
+        String adminIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
+        Long adminId = Long.valueOf(adminIdOfStr);
+
+        if(adminId == 0L || adminId == null){
+            return new ResponseVo("token解析失败",null,"0x501");
+        }
+
+        SendNotification sendNotification = new SendNotification();
+        sendNotification.setCreateBy(adminId);
+        sendNotification.setCreateTime(new Date());
+
+        //将通知内容注入到数据库中
+        Long notice = noticeMapper.insertNotice(sendNotification);
+
+        if(notice == null || notice == 0L){
+            return new ResponseVo("通知发起失败",null,"0x500");
+        }
+
+        //创建发起签到功能的传入类实体对象
+        SignInAdminWebSocketBo signInAdminWebSocketBo = new SignInAdminWebSocketBo();
+        signInAdminWebSocketBo.setToken(sendNotificationBo.getToken());
+        signInAdminWebSocketBo.setContent(sendNotificationBo.getContent());
+
+        userAdminController.userAdminSignInWebSocket(signInAdminWebSocketBo);
+
+        return new ResponseVo("通知已发起",null,"0x200");
+    }
+
+    /**
+     * @author hln 2023-11-14
+     *      社团成员接受签到通知
+     * @param receiveNotificationsBo
+     * @return
+     */
+    @Override
+    public ResponseVo userReceiveNotifications(ReceiveNotificationsBo receiveNotificationsBo) {
+        String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
+        Long userId = Long.valueOf(userIdOfStr);
+
+        if(userId == 0L || userId == null){
+            return new ResponseVo("token解析失败",null,"0x501");
+        }
+
+        Date date = new Date();
+
+        //通过社团id找数据
+        Long id = noticeMapper.selectByUserIdNotice(userId,date);
+
+        //判断通知是否收到
+        if(id == null || id == 0L){
+            return new ResponseVo("未接受到签到通知",null,"0x500");
+        }
+
+        SignInWebSocketBo signInWebSocketBo = new SignInWebSocketBo();
+        signInWebSocketBo.setContent(receiveNotificationsBo.getContent());
+        signInWebSocketBo.setToken(receiveNotificationsBo.getToken());
+
+        userController.userSignInWebSocket(signInWebSocketBo);
+
+        return new ResponseVo("收到签到通知",null,"0x200");
+    }
+
     /**
      * @author zhuxinyu 2023-10-29
      *    分页获取数据
@@ -349,6 +427,7 @@ public class CommunityServiceImpl implements CommunityService {
 
         return new ResponseVo("社长消息回复成功",   communityReplyNoticeBo.getContext(), "0x200");
     }
+
 
 
 }

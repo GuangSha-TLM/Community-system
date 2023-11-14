@@ -1,9 +1,12 @@
 package com.gsxy.core.mapper;
 
 import com.gsxy.core.pojo.Notice;
+import com.gsxy.core.pojo.SendNotification;
 import com.gsxy.core.pojo.bo.NoticePagingToGetDataBo;
+import com.gsxy.core.pojo.bo.SendNotificationBo;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -97,6 +100,22 @@ public interface NoticeMapper {
      * @return void
      */
     public void updateByIdToDealt(Long noticeId);
+
+    /**
+     * @author hln 2023-11-13
+     *      社长（管理员）向社团成员发起签到通知
+     * @param sendNotification
+     * @return
+     */
+    Long insertNotice(SendNotification sendNotification);
+
+    /**
+     * @author hln 2023-11-14
+     *      根据userId查询通知数据
+     * @param userId
+     * @return
+     */
+    Long selectByUserIdNotice(Long userId, Date date);
 }
 
 

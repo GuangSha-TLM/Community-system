@@ -45,6 +45,15 @@
              #{updateTime},#{status},#{delFlag});
     </insert>
 
+    <!-- 社长（管理员）向社团成员发起签到通知 -->
+    <insert id="insertNotice">
+        insert into
+            notice
+            (context,create_by,create_time)
+        values
+            (#{context},#{createBy},#{createTime})
+    </insert>
+
     <!--
          @author Oh… Yeah!!! 2023-10-27
          更新数据
@@ -154,6 +163,21 @@
         where
             id = #{id}
         limit 1
+    </select>
+
+    <!-- 根据userId查询通知数据 -->
+    <select id="selectByUserIdNotice" resultType="java.lang.Long">
+        SELECT
+            t1.id
+        FROM
+            notice t1
+        INNER JOIN
+                community_user t2
+        ON
+            t1.create_by = (SELECT community_id FROM community_user WHERE user_id = #{userId} LIMIT 1)
+        WHERE
+            t1.create_time > now() AND t1.create_time > DATE_SUB(NOW(), INTERVAL 10 MINUTE)
+        LIMIT 1;
     </select>
 
     <!--
