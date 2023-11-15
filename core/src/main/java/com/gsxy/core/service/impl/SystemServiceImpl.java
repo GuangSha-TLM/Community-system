@@ -1,7 +1,9 @@
 package com.gsxy.core.service.impl;
 
 import com.alibaba.fastjson2.JSONArray;
+import com.gsxy.core.mapper.ImgMapper;
 import com.gsxy.core.mapper.UserAdminMapper;
+import com.gsxy.core.pojo.Img;
 import com.gsxy.core.pojo.UserAdmin;
 import com.gsxy.core.pojo.vo.ResponseVo;
 import com.gsxy.core.service.SystemService;
@@ -19,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Date;
 import java.util.Map;
 import java.util.UUID;
 
@@ -35,6 +38,8 @@ public class SystemServiceImpl implements SystemService {
     private String projecturl;
     @Autowired
     private UserAdminMapper userAdminMapper;
+    @Autowired
+    private ImgMapper imgMapper;
 
     /**
      * 鉴权
@@ -117,8 +122,25 @@ public class SystemServiceImpl implements SystemService {
             saveFilePath.mkdirs();
         }
 
-        file.transferTo(new File(path+""+id+"/"+fileName));
-        System.err.println("??");
+        String imgUrl = id+"/"+fileName;
+
+        file.transferTo(new File(path+imgUrl));
+
+ //       System.out.println("/"+id+"/"+fileName);
+
+        Img img = new Img();
+        img.setUrl("/"+imgUrl);
+        Long byId = Long.valueOf(id);
+        img.setCreateBy(byId);
+        img.setCreateTime(new Date());
+        img.setUpdateBy(byId);
+        img.setUpdateTime(new Date());
+        img.setDelFlag(0);
+        img.setStatus(0);
+
+        imgMapper.addImg(img);
+
+ //       System.err.println("??");
         return JSONArray.toJSONString(new ResponseVo<>("success",projecturl+"/system/getimage?imgUrl="+id+"/"+fileName,"0x200"));
     }
 
