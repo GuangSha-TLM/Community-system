@@ -1,16 +1,18 @@
 package com.gsxy.core.pojo.bo;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import java.io.Serializable;
 
 public class ActiveAddBo implements Serializable {
 
     private String token;
 
-    private String context;
+    private MultipartFile context;
 
     private String title;
 
-    public ActiveAddBo(String token, String context, String title) {
+    public ActiveAddBo(String token, MultipartFile context, String title) {
         this.token = token;
         this.context = context;
         this.title = title;
@@ -27,11 +29,11 @@ public class ActiveAddBo implements Serializable {
         this.token = token;
     }
 
-    public String getContext() {
+    public MultipartFile getContext() {
         return context;
     }
 
-    public void setContext(String context) {
+    public void setContext(MultipartFile context) {
         this.context = context;
     }
 
@@ -47,7 +49,7 @@ public class ActiveAddBo implements Serializable {
     public String toString() {
         return "ActiveAddBo{" +
                 "token='" + token + '\'' +
-                ", context='" + context + '\'' +
+                ", context=" + context +
                 ", title='" + title + '\'' +
                 '}';
     }

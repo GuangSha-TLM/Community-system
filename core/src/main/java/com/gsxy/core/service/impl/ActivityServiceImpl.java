@@ -6,6 +6,7 @@ import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.PagingToGetActiveDataVO;
 import com.gsxy.core.pojo.vo.ResponseVo;
 import com.gsxy.core.service.ActiveService;
+import com.gsxy.core.util.FileUtils;
 import com.gsxy.core.util.ThreadLocalUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,8 +40,8 @@ public class ActivityServiceImpl implements ActiveService {
         Long createBy = activeMapper.selectToGetByUserId(userId);
         Long communityId = activeMapper.selectToGetCommunityId(userId);
 
-        active.setContext(activeAddBo.getContext());
-        active.setCommunityList(activeAddBo.getContext());
+        active.setContext(FileUtils.uploadFile(activeAddBo.getContext()));
+        active.setCommunityList(FileUtils.uploadFile(activeAddBo.getContext()));
         active.setCreateBy(createBy);
         active.setCommunity(communityId);
         active.setTitle(activeAddBo.getTitle());
