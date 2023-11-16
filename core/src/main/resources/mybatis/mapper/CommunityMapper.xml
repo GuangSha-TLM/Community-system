@@ -38,8 +38,8 @@
     <select id="communityAndUser" resultType="com.gsxy.core.pojo.vo.CommunityAndUserVo"
             parameterType="com.gsxy.core.pojo.bo.CommunityAndUserBo">
         SELECT
-            us.id,us.name,us.student_id,us.college,
-            us.professional,us.grade
+            us.name,us.student_id,us.college,
+            us.professional,us.grade,cu.user_id
                 FROM
                 community_user AS cu
         INNER JOIN

@@ -24,7 +24,7 @@ public class WebSocketController {
     private Set<Session> sessions = new HashSet<>();
 
     //    private UserAdminService userAdminService = SpringContextUtil.getBean(UserAdminService.class);
-//    private UserService userService = SpringContextUtil.getBean(UserService.class);
+    //    private UserService userService = SpringContextUtil.getBean(UserService.class);
     @Autowired
     private UserAdminService userAdminService;
     @Autowired
@@ -77,5 +77,4 @@ public class WebSocketController {
             }
         }
     }
-
 }
