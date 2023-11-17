@@ -155,5 +155,14 @@
         limit 1
     </select>
 
+    <!-- 获取该社团内所有用户的id -->
+    <select id="selectToGetUserId" resultType="java.lang.Long" parameterType="java.lang.Long">
+        select
+            user_id
+        from
+            community_user
+        where
+            create_by = #{adminId}
+    </select>
 
 </mapper>

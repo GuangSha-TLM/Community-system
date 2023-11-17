@@ -49,9 +49,9 @@
     <insert id="insertNotice">
         insert into
             notice
-            (context,create_by,create_time)
+            (user_email_id,context,create_by,create_time)
         values
-            (#{context},#{createBy},#{createTime})
+            (#{userId},#{context},#{createBy},#{createTime})
     </insert>
 
     <!--

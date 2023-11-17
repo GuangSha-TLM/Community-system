@@ -193,15 +193,21 @@ public class CommunityServiceImpl implements CommunityService {
             return new ResponseVo("token解析失败",null,"0x501");
         }
 
-        SendNotification sendNotification = new SendNotification();
-        sendNotification.setCreateBy(adminId);
-        sendNotification.setCreateTime(new Date());
+        //获取该社团内所有用户的id
+        List<Long> list = communityMapper.selectToGetUserId(adminId);
 
-        //将通知内容注入到数据库中
-        Long notice = noticeMapper.insertNotice(sendNotification);
+        int l = 0;
+        while (l < list.size()) {
+            SendNotification sendNotification = new SendNotification();
+            sendNotification.setCreateBy(adminId);
+            sendNotification.setCreateTime(new Date());
+            sendNotification.setUserId(list.get(l++));
+            //将通知内容注入到数据库中
+            Long notice = noticeMapper.insertNotice(sendNotification);
 
-        if(notice == null || notice == 0L){
-            return new ResponseVo("通知发起失败",null,"0x500");
+            if (notice == null || notice == 0L) {
+                return new ResponseVo("通知发起失败", null, "0x500");
+            }
         }
 
         //创建发起签到功能的传入类实体对象

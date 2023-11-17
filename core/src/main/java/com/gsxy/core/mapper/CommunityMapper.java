@@ -2,7 +2,6 @@ package com.gsxy.core.mapper;
 
 import com.gsxy.core.pojo.Community;
 import com.gsxy.core.pojo.bo.CommunityAllname;
-import com.gsxy.core.pojo.bo.CommunityAndUserBo;
 import com.gsxy.core.pojo.bo.CommunityPagingToGetDataBo;
 import com.gsxy.core.pojo.vo.CommunityAndActiveVo;
 import com.gsxy.core.pojo.vo.CommunityAndUserVo;
@@ -86,4 +85,11 @@ public interface CommunityMapper {
      */
     public List<Community> communityPagingToGetData(CommunityPagingToGetDataBo communityPagingToGetDataBo);
 
+    /**
+     * @param adminId
+     * @return
+     * @author hln 2023-11-17
+     * 获取该社团内所有用户的id
+     */
+    List<Long> selectToGetUserId(Long adminId);
 }
