@@ -141,7 +141,7 @@ public class SystemServiceImpl implements SystemService {
         imgMapper.addImg(img);
 
  //       System.err.println("??");
-        return JSONArray.toJSONString(new ResponseVo<>("success",projecturl+"/system/getimage?imgUrl="+id+"/"+fileName,"0x200"));
+        return JSONArray.toJSONString(new ResponseVo<>("success",projecturl+"/img/getimage?imgUrl="+id+"%2F"+fileName,"0x200"));
     }
 
 
