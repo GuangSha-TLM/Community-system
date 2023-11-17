@@ -3,6 +3,18 @@
         <div class="content">
             <section>
                 <div class="container">
+                    <!-- 发起签到按钮 与 拉取人员按钮-->
+                    <div class="top">
+                        <div class="col-md-12">
+                            <div class="card-header">
+                                <h4 class="card-title">
+                                    <button class="btn btn-primary" @click="SignInWindow = true">发起签到</button>
+                                    <button class="btn btn-primary" @click="dialogVisible = true">拉取人员</button>
+                                </h4>
+                            </div>
+                        </div>
+
+                    </div>
                     <table class="table">
                         <thead>
                             <tr>
@@ -12,7 +24,6 @@
                                 <th scope="col">班级</th>
                                 <th scope="col">学号</th>
                                 <th scope="col">操作</th>
-                                <th><button class="but" @click="dialogVisible = true">拉取</button></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -23,19 +34,23 @@
                                 <td>{{ obj.professional }}</td>
                                 <td>{{ obj.studentId }}</td>
                                 <td>
-                                    <el-link type="success" @click="deleteById(obj.id)">删除</el-link>
+                                    <el-link type="success" @click="deleteById(obj.userId)">删除</el-link>
                                 </td>
                             </tr>
 
                         </tbody>
                     </table>
 
-                    <el-dialog
-                        title="拉取用户"
-                        :visible.sync="dialogVisible"
-                        width="80%"
-                        top="0">
+                    <el-dialog title="拉取用户" :visible.sync="dialogVisible" width="80%" top="0">
                         <ClassManagement></ClassManagement>
+                    </el-dialog>
+
+                    <el-dialog title="发起签到" :visible.sync="SignInWindow" width="50%">
+                        <el-input v-model="signInAdminWebSocketBo.content" placeholder="请输入签到内容"></el-input>
+                        <span slot="footer" class="dialog-footer">
+                            <el-button @click="SignInWindow = false">取 消</el-button>
+                            <el-button type="primary" @click="showModal">确 定</el-button>
+                        </span>
                     </el-dialog>
                 </div>
             </section>
@@ -51,9 +66,11 @@ import { synRequestPost, synRequestGet } from "../../static/request"
 export default {
     data() {
         return {
-            //控制弹窗
+            //控制拉取人员弹窗
             dialogVisible: false,
-            communityUserdeleteUserBo:{
+            // 签到弹窗
+            SignInWindow: false,
+            communityUserdeleteUserBo: {
                 token: '',
                 userId: ''
             },
@@ -62,18 +79,29 @@ export default {
                 token: "",
                 id: this.$route.params.id
             },
-            list: []
+            list: [],
+            //签到信息
+            signInAdminWebSocketBo:{
+                token:'',
+                content:''
+            }
         }
     },
     mounted() {
         this.getMerchantInformation()
     },
 
-    components:{
+    components: {
         ClassManagement
     },
     methods: {
 
+        async showModal() {
+            this.signInAdminWebSocketBo.token = this.token
+            let obj = await synRequestPost("/userAdmin/adminsigninweb",this.signInAdminWebSocketBo);
+            console.log(obj);
+            this.SignInWindow= false
+        },
 
         //跳转指定页面
         async getMerchantInformation() {
@@ -81,23 +109,26 @@ export default {
             if (res.code == "0x200") {
                 this.list = res.data;
             }
+            console.log(this.list);
         },
         async deleteById(id) {
-            if (confirm('确定要删除该用户吗？')) {
-                this.communityUserdeleteUserBo.token=this.token;
-                this.communityUserdeleteUserBo.userId=id;
-            let obj = await synRequestPost("/communityUser/communityUserdeleteUser",
-                this.communityUserdeleteUserBo
-            );
-            if (obj.code === "0x200") {
-                this.$message({
-                    showClose: true,
-                    message: '删除成功!',
-                    type: 'success'
-                });
-            } else {
-                this.$message.error(`修改失败,${obj.message}!`);
-            }
+            if (confirm('确定要移除该用户吗？')) {
+                console.log(id);
+                this.communityUserdeleteUserBo.token = this.token;
+                this.communityUserdeleteUserBo.userId = id;
+                let obj = await synRequestPost("/communityUser/communityUserdeleteUser",
+                    this.communityUserdeleteUserBo
+                );
+                if (obj.code === "0x200") {
+                    this.$message({
+                        showClose: true,
+                        message: '删除成功!',
+                        type: 'success'
+                    });
+                    this.getMerchantInformation();
+                } else {
+                    this.$message.error(`修改失败,${obj.message}!`);
+                }
             }
         }
 
@@ -169,7 +200,8 @@ a {
     font-weight: bold;
     /* 可以使键加粗 */
 }
-.but{
+
+.but {
     border: none;
     background-color: #fff;
     color: #42b983;
