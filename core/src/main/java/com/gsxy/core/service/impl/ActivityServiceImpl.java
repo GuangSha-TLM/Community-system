@@ -21,13 +21,14 @@ public class ActivityServiceImpl implements ActiveService {
     private ActiveMapper activeMapper;
 
     /**
-     * @auhtor hln 2023-10-24
-     *      添加活动功能
      * @param activeAddBo
+     * @param context
      * @return
+     * @auhtor hln 2023-10-24
+     * 添加活动功能
      */
     @Override
-    public ResponseVo addActive(ActiveAddBo activeAddBo) {
+    public ResponseVo addActive(ActiveAddBo activeAddBo, String context) {
 
         String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
         Long userId = Long.valueOf(userIdOfStr);//用户id
@@ -40,8 +41,8 @@ public class ActivityServiceImpl implements ActiveService {
         Long createBy = activeMapper.selectToGetByUserId(userId);
         Long communityId = activeMapper.selectToGetCommunityId(userId);
 
-        active.setContext(FileUtils.uploadFile(activeAddBo.getContext()));
-        active.setCommunityList(FileUtils.uploadFile(activeAddBo.getContext()));
+        active.setContext(context);
+        active.setCommunityList(context);
         active.setCreateBy(createBy);
         active.setCommunity(communityId);
         active.setTitle(activeAddBo.getTitle());

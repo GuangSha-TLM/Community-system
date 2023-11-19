@@ -6,12 +6,13 @@ import com.gsxy.core.pojo.vo.ResponseVo;
 public interface ActiveService {
 
     /**
-     * @auhtor hln 2023-10-24
-     *      添加活动功能
      * @param activityAddBo
+     * @param context
      * @return
+     * @auhtor hln 2023-10-24
+     * 添加活动功能
      */
-    ResponseVo addActive(ActiveAddBo activityAddBo);
+    ResponseVo addActive(ActiveAddBo activityAddBo, String context);
 
     /**
      * @author hln 2023-10-25

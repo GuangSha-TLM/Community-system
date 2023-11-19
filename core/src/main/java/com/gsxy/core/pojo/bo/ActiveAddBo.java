@@ -8,13 +8,10 @@ public class ActiveAddBo implements Serializable {
 
     private String token;
 
-    private MultipartFile context;
-
     private String title;
 
-    public ActiveAddBo(String token, MultipartFile context, String title) {
+    public ActiveAddBo(String token, String title) {
         this.token = token;
-        this.context = context;
         this.title = title;
     }
 
@@ -29,14 +26,6 @@ public class ActiveAddBo implements Serializable {
         this.token = token;
     }
 
-    public MultipartFile getContext() {
-        return context;
-    }
-
-    public void setContext(MultipartFile context) {
-        this.context = context;
-    }
-
     public String getTitle() {
         return title;
     }
@@ -49,7 +38,6 @@ public class ActiveAddBo implements Serializable {
     public String toString() {
         return "ActiveAddBo{" +
                 "token='" + token + '\'' +
-                ", context=" + context +
                 ", title='" + title + '\'' +
                 '}';
     }
