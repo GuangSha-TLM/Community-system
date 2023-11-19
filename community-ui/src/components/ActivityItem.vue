@@ -1,7 +1,7 @@
 <!--
  * @Author: tianleiyu
  * @Date: 2023-10-29 13:15:48
- * @LastEditTime: 2023-11-02 14:10:55
+ * @LastEditTime: 2023-11-19 12:36:46
  * @LastEditors: tianleiyu
  * @Description:
  * @FilePath: /community-ui/src/components/ActivityItem.vue
@@ -15,7 +15,7 @@
 
         <div class="content" >
             <div class="title">
-                <h2>{{ list.activeToGetBo.title }}</h2>
+                {{ list.activeToGetBo.title }}
             </div>
             <div class="item_list">
                 <div class="item">
@@ -29,9 +29,8 @@
                     创建人:{{ list.communityInActiveBo.username }}
                 </div>
             </div>
-            <div class="context">
-
-                {{ list.activeToGetBo.context }}
+            <div class="context" v-html="list.activeToGetBo.context">
+                
             </div>
 
         </div>
@@ -78,7 +77,6 @@ export default {
             console.log(obj);
             if (obj.code == "0x200") {
                 this.list = obj.data;
-
             }
         },
     }
@@ -113,7 +111,7 @@ a {
     display: flex;
     flex-direction: column;
 }
-.title h2{
+.title{
     font-size: 70px;
 }
 .item_list{
@@ -123,6 +121,9 @@ a {
 
 .context{
     margin-top: 30px;
-    font-size: 25px;
+}
+/deep/ img{
+    width: 100%;
+    height: auto;
 }
 </style>

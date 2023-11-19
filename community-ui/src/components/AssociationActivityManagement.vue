@@ -1,7 +1,7 @@
 <!--
  * @Author: tianleiyu
  * @Date: 2023-11-10 13:39:11
- * @LastEditTime: 2023-11-16 17:03:48
+ * @LastEditTime: 2023-11-19 12:16:55
  * @LastEditors: tianleiyu
  * @Description:
  * @FilePath: /community-ui/src/components/AssociationActivityManagement.vue
@@ -34,7 +34,7 @@
                         <el-input v-model="activeAddBo.title" autocomplete="off"></el-input>
                     </el-form-item>
                     <el-form-item label="活动详细" :label-width="formLabelWidth">
-                        <quill-editor v-model="activeAddBo.context" ref="myTextEditor" :options="editorOptions" />
+                        <quill-editor v-model="context" ref="myTextEditor" :options="editorOptions" />
 
                         <el-upload class="upload-demo" action="#" drag :file-list="fileList" style="display: none;"
                             :on-change="handleChange" :http-request="confirmUpload">
@@ -89,8 +89,8 @@ export default {
             activeAddBo: {
                 token: '',
                 title: '',
-                context: ''
             },
+            context:'',
             formLabelWidth: '120px',
             // 删除活动
             activeDeleteByIdBo: {
@@ -162,7 +162,7 @@ export default {
         async addActive() {
             this.activeAddBo.context = this.$refs.myTextEditor.quill.root.innerHTML;
             this.activeAddBo.token = this.token
-            let obj = await synRequestPost('/activity/add', this.activeAddBo);
+            let obj = await synRequestPost(`/activity/add?context=${this.context}`, this.activeAddBo);
             if (obj.code == "0x200") {
                 this.dialogFormVisible = false
                 this.$message({
