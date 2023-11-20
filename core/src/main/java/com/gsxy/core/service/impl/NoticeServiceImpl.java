@@ -67,7 +67,8 @@ public class NoticeServiceImpl implements NoticeService {
                         user.getProfessional(),
                         user.getGrade(),
                         notice.getRead(),
-                        notice.getDealt()
+                        notice.getDealt(),
+                        notice.getKinds()
                 ));
             }else {
 

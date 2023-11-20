@@ -2,6 +2,7 @@ package com.gsxy.core.pojo.vo;
 
 import com.gsxy.core.pojo.Notice;
 import com.gsxy.core.pojo.User;
+import io.swagger.models.auth.In;
 
 /**
  * @author Oh...Yeah!!! 2023-11-5
@@ -19,6 +20,8 @@ public class NoticeWithCreateByVo {
     private String grade;
     private Integer read;
     private Integer dealt;
+    private Integer kinds;
+
 
     public NoticeWithCreateByVo() {
     }
@@ -27,7 +30,7 @@ public class NoticeWithCreateByVo {
         this.name = name;
     }
 
-    public NoticeWithCreateByVo(Long id, String noticeName, Long userEmailId, Long createBy, String context, String name, String professional, String grade, Integer read, Integer dealt) {
+    public NoticeWithCreateByVo(Long id, String noticeName, Long userEmailId, Long createBy, String context, String name, String professional, String grade, Integer read, Integer dealt, Integer kinds) {
         this.id = id;
         this.noticeName = noticeName;
         UserEmailId = userEmailId;
@@ -38,6 +41,7 @@ public class NoticeWithCreateByVo {
         this.grade = grade;
         this.read = read;
         this.dealt = dealt;
+        this.kinds = kinds;
     }
 
     public Long getId() {
@@ -120,6 +124,14 @@ public class NoticeWithCreateByVo {
         this.dealt = dealt;
     }
 
+    public Integer getKinds() {
+        return kinds;
+    }
+
+    public void setKinds(Integer kinds) {
+        this.kinds = kinds;
+    }
+
     @Override
     public String toString() {
         return "NoticeWithCreateByVo{" +
@@ -133,6 +145,7 @@ public class NoticeWithCreateByVo {
                 ", grade='" + grade + '\'' +
                 ", read=" + read +
                 ", dealt=" + dealt +
+                ", kinds=" + kinds +
                 '}';
     }
 }
