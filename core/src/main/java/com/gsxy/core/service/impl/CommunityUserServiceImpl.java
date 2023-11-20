@@ -40,10 +40,40 @@ public class CommunityUserServiceImpl implements CommunityUserService {
         communityUserAddBo.getCommunityUser().setCommunityId(communityUserId);
         communityUserAddBo.getCommunityUser().setCreateBy(communityUserId);
         communityUserAddBo.getCommunityUser().setCreateTime(new Date());
-        Long aLong = communityUserMapper.communityUseAdd(communityUserAddBo.getCommunityUser());
-        if (aLong.longValue() == 0L) {
-            return new ResponseVo("增加失败",  null, "0x500");
-        }
+        String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
+        Long userId = Long.valueOf(userIdOfStr);
+
+        //获取该社团的信息
+        Community community = communityMapper.selectByCommunityId(userId);
+
+        //发送通知
+        Notice notice = new Notice();
+        notice.setContext(community.getName()+"的社长已成功将你拉取到该社团");
+//        notice.setContext(communityUserAndUserNoticeBo.getContext());
+        notice.setUserEmailId(communityUserAddBo.getCommunityUser().getUserId());
+
+        notice.setCreateBy(userId);
+        notice.setStatus(0);
+        notice.setDelFlag(0);
+
+        UUID uuid = UUID.randomUUID();
+        notice.setUuid(uuid.toString());
+
+        //发送通知
+        noticeMapper.addNotice(notice);
+
+        //获取最新的通知的id
+        Notice notice2 =noticeMapper.seleByUUID(uuid.toString());
+
+        //设置历史记录信息
+        NoticeWithUser noticeWithUser = new NoticeWithUser();
+        noticeWithUser.setReceiveUserId(communityUserAddBo.getCommunityUser().getUserId());
+        noticeWithUser.setSendUserId(userId);
+        noticeWithUser.setNoticeId(notice2.getId());
+        noticeWithUser.setCreateBy(userId);
+        noticeWithUser.setStatus(0);
+        noticeWithUser.setDelFlag(0);
+        noticeWithUserMapper.addNoticeWithUser(noticeWithUser);
 
         return new ResponseVo("增加成功", communityUserId, "0x200");
     }
