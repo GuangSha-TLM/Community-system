@@ -1,8 +1,10 @@
 package com.gsxy.core.service.impl;
 
 import com.gsxy.core.mapper.UserAdminMapper;
+import com.gsxy.core.mapper.UserMapper;
 import com.gsxy.core.pojo.SignInAdmin;
 import com.gsxy.core.pojo.SignInAdminWebSocket;
+import com.gsxy.core.pojo.User;
 import com.gsxy.core.pojo.UserAdmin;
 import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.ResponseVo;
@@ -24,6 +26,9 @@ public class UserAdminServiceImpl implements UserAdminService {
 
     @Autowired
     private UserAdminMapper userAdminMapper;
+
+    @Autowired
+    private UserMapper userMapper;
 
     /**
      * @author Oh… Yeah!!!, 2023-10-24
