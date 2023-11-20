@@ -11,11 +11,11 @@ import io.swagger.models.auth.In;
 public class NoticeWithCreateByVo {
 
     private Long id;
-    private String noticeName;
+    private String noticeName;//通知的名字
     private Long UserEmailId;
     private Long createBy;
     private String context;
-    private String name;
+    private String name; //用户的名字
     private String professional;
     private String grade;
     private Integer read;
