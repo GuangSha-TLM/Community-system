@@ -373,7 +373,7 @@ public class CommunityServiceImpl implements CommunityService {
             notice.setDelFlag(0);
             notice.setRead(0);
             notice.setDealt(1);
-            notice.setKinds(1);
+            notice.setKinds(0);
             //发送通知
             noticeMapper.addNotice(notice);
 
@@ -419,7 +419,7 @@ public class CommunityServiceImpl implements CommunityService {
         notice.setDelFlag(0);
         notice.setRead(0);
         notice.setDealt(1);
-        notice.setKinds(1);
+        notice.setKinds(0);
         noticeMapper.addNotice(notice);
 
 
