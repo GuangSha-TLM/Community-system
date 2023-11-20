@@ -196,12 +196,19 @@ public class CommunityServiceImpl implements CommunityService {
         //获取该社团内所有用户的id
         List<Long> list = communityMapper.selectToGetUserId(adminId);
 
+        String name = userMapper.selectToGetNameByUserId(adminId);
+
         int l = 0;
         while (l < list.size()) {
+            if(list.get(l) == adminId){
+                l++;
+                continue;
+            }
             SendNotification sendNotification = new SendNotification();
             sendNotification.setCreateBy(adminId);
             sendNotification.setCreateTime(new Date());
             sendNotification.setUserId(list.get(l++));
+            sendNotification.setName(name);
             //将通知内容注入到数据库中
             Long notice = noticeMapper.insertNotice(sendNotification);
 

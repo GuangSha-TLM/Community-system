@@ -210,6 +210,16 @@
         limit 1
     </select>
 
+    <!-- 查询用户姓名根据id -->
+    <select id="selectToGetNameByUserId" resultType="java.lang.String" parameterType="java.lang.Long">
+        select
+            name
+        from
+            user
+        where
+            id = #{id}
+    </select>
+
     <!-- 插入用户签到状态 -->
     <insert id="userSignIn" parameterType="com.gsxy.core.pojo.bo.UserSignInBo">
         insert into

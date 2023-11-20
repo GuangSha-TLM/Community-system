@@ -8,12 +8,16 @@ public class SendNotification implements Serializable {
     private Long createBy;//创建人
     private Date createTime;//创建时间
     private String context = "签到";//签到内容
+    private String name;//签到人名
+    private Integer kinds = 2;//签到状态
     private Long userId;//用户ID
 
-    public SendNotification(Long createBy, Date createTime, String context, Long userId) {
+    public SendNotification(Long createBy, Date createTime, String context, String name, Integer kinds, Long userId) {
         this.createBy = createBy;
         this.createTime = createTime;
         this.context = context;
+        this.name = name;
+        this.kinds = kinds;
         this.userId = userId;
     }
 
@@ -44,6 +48,22 @@ public class SendNotification implements Serializable {
         this.context = context;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getKinds() {
+        return kinds;
+    }
+
+    public void setKinds(Integer kinds) {
+        this.kinds = kinds;
+    }
+
     public Long getUserId() {
         return userId;
     }
@@ -58,6 +78,8 @@ public class SendNotification implements Serializable {
                 "createBy=" + createBy +
                 ", createTime=" + createTime +
                 ", context='" + context + '\'' +
+                ", name='" + name + '\'' +
+                ", kinds=" + kinds +
                 ", userId=" + userId +
                 '}';
     }

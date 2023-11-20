@@ -150,4 +150,12 @@ public interface UserMapper {
      * @param signInUserStatusWeb
      */
     void insertSignInUserWithAdmin(SignInUserStatusWeb signInUserStatusWeb);
+
+    /**
+     * @author hln 2023-11-20
+     *      查询用户姓名根据id
+     * @param aLong
+     * @return
+     */
+    String selectToGetNameByUserId(Long aLong);
 }
