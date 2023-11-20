@@ -304,6 +304,7 @@ public class CommunityServiceImpl implements CommunityService {
         notice.setCreateBy(userId);
         notice.setRead(0);
         notice.setDealt(0);
+        notice.setKinds(1);
         UUID uuid = UUID.randomUUID();
         notice.setUuid(uuid.toString());
 
@@ -355,7 +356,7 @@ public class CommunityServiceImpl implements CommunityService {
         UserAdmin userAdmin = userAdminMapper.selectByIdUserAdmin(userId);
 
         //社长决定是否让该用户进入社团
-        if (communityReplyNoticeBo.getStatus() == 1){
+        if (communityReplyNoticeBo.getResult() == 1){
 
             //获取该社团的信息
             Community community = communityMapper.selectByCommunityId(userAdmin.getCommunityId());
@@ -372,6 +373,7 @@ public class CommunityServiceImpl implements CommunityService {
             notice.setDelFlag(0);
             notice.setRead(0);
             notice.setDealt(1);
+            notice.setKinds(1);
             //发送通知
             noticeMapper.addNotice(notice);
 
@@ -417,6 +419,7 @@ public class CommunityServiceImpl implements CommunityService {
         notice.setDelFlag(0);
         notice.setRead(0);
         notice.setDealt(1);
+        notice.setKinds(1);
         noticeMapper.addNotice(notice);
 
 

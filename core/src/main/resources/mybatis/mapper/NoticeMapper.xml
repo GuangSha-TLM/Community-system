@@ -41,7 +41,7 @@
             notice
         values
             (null,#{userEmailId},#{context},#{uuid},#{imgId},#{name},
-             #{read},#{dealt},#{createBy},#{createTime},#{updateBy},
+             #{read},#{dealt},#{kinds},#{createBy},#{createTime},#{updateBy},
              #{updateTime},#{status},#{delFlag});
     </insert>
 
@@ -81,6 +81,9 @@
             </if>
             <if test="dealt != null ">
                 dealt = #{dealt},
+            </if>
+            <if test="kinds != null ">
+                kinds = #{kinds},
             </if>
             <if test="createBy != null ">
                 create_by = #{createBy},
@@ -143,7 +146,7 @@
 
     <!--
      @author Oh… Yeah!!! 2023-10-27
-     查找所有未阅读的通知.
+     查找所有未阅读的通知的数量.
     -->
     <select id="selectReadNotice" resultType="java.lang.Long" parameterType="java.lang.Long">
         SELECT
@@ -155,6 +158,12 @@
         and
             user_email_id = #{userId}
     </select>
+
+
+    <!--
+     @author Oh… Yeah!!! 2023-10-27
+     根据id查询通知数据.
+    -->
     <select id="noticeSelectByNoticeId" resultType="com.gsxy.core.pojo.Notice" parameterType="java.lang.Long">
         select
             *

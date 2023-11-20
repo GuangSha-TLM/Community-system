@@ -14,20 +14,17 @@ public class CommunityReplyNoticeBo implements Serializable {
     private String context;
     private Long noticeId;
     //社长同意或拒绝用户的申请(0:同意,1:拒绝)
-    private Integer status;
+    private Integer result;
 
     public String getToken() {
         return token;
     }
 
-    @Override
-    public String toString() {
-        return "CommunityReplyNoticeBo{" +
-                "token='" + token + '\'' +
-                ", context='" + context + '\'' +
-                ", noticeId=" + noticeId +
-                ", status=" + status +
-                '}';
+    public CommunityReplyNoticeBo(String token, String context, Long noticeId, Integer result) {
+        this.token = token;
+        this.context = context;
+        this.noticeId = noticeId;
+        this.result = result;
     }
 
     public void setToken(String token) {
@@ -50,21 +47,21 @@ public class CommunityReplyNoticeBo implements Serializable {
         this.noticeId = noticeId;
     }
 
-    public Integer getStatus() {
-        return status;
+    public Integer getResult() {
+        return result;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setResult(Integer result) {
+        this.result = result;
     }
 
-    public CommunityReplyNoticeBo() {
-    }
-
-    public CommunityReplyNoticeBo(String token, String context, Long noticeId, Integer status) {
-        this.token = token;
-        this.context = context;
-        this.noticeId = noticeId;
-        this.status = status;
+    @Override
+    public String toString() {
+        return "CommunityReplyNoticeBo{" +
+                "token='" + token + '\'' +
+                ", context='" + context + '\'' +
+                ", noticeId=" + noticeId +
+                ", result=" + result +
+                '}';
     }
 }

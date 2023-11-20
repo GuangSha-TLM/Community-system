@@ -9,37 +9,25 @@ import java.util.Date;
 public class Notice {
 
     private Long id;
-    //收件箱人的id
-    private Long userEmailId;
-    //通知内容
-    private String context;
-    //用于查找新增的通知
-    private String uuid;
-    //关联的图片id
-    private Long imgId;
-    //名字
-    private String name;
-    //通知的阅读状态
-    private Integer read;
-    //通知的处理状态
-    private Integer dealt;
-    //创建人
-    private Long createBy;
-    //创建时间
-    private Date createTime;
-    //更新人
-    private Long updateBy;
-    //更新时间
-    private Date updateTime;
-    //状态
-    private Integer status;
-    //逻辑删除
-    private Integer delFlag;
+    private Long userEmailId; //收件箱人的id
+    private String context;  //通知内容
+    private String uuid;//用于查找新增的通知
+    private Long imgId;    //关联的图片id
+    private String name;    //名字
+    private Integer read;    //通知的阅读状态
+    private Integer dealt;    //通知的处理状态
+    private Integer kinds;    //通知的种类
+    private Long createBy;    //创建人
+    private Date createTime;    //创建时间
+    private Long updateBy;    //更新人
+    private Date updateTime;    //更新时间
+    private Integer status;    //状态
+    private Integer delFlag;    //逻辑删除
 
     public Notice() {
     }
 
-    public Notice(Long id, Long userEmailId, String context, String uuid, Long imgId, String name, Integer read, Integer dealt, Long createBy, Date createTime, Long updateBy, Date updateTime, Integer status, Integer delFlag) {
+    public Notice(Long id, Long userEmailId, String context, String uuid, Long imgId, String name, Integer read, Integer dealt, Integer kinds, Long createBy, Date createTime, Long updateBy, Date updateTime, Integer status, Integer delFlag) {
         this.id = id;
         this.userEmailId = userEmailId;
         this.context = context;
@@ -48,6 +36,7 @@ public class Notice {
         this.name = name;
         this.read = read;
         this.dealt = dealt;
+        this.kinds = kinds;
         this.createBy = createBy;
         this.createTime = createTime;
         this.updateBy = updateBy;
@@ -120,6 +109,14 @@ public class Notice {
         this.dealt = dealt;
     }
 
+    public Integer getKinds() {
+        return kinds;
+    }
+
+    public void setKinds(Integer kinds) {
+        this.kinds = kinds;
+    }
+
     public Long getCreateBy() {
         return createBy;
     }
@@ -179,6 +176,7 @@ public class Notice {
                 ", name='" + name + '\'' +
                 ", read=" + read +
                 ", dealt=" + dealt +
+                ", kinds=" + kinds +
                 ", createBy=" + createBy +
                 ", createTime=" + createTime +
                 ", updateBy=" + updateBy +
