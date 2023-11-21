@@ -11,8 +11,6 @@ public class WebSocketConfig  {
 
     @Bean
     public ServerEndpointExporter serverEndpointExporter() {
-
-        System.err.println("???");
         return new ServerEndpointExporter();
     }
 
