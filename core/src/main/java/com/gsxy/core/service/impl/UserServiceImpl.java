@@ -71,6 +71,8 @@ public class UserServiceImpl implements UserService {
         //通过username去获取用户
         User user = userMapper.userLogin(userLoginBo);
 
+        Long id = user.getId();
+
         //比较用户密码和数据库中密码是否一致
         if(user == null || !user.getPassword().equals(userLoginBo.getPassword())){
             return new ResponseVo("登录失败",null,"0x500");
@@ -82,7 +84,11 @@ public class UserServiceImpl implements UserService {
         user.setLoginTime(new Date());
 
         //返回数据库中 user 和 userAdmin 中前端想获取的数据
-        int role = userMapper.selectByUserAndUserAdminId(user.getId());
+        Integer role = userMapper.selectByUserAndUserAdminId(id);
+
+        if(role == null){
+            role = 0;
+        }
 
         UserAndUserAdminBo userAndUserAdminBo = new UserAndUserAdminBo();
         BeanUtils.copyProperties(user,userAndUserAdminBo);
@@ -326,13 +332,17 @@ public class UserServiceImpl implements UserService {
 
         userMapper.insertSignInWeb(signInWebSocket);
 
-        SignInUserStatusWeb signInUserStatusWeb = userMapper.selectToGetUserAndAdminSignIn();
+        SignInUserStatusWeb signInUserStatusWeb = userMapper.selectToGetUserAndAdminSignIn(userId);
 
         if (signInUserStatusWeb == null){
             return new ResponseVo("签到失败",null,"0x500");
         }
 
-        userMapper.insertSignInUserWithAdmin(signInUserStatusWeb);
+        Long id = userMapper.insertSignInUserWithAdmin(signInUserStatusWeb);
+
+        if(id == 0L){
+            return new ResponseVo("签到失败",null,"0x502");
+        }
 
         return new ResponseVo("签到成功",signInWebSocketBo,"0x200");
     }

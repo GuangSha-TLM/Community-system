@@ -89,7 +89,7 @@ public interface UserMapper {
      * @author hln 2023-10-29
      * 通过id获取管理员权限
      */
-    int selectByUserAndUserAdminId(Long id);
+    Integer selectByUserAndUserAdminId(Long id);
 
     /**
      * @quthor hln 2023-10-30
@@ -142,14 +142,15 @@ public interface UserMapper {
      *      查询UserAndAdminSignIn实体类信息
      * @return
      */
-    SignInUserStatusWeb selectToGetUserAndAdminSignIn();
+    SignInUserStatusWeb selectToGetUserAndAdminSignIn(Long userId);
 
     /**
-     * @author hln 2023-11-10
-     *      插入数据到 sign_in_user_status_web
      * @param signInUserStatusWeb
+     * @return
+     * @author hln 2023-11-10
+     * 插入数据到 sign_in_user_status_web
      */
-    void insertSignInUserWithAdmin(SignInUserStatusWeb signInUserStatusWeb);
+    Long insertSignInUserWithAdmin(SignInUserStatusWeb signInUserStatusWeb);
 
     /**
      * @author hln 2023-11-20
