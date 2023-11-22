@@ -1,7 +1,7 @@
 <!--
  * @Author: tianleiyu
  * @Date: 2023-10-29 10:33:58
- * @LastEditTime: 2023-11-22 11:06:56
+ * @LastEditTime: 2023-11-22 14:53:39
  * @LastEditors: tianleiyu
  * @Description:
  * @FilePath: /community-ui/src/components/fream/LoginTop.vue
@@ -28,72 +28,80 @@
         </div>
         <a class="btn btn-block btn-dark text-truncate rounded-0 py-2 d-none d-lg-block"
             style="z-index: 1000;color:aliceblue" target="_blank">
-            哈尔滨广厦学院 <strong>投诉系统 </strong> 测试版本 v0.1
+            哈尔滨广厦学院 <strong>社团管理系统 </strong> 测试版本 v0.1
         </a>
 
         <div>
             <nav class="navbar navbar-expand-lg navbar-light bg-white">
                 <div class="container">
                     <!-- Brand -->
-                    <a class="navbar-brand" href="/h">
+                    <a class="navbar-brand item" href="/h">
                         <img alt="Image placeholder" style="height:3.4rem" src="#" id="navbar-logo">
                     </a>
+
+                    <el-input placeholder="请输入内容" v-if="isActive" v-model="activeLikeToGetByTitleBo.title"
+                        @input="searchInfo" class="input-with-select item">
+                        <el-button slot="append" icon="el-icon-search" @click="searchInfo"></el-button>
+                    </el-input>
+
+                    <router-link to="/ActivityManagement" v-else class="item">活动页面</router-link>
+
+
+
                     <!-- Toggler -->
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                    <button class="navbar-toggler item" type="button" data-toggle="collapse" data-target="#navbarCollapse"
                         aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
+
+
                     <!-- Collapse -->
-                    <div class="collapse navbar-collapse" id="navbarCollapse">
 
-                        <el-input placeholder="请输入内容" v-if="isActive" v-model="activeLikeToGetByTitleBo.title"
-                            @input="searchInfo" class="input-with-select">
-                            <el-button slot="append" icon="el-icon-search" @click="searchInfo"></el-button>
-                        </el-input>
-                        <div class="result" v-if="searchList.length > 0 && activeLikeToGetByTitleBo.title != ''">
-                            <div class="result-item" v-for="(item, index) in searchList" :key="index">
-                                <div @click="emitBus">{{ item.title }}</div>
-                            </div>
-                        </div>
-
-                        <ul class="navbar-nav mt-4 mt-lg-0 ml-auto" v-if="isLogin">
-                            <el-dropdown>
-                                <router-link to="/UserCenter">
-                                    <li class="nav-item ">
-                                        {{ username }}
-                                    </li>
-                                </router-link>
-                                <el-dropdown-menu slot="dropdown">
-                                    <router-link to="/MessageLists">
-                                        <el-dropdown-item>
-                                            <el-badge :value="count" class="item">
-                                                消息
-                                            </el-badge>
-                                        </el-dropdown-item>
-                                    </router-link>
-                                    <div @click="loginOut()">
-                                        <el-dropdown-item>退出登陆</el-dropdown-item>
-                                    </div>
-                                </el-dropdown-menu>
-                            </el-dropdown>
-                        </ul>
-
-                        <ul class="navbar-nav mt-4 mt-lg-0 ml-auto" v-else>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="#">Help </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="/Login">登入 </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="/UserReg">注册 </a>
-                            </li>
-                        </ul>
-
-
-                    </div>
                 </div>
             </nav>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+
+                <ul class="navbar-nav mt-4 mt-lg-0 ml-auto" v-if="isLogin">
+                    <el-dropdown>
+                        <router-link to="/UserCenter">
+                            <li class="nav-item ">
+                                {{ username }}
+                            </li>
+                        </router-link>
+                        <el-dropdown-menu slot="dropdown">
+                            <router-link to="/MessageLists">
+                                <el-dropdown-item>
+                                    <el-badge :value="count">
+                                        消息
+                                    </el-badge>
+                                </el-dropdown-item>
+                            </router-link>
+                            <div @click="loginOut()">
+                                <el-dropdown-item>退出登陆</el-dropdown-item>
+                            </div>
+                        </el-dropdown-menu>
+                    </el-dropdown>
+                </ul>
+
+                <ul class="navbar-nav mt-4 mt-lg-0 ml-auto" v-else>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="#">Help </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="/Login">登入 </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="/UserReg">注册 </a>
+                    </li>
+                </ul>
+
+
+            </div>
+            <div class="result" v-if="searchList.length > 0 && activeLikeToGetByTitleBo.title != ''">
+                <div class="result-item" v-for="(item, index) in searchList" :key="index">
+                    <div @click="emitBus">{{ item.title }}</div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -128,47 +136,48 @@ export default {
             path: "ws://localhost:8008/websocket/",
             ws: {},
 
+
+            socket: null,
+
+            webSocketIp: "127.0.0.1",
+            webSocketPort: 8008,
+
         }
     },
     mounted() {
-        this.init()
+
     },
     created() {
         this.isLoginInfo();
         this.isActiveInfo();
+        this.setupWebSocket();
         this.$bus.$on('messageListEmpty', this.handleMessageListEmpty);
     },
     methods: {
+        
+        setupWebSocket() {
+          // const contestId = 80; // 用于示例的contest_id
+          // alert(this.getHashVariable("contestId"));
+          this.socket = new WebSocket("ws://"+this.webSocketIp+":"+this.webSocketPort+"/websocket/81");
+        console.log(this.socket);
+          this.socket.onopen = () => {
+            this.socketStatus = '已连接';
+            console.log("oks");
+          };
 
-        //init函数可在页面加载的时候就进行初始化或者根据自己的业务需求在需要打开通讯的时候在进行初始化
-        init() {
-            // 实例化socket，这里的实例化直接赋值给this.ws是为了后面可以在其它的函数中也能调用websocket方法，例如：this.ws.close(); 完成通信后关闭WebSocket连接
-            this.ws = new WebSocket(this.path)
+          this.socket.onmessage = (event) => {
+              //console.log(event);
+                JSON.parse(event.data);
+     
+          };
 
-            //监听是否连接成功
-            this.ws.onopen = () => {
-                console.log('ws连接状态：' + this.ws.readyState);
-                //连接成功则发送一个数据
-                this.ws.send('连接成功');
-            }
+          this.socket.onclose = () => {
+              this.socketStatus = '已关闭';
+              console.log("close");
+              this.setupWebSocket();
+          };
+       },
 
-            //接听服务器发回的信息并处理展示
-            this.ws.onmessage = (data) => {
-                console.log('接收到来自服务器的消息：');
-                console.log(data)
-            }
-
-            //监听连接关闭事件
-            this.ws.onclose = () => {
-                //监听整个过程中websocket的状态
-                console.log('ws连接状态：' + this.ws.readyState);
-            }
-
-            //监听并处理error事件
-            this.ws.onerror = function (error) {
-                console.log(error);
-            }
-        },
         //判断是否为登陆
         async isLoginInfo() {
             if (this.$route.path != "/Login") {
@@ -228,8 +237,7 @@ export default {
         handleMessageListEmpty() {
             this.getMessageList().then(() => {
 
-                console.log(this.messageList);
-                if(this.messageList.length > 0){
+                if (this.messageList.length > 0) {
                     this.$bus.$emit('MessageList', this.messageList);
                 }
 
@@ -245,4 +253,21 @@ export default {
 
 </script>
 
+<style scoped>
+.container {
+    width: 100%;
+    flex-wrap: nowrap;
+}
 
+.item {
+    width: 33.333%;
+}
+
+/deep/ .el-input-group {
+    width: 50%;
+}
+
+.ml-auto {
+    margin-right: auto;
+}
+</style>
