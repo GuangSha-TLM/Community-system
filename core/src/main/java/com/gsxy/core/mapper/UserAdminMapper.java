@@ -3,7 +3,6 @@ package com.gsxy.core.mapper;
 import com.gsxy.core.pojo.SignInAdmin;
 import com.gsxy.core.pojo.SignInAdminWebSocket;
 import com.gsxy.core.pojo.UserAdmin;
-import com.gsxy.core.pojo.bo.SignInAdminBo;
 import com.gsxy.core.pojo.bo.SignInAdminWebSocketBo;
 import com.gsxy.core.pojo.bo.UserAdminPagingToGetDataBo;
 import com.gsxy.core.pojo.bo.UserSignInStatusBo;
@@ -12,6 +11,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  *  @author Oh...Yeah!!! 2023-10-28
@@ -164,4 +164,28 @@ public interface UserAdminMapper {
      * @param signInAdminWebSocket
      */
     void insertPutSignIn(SignInAdminWebSocket signInAdminWebSocket);
+
+    /**
+     * @param adminId
+     * @return
+     * @author hln 2023-11-22
+     * 封装所有用户签到状态表中的用户id
+     */
+    Set selectToGetIdByAdminId(Long adminId);
+
+    /**
+     * @author hln 2023-11-22
+     *      封装该社团所有用户id到List集合中
+     * @param adminId
+     * @return
+     */
+    List selectToGetUserIdByAdminId(Long adminId);
+
+    /**
+     * @author hln 2023-11-22
+     *      查找当前的id对应用户的姓名
+     * @param userId
+     * @return
+     */
+    String selectToGetName(Long userId);
 }

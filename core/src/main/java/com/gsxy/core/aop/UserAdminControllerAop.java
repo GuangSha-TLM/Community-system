@@ -64,6 +64,13 @@ public interface UserAdminControllerAop {
      */
     public String userAdminSignInWebSocket(JoinPoint joinPoint);
 
+    /**
+     * @author hln 2023-11-22
+     *      管理员查看实时签到信息
+     * @param joinPoint
+     */
+    void adminCheckInStatusInRealTime(JoinPoint joinPoint);
+
 //    /**
 //     * @author hln 2023-11-01
 //     *      管理员查看所有用户签到鉴权(相应社团)

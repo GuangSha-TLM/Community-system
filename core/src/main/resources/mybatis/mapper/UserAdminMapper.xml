@@ -243,4 +243,34 @@
         limit 1
     </select>
 
+    <!-- 封装所有用户签到状态表中的用户id -->
+    <select id="selectToGetIdByAdminId" resultType="java.util.Set" parameterType="java.lang.Long">
+        select
+            user_id
+        from
+            sign_in_user_status_web
+        where
+            admin_id = #{adminId}
+    </select>
+
+    <!-- 封装该社团所有用户id到List集合中 -->
+    <select id="selectToGetUserIdByAdminId" resultType="java.util.List" parameterType="java.lang.Long">
+        select
+            user_id
+        from
+            community_user
+        where
+            create_by = #{adminId}
+    </select>
+
+    <!-- 查找当前的id对应用户的姓名 -->
+    <select id="selectToGetName" resultType="java.lang.String" parameterType="java.lang.Long">
+        select
+            name
+        from
+            user
+        where
+            id = #{userId}
+    </select>
+
 </mapper>

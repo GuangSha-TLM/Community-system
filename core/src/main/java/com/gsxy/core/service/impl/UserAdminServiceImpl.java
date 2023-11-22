@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 /**
  *  @author Oh...Yeah!!! 2023-10-28
@@ -204,6 +205,38 @@ public class UserAdminServiceImpl implements UserAdminService {
         userAdminMapper.insertPutSignIn(signInAdminWebSocket);
 
         return new ResponseVo("签到已发起",signInAdminWebSocketBo,"0x200");
+    }
+
+    /**
+     * @author hln 2023-11-22
+     *      管理员查看实时签到信息
+     * @param token
+     * @return
+     */
+    @Override
+    public ResponseVo adminCheckInStatusInRealTime(String token) {
+        String adminIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
+        Long adminId = Long.valueOf(adminIdOfStr);
+
+        if(adminId == null || adminId == 0L){
+            return new ResponseVo("token解析失败",null,"0x501");
+        }
+
+        //封装所有用户签到状态表中的用户id
+        Set set = userAdminMapper.selectToGetIdByAdminId(adminId);
+
+        //封装该社团所有用户id到List集合中
+        List list = userAdminMapper.selectToGetUserIdByAdminId(adminId);
+
+        for (int i = 0; i < list.size(); i++) {
+            Long userId = (Long) list.get(i);
+            String name = userAdminMapper.selectToGetName(userId);
+            if(!set.add(list.get(i))){
+                System.out.println(name + "已签到!");
+            }
+        }
+
+        return new ResponseVo("查询成功",null,"0x200");
     }
 
 }

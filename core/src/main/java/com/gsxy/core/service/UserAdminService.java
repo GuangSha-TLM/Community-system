@@ -76,6 +76,14 @@ public interface UserAdminService {
      * @return
      */
     ResponseVo adminSignInWeb(SignInAdminWebSocketBo signInAdminWebSocketBo);
+
+    /**
+     * @author hln 2023-11-22
+     *      管理员查看实时签到信息
+     * @param token
+     * @return
+     */
+    ResponseVo adminCheckInStatusInRealTime(String token);
 }
 
 
