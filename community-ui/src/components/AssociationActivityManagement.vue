@@ -1,7 +1,7 @@
 <!--
  * @Author: tianleiyu
  * @Date: 2023-11-10 13:39:11
- * @LastEditTime: 2023-11-19 12:16:55
+ * @LastEditTime: 2023-11-20 15:00:05
  * @LastEditors: tianleiyu
  * @Description:
  * @FilePath: /community-ui/src/components/AssociationActivityManagement.vue
@@ -24,7 +24,6 @@
                     <div class="item_del" @click="delActive(item.id)"><i class="el-icon-delete"></i></div>
                     <div class="item_icon"><i class="el-icon-arrow-right"></i></div>
                 </div>
-
             </div>
 
 

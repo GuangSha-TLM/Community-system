@@ -1,7 +1,7 @@
 <!--
  * @Author: tianleiyu
  * @Date: 2023-10-29 10:33:58
- * @LastEditTime: 2023-11-12 20:32:04
+ * @LastEditTime: 2023-11-22 11:06:56
  * @LastEditors: tianleiyu
  * @Description:
  * @FilePath: /community-ui/src/components/fream/LoginTop.vue
@@ -128,49 +128,47 @@ export default {
             path: "ws://localhost:8008/websocket/",
             ws: {},
 
-
-            socket: null,
-
-            webSocketIp: "127.0.0.1",
-            webSocketPort: 8008,
-
         }
     },
     mounted() {
-        //this.init()
+        this.init()
     },
     created() {
-        this.setupWebSocket();
         this.isLoginInfo();
         this.isActiveInfo();
         this.$bus.$on('messageListEmpty', this.handleMessageListEmpty);
     },
     methods: {
-        setupWebSocket() {
-          // const contestId = 80; // 用于示例的contest_id
-          // alert(this.getHashVariable("contestId"));
-          this.socket = new WebSocket("ws://"+this.webSocketIp+":"+this.webSocketPort+"/websocket/81");
-        console.log(this.socket);
-          this.socket.onopen = () => {
-            this.socketStatus = '已连接';
-            console.log("oks");
-          };
 
-          this.socket.onmessage = (event) => {
-              //console.log(event);
-                JSON.parse(event.data);
-     
-          };
+        //init函数可在页面加载的时候就进行初始化或者根据自己的业务需求在需要打开通讯的时候在进行初始化
+        init() {
+            // 实例化socket，这里的实例化直接赋值给this.ws是为了后面可以在其它的函数中也能调用websocket方法，例如：this.ws.close(); 完成通信后关闭WebSocket连接
+            this.ws = new WebSocket(this.path)
 
-          this.socket.onclose = () => {
-              this.socketStatus = '已关闭';
-              console.log("close");
-              this.setupWebSocket();
-          };
-       },
+            //监听是否连接成功
+            this.ws.onopen = () => {
+                console.log('ws连接状态：' + this.ws.readyState);
+                //连接成功则发送一个数据
+                this.ws.send('连接成功');
+            }
 
+            //接听服务器发回的信息并处理展示
+            this.ws.onmessage = (data) => {
+                console.log('接收到来自服务器的消息：');
+                console.log(data)
+            }
 
-    
+            //监听连接关闭事件
+            this.ws.onclose = () => {
+                //监听整个过程中websocket的状态
+                console.log('ws连接状态：' + this.ws.readyState);
+            }
+
+            //监听并处理error事件
+            this.ws.onerror = function (error) {
+                console.log(error);
+            }
+        },
         //判断是否为登陆
         async isLoginInfo() {
             if (this.$route.path != "/Login") {
@@ -229,12 +227,12 @@ export default {
         },
         handleMessageListEmpty() {
             this.getMessageList().then(() => {
-                
+
                 console.log(this.messageList);
                 if(this.messageList.length > 0){
                     this.$bus.$emit('MessageList', this.messageList);
                 }
-                
+
             })
         }
     },

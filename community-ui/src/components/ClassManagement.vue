@@ -13,8 +13,6 @@
                         </el-select>
                     </div>
 
-
-
                     <div class="form-group">
                         <label for="exampleInputprofessional">选择你的专业</label>
                         <el-select v-model="selectInfo.professional" placeholder="请选择" style="width: 100%;">
@@ -51,10 +49,10 @@
                     <thead>
                         <tr>
                             <th scope="col">序号</th>
+                            <th scope="col">姓名</th>
                             <th scope="col">学院</th>
                             <th scope="col">专业</th>
                             <th scope="col">年级</th>
-                            <th scope="col">班级名</th>
                             <th scope="col">操作</th>
                         </tr>
 
@@ -62,10 +60,10 @@
                     <tbody>
                         <tr v-for="(obj, index) in list" :key="obj.index">
                             <th scope="row">{{ index + 1 }}</th>
+                            <td>{{ obj.name }}</td>
                             <td>{{ obj.college }}</td>
                             <td>{{ obj.professional }}</td>
                             <td>{{ obj.grade }}</td>
-                            <td>{{ obj.name }}班</td>
                             <td>
                                 <!-- 拉取功能 -->
                                 <el-link type="primary" @click="Pulling(obj.id)">拉取</el-link>

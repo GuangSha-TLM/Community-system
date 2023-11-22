@@ -10,6 +10,7 @@
                                 <h4 class="card-title">
                                     <button class="btn btn-primary" @click="SignInWindow = true">发起签到</button>
                                     <button class="btn btn-primary" @click="dialogVisible = true">拉取人员</button>
+
                                 </h4>
                             </div>
                         </div>
@@ -46,7 +47,7 @@
                     </el-dialog>
 
                     <el-dialog title="发起签到" :visible.sync="SignInWindow" width="50%">
-                        <el-input v-model="signInAdminWebSocketBo.content" placeholder="请输入签到内容"></el-input>
+                        <el-input v-model="sendNotificationBo.content" placeholder="请输入签到内容"></el-input>
                         <span slot="footer" class="dialog-footer">
                             <el-button @click="SignInWindow = false">取 消</el-button>
                             <el-button type="primary" @click="showModal">确 定</el-button>
@@ -81,7 +82,7 @@ export default {
             },
             list: [],
             //签到信息
-            signInAdminWebSocketBo:{
+            sendNotificationBo:{
                 token:'',
                 content:''
             }
@@ -97,8 +98,8 @@ export default {
     methods: {
 
         async showModal() {
-            this.signInAdminWebSocketBo.token = this.token
-            let obj = await synRequestPost("/userAdmin/adminsigninweb",this.signInAdminWebSocketBo);
+            this.sendNotificationBo.token = this.token
+            let obj = await synRequestPost("/community/sendNotification",this.sendNotificationBo);
             console.log(obj);
             this.SignInWindow= false
         },
@@ -109,7 +110,7 @@ export default {
             if (res.code == "0x200") {
                 this.list = res.data;
             }
-            console.log(this.list);
+            // console.log(this.list);
         },
         async deleteById(id) {
             if (confirm('确定要移除该用户吗？')) {
@@ -206,4 +207,5 @@ a {
     background-color: #fff;
     color: #42b983;
 }
+
 </style>

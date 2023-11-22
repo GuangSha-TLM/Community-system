@@ -1,7 +1,7 @@
 <!--
  * @Author: tianleiyu
  * @Date: 2023-10-29 17:49:10
- * @LastEditTime: 2023-11-10 13:41:25
+ * @LastEditTime: 2023-11-20 21:30:26
  * @LastEditors: tianleiyu
  * @Description:
  * @FilePath: /community-ui/src/components/UserCenter.vue
@@ -13,10 +13,10 @@
             <el-collapse-item title="用户信息" name="1">
                 <Userinfo/>
             </el-collapse-item>
-            <router-link to="/AssociationManager">
+            <router-link to="/AssociationManager" v-if="user.role > 1">
                 <el-collapse-item title="社团管理" name="2"/>
             </router-link>
-            <router-link to="/AssociationActivityManagement">
+            <router-link to="/AssociationActivityManagement" v-if="user.role > 1">
             <el-collapse-item title="活动管理" name="3"/>
         </router-link>
         </el-collapse>
@@ -31,6 +31,7 @@ export default {
     data() {
         return {
             token: getCookie("token"),
+
             user: JSON.parse(localStorage.getItem("user")),
             activeName:0,
         }
