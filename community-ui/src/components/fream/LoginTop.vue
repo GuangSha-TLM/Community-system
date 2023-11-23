@@ -1,7 +1,7 @@
 <!--
  * @Author: tianleiyu
  * @Date: 2023-10-29 10:33:58
- * @LastEditTime: 2023-11-22 14:53:39
+ * @LastEditTime: 2023-11-22 19:51:29
  * @LastEditors: tianleiyu
  * @Description:
  * @FilePath: /community-ui/src/components/fream/LoginTop.vue
@@ -58,46 +58,47 @@
                     <!-- Collapse -->
 
                 </div>
-            </nav>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="collapse navbar-collapse" id="navbarCollapse">
 
-                <ul class="navbar-nav mt-4 mt-lg-0 ml-auto" v-if="isLogin">
-                    <el-dropdown>
-                        <router-link to="/UserCenter">
-                            <li class="nav-item ">
-                                {{ username }}
-                            </li>
-                        </router-link>
-                        <el-dropdown-menu slot="dropdown">
-                            <router-link to="/MessageLists">
-                                <el-dropdown-item>
-                                    <el-badge :value="count">
-                                        消息
-                                    </el-badge>
-                                </el-dropdown-item>
+                    <ul class="navbar-nav mt-4 mt-lg-0 ml-auto" v-if="isLogin">
+                        <el-dropdown>
+                            <router-link to="/UserCenter">
+                                <li class="nav-item ">
+                                    {{ username }}
+                                </li>
                             </router-link>
-                            <div @click="loginOut()">
-                                <el-dropdown-item>退出登陆</el-dropdown-item>
-                            </div>
-                        </el-dropdown-menu>
-                    </el-dropdown>
-                </ul>
+                            <el-dropdown-menu slot="dropdown">
+                                <router-link to="/MessageLists">
+                                    <el-dropdown-item>
+                                        <el-badge :value="count">
+                                            消息
+                                        </el-badge>
+                                    </el-dropdown-item>
+                                </router-link>
+                                <div @click="loginOut()">
+                                    <el-dropdown-item>退出登陆</el-dropdown-item>
+                                </div>
+                            </el-dropdown-menu>
+                        </el-dropdown>
+                    </ul>
 
-                <ul class="navbar-nav mt-4 mt-lg-0 ml-auto" v-else>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="#">Help </a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="/Login">登入 </a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="/UserReg">注册 </a>
-                    </li>
-                </ul>
+                    <ul class="navbar-nav mt-4 mt-lg-0 ml-auto" v-else>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="#">Help </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/Login">登入 </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/UserReg">注册 </a>
+                        </li>
+                    </ul>
 
 
-            </div>
-            <div class="result" v-if="searchList.length > 0 && activeLikeToGetByTitleBo.title != ''">
+                </div>
+            </nav>
+
+            <div class="result" v-if="searchList.length > 0">
                 <div class="result-item" v-for="(item, index) in searchList" :key="index">
                     <div @click="emitBus">{{ item.title }}</div>
                 </div>
@@ -154,29 +155,29 @@ export default {
         this.$bus.$on('messageListEmpty', this.handleMessageListEmpty);
     },
     methods: {
-        
+
         setupWebSocket() {
-          // const contestId = 80; // 用于示例的contest_id
-          // alert(this.getHashVariable("contestId"));
-          this.socket = new WebSocket("ws://"+this.webSocketIp+":"+this.webSocketPort+"/websocket/81");
-        console.log(this.socket);
-          this.socket.onopen = () => {
-            this.socketStatus = '已连接';
-            console.log("oks");
-          };
+            // const contestId = 80; // 用于示例的contest_id
+            // alert(this.getHashVariable("contestId"));
+            this.socket = new WebSocket("ws://" + this.webSocketIp + ":" + this.webSocketPort + `/websocket/${this.token}`);
+            console.log(this.socket);
+            this.socket.onopen = () => {
+                this.socketStatus = '已连接';
+                console.log("oks");
+            };
 
-          this.socket.onmessage = (event) => {
-              //console.log(event);
+            this.socket.onmessage = (event) => {
+                //console.log(event);
                 JSON.parse(event.data);
-     
-          };
 
-          this.socket.onclose = () => {
-              this.socketStatus = '已关闭';
-              console.log("close");
-              this.setupWebSocket();
-          };
-       },
+            };
+
+            this.socket.onclose = () => {
+                this.socketStatus = '已关闭';
+                console.log("close");
+                this.setupWebSocket();
+            };
+        },
 
         //判断是否为登陆
         async isLoginInfo() {
