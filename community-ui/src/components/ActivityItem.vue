@@ -22,7 +22,8 @@
                     创建时间: {{ list.activeToGetBo.createTime }}
                 </div>
                 <div class="item">
-                    <router-link :to="{name:'ApplyAddAssociation',params:{id:list.communityInActiveBo.id}}">社团:{{ list.communityInActiveBo.name }}</router-link>
+                    <router-link :to="{name:'ApplyAddAssociation',
+                    params:{id:list.communityInActiveBo.id}}">社团:{{ list.communityInActiveBo.name }}</router-link>
 
                 </div>
                 <div class="item">
@@ -30,7 +31,7 @@
                 </div>
             </div>
             <div class="context" v-html="list.activeToGetBo.context">
-                
+
             </div>
 
         </div>
@@ -122,7 +123,7 @@ a {
 .context{
     margin-top: 30px;
 }
-/deep/ img{
+img{
     width: 100%;
     height: auto;
 }

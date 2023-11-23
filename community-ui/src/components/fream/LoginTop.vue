@@ -38,7 +38,10 @@
                     <a class="navbar-brand item" href="/h">
                         <img alt="Image placeholder" style="height:3.4rem" src="#" id="navbar-logo">
                     </a>
-
+                    <!-- 输入框
+                    v-model="activeLikeToGetByTitleBo.title"将输入的数据进行保存
+                    @input="searchInfo"数据进行模糊查询
+                    -->
                     <el-input placeholder="请输入内容" v-if="isActive" v-model="activeLikeToGetByTitleBo.title"
                         @input="searchInfo" class="input-with-select item">
                         <el-button slot="append" icon="el-icon-search" @click="searchInfo"></el-button>
@@ -148,6 +151,7 @@ export default {
     mounted() {
 
     },
+    //从MessageLists接收一个空的this.handleMessageListEmpty，
     created() {
         this.isLoginInfo();
         this.isActiveInfo();
@@ -224,17 +228,19 @@ export default {
 
             }
         },
-        //发送给search组件
+        //发送给searchList组件给ActivityManagement
         emitBus() {
             this.$bus.$emit('searchList', this.searchList);
             this.searchList = [];
         },
+        //退出登陆的方法实现
         loginOut() {
             this.username = "";
             localStorage.removeItem('user')
             delCookie('token')
             this.$router.push('/Login');
         },
+        //接收完空MessageLists，获取数据后在将其发送回MessageLists
         handleMessageListEmpty() {
             this.getMessageList().then(() => {
 

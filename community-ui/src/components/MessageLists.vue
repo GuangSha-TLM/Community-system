@@ -1,7 +1,7 @@
 <!--
  * @Author: tianleiyu
  * @Date: 2023-11-05 20:12:55
- * @LastEditTime: 2023-11-21 19:13:53
+ * @LastEditTime: 2023-11-12 08:50:21
  * @LastEditors: tianleiyu
  * @Description:
  * @FilePath: /community-ui/src/components/MessageLists.vue
@@ -13,7 +13,7 @@
             <section>
                 <div class="container">
                     <table class="table">
-                        <!-- <thead>
+                        <thead>
                             <tr>
                                 <th scope="col">序号</th>
                                 <th scope="col">简要</th>
@@ -21,7 +21,7 @@
                                 <th scope="col">申请原因</th>
                                 <th scope="col">操作</th>
                             </tr>
-                        </thead> -->
+                        </thead>
                         <tbody>
                             <tr v-for="(obj, index) in messageList" :key="obj.id">
 
@@ -92,6 +92,7 @@ export default {
 
         }
     },
+    //接收LoginTop的'MessageList'
     created() {
         this.$bus.$on('MessageList', this.UpdatedMessageList);
     },
@@ -106,7 +107,7 @@ export default {
             this.communityReplyNoticeBo.context=''
             this.dialogVisible= false
         },
-        //跳转指定页面
+        //发送空的MessageLists给LoginTop，解决刷新数据为空问题
         async getMerchantInformation() {
             this.$bus.$emit('messageListEmpty');
         },
@@ -158,6 +159,7 @@ export default {
             this.communityReplyNoticeBo.context = ''
             this.getMerchantInformation()
         },
+        // 将传入的MessageList进行更新
         UpdatedMessageList(MessageList) {
             // 处理更新后的 messageList
             this.messageList = MessageList;
