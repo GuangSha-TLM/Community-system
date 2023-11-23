@@ -46,6 +46,7 @@ export default {
         }
     },
     mounted() {
+        //接收LoginTop的数据
         this.$bus.$on("searchList", this.handleParamsChange);
 
         this.getMerchantInformation();
