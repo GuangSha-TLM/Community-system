@@ -1,9 +1,5 @@
 <template>
     <div>
-
-        <!-- <div>
-            <Top></Top>
-        </div> -->
         <div class="content">
             <router-link class="item" v-for="(item,index) in list" :key="item.id"
                 :to="{ name: 'ActivityItem', params: { id: item.id } }">
@@ -13,9 +9,6 @@
                 <div class="item_icon"><i class="el-icon-arrow-right"></i></div>
             </router-link>
         </div>
-        <!-- <footer class="position-relative" id="footer-main">
-            <Foot></Foot>
-        </footer> -->
     </div>
 </template>
 

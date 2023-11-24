@@ -24,27 +24,27 @@ public class TestWebSocketController {
     private UserAdminController userAdminController = SpringContextUtil.getBean(UserAdminController.class);
 
     @OnOpen
-    public void onOpen(Session session, @PathParam("token") String token)
-    {
+    public void onOpen(Session session, @PathParam("token") String token) throws IOException {
         System.out.println("签到已发起"+token);
         this.token = token;
-        this.serviceFunction(token,session);
-
+        String s = this.serviceFunction(token, session);
+        session.getBasicRemote().sendText(s);
     }
+
     // 其他方法...
     @OnMessage
-    public void onMessage(String message, Session session) throws IOException {
+    public void onMessage(String token, Session session) throws IOException {
 
         //实现用户签到信息的实时查看
-        System.out.println("时间:" + new Date());
-        userAdminController.adminCheckInStatusInRealTime(token);
+        String s = this.serviceFunction(token, session);
+        session.getBasicRemote().sendText(s);
 
     }
 
 
-    public void serviceFunction(String token, Session session){
+    public String serviceFunction(String token, Session session) throws IOException {
         String str = userAdminController.adminCheckInStatusInRealTime(token);
-        session.getAsyncRemote().sendText(str);
+         return str;
     }
 
 

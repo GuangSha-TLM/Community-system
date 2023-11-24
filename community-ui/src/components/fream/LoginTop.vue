@@ -1,7 +1,7 @@
 <!--
  * @Author: tianleiyu
  * @Date: 2023-10-29 10:33:58
- * @LastEditTime: 2023-11-22 19:51:29
+ * @LastEditTime: 2023-11-24 20:05:59
  * @LastEditors: tianleiyu
  * @Description:
  * @FilePath: /community-ui/src/components/fream/LoginTop.vue
@@ -137,7 +137,6 @@ export default {
             count: 0,
 
             //websockt
-            path: "ws://localhost:8008/websocket/",
             ws: {},
 
 
@@ -149,7 +148,12 @@ export default {
         }
     },
     mounted() {
-
+        setInterval(() => {
+                    const token = this.token; // 替换为您的消息内容
+                    if (this.socket && this.socket.readyState === WebSocket.OPEN) {
+                        this.socket.send(token);
+                    }
+                }, 1500);
     },
     //从MessageLists接收一个空的this.handleMessageListEmpty，
     created() {
@@ -165,15 +169,18 @@ export default {
             // alert(this.getHashVariable("contestId"));
             this.socket = new WebSocket("ws://" + this.webSocketIp + ":" + this.webSocketPort + `/websocket/${this.token}`);
             console.log(this.socket);
+            
             this.socket.onopen = () => {
                 this.socketStatus = '已连接';
                 console.log("oks");
+                console.log(event);
             };
 
             this.socket.onmessage = (event) => {
                 //console.log(event);
-                JSON.parse(event.data);
-
+                 
+                let obj = JSON.parse(event.data);
+                console.log(obj);
             };
 
             this.socket.onclose = () => {
