@@ -254,7 +254,7 @@
     </select>
 
     <!-- 封装该社团所有用户id到List集合中 -->
-    <select id="selectToGetUserIdByAdminId" resultType="java.util.List" parameterType="long">
+    <select id="selectToGetUserIdByAdminId" resultType="java.lang.Long" parameterType="long">
         select
             user_id
         from

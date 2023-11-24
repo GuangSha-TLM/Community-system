@@ -179,7 +179,7 @@ public interface UserAdminMapper {
      * @param adminId
      * @return
      */
-    List selectToGetUserIdByAdminId(Long adminId);
+    List<Long> selectToGetUserIdByAdminId(Long adminId);
 
     /**
      * @author hln 2023-11-22

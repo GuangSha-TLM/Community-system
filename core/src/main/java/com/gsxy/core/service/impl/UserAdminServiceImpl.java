@@ -226,12 +226,12 @@ public class UserAdminServiceImpl implements UserAdminService {
         Set<Long> set = userAdminMapper.selectToGetIdByAdminId(adminId);
 
         //封装该社团所有用户id到List集合中
-        List list = userAdminMapper.selectToGetUserIdByAdminId(adminId);
+        List<Long> list = userAdminMapper.selectToGetUserIdByAdminId(adminId);
 
         for (int i = 0; i < list.size(); i++) {
-            Long userId = (Long) list.get(i);
+            Long userId = list.get(i);
             String name = userAdminMapper.selectToGetName(userId);
-            if(!set.add((Long) list.get(i))){
+            if(!set.add(list.get(i))){
                 System.out.println(name + "已签到!");
             }
         }
