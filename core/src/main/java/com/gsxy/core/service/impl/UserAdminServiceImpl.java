@@ -14,6 +14,7 @@ import com.gsxy.core.util.ThreadLocalUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -228,15 +229,19 @@ public class UserAdminServiceImpl implements UserAdminService {
         //封装该社团所有用户id到List集合中
         List<Long> list = userAdminMapper.selectToGetUserIdByAdminId(adminId);
 
+        ArrayList<String> listSignIn = new ArrayList<>();
+
         for (int i = 0; i < list.size(); i++) {
             Long userId = list.get(i);
             String name = userAdminMapper.selectToGetName(userId);
             if(!set.add(list.get(i))){
-                System.out.println(name + "已签到!");
+                listSignIn.add(name + "已签到");
+            }else {
+                listSignIn.add(name + "未签到");
             }
         }
 
-        return new ResponseVo("查询成功",null,"0x200");
+        return new ResponseVo("查询成功",listSignIn,"0x200");
     }
 
 }
