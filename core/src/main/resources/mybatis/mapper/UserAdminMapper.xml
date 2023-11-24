@@ -244,7 +244,7 @@
     </select>
 
     <!-- 封装所有用户签到状态表中的用户id -->
-    <select id="selectToGetIdByAdminId" resultType="java.util.Set" parameterType="java.lang.Long">
+    <select id="selectToGetIdByAdminId" resultType="long" parameterType="long">
         select
             user_id
         from
@@ -254,7 +254,7 @@
     </select>
 
     <!-- 封装该社团所有用户id到List集合中 -->
-    <select id="selectToGetUserIdByAdminId" resultType="java.util.List" parameterType="java.lang.Long">
+    <select id="selectToGetUserIdByAdminId" resultType="java.util.List" parameterType="long">
         select
             user_id
         from

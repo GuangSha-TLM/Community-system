@@ -171,7 +171,7 @@ public interface UserAdminMapper {
      * @author hln 2023-11-22
      * 封装所有用户签到状态表中的用户id
      */
-    Set selectToGetIdByAdminId(Long adminId);
+    Set<Long> selectToGetIdByAdminId(Long adminId);
 
     /**
      * @author hln 2023-11-22

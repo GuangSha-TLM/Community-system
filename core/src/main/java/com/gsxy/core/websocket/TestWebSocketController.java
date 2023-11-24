@@ -14,7 +14,7 @@ import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.util.Date;
 
-@ServerEndpoint("/websocket/{contest_id}")
+@ServerEndpoint("/websocket/{token}")
 @CrossOrigin
 @Component
 public class TestWebSocketController {
@@ -26,10 +26,11 @@ public class TestWebSocketController {
     @OnOpen
     public void onOpen(Session session, @PathParam("token") String token)
     {
-        System.out.println("签到已发起");
+        System.out.println("签到已发起"+token);
         this.token = token;
-    }
+        this.serviceFunction(token,session);
 
+    }
     // 其他方法...
     @OnMessage
     public void onMessage(String message, Session session) throws IOException {
@@ -38,6 +39,12 @@ public class TestWebSocketController {
         System.out.println("时间:" + new Date());
         userAdminController.adminCheckInStatusInRealTime(token);
 
+    }
+
+
+    public void serviceFunction(String token, Session session){
+        String str = userAdminController.adminCheckInStatusInRealTime(token);
+        session.getAsyncRemote().sendText(str);
     }
 
 

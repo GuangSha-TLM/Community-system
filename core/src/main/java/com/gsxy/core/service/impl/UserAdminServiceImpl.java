@@ -223,7 +223,7 @@ public class UserAdminServiceImpl implements UserAdminService {
         }
 
         //封装所有用户签到状态表中的用户id
-        Set set = userAdminMapper.selectToGetIdByAdminId(adminId);
+        Set<Long> set = userAdminMapper.selectToGetIdByAdminId(adminId);
 
         //封装该社团所有用户id到List集合中
         List list = userAdminMapper.selectToGetUserIdByAdminId(adminId);
@@ -231,7 +231,7 @@ public class UserAdminServiceImpl implements UserAdminService {
         for (int i = 0; i < list.size(); i++) {
             Long userId = (Long) list.get(i);
             String name = userAdminMapper.selectToGetName(userId);
-            if(!set.add(list.get(i))){
+            if(!set.add((Long) list.get(i))){
                 System.out.println(name + "已签到!");
             }
         }
