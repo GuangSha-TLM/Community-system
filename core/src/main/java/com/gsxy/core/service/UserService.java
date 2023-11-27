@@ -1,11 +1,10 @@
 package com.gsxy.core.service;
 
+import com.baomidou.mybatisplus.extension.api.R;
 import com.gsxy.core.pojo.User;
-import com.gsxy.core.pojo.bo.UserDeleteByIdBo;
-import com.gsxy.core.pojo.bo.UserLoginBo;
-import com.gsxy.core.pojo.bo.UserSelectByUserIdBo;
-import com.gsxy.core.pojo.bo.UserUpdateByUserIdBo;
+import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.ResponseVo;
+import com.gsxy.core.pojo.vo.UserSelectToGetVo;
 
 /**
  * 用户板块
@@ -58,4 +57,36 @@ public interface UserService {
      * @return
      */
     ResponseVo userFindAll();
+
+    /**
+     * @author hln 2023-10-27
+     *      分页查询
+     * @param pagingToGetUserDataBo
+     * @return
+     */
+    ResponseVo pagingToGetUserData(PagingToGetUserDataBo pagingToGetUserDataBo);
+
+    /**
+     * @quthor hln 2023-10-30
+     *      用户签到
+     * @param userSignInBo
+     * @return
+     */
+    ResponseVo userSignIn(UserSignInBo userSignInBo);
+
+    /**
+     * @author hln 2023-11-03
+     *      根据前端指定字段返回User信息
+     * @param userSelectToGetBo
+     * @return
+     */
+    ResponseVo selectToGetUser(UserSelectToGetBo userSelectToGetBo);
+
+    /**
+     * @author hln 2023-11-07
+     *      用户签到（响应）功能
+     * @param signInWebSocketBo
+     * @return
+     */
+    ResponseVo userSignInWebSocket(SignInWebSocketBo signInWebSocketBo);
 }

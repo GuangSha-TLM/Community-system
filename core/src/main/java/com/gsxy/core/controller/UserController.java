@@ -1,17 +1,19 @@
 package com.gsxy.core.controller;
 
 import com.alibaba.fastjson2.JSONArray;
+import com.gsxy.core.pojo.SignInWebSocket;
 import com.gsxy.core.pojo.User;
-import com.gsxy.core.pojo.bo.UserDeleteByIdBo;
-import com.gsxy.core.pojo.bo.UserLoginBo;
-import com.gsxy.core.pojo.bo.UserSelectByUserIdBo;
-import com.gsxy.core.pojo.bo.UserUpdateByUserIdBo;
+import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.ResponseVo;
+import com.gsxy.core.pojo.vo.UserSelectToGetVo;
 import com.gsxy.core.service.UserService;
+import com.gsxy.core.util.ThreadLocalUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 /**
  * 2023-10-23
@@ -48,7 +50,7 @@ public class UserController {
      * @param userLoginBo
      * @return
      */
-    @PostMapping("/Login")
+    @PostMapping("/login")
     @ApiOperation("用户登录")
     public String userLogin(@RequestBody UserLoginBo userLoginBo){
         if(userLoginBo == null){
@@ -64,9 +66,15 @@ public class UserController {
      * @param userSelectByUserIdBo
      * @return
      */
-    @PostMapping("/selectByUserId")
+    @PostMapping("/select")
     @ApiOperation("通过id查找用户")
     public String selectByUserId(@RequestBody UserSelectByUserIdBo userSelectByUserIdBo){
+        Map<String, String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+        if ( map.get("error") != null) {
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
+
         return JSONArray.toJSONString(userService.selectByUserId(userSelectByUserIdBo));
     }
 
@@ -76,9 +84,15 @@ public class UserController {
      * @param userDeleteByIdBo
      * @return
      */
-    @PostMapping("/deleteByUserId")
+    @PostMapping("/delete")
     @ApiOperation("通过id删除用户")
     public String deleteByUserId(@RequestBody UserDeleteByIdBo userDeleteByIdBo){
+        Map<String, String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+        if ( map.get("error") != null) {
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
+
         return JSONArray.toJSONString(userService.deleteByUserId(userDeleteByIdBo));
     }
 
@@ -91,7 +105,36 @@ public class UserController {
     @PostMapping("/update")
     @ApiOperation("通过id修改用户")
     public String updateByUserId(@RequestBody UserUpdateByUserIdBo userUpdateByUserIdBo){
+        Map<String, String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+        if ( map.get("error") != null) {
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
+
         return JSONArray.toJSONString(userService.updateByUserId(userUpdateByUserIdBo));
+    }
+
+    /**
+     * @author hln 2023-10-27
+     *      分页查询
+     * @param pagingToGetUserDataBo
+     * @return
+     */
+    @PostMapping("/pagingQuery")
+    @ApiOperation("分页查询")
+    public String pagingToGetUserData(@RequestBody PagingToGetUserDataBo pagingToGetUserDataBo){
+
+        Map<String,String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+        if(map.get("error") != null){
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
+
+        if (pagingToGetUserDataBo == null){
+            return JSONArray.toJSONString(new ResponseVo<>("参数为null",null,"0x455"));
+        }
+
+        return JSONArray.toJSONString(userService.pagingToGetUserData(pagingToGetUserDataBo));
     }
 
     /**
@@ -103,6 +146,61 @@ public class UserController {
     @ApiOperation("查询所有用户信息")
     public String userFindAll(){
         return JSONArray.toJSONString(userService.userFindAll());
+    }
+
+    /**
+     * @quthor hln 2023-10-30
+     *      用户签到
+     * @param userSignInBo
+     * @return
+     */
+    @PostMapping("/userSignIn")
+    @ApiOperation("用户签到")
+    public String userSignIn(@RequestBody UserSignInBo userSignInBo){
+
+        Map<String,String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+        if(map.get("error") != null){
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
+
+        return JSONArray.toJSONString(userService.userSignIn(userSignInBo));
+    }
+
+    /**
+     * @quthor hln 2023-10-30
+     *      用户签到-WebSocket
+     * @param signInWebSocketBo
+     * @return
+     */
+    @PostMapping("/usersignweb")
+    @ApiOperation("用户签到")
+    public String userSignInWebSocket(@RequestBody SignInWebSocketBo signInWebSocketBo){
+        Map<String,String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+        if(map.get("error") != null){
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
+
+        return JSONArray.toJSONString(userService.userSignInWebSocket(signInWebSocketBo));
+    }
+
+    /**
+     * @author hln 2023-11-03
+     *      根据前端指定字段返回User信息
+     * @param userSelectToGetBo
+     * @return
+     */
+    @PostMapping("/selectToGetUser")
+    @ApiOperation("根据前端指定字段返回User信息")
+    public String selectToGetUser(@RequestBody UserSelectToGetBo userSelectToGetBo){
+        Map<String,String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+        if(map.get("error") != null){
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
+
+        return JSONArray.toJSONString(userService.selectToGetUser(userSelectToGetBo));
     }
 
 }

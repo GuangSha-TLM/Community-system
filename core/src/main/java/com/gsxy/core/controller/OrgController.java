@@ -1,15 +1,13 @@
 package com.gsxy.core.controller;
 
 import com.alibaba.fastjson2.JSONArray;
-import com.gsxy.core.pojo.bo.OrgAddBo;
-import com.gsxy.core.pojo.bo.OrgDeleteByIdBo;
-import com.gsxy.core.pojo.bo.OrgSelectByIdBo;
-import com.gsxy.core.pojo.bo.OrgUpdateByIdBo;
+import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.ResponseVo;
 import com.gsxy.core.service.OrgService;
 import com.gsxy.core.util.ThreadLocalUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -55,6 +53,11 @@ public class OrgController {
     @PostMapping("/delete")
     @ApiOperation("通过id删除Org数据")
     public String orgDeleteById(@RequestBody OrgDeleteByIdBo orgDeleteByIdBo){
+        Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+        if (map.get("error") != null) {
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
         return JSONArray.toJSONString(orgService.orgDeleteById(orgDeleteByIdBo));
     }
 
@@ -65,7 +68,7 @@ public class OrgController {
      * @return
      */
     @PostMapping("/select")
-    @ApiOperation("根据userId查询Org数据")
+    @ApiOperation("根据Id查询Org数据")
     public String orgSelectById(@RequestBody OrgSelectByIdBo orgSelectByIdBo){
         Map<String, String> map = ThreadLocalUtil.mapThreadLocal.get();
         ThreadLocalUtil.mapThreadLocal.remove();
@@ -77,6 +80,17 @@ public class OrgController {
     }
 
     /**
+     * @author zhuxinyu 2023-10-25
+     *      查询所有信息
+     * @return
+     */
+    @PostMapping("/selectall")
+    @ApiOperation("查询所有数据")
+    public String orgselectall(){
+        return JSONArray.toJSONString(orgService.orgSelectAll());
+    }
+
+    /**
      * @author zhuxinyu 2023-10-23
      *      通过id修改Org
      * @param orgUpdateByIdBo
@@ -85,6 +99,39 @@ public class OrgController {
     @PostMapping("/update")
     @ApiOperation("通过id修改Org数据")
     public String orgUpdateById(@RequestBody OrgUpdateByIdBo orgUpdateByIdBo){
+        Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+        if (map.get("error") != null) {
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
         return JSONArray.toJSONString(orgService.orgUpdateById(orgUpdateByIdBo));
+    }
+
+    /**
+     * @author zhuxinyu 2023-10-25
+     *      通过Org查找user数据
+     * @return
+     */
+    @PostMapping("/orgselectuser")
+    @ApiOperation("通过Org查找user数据")
+    public String orgSelectByUser(){
+        return JSONArray.toJSONString(orgService.orgSelectByUser());
+    }
+
+    /**
+     * @author zhuxinyu 2023-10-30
+     *      分页查询获取数据
+     * @param orgPagingToGetDataBo
+     * @return
+     */
+    @PostMapping("/pagingToGetData")
+    @ApiOperation("分页获取数据")
+    public String orgPagingToGetData(@RequestBody OrgPagingToGetDataBo orgPagingToGetDataBo){
+        Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+        if (map.get("error") != null) {
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
+        return JSONArray.toJSONString(orgService.orgPagingToGetData(orgPagingToGetDataBo));
     }
 }

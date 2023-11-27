@@ -2,10 +2,8 @@ package com.gsxy.core.pojo.bo;
 
 import java.io.Serializable;
 
-
-
 /**
- *  2023-10-12
+ *  @author Oh...Yeah!!! 2023-10-28
  *  通过id查询img
  */
 public class ImgSelectByIdBo implements Serializable{
@@ -14,6 +12,7 @@ public class ImgSelectByIdBo implements Serializable{
     private String token;
 
     public ImgSelectByIdBo() {
+
     }
 
     public ImgSelectByIdBo(Long id, String token) {

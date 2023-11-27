@@ -1,15 +1,33 @@
 package com.gsxy.core.mapper;
 
+import com.gsxy.core.pojo.SignInAdmin;
+import com.gsxy.core.pojo.SignInAdminWebSocket;
 import com.gsxy.core.pojo.UserAdmin;
+import com.gsxy.core.pojo.bo.SignInAdminWebSocketBo;
+import com.gsxy.core.pojo.bo.UserAdminPagingToGetDataBo;
+import com.gsxy.core.pojo.bo.UserSignInStatusBo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
+import java.util.Set;
 
 /**
- *  2023-10-24
+ *  @author Oh...Yeah!!! 2023-10-28
  *  管理员持久层
  */
 @Mapper
 public interface UserAdminMapper {
 
+    /**
+     * 2023-10-28
+     *      在管理员库中查找目标用户.
+     * @param userId
+     * @return UserAdmin.class
+     */
+    @Select("select * from user_admin where user_id = #{userId} limit 1")
+    public UserAdmin queryByUserId(@Param("userId")Long userId);
 
     /**
      * @author Oh… Yeah!!!, 2023-10-24
@@ -46,6 +64,128 @@ public interface UserAdminMapper {
      */
     public Long updateByIdUserAdmin(UserAdmin userAdmin);
 
+    /**
+     * @author Oh...Yeah!!! 2023-10-28
+     *    分页获取数据
+     * @param userAdminPagingToGetDataBo
+     * @return String.class
+     */
+    public List<UserAdmin> userAdminPagingToGetData(UserAdminPagingToGetDataBo userAdminPagingToGetDataBo);
 
+    /**
+     * @author hln 2023-10-31
+     *      插入发起签到信息到sign_in_admin表中
+     * @param signInAdmin
+     */
+    void insertSignInAdmin(SignInAdmin signInAdmin);
 
+    /**
+     * @author hln 2023-10-31
+     *      根据admin_id查询sign_in_admin表中相应数据
+     * @param signInAdmin
+     * @return
+     */
+    Long selectToGetByAdminId(SignInAdmin signInAdmin);
+
+    /**
+     * @author hln 2023-11-01
+     *      管理员查看所有签到状态
+     * @return
+     */
+    List<UserSignInStatusBo> findAllSignInStatus();
+
+    /**
+     * @author hln 2023-11-01
+     *      查找社团id
+     * @param signInAdmin
+     * @return
+     */
+    SignInAdmin selectToGetCommunityId(SignInAdmin signInAdmin);
+
+    //--------------------------
+    /**
+     * @author hln 2023-11-01
+     *      获取所需返回的user中的字段
+     * @param userSignInStatusBo
+     * @return
+     */
+    UserSignInStatusBo selectToGetUserBo(UserSignInStatusBo userSignInStatusBo);
+
+    //---------------------------------
+    /**
+     * @author hln 2023-11-01
+     *      先将sign_in_admin中查找出的字段放到sign_in_user_status表中
+     * @param userSignInStatusBo
+     * @return
+     */
+    void insertSignInUserStatus(UserSignInStatusBo userSignInStatusBo);
+
+    //-------------------------------
+    /**
+     * @author hln 2023-11-01
+     *      删除实体类中的不全信息
+     * @param userSignInStatusBo1
+     */
+    void deleteBYIdToStatus(UserSignInStatusBo userSignInStatusBo1);
+
+    //--------------------------------
+    /**
+     * @author hln 2023-11-01
+     *      插入所有的实体类信息
+     * @param userSignInStatusBo1
+     */
+    void insertSignInUserStatusAll(UserSignInStatusBo userSignInStatusBo1);
+
+    /**
+     * @author hln 2023-11-01
+     *      删除先前插入不完整的信息
+     * @param signInAdmin
+     */
+    void deleteByIdSignIn(SignInAdmin signInAdmin);
+
+    /**
+     * @author hln 2023-11-05
+     *      插入所有的实体类SignInAdminWebSocket的信息到sign_in_admin_websocket
+     * @param socketBo
+     */
+    void insertSignInAdminWebSocket(SignInAdminWebSocketBo socketBo);
+
+    /**
+     * @author hln 2023-11-05
+     *      查询所有的实体类SignInAdminWebSocket的信息到sign_in_admin_websocket
+     * @param adminId
+     * @return
+     */
+    SignInAdminWebSocketBo selectToGetWebByAdminId(Long adminId);
+
+    /**
+     * @author hln 2023-11-07
+     *      插入所有的实体类SignInAdminWebSocketBo的信息到sign_in_admin_websocket
+     * @param signInAdminWebSocket
+     */
+    void insertPutSignIn(SignInAdminWebSocket signInAdminWebSocket);
+
+    /**
+     * @param adminId
+     * @return
+     * @author hln 2023-11-22
+     * 封装所有用户签到状态表中的用户id
+     */
+    Set<Long> selectToGetIdByAdminId(Long adminId);
+
+    /**
+     * @author hln 2023-11-22
+     *      封装该社团所有用户id到List集合中
+     * @param adminId
+     * @return
+     */
+    List<Long> selectToGetUserIdByAdminId(Long adminId);
+
+    /**
+     * @author hln 2023-11-22
+     *      查找当前的id对应用户的姓名
+     * @param userId
+     * @return
+     */
+    String selectToGetName(Long userId);
 }

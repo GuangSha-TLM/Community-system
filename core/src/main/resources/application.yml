@@ -10,6 +10,9 @@ server:
   port: 8008
 
 # 选择api项目下的resouces路径下的user文件夹
-filePath: "/Users/yangyida/Documents/project/complaint_system/web-server/src/main/resources/img/user/"
+# filePath: "/Users/yangyida/Documents/project/complaint_system/web-server/src/main/resources/img/user/"
+filePath: "D:/Desktop/demo/Community-system/core/src/main/resources/img/user/"
 # 服务器url路径
-projecturl: "http://127.0.0.1:8001"
+projecturl: "http://127.0.0.1:8008"
+
+

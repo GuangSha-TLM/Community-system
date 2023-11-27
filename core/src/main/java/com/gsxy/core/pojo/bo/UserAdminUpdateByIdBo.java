@@ -5,8 +5,8 @@ import com.gsxy.core.pojo.UserAdmin;
 import java.io.Serializable;
 
 /**
- *  2023-10-24
- *  更新管理员信息
+ *  @author Oh...Yeah!!! 2023-10-28
+ *  通过id修改数据
  */
 public class UserAdminUpdateByIdBo implements Serializable {
 

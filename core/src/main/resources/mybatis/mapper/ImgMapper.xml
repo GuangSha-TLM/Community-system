@@ -38,7 +38,7 @@
         insert into
             img
         values
-            (null,#{url},#{createBy},
+            (null,#{url},#{name},#{createBy},
              #{createTime},#{updateBy},#{updateTime},
              #{status},#{delFlag});
     </insert>
@@ -52,6 +52,9 @@
             <set>
                 <if test="url != null and url != '' ">
                     url = #{url},
+                </if>
+                <if test="name != null and name != '' ">
+                    name = #{name},
                 </if>
                 <if test="createBy != null ">
                     create_by = #{createBy},
@@ -75,5 +78,28 @@
             where
             id = #{id}
     </update>
+
+    <!--
+          @author Oh...Yeah!!! 2023-10-28
+          分页获取用户数据集合
+    -->
+    <select id="imgPagingToGetData" resultType="com.gsxy.core.pojo.Img"
+            parameterType="com.gsxy.core.pojo.bo.ImgPagingToGetDataBo">
+        select
+            *
+        from
+            img
+        <where>
+            <if test="name != null and name != ''">
+                name like concat('%',#{name},'%') and
+            </if>
+        </where>
+            status = #{status} and
+            del_flag = #{delFlag}
+        limit
+            #{start},#{size}
+    </select>
+
+
 
 </mapper>

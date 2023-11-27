@@ -1,14 +1,13 @@
 package com.gsxy.core.service;
 
-import com.gsxy.core.pojo.bo.UserAdminAddByBo;
-import com.gsxy.core.pojo.bo.UserAdminDeleteByIdBo;
-import com.gsxy.core.pojo.bo.UserAdminSelectByIdBo;
-import com.gsxy.core.pojo.bo.UserAdminUpdateByIdBo;
+import com.gsxy.core.pojo.User;
+import com.gsxy.core.pojo.UserAdmin;
+import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.ResponseVo;
 
 /**
- * 2023-10-24
- * 管理员业务接口
+ *  @author Oh...Yeah!!! 2023-10-28
+ *  管理员业务接口
  */
 public interface UserAdminService {
 
@@ -47,5 +46,45 @@ public interface UserAdminService {
     public ResponseVo userAdminUpdateById(UserAdminUpdateByIdBo userAdminUpdateByIdBo);
 
 
+    /**
+     * @author Oh...Yeah!!! 2023-10-28
+     *    分页获取数据
+     * @param userAdminPagingToGetDataBo
+     * @return String.class
+     */
+    public Object pagingToGetUserAdminData(UserAdminPagingToGetDataBo userAdminPagingToGetDataBo);
 
+    /**
+     * @author hln 2023-10-31
+     *      管理员发起签到
+     * @param signInAdminBo
+     * @return
+     */
+    ResponseVo userAdminSignIn(SignInAdminBo signInAdminBo);
+
+    /**
+     * @author hln 2023-11-01
+     *      管理员查看所有签到状态
+     * @return
+     */
+    ResponseVo findAllSignInStatus();
+
+    /**
+     * @author hln 2023-11-07
+     *      管理员发起签到-WebSocket
+     * @param signInAdminWebSocketBo
+     * @return
+     */
+    ResponseVo adminSignInWeb(SignInAdminWebSocketBo signInAdminWebSocketBo);
+
+    /**
+     * @author hln 2023-11-22
+     *      管理员查看实时签到信息
+     * @param token
+     * @return
+     */
+    ResponseVo adminCheckInStatusInRealTime(String token);
 }
+
+
+

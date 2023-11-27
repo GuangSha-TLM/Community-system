@@ -10,7 +10,7 @@ import java.io.Serializable;
  */
 public class CommunityAddBo implements Serializable {
     private String token;
-    private Community community;//社团实体类
+    private Community community;  //社团实体类
 
     public CommunityAddBo(){
 

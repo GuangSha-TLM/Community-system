@@ -4,10 +4,14 @@ import com.gsxy.core.aop.SystemAop;
 import com.gsxy.core.util.ThreadLocalUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.Aspect;
+import org.springframework.stereotype.Component;
 
 /**
  * @author zhuxinyu 2023-10-23
  */
+@Component
+@Aspect
 public class SystemAopImpl implements SystemAop {
     /**
      * @author zhuxinyu 2023-10-23
@@ -23,4 +27,5 @@ public class SystemAopImpl implements SystemAop {
         ThreadLocalUtil.DataOfThreadLocal.remove();
 
     }
+
 }

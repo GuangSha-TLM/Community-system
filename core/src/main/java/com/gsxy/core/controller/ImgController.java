@@ -45,7 +45,7 @@ public class ImgController {
      */
     @PostMapping("/delete")
     @ApiOperation("通过id删除img数据")
-    public String imgDeleteById(@RequestBody ImgDeleteByIdBo imgDeleteByIdBo){
+    public String taskImgDeleteById(@RequestBody ImgDeleteByIdBo imgDeleteByIdBo){
         return JSONArray.toJSONString(imgService.imgDeleteById(imgDeleteByIdBo));
     }
 
@@ -72,7 +72,7 @@ public class ImgController {
      */
     @ApiOperation("通过id修改Img数据")
     @PostMapping("/update")
-    public String imgUpdateById(@RequestBody ImgUpdateByIdBo imgUpdateByIdBo){
+    public String taskImgUpdateById(@RequestBody ImgUpdateByIdBo imgUpdateByIdBo){
         return JSONArray.toJSONString(imgService.imgUpdateById(imgUpdateByIdBo));
     }
 

@@ -1,14 +1,11 @@
 package com.gsxy.core.service;
 
 
-import com.gsxy.core.pojo.bo.ImgAddByBo;
-import com.gsxy.core.pojo.bo.ImgDeleteByIdBo;
-import com.gsxy.core.pojo.bo.ImgSelectByIdBo;
-import com.gsxy.core.pojo.bo.ImgUpdateByIdBo;
+import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.ResponseVo;
 
 /**
- * 2023-10-23
+ * @author Oh...Yeah!!! 2023-10-28
  * 图片业务接口
  */
 public interface ImgService {
@@ -45,4 +42,13 @@ public interface ImgService {
      * @return String.class
      */
     public ResponseVo imgUpdateById(ImgUpdateByIdBo imgUpdateByIdBo);
+
+
+    /**
+     * @author Oh...Yeah!!! 2023-10-27
+     *    分页获取数据
+     * @param imgPagingToGetDataBo
+     * @return ResponseVo.class
+     */
+    public ResponseVo imgPagingToGetData(ImgPagingToGetDataBo imgPagingToGetDataBo);
 }
