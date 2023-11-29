@@ -1,7 +1,7 @@
 <!--
  * @Author: tianleiyu 
  * @Date: 2023-11-22 11:14:11
- * @LastEditTime: 2023-11-27 16:39:32
+ * @LastEditTime: 2023-11-29 19:55:45
  * @LastEditors: tianleiyu
  * @Description: 
  * @FilePath: /community-ui/src/components/Home.vue
@@ -28,7 +28,7 @@
 <script>
 import Foot from './fream/Foot.vue';
 import Top from './fream/LoginTop.vue'
-import { synRequestPost, synRequestGet } from "../../static/request"l;
+import { synRequestPost, synRequestGet } from "../../static/request";
 
 export default {
     name: 'Register',
