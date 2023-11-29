@@ -1,7 +1,7 @@
 <!--
  * @Author: tianleiyu
  * @Date: 2023-11-05 20:12:55
- * @LastEditTime: 2023-11-12 08:50:21
+ * @LastEditTime: 2023-11-24 20:12:49
  * @LastEditors: tianleiyu
  * @Description:
  * @FilePath: /community-ui/src/components/MessageLists.vue
@@ -103,7 +103,9 @@ export default {
         async sign(){
             this.receiveNotificationsBo.token = this.token;
             this.receiveNotificationsBo.context = this.communityReplyNoticeBo.context;
+            console.log(1111);
             let obj = await synRequestPost("/community/receiveNotifications", this.receiveNotificationsBo);
+            console.log(obj);
             this.communityReplyNoticeBo.context=''
             this.dialogVisible= false
         },

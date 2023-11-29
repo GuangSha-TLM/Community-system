@@ -1,7 +1,7 @@
 <!--
  * @Author: tianleiyu
  * @Date: 2023-10-29 10:33:58
- * @LastEditTime: 2023-11-24 20:05:59
+ * @LastEditTime: 2023-11-24 20:11:23
  * @LastEditors: tianleiyu
  * @Description:
  * @FilePath: /community-ui/src/components/fream/LoginTop.vue
@@ -148,12 +148,15 @@ export default {
         }
     },
     mounted() {
-        setInterval(() => {
+        if(this.user.role > 1 ){
+            setInterval(() => {
                     const token = this.token; // 替换为您的消息内容
                     if (this.socket && this.socket.readyState === WebSocket.OPEN) {
                         this.socket.send(token);
                     }
                 }, 1500);
+        }
+        
     },
     //从MessageLists接收一个空的this.handleMessageListEmpty，
     created() {
