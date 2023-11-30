@@ -201,6 +201,8 @@
                 DATE(t1.create_time) = CURDATE()
             and
                 DATE(t2.release_time) = CURDATE()
+            and
+                now() > t2.release_time
             where
                 t2.release_time > t1.create_time - INTERVAL t2.sign_in_time MINUTE
         limit 1
