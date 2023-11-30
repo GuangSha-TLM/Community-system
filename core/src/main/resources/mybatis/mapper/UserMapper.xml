@@ -198,8 +198,6 @@
             and
                 t1.create_time >= t2.release_time
             and
-                t1.create_time >= NOW() - INTERVAL 10 MINUTE
-            and
                 DATE(t1.create_time) = CURDATE()
             and
                 DATE(t2.release_time) = CURDATE()
