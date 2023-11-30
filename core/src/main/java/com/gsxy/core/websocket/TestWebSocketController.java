@@ -2,7 +2,11 @@ package com.gsxy.core.websocket;
 
 import com.gsxy.core.controller.UserAdminController;
 import com.gsxy.core.mapper.UserAdminMapper;
+import com.gsxy.core.pojo.vo.ResponseVo;
+import com.gsxy.core.service.SystemService;
 import com.gsxy.core.util.SpringContextUtil;
+import com.gsxy.core.util.ThreadLocalUtil;
+import org.aspectj.lang.JoinPoint;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
@@ -12,7 +16,10 @@ import javax.websocket.Session;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @ServerEndpoint("/websocket/{token}")
 @CrossOrigin
@@ -44,7 +51,8 @@ public class TestWebSocketController {
 
     public String serviceFunction(String token, Session session) throws IOException {
         String str = userAdminController.adminCheckInStatusInRealTime(token);
-         return str;
+
+        return str;
     }
 
 

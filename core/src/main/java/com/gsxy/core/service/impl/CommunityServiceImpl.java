@@ -252,6 +252,8 @@ public class CommunityServiceImpl implements CommunityService {
             return new ResponseVo("未接受到签到通知",null,"0x500");
         }
 
+        noticeMapper.updateNoticeStatus(id);
+
         SignInWebSocketBo signInWebSocketBo = new SignInWebSocketBo();
         signInWebSocketBo.setContent(receiveNotificationsBo.getContent());
         signInWebSocketBo.setToken(receiveNotificationsBo.getToken());

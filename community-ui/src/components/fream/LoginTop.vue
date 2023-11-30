@@ -1,7 +1,7 @@
 <!--
  * @Author: tianleiyu
  * @Date: 2023-10-29 10:33:58
- * @LastEditTime: 2023-11-24 20:05:59
+ * @LastEditTime: 2023-11-29 20:09:39
  * @LastEditors: tianleiyu
  * @Description:
  * @FilePath: /community-ui/src/components/fream/LoginTop.vue
@@ -118,6 +118,7 @@ export default {
     name: 'Foot',
     data() {
         return {
+            user:JSON.parse(localStorage.getItem("user")),
             username: "",
             token: getCookie("token"),
             //登陆状态
@@ -148,12 +149,16 @@ export default {
         }
     },
     mounted() {
-        setInterval(() => {
+        
+        if(this.user.role > 0 ){
+            setInterval(() => {
                     const token = this.token; // 替换为您的消息内容
                     if (this.socket && this.socket.readyState === WebSocket.OPEN) {
                         this.socket.send(token);
                     }
-                }, 1500);
+                }, 500);
+        }
+        
     },
     //从MessageLists接收一个空的this.handleMessageListEmpty，
     created() {
