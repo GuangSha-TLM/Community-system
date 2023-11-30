@@ -13,13 +13,15 @@ public class SignInAdminWebSocket implements Serializable {
     private Long communityId;//社团ID
     private String content;//签到内容(管理员发布的)
     private Date releaseTime;//发布时间
+    private Date signInTime;//签到时长
 
-    public SignInAdminWebSocket(Long id, Long adminId, Long communityId, String content, Date releaseTime) {
+    public SignInAdminWebSocket(Long id, Long adminId, Long communityId, String content, Date releaseTime, Date signInTime) {
         this.id = id;
         this.adminId = adminId;
         this.communityId = communityId;
         this.content = content;
         this.releaseTime = releaseTime;
+        this.signInTime = signInTime;
     }
 
     public SignInAdminWebSocket() {
@@ -65,6 +67,14 @@ public class SignInAdminWebSocket implements Serializable {
         this.releaseTime = releaseTime;
     }
 
+    public Date getSignInTime() {
+        return signInTime;
+    }
+
+    public void setSignInTime(Date signInTime) {
+        this.signInTime = signInTime;
+    }
+
     @Override
     public String toString() {
         return "SignInAdminWebSocket{" +
@@ -73,6 +83,7 @@ public class SignInAdminWebSocket implements Serializable {
                 ", communityId=" + communityId +
                 ", content='" + content + '\'' +
                 ", releaseTime=" + releaseTime +
+                ", signInTime=" + signInTime +
                 '}';
     }
 }

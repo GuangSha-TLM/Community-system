@@ -202,6 +202,7 @@ public class UserAdminServiceImpl implements UserAdminService {
         signInAdminWebSocket.setCommunityId(adminId);
         signInAdminWebSocket.setReleaseTime(new Date());
         signInAdminWebSocket.setContent(signInAdminWebSocketBo.getContent());
+        signInAdminWebSocket.setSignInTime(signInAdminWebSocketBo.getSignInTime());
 
         userAdminMapper.insertPutSignIn(signInAdminWebSocket);
 

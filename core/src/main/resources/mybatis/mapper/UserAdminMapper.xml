@@ -99,9 +99,9 @@
     <insert id="insertPutSignIn" parameterType="com.gsxy.core.pojo.SignInAdminWebSocket">
         insert into
             sign_in_admin_websocket
-            (admin_id,community_id,content,release_time)
+            (admin_id,community_id,content,release_time,sign_in_time)
         values
-            (#{adminId},#{communityId},#{content},#{releaseTime})
+            (#{adminId},#{communityId},#{content},#{releaseTime},#{signInTime})
     </insert>
 
     <!--

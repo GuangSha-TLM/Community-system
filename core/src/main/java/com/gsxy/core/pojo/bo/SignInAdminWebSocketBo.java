@@ -10,10 +10,12 @@ public class SignInAdminWebSocketBo implements Serializable {
 
     private String token;
     private String content;//签到内容(管理员发布的)
+    private Date signInTime;//签到时长
 
-    public SignInAdminWebSocketBo(String token, String content) {
+    public SignInAdminWebSocketBo(String token, String content, Date signInTime) {
         this.token = token;
         this.content = content;
+        this.signInTime = signInTime;
     }
 
     public SignInAdminWebSocketBo() {
@@ -35,11 +37,20 @@ public class SignInAdminWebSocketBo implements Serializable {
         this.content = content;
     }
 
+    public Date getSignInTime() {
+        return signInTime;
+    }
+
+    public void setSignInTime(Date signInTime) {
+        this.signInTime = signInTime;
+    }
+
     @Override
     public String toString() {
         return "SignInAdminWebSocketBo{" +
                 "token='" + token + '\'' +
                 ", content='" + content + '\'' +
+                ", signInTime=" + signInTime +
                 '}';
     }
 }
