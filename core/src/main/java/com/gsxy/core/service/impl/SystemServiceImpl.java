@@ -149,7 +149,6 @@ public class SystemServiceImpl implements SystemService {
      * @author Oh...Yeah!!! 2023-11-13
      *    图片上传
      * @param token
-     * @param file
      * @return String.class
      */
     @Override

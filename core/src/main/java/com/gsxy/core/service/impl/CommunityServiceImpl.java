@@ -260,6 +260,31 @@ public class CommunityServiceImpl implements CommunityService {
 
         userController.userSignInWebSocket(signInWebSocketBo);
 
+        Long communityId = userMapper.selectToGetCommunityId(userId);
+
+        if(communityId == null || communityId == 0L){
+            return new ResponseVo<>("该社团内找不到此用户",null,"0x500");
+        }
+        SignInWebSocket signInWebSocket = new SignInWebSocket();
+        signInWebSocket.setUserId(userId);
+        signInWebSocket.setCreateTime(new Date());
+        signInWebSocket.setContent(signInWebSocketBo.getContent());
+        signInWebSocket.setCommunityId(communityId);
+
+        userMapper.insertSignInWeb(signInWebSocket);
+
+        SignInUserStatusWeb signInUserStatusWeb = userMapper.selectToGetUserAndAdminSignIn(userId);
+
+        if (signInUserStatusWeb == null){
+            return new ResponseVo("签到失败",null,"0x500");
+        }
+
+        Long id2 = userMapper.insertSignInUserWithAdmin(signInUserStatusWeb);
+
+        if(id2 == 0L){
+            return new ResponseVo("签到失败",null,"0x502");
+        }
+
         return new ResponseVo("收到签到通知",null,"0x200");
     }
 
