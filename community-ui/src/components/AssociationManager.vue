@@ -10,7 +10,7 @@
                                 <h4 class="card-title">
                                     <button class="btn btn-primary" @click="SignInWindow = true">发起签到</button>
                                     <button class="btn btn-primary" @click="dialogVisible = true">拉取人员</button>
-
+                                    <button class="btn btn-primary" @click="lookSignInWindow = true">查看签到状态</button>
                                 </h4>
                             </div>
                         </div>
@@ -48,10 +48,28 @@
 
                     <el-dialog title="发起签到" :visible.sync="SignInWindow" width="50%">
                         <el-input v-model="sendNotificationBo.content" placeholder="请输入签到内容"></el-input>
+                        <el-slider v-model="sendNotificationBo.signInTime" :min="1" :max="10"></el-slider>{{
+                            sendNotificationBo.signInTime }} 分钟
                         <span slot="footer" class="dialog-footer">
                             <el-button @click="SignInWindow = false">取 消</el-button>
                             <el-button type="primary" @click="showModal">确 定</el-button>
                         </span>
+                    </el-dialog>
+                    <el-dialog title="查看签到人员" :visible.sync="lookSignInWindow" width="50%">
+                        <div class="showSign">
+                            <div class="left">
+                            <p>已签到:</p>
+                            <div v-for="(item, index) in signedData" :key="index">
+                                {{ item.name }}
+                            </div>
+                        </div>
+                        <div class="right">
+                            <p>未签到:</p>
+                            <div v-for="(item, index) in unsignedData" :key="index">
+                                {{ item.name }}
+                            </div>
+                        </div>
+                        </div>
                     </el-dialog>
                 </div>
             </section>
@@ -71,6 +89,8 @@ export default {
             dialogVisible: false,
             // 签到弹窗
             SignInWindow: false,
+            // 查看签到人员的弹窗
+            lookSignInWindow: false,
             communityUserdeleteUserBo: {
                 token: '',
                 userId: ''
@@ -82,26 +102,68 @@ export default {
             },
             list: [],
             //签到信息
-            sendNotificationBo:{
-                token:'',
-                content:''
-            }
+            sendNotificationBo: {
+                token: '',
+                content: '',
+                signInTime: 0
+            },
+            //websockt
+            ws: {},
+            user: JSON.parse(localStorage.getItem("user")),
+            socket: null,
+            webSocketIp: "127.0.0.1",
+            webSocketPort: 8008,
+
+            signInFrom: []
+
         }
     },
     mounted() {
         this.getMerchantInformation()
+        if (this.user.role > 0) {
+            setInterval(() => {
+                const token = this.token; // 替换为您的消息内容
+                if (this.socket && this.socket.readyState === WebSocket.OPEN) {
+                    this.socket.send(token);
+                }
+            }, 500);
+        }
     },
 
     components: {
         ClassManagement
     },
     methods: {
+        setupWebSocket() {
+            // const contestId = 80; // 用于示例的contest_id
+            // alert(this.getHashVariable("contestId"));
+            this.socket = new WebSocket("ws://" + this.webSocketIp + ":" + this.webSocketPort + `/websocket/${this.token}`);
 
+            this.socket.onopen = () => {
+                this.socketStatus = '已连接';
+            };
+
+            this.socket.onmessage = (event) => {
+                // console.log(event);
+                let obj = JSON.parse(event.data);
+                this.signInFrom = obj.data
+                console.log(this.signInFrom);
+            };
+
+            this.socket.onclose = () => {
+                this.socketStatus = '已关闭';
+                console.log("close");
+                this.setupWebSocket();
+            };
+        },
         async showModal() {
             this.sendNotificationBo.token = this.token
-            let obj = await synRequestPost("/community/sendNotification",this.sendNotificationBo);
+            let obj = await synRequestPost("/community/sendNotification", this.sendNotificationBo);
+            if (obj.code == "0x200") {
+                this.SignInWindow = false
+                this.setupWebSocket()
+            }
             console.log(obj);
-            this.SignInWindow= false
         },
 
         //跳转指定页面
@@ -110,7 +172,6 @@ export default {
             if (res.code == "0x200") {
                 this.list = res.data;
             }
-            // console.log(this.list);
         },
         async deleteById(id) {
             if (confirm('确定要移除该用户吗？')) {
@@ -133,7 +194,23 @@ export default {
             }
         }
 
-    }
+    },
+    computed: {
+        parsedData() {
+            return this.signInFrom.map(item => {
+                const [name, status] = item.split(/(已签到|未签到)/);
+                return { name: name.trim(), status: status.trim() };
+            });
+        },
+        signedData() {
+            // console.log(this.parsedData);
+            return this.parsedData.filter(item => item.status === '已签到');
+        },
+        unsignedData() {
+            // console.log(this.parsedData);
+            return this.parsedData.filter(item => item.status === '未签到');
+        },
+    },
 
 }
 
@@ -206,6 +283,23 @@ a {
     border: none;
     background-color: #fff;
     color: #42b983;
+}
+.card-title{
+    display: flex;
+
+}
+.showSign{
+    display: flex;
+    justify-content: space-between
+}
+.showSign .left{
+    width: 50%;
+}
+.showSign .right{
+    width: 50%;
+}
+.el-input {
+    margin-bottom: 30px;
 }
 
 </style>

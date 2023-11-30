@@ -1,7 +1,7 @@
 <!--
  * @Author: tianleiyu
  * @Date: 2023-11-05 20:12:55
- * @LastEditTime: 2023-11-24 20:12:49
+ * @LastEditTime: 2023-11-30 17:02:52
  * @LastEditors: tianleiyu
  * @Description:
  * @FilePath: /community-ui/src/components/MessageLists.vue
@@ -45,7 +45,7 @@
 
             <el-dialog :title="title" :visible.sync="dialogVisible" width="30%" @close="close">
                 <span slot="footer" class="dialog-footer">
-                    <el-input placeholder="请输入内容" v-model="communityReplyNoticeBo.context" clearable>
+                    <el-input placeholder="请输入内容" v-model="communityReplyNoticeBo.content" clearable>
                     </el-input>
                     <el-button class="but" v-if="signIn" @click="sign()">签到</el-button>
                     <div v-else class="but">
@@ -75,7 +75,7 @@ export default {
             dialogVisible: false,
             communityReplyNoticeBo: {
                 token: '',
-                context: '',
+                content: '',
                 noticeId: '',
                 result: ''
             },
@@ -86,9 +86,10 @@ export default {
             //签到回复的内容
             receiveNotificationsBo:{
                 token:'',
-                context:'',
+                content:'',
                 noticeId:''
-            }
+            },
+            
 
         }
     },
@@ -102,11 +103,11 @@ export default {
     methods: {
         async sign(){
             this.receiveNotificationsBo.token = this.token;
-            this.receiveNotificationsBo.context = this.communityReplyNoticeBo.context;
+            this.receiveNotificationsBo.content = this.communityReplyNoticeBo.content;
             console.log(1111);
             let obj = await synRequestPost("/community/receiveNotifications", this.receiveNotificationsBo);
             console.log(obj);
-            this.communityReplyNoticeBo.context=''
+            this.communityReplyNoticeBo.content=''
             this.dialogVisible= false
         },
         //发送空的MessageLists给LoginTop，解决刷新数据为空问题

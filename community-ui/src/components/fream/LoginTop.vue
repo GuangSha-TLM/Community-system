@@ -1,7 +1,7 @@
 <!--
  * @Author: tianleiyu
  * @Date: 2023-10-29 10:33:58
- * @LastEditTime: 2023-11-29 20:09:39
+ * @LastEditTime: 2023-11-30 17:51:26
  * @LastEditors: tianleiyu
  * @Description:
  * @FilePath: /community-ui/src/components/fream/LoginTop.vue
@@ -111,14 +111,12 @@
 </template>
 
 <script>
-import { param } from 'jquery';
-
 import { synRequestPost, synRequestGet } from "../../../static/request"
 export default {
     name: 'Foot',
     data() {
         return {
-            user:JSON.parse(localStorage.getItem("user")),
+            // user:JSON.parse(localStorage.getItem("user")),
             username: "",
             token: getCookie("token"),
             //登陆状态
@@ -137,63 +135,63 @@ export default {
             messageList: [],
             count: 0,
 
-            //websockt
-            ws: {},
+            // //websockt
+            // ws: {},
 
 
-            socket: null,
+            // socket: null,
 
-            webSocketIp: "127.0.0.1",
-            webSocketPort: 8008,
+            // webSocketIp: "127.0.0.1",
+            // webSocketPort: 8008,
 
         }
     },
     mounted() {
         
-        if(this.user.role > 0 ){
-            setInterval(() => {
-                    const token = this.token; // 替换为您的消息内容
-                    if (this.socket && this.socket.readyState === WebSocket.OPEN) {
-                        this.socket.send(token);
-                    }
-                }, 500);
-        }
+        // if(this.user.role > 0 ){
+        //     setInterval(() => {
+        //             const token = this.token; // 替换为您的消息内容
+        //             if (this.socket && this.socket.readyState === WebSocket.OPEN) {
+        //                 this.socket.send(token);
+        //             }
+        //         }, 500);
+        // }
         
     },
     //从MessageLists接收一个空的this.handleMessageListEmpty，
     created() {
         this.isLoginInfo();
         this.isActiveInfo();
-        this.setupWebSocket();
+        // this.setupWebSocket();
         this.$bus.$on('messageListEmpty', this.handleMessageListEmpty);
     },
     methods: {
 
-        setupWebSocket() {
-            // const contestId = 80; // 用于示例的contest_id
-            // alert(this.getHashVariable("contestId"));
-            this.socket = new WebSocket("ws://" + this.webSocketIp + ":" + this.webSocketPort + `/websocket/${this.token}`);
-            console.log(this.socket);
+        // setupWebSocket() {
+        //     // const contestId = 80; // 用于示例的contest_id
+        //     // alert(this.getHashVariable("contestId"));
+        //     this.socket = new WebSocket("ws://" + this.webSocketIp + ":" + this.webSocketPort + `/websocket/${this.token}`);
+        //     console.log(this.socket);
             
-            this.socket.onopen = () => {
-                this.socketStatus = '已连接';
-                console.log("oks");
-                console.log(event);
-            };
+        //     this.socket.onopen = () => {
+        //         this.socketStatus = '已连接';
+        //         console.log("oks");
+        //         console.log(event);
+        //     };
 
-            this.socket.onmessage = (event) => {
-                //console.log(event);
+        //     this.socket.onmessage = (event) => {
+        //         // console.log(event);
                  
-                let obj = JSON.parse(event.data);
-                console.log(obj);
-            };
+        //         let obj = JSON.parse(event.data);
+        //         console.log(obj);
+        //     };
 
-            this.socket.onclose = () => {
-                this.socketStatus = '已关闭';
-                console.log("close");
-                this.setupWebSocket();
-            };
-        },
+        //     this.socket.onclose = () => {
+        //         this.socketStatus = '已关闭';
+        //         console.log("close");
+        //         this.setupWebSocket();
+        //     };
+        // },
 
         //判断是否为登陆
         async isLoginInfo() {
