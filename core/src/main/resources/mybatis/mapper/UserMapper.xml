@@ -185,28 +185,24 @@
             t3.org,t3.student_id,t2.release_time,t1.create_time
         from
             sign_in_websocket t1
-        inner join
+                inner join
             sign_in_admin_websocket t2
-        inner join
+                inner join
             user t3
-        on
-            t2.community_id = t1.community_id
-        and
-            t1.user_id = (select id from user where id = #{userId})
-        and
-            t1.content = t2.content
-        where
-            t1.create_time >= t2.release_time
-        and
-            t1.create_time >= NOW() - INTERVAL 10 MINUTE
-        and
-            NOW() > t1.create_time
-        and
-            DATE(t1.create_time) = CURDATE()
-        and
-            NOW() - INTERVAL 60 MINUTE >= t2.release_time
-        and
-            DATE(t2.release_time) = CURDATE()
+            on
+                t2.community_id = t1.community_id
+            and
+                t1.user_id = (select id from user where id = #{id})
+            and
+                t1.content = t2.content
+            and
+                t1.create_time >= t2.release_time
+            and
+                t1.create_time >= NOW() - INTERVAL 10 MINUTE
+            and
+                DATE(t1.create_time) = CURDATE()
+            and
+                DATE(t2.release_time) = CURDATE()
         limit 1
     </select>
 

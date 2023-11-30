@@ -29,8 +29,6 @@ public class TestWebSocketController {
     // 构造函数注入任何需要的依赖项
     private String token;//前端传输的token信息
     private UserAdminController userAdminController = SpringContextUtil.getBean(UserAdminController.class);
-    private SystemService systemService = SpringContextUtil.getBean(SystemService.class);
-    private UserAdminMapper userAdminMapper = SpringContextUtil.getBean(UserAdminMapper.class);
 
     @OnOpen
     public void onOpen(Session session, @PathParam("token") String token) throws IOException {
@@ -52,37 +50,7 @@ public class TestWebSocketController {
 
 
     public String serviceFunction(String token, Session session) throws IOException {
-        systemService.auth(token);
-        String adminIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
-        Long adminId = Long.valueOf(adminIdOfStr);
-
-        //封装所有用户签到状态表中的用户id
-        Set<Long> set = userAdminMapper.selectToGetIdByAdminId(adminId);
-
-        //封装该社团所有用户id到List集合中
-        List<Long> list = userAdminMapper.selectToGetUserIdByAdminId(adminId);
-
-        List<String> listSignIn = new ArrayList<>();
-
-        for (int i = 0; i < list.size(); i++) {
-            Long userId = list.get(i);
-            String name = userAdminMapper.selectToGetName(userId);
-
-            if (name == null)
-                continue;
-
-            if(!set.add(list.get(i))){
-                listSignIn.add(name + "已签到");
-            }else {
-                listSignIn.add(name + "未签到");
-            }
-        }
-
-        String str = "";
-
-        for (String s : listSignIn) {
-            str += s + " ";
-        }
+        String str = userAdminController.adminCheckInStatusInRealTime(token);
 
         return str;
     }
