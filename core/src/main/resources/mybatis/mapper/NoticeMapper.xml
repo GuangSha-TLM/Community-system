@@ -217,7 +217,7 @@
         update
             notice
         set
-            read = 1,
+            `read` = 1,
             dealt = 1
         where
             id = #{id}

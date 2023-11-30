@@ -200,6 +200,8 @@
         and
             t1.create_time >= NOW() - INTERVAL 10 MINUTE
         and
+            NOW() > t1.create_time
+        and
             DATE(t1.create_time) = CURDATE()
         and
             NOW() - INTERVAL 60 MINUTE >= t2.release_time

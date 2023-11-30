@@ -2,7 +2,11 @@ package com.gsxy.core.websocket;
 
 import com.gsxy.core.controller.UserAdminController;
 import com.gsxy.core.mapper.UserAdminMapper;
+import com.gsxy.core.pojo.vo.ResponseVo;
+import com.gsxy.core.service.SystemService;
 import com.gsxy.core.util.SpringContextUtil;
+import com.gsxy.core.util.ThreadLocalUtil;
+import org.aspectj.lang.JoinPoint;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
@@ -12,7 +16,10 @@ import javax.websocket.Session;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @ServerEndpoint("/websocket/{token}")
 @CrossOrigin
@@ -22,6 +29,8 @@ public class TestWebSocketController {
     // 构造函数注入任何需要的依赖项
     private String token;//前端传输的token信息
     private UserAdminController userAdminController = SpringContextUtil.getBean(UserAdminController.class);
+    private SystemService systemService = SpringContextUtil.getBean(SystemService.class);
+    private UserAdminMapper userAdminMapper = SpringContextUtil.getBean(UserAdminMapper.class);
 
     @OnOpen
     public void onOpen(Session session, @PathParam("token") String token) throws IOException {
@@ -43,8 +52,39 @@ public class TestWebSocketController {
 
 
     public String serviceFunction(String token, Session session) throws IOException {
-        String str = userAdminController.adminCheckInStatusInRealTime(token);
-         return str;
+        systemService.auth(token);
+        String adminIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
+        Long adminId = Long.valueOf(adminIdOfStr);
+
+        //封装所有用户签到状态表中的用户id
+        Set<Long> set = userAdminMapper.selectToGetIdByAdminId(adminId);
+
+        //封装该社团所有用户id到List集合中
+        List<Long> list = userAdminMapper.selectToGetUserIdByAdminId(adminId);
+
+        List<String> listSignIn = new ArrayList<>();
+
+        for (int i = 0; i < list.size(); i++) {
+            Long userId = list.get(i);
+            String name = userAdminMapper.selectToGetName(userId);
+
+            if (name == null)
+                continue;
+
+            if(!set.add(list.get(i))){
+                listSignIn.add(name + "已签到");
+            }else {
+                listSignIn.add(name + "未签到");
+            }
+        }
+
+        String str = "";
+
+        for (String s : listSignIn) {
+            str += s + " ";
+        }
+
+        return str;
     }
 
 
