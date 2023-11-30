@@ -5,11 +5,13 @@ import java.io.Serializable;
 public class SendNotificationBo implements Serializable {
 
     private String token;
-    private String content;
+    private String content;//签到内容
+    private Integer signInTime;//签到时长
 
-    public SendNotificationBo(String token, String content) {
+    public SendNotificationBo(String token, String content, Integer signInTime) {
         this.token = token;
         this.content = content;
+        this.signInTime = signInTime;
     }
 
     public SendNotificationBo() {
@@ -31,11 +33,20 @@ public class SendNotificationBo implements Serializable {
         this.content = content;
     }
 
+    public Integer getSignInTime() {
+        return signInTime;
+    }
+
+    public void setSignInTime(Integer signInTime) {
+        this.signInTime = signInTime;
+    }
+
     @Override
     public String toString() {
         return "SendNotificationBo{" +
                 "token='" + token + '\'' +
                 ", content='" + content + '\'' +
+                ", signInTime=" + signInTime +
                 '}';
     }
 }

@@ -221,6 +221,7 @@ public class CommunityServiceImpl implements CommunityService {
         SignInAdminWebSocketBo signInAdminWebSocketBo = new SignInAdminWebSocketBo();
         signInAdminWebSocketBo.setToken(sendNotificationBo.getToken());
         signInAdminWebSocketBo.setContent(sendNotificationBo.getContent());
+        signInAdminWebSocketBo.setSignInTime(sendNotificationBo.getSignInTime());
 
         userAdminController.userAdminSignInWebSocket(signInAdminWebSocketBo);
 
