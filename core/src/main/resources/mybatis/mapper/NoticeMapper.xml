@@ -212,5 +212,15 @@
             id = #{noticeId};
     </update>
 
+    <!-- 修改用户确认通知状态 -->
+    <update id="updateNoticeStatus">
+        update
+            notice
+        set
+            read = 1,
+            dealt = 1
+        where
+            id = #{id}
+    </update>
 
 </mapper>

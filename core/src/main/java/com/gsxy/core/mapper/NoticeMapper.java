@@ -3,7 +3,6 @@ package com.gsxy.core.mapper;
 import com.gsxy.core.pojo.Notice;
 import com.gsxy.core.pojo.SendNotification;
 import com.gsxy.core.pojo.bo.NoticePagingToGetDataBo;
-import com.gsxy.core.pojo.bo.SendNotificationBo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Date;
@@ -116,6 +115,12 @@ public interface NoticeMapper {
      * @return
      */
     Long selectByUserIdNotice(Long userId, Date date);
+
+    /**
+     * @author hln 2023-11-30
+     *      修改用户确认通知状态
+     */
+    void updateNoticeStatus(Long id);
 }
 
 
