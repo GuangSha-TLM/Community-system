@@ -20,9 +20,9 @@ public class SignInUserStatusWeb implements Serializable {
     private Integer status;//签到状态
     private Date releaseTime;//签到发布状态
     private Date createTime;//用户进行签到时间
-    private Date signInTime;//签到时长
+    private Integer signInTime;//签到时长
 
-    public SignInUserStatusWeb(Long userId, Long adminId, Long communityId, String name, Integer college, String grade, String professional, Integer org, String studentId, Integer status, Date releaseTime, Date createTime, Date signInTime) {
+    public SignInUserStatusWeb(Long userId, Long adminId, Long communityId, String name, Integer college, String grade, String professional, Integer org, String studentId, Integer status, Date releaseTime, Date createTime, Integer signInTime) {
         this.userId = userId;
         this.adminId = adminId;
         this.communityId = communityId;
@@ -137,11 +137,11 @@ public class SignInUserStatusWeb implements Serializable {
         this.createTime = createTime;
     }
 
-    public Date getSignInTime() {
+    public Integer getSignInTime() {
         return signInTime;
     }
 
-    public void setSignInTime(Date signInTime) {
+    public void setSignInTime(Integer signInTime) {
         this.signInTime = signInTime;
     }
 

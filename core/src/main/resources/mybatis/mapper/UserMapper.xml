@@ -182,7 +182,7 @@
     <select id="selectToGetUserAndAdminSignIn" resultType="com.gsxy.core.pojo.SignInUserStatusWeb">
         select
             t1.user_id,t2.admin_id,t1.community_id,t3.name,t3.college,t3.grade,t3.professional,
-            t3.org,t3.student_id,t2.release_time,t1.create_time
+            t3.org,t3.student_id,t2.release_time,t1.create_time,t2.sign_in_time
         from
             sign_in_websocket t1
                 inner join
@@ -203,6 +203,8 @@
                 DATE(t1.create_time) = CURDATE()
             and
                 DATE(t2.release_time) = CURDATE()
+            where
+                t2.release_time > t1.create_time - INTERVAL t2.sign_in_time MINUTE
         limit 1
     </select>
 
@@ -254,10 +256,10 @@
         insert into
             sign_in_user_status_web
             (user_id,admin_id,community_id,name,college,grade
-            ,professional,org,student_id,status,release_time,create_time)
+            ,professional,org,student_id,status,release_time,create_time,sign_in_time)
         values
             (#{userId},#{adminId},#{communityId},#{name},#{college},#{grade}
-            ,#{professional},#{org},#{studentId},1,#{releaseTime},#{createTime})
+            ,#{professional},#{org},#{studentId},1,#{releaseTime},#{createTime},#{signInTime})
     </insert>
 
     <!-- 删除签到记录（如果该社团没有该用户） -->

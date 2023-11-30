@@ -13,9 +13,9 @@ public class SignInAdminWebSocket implements Serializable {
     private Long communityId;//社团ID
     private String content;//签到内容(管理员发布的)
     private Date releaseTime;//发布时间
-    private Date signInTime;//签到时长
+    private Integer signInTime;//签到时长
 
-    public SignInAdminWebSocket(Long id, Long adminId, Long communityId, String content, Date releaseTime, Date signInTime) {
+    public SignInAdminWebSocket(Long id, Long adminId, Long communityId, String content, Date releaseTime, Integer signInTime) {
         this.id = id;
         this.adminId = adminId;
         this.communityId = communityId;
@@ -67,11 +67,11 @@ public class SignInAdminWebSocket implements Serializable {
         this.releaseTime = releaseTime;
     }
 
-    public Date getSignInTime() {
+    public Integer getSignInTime() {
         return signInTime;
     }
 
-    public void setSignInTime(Date signInTime) {
+    public void setSignInTime(Integer signInTime) {
         this.signInTime = signInTime;
     }
 
