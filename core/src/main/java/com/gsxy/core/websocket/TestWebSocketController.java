@@ -53,6 +53,7 @@ public class TestWebSocketController {
         //注入对象
         AdminCheckInStatusInRealTimeBo adminCheckInStatusInRealTimeBo = new AdminCheckInStatusInRealTimeBo();
         adminCheckInStatusInRealTimeBo.setToken(token);
+        adminCheckInStatusInRealTimeBo.setContent(content);
 
         //转换格式
         String str = userAdminController.adminCheckInStatusInRealTime(adminCheckInStatusInRealTimeBo);
