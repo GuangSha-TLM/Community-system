@@ -191,7 +191,7 @@
         and
             t1.uuid = t3.uuid
         and
-            t3.content = #{content}
+            t3.content = (select t3.content from sign_in_admin_websocket where content = #{content} order by t3.release_time desc limit 1)
         where
             t1.create_by = t3.admin_id
         LIMIT 1;
