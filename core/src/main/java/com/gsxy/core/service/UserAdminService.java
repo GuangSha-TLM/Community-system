@@ -79,10 +79,10 @@ public interface UserAdminService {
     /**
      * @author hln 2023-11-22
      *      管理员查看实时签到信息
-     * @param uuid
+     * @param content
      * @return
      */
-    ResponseVo adminCheckInStatusInRealTime(String uuid);
+    ResponseVo adminCheckInStatusInRealTime(String content);
 }
 
 

@@ -180,15 +180,32 @@
             t1.id
         FROM
             notice t1
-        INNER JOIN
+                INNER JOIN
             community_user t2
+        inner join
+            sign_in_admin_websocket t3
         ON
             t1.create_by = (SELECT community_id FROM community_user WHERE user_id = #{userId} LIMIT 1)
         and
-            t1.create_time > DATE_SUB(NOW(), INTERVAL 3 MINUTE)
-        where
             user_email_id = #{userId}
+        and
+            t1.uuid = t3.uuid
+        and
+            t3.content = #{content}
+        where
+            t1.create_by = t3.admin_id
         LIMIT 1;
+    </select>
+
+    <!-- 获取指定id的uuid -->
+    <select id="selectToGetUUID" resultType="java.lang.String" parameterType="java.lang.Long">
+        select
+            uuid
+        from
+            notice
+        where
+            id = #{id}
+        limit 1
     </select>
 
     <!--

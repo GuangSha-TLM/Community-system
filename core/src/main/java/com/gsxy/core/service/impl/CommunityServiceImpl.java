@@ -40,6 +40,7 @@ public class CommunityServiceImpl implements CommunityService {
     private UserAdminController userAdminController;
     @Autowired
     private UserController userController;
+    private static String uuid;
 
     /**
      * @author zhuxinyu 2023-10-24
@@ -241,8 +242,6 @@ public class CommunityServiceImpl implements CommunityService {
         return new ResponseVo("通知已发起",uuid1,"0x200");
     }
 
-    private static String uuid = "";
-
     /**
      * @author hln 2023-11-14
      *      社团成员接受签到通知
@@ -258,18 +257,19 @@ public class CommunityServiceImpl implements CommunityService {
             return new ResponseVo("token解析失败",null,"0x501");
         }
 
-        Date date = new Date();
-
         //通过社团id找数据
-        Long id = noticeMapper.selectByUserIdNotice(userId,date);
+        String content = receiveNotificationsBo.getContent();
+        Long id = noticeMapper.selectByUserIdNotice(userId,content);
 
         //判断通知是否收到
         if(id == null || id == 0L){
             return new ResponseVo("未接受到签到通知",null,"0x500");
         }
 
+        String uuid2 = noticeMapper.selectToGetUUID(id);
+
         //修改通知状态
-        receiveNotificationsBo.setUuid(this.uuid);
+        receiveNotificationsBo.setUuid(uuid2);
         String uuid = receiveNotificationsBo.getUuid();
         noticeMapper.updateByIdRead(userId,uuid);
 

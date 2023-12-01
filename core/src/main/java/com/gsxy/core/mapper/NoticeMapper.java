@@ -5,7 +5,6 @@ import com.gsxy.core.pojo.SendNotification;
 import com.gsxy.core.pojo.bo.NoticePagingToGetDataBo;
 import org.apache.ibatis.annotations.Mapper;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -114,7 +113,7 @@ public interface NoticeMapper {
      * @param userId
      * @return
      */
-    Long selectByUserIdNotice(Long userId, Date date);
+    Long selectByUserIdNotice(Long userId, String content);
 
     /**
      * @author hln 2023-11-30
@@ -137,6 +136,14 @@ public interface NoticeMapper {
      * @param userId
      */
     void updateByIdDealt(String uuid, Long userId);
+
+    /**
+     * @author hln 2023-12-01
+     *      获取指定id的uuid
+     * @param id
+     * @return
+     */
+    String selectToGetUUID(Long id);
 }
 
 

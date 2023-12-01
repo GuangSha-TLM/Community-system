@@ -216,17 +216,25 @@ public class UserAdminServiceImpl implements UserAdminService {
     /**
      * @author hln 2023-11-22
      *      管理员查看实时签到信息
-     * @param uuid
+     * @param content
      * @return
      */
     @Override
-    public ResponseVo adminCheckInStatusInRealTime(String uuid) {
+    public ResponseVo adminCheckInStatusInRealTime(String content) {
         String adminIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
         Long adminId = Long.valueOf(adminIdOfStr);
 
         if(adminId == null || adminId == 0L){
             return new ResponseVo("token解析失败",null,"0x501");
         }
+
+        Long id = noticeMapper.selectByUserIdNotice(adminId,content);
+        //判断通知是否收到
+        if(id == null || id == 0L){
+            return new ResponseVo("未接受到签到通知",null,"0x500");
+        }
+
+        String uuid = noticeMapper.selectToGetUUID(id);
 
         //封装所有用户签到状态表中的用户id
         Set<Long> set = userAdminMapper.selectToGetIdByAdminId(adminId,uuid);
