@@ -31,24 +31,27 @@ public class TestWebSocketController {
     private UserAdminController userAdminController = SpringContextUtil.getBean(UserAdminController.class);
 
     @OnOpen
-    public void onOpen(Session session, @PathParam("adminCheckInStatusInRealTimeBo") AdminCheckInStatusInRealTimeBo adminCheckInStatusInRealTimeBo) throws IOException {
+    public void onOpen(Session session, @PathParam("token") String token,@PathParam("content") String content) throws IOException {
 //        System.out.println("签到已发起"+token);
-        String s = this.serviceFunction(adminCheckInStatusInRealTimeBo, session);
+        String s = this.serviceFunction(token, session,content);
         session.getBasicRemote().sendText(s);
     }
 
     // 其他方法...
     @OnMessage
-    public void onMessage(AdminCheckInStatusInRealTimeBo adminCheckInStatusInRealTimeBo, Session session) throws IOException {
+    public void onMessage(String token, Session session,String content) throws IOException {
 
         //实现用户签到信息的实时查看
-        String s = this.serviceFunction(adminCheckInStatusInRealTimeBo, session);
+        String s = this.serviceFunction(token, session,content);
         session.getBasicRemote().sendText(s);
 
     }
 
 
-    public String serviceFunction(AdminCheckInStatusInRealTimeBo adminCheckInStatusInRealTimeBo, Session session) throws IOException {
+    public String serviceFunction(String token, Session session,String content) throws IOException {
+        AdminCheckInStatusInRealTimeBo adminCheckInStatusInRealTimeBo = new AdminCheckInStatusInRealTimeBo();
+        adminCheckInStatusInRealTimeBo.setContent(content);
+        adminCheckInStatusInRealTimeBo.setToken(token);
         String str = userAdminController.adminCheckInStatusInRealTime(adminCheckInStatusInRealTimeBo);
 
         return str;
