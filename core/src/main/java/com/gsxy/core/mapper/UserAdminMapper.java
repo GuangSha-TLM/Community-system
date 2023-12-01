@@ -193,8 +193,7 @@ public interface UserAdminMapper {
     /**
      * @author hln 2023-12-01
      *      根据userId查找签到内容
-     * @param userId
      * @return
      */
-    String selectToGetContent(Long userId);
+    String selectToGetContent();
 }

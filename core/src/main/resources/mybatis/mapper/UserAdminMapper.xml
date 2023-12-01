@@ -283,15 +283,24 @@
     </select>
 
     <!-- 根据userId查找签到内容 -->
-    <select id="selectToGetContent" resultType="java.lang.String" parameterType="java.lang.Long">
+    <select id="selectToGetContent" resultType="java.lang.String">
         select
             t1.content
         from
             sign_in_admin_websocket t1
-        where
-            admin_id = #{userId}
+        inner join
+            notice t2
+        inner join
+            sign_in_websocket t3
+        on
+            t2.uuid = t1.uuid
+        and
+            t1.content = t3.content
+        and
+            t1.admin_id = t2.create_by
         order by
             release_time desc
+        limit 1
     </select>
 
 </mapper>

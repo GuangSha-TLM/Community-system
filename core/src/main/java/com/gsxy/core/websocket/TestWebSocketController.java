@@ -47,10 +47,8 @@ public class TestWebSocketController {
 //        String adminIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
 //        Long userId = Long.valueOf(adminIdOfStr);
 
-        String id = session.getId();
-
         //通过数据库查content
-        String content = userAdminMapper.selectToGetContent(Long.valueOf(id));
+        String content = userAdminMapper.selectToGetContent();
 
         //注入对象
         AdminCheckInStatusInRealTimeBo adminCheckInStatusInRealTimeBo = new AdminCheckInStatusInRealTimeBo();
