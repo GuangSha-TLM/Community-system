@@ -44,11 +44,13 @@ public class TestWebSocketController {
 
     public String serviceFunction(String token, Session session) throws IOException {
         //拿到用户的id
-        String adminIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
-        Long userId = Long.valueOf(adminIdOfStr);
+//        String adminIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
+//        Long userId = Long.valueOf(adminIdOfStr);
+
+        String id = session.getId();
 
         //通过数据库查content
-        String content = userAdminMapper.selectToGetContent(userId);
+        String content = userAdminMapper.selectToGetContent(Long.valueOf(id));
 
         //注入对象
         AdminCheckInStatusInRealTimeBo adminCheckInStatusInRealTimeBo = new AdminCheckInStatusInRealTimeBo();
