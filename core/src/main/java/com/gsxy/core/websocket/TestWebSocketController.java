@@ -2,6 +2,7 @@ package com.gsxy.core.websocket;
 
 import com.gsxy.core.controller.UserAdminController;
 import com.gsxy.core.mapper.UserAdminMapper;
+import com.gsxy.core.pojo.bo.AdminCheckInStatusInRealTimeBo;
 import com.gsxy.core.pojo.vo.ResponseVo;
 import com.gsxy.core.service.SystemService;
 import com.gsxy.core.util.SpringContextUtil;
@@ -30,25 +31,25 @@ public class TestWebSocketController {
     private UserAdminController userAdminController = SpringContextUtil.getBean(UserAdminController.class);
 
     @OnOpen
-    public void onOpen(Session session, @PathParam("token") String content) throws IOException {
+    public void onOpen(Session session, @PathParam("adminCheckInStatusInRealTimeBo") AdminCheckInStatusInRealTimeBo adminCheckInStatusInRealTimeBo) throws IOException {
 //        System.out.println("签到已发起"+token);
-        String s = this.serviceFunction(content, session);
+        String s = this.serviceFunction(adminCheckInStatusInRealTimeBo, session);
         session.getBasicRemote().sendText(s);
     }
 
     // 其他方法...
     @OnMessage
-    public void onMessage(String token, Session session) throws IOException {
+    public void onMessage(AdminCheckInStatusInRealTimeBo adminCheckInStatusInRealTimeBo, Session session) throws IOException {
 
         //实现用户签到信息的实时查看
-        String s = this.serviceFunction(token, session);
+        String s = this.serviceFunction(adminCheckInStatusInRealTimeBo, session);
         session.getBasicRemote().sendText(s);
 
     }
 
 
-    public String serviceFunction(String content, Session session) throws IOException {
-        String str = userAdminController.adminCheckInStatusInRealTime(content);
+    public String serviceFunction(AdminCheckInStatusInRealTimeBo adminCheckInStatusInRealTimeBo, Session session) throws IOException {
+        String str = userAdminController.adminCheckInStatusInRealTime(adminCheckInStatusInRealTimeBo);
 
         return str;
     }

@@ -79,10 +79,10 @@ public interface UserAdminService {
     /**
      * @author hln 2023-11-22
      *      管理员查看实时签到信息
-     * @param content
+     * @param adminCheckInStatusInRealTimeBo
      * @return
      */
-    ResponseVo adminCheckInStatusInRealTime(String content);
+    ResponseVo adminCheckInStatusInRealTime(AdminCheckInStatusInRealTimeBo adminCheckInStatusInRealTimeBo);
 }
 
 
