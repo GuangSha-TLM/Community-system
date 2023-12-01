@@ -198,6 +198,15 @@ public class CommunityServiceImpl implements CommunityService {
 
         String name = userMapper.selectToGetNameByUserId(adminId);
 
+        /*
+            写麻烦了，但是懒得改，就让他待着吧
+         */
+        String uuid1 = "";
+        //随机生成UUID编号
+        UUID uuid = UUID.randomUUID();
+        String uuidString = uuid.toString().replace("-", "").toLowerCase();
+        uuid1 = uuidString;
+
         int l = 0;
         while (l < list.size()) {
             if(list.get(l) == adminId){
@@ -209,6 +218,9 @@ public class CommunityServiceImpl implements CommunityService {
             sendNotification.setCreateTime(new Date());
             sendNotification.setUserId(list.get(l++));
             sendNotification.setName(name);
+
+            sendNotification.setUuid(uuidString);
+
             //将通知内容注入到数据库中
             Long notice = noticeMapper.insertNotice(sendNotification);
 
@@ -223,9 +235,9 @@ public class CommunityServiceImpl implements CommunityService {
         signInAdminWebSocketBo.setContent(sendNotificationBo.getContent());
         signInAdminWebSocketBo.setSignInTime(sendNotificationBo.getSignInTime());
 
-        userAdminController.userAdminSignInWebSocket(signInAdminWebSocketBo);
+        userAdminController.userAdminSignInWebSocket(signInAdminWebSocketBo,uuid1);
 
-        return new ResponseVo("通知已发起",null,"0x200");
+        return new ResponseVo("通知已发起",uuid1,"0x200");
     }
 
     /**
@@ -253,38 +265,44 @@ public class CommunityServiceImpl implements CommunityService {
             return new ResponseVo("未接受到签到通知",null,"0x500");
         }
 
-        noticeMapper.updateNoticeStatus(id);
+        //修改通知状态
+        String uuid = receiveNotificationsBo.getUuid();
+        noticeMapper.updateByIdRead(userId,uuid);
 
         SignInWebSocketBo signInWebSocketBo = new SignInWebSocketBo();
         signInWebSocketBo.setContent(receiveNotificationsBo.getContent());
         signInWebSocketBo.setToken(receiveNotificationsBo.getToken());
+        signInWebSocketBo.setUuid(receiveNotificationsBo.getUuid());
 
         userController.userSignInWebSocket(signInWebSocketBo);
 
-        Long communityId = userMapper.selectToGetCommunityId(userId);
-
-        if(communityId == null || communityId == 0L){
-            return new ResponseVo<>("该社团内找不到此用户",null,"0x500");
-        }
-        SignInWebSocket signInWebSocket = new SignInWebSocket();
-        signInWebSocket.setUserId(userId);
-        signInWebSocket.setCreateTime(new Date());
-        signInWebSocket.setContent(signInWebSocketBo.getContent());
-        signInWebSocket.setCommunityId(communityId);
-
-        userMapper.insertSignInWeb(signInWebSocket);
-
-        SignInUserStatusWeb signInUserStatusWeb = userMapper.selectToGetUserAndAdminSignIn(userId);
-
-        if (signInUserStatusWeb == null){
-            return new ResponseVo("签到失败",null,"0x500");
-        }
-
-        Long id2 = userMapper.insertSignInUserWithAdmin(signInUserStatusWeb);
-
-        if(id2 == 0L){
-            return new ResponseVo("签到失败",null,"0x502");
-        }
+//        Long communityId = userMapper.selectToGetCommunityId(userId);
+//
+//        if(communityId == null || communityId == 0L){
+//            return new ResponseVo<>("该社团内找不到此用户",null,"0x500");
+//        }
+//        SignInWebSocket signInWebSocket = new SignInWebSocket();
+//        signInWebSocket.setUserId(userId);
+//        signInWebSocket.setCreateTime(new Date());
+//        signInWebSocket.setContent(signInWebSocketBo.getContent());
+//        signInWebSocket.setCommunityId(communityId);
+//
+//        userMapper.insertSignInWeb(signInWebSocket);
+//
+//        SignInUserStatusWeb signInUserStatusWeb = userMapper.selectToGetUserAndAdminSignIn(userId);
+//
+        //修改通知状态
+//        noticeMapper.updateNoticeStatus(id);
+//
+//        if (signInUserStatusWeb == null){
+//            return new ResponseVo("签到失败",null,"0x500");
+//        }
+//
+//        Long id2 = userMapper.insertSignInUserWithAdmin(signInUserStatusWeb);
+//
+//        if(id2 == 0L){
+//            return new ResponseVo("签到失败",null,"0x502");
+//        }
 
         return new ResponseVo("收到签到通知",null,"0x200");
     }

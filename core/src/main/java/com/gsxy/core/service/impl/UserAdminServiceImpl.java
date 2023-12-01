@@ -1,10 +1,10 @@
 package com.gsxy.core.service.impl;
 
+import com.gsxy.core.mapper.NoticeMapper;
 import com.gsxy.core.mapper.UserAdminMapper;
 import com.gsxy.core.mapper.UserMapper;
 import com.gsxy.core.pojo.SignInAdmin;
 import com.gsxy.core.pojo.SignInAdminWebSocket;
-import com.gsxy.core.pojo.User;
 import com.gsxy.core.pojo.UserAdmin;
 import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.ResponseVo;
@@ -31,6 +31,8 @@ public class UserAdminServiceImpl implements UserAdminService {
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private NoticeMapper noticeMapper;
 
     /**
      * @author Oh… Yeah!!!, 2023-10-24
@@ -182,13 +184,14 @@ public class UserAdminServiceImpl implements UserAdminService {
     }
 
     /**
-     * @author hln 2023-11-07
-     *      管理员发起签到-WebSocket
      * @param signInAdminWebSocketBo
+     * @param uuid1
      * @return
+     * @author hln 2023-11-07
+     * 管理员发起签到-WebSocket
      */
     @Override
-    public ResponseVo adminSignInWeb(SignInAdminWebSocketBo signInAdminWebSocketBo) {
+    public ResponseVo adminSignInWeb(SignInAdminWebSocketBo signInAdminWebSocketBo, String uuid1) {
         String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
         Long adminId = Long.valueOf(userIdOfStr);
 
@@ -203,6 +206,7 @@ public class UserAdminServiceImpl implements UserAdminService {
         signInAdminWebSocket.setReleaseTime(new Date());
         signInAdminWebSocket.setContent(signInAdminWebSocketBo.getContent());
         signInAdminWebSocket.setSignInTime(signInAdminWebSocketBo.getSignInTime());
+        signInAdminWebSocket.setUuid(uuid1);
 
         userAdminMapper.insertPutSignIn(signInAdminWebSocket);
 
@@ -212,11 +216,11 @@ public class UserAdminServiceImpl implements UserAdminService {
     /**
      * @author hln 2023-11-22
      *      管理员查看实时签到信息
-     * @param token
+     * @param uuid
      * @return
      */
     @Override
-    public ResponseVo adminCheckInStatusInRealTime(String token) {
+    public ResponseVo adminCheckInStatusInRealTime(String uuid) {
         String adminIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
         Long adminId = Long.valueOf(adminIdOfStr);
 
@@ -225,7 +229,7 @@ public class UserAdminServiceImpl implements UserAdminService {
         }
 
         //封装所有用户签到状态表中的用户id
-        Set<Long> set = userAdminMapper.selectToGetIdByAdminId(adminId);
+        Set<Long> set = userAdminMapper.selectToGetIdByAdminId(adminId,uuid);
 
         //封装该社团所有用户id到List集合中
         List<Long> list = userAdminMapper.selectToGetUserIdByAdminId(adminId);

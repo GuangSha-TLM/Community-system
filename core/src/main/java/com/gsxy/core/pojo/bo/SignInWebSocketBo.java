@@ -6,10 +6,12 @@ public class SignInWebSocketBo implements Serializable {
 
     private String token;
     private String content;//用户响应签到内容
+    private String uuid;//uuid
 
-    public SignInWebSocketBo(String token, String content) {
+    public SignInWebSocketBo(String token, String content, String uuid) {
         this.token = token;
         this.content = content;
+        this.uuid = uuid;
     }
 
     public SignInWebSocketBo() {
@@ -31,11 +33,20 @@ public class SignInWebSocketBo implements Serializable {
         this.content = content;
     }
 
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
     @Override
     public String toString() {
         return "SignInWebSocketBo{" +
                 "token='" + token + '\'' +
                 ", content='" + content + '\'' +
+                ", uuid='" + uuid + '\'' +
                 '}';
     }
 }

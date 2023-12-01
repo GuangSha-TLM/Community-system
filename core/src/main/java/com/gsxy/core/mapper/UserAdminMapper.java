@@ -167,17 +167,18 @@ public interface UserAdminMapper {
 
     /**
      * @param adminId
+     * @param uuid
      * @return
      * @author hln 2023-11-22
      * 封装所有用户签到状态表中的用户id
      */
-    Set<Long> selectToGetIdByAdminId(Long adminId);
+    Set<Long> selectToGetIdByAdminId(Long adminId, String uuid);
 
     /**
-     * @author hln 2023-11-22
-     *      封装该社团所有用户id到List集合中
      * @param adminId
      * @return
+     * @author hln 2023-11-22
+     * 封装该社团所有用户id到List集合中
      */
     List<Long> selectToGetUserIdByAdminId(Long adminId);
 
@@ -188,4 +189,5 @@ public interface UserAdminMapper {
      * @return
      */
     String selectToGetName(Long userId);
+
 }

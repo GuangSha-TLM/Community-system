@@ -182,28 +182,32 @@
     <select id="selectToGetUserAndAdminSignIn" resultType="com.gsxy.core.pojo.SignInUserStatusWeb">
         select
             t1.user_id,t2.admin_id,t1.community_id,t3.name,t3.college,t3.grade,t3.professional,
-            t3.org,t3.student_id,t2.release_time,t1.create_time,t2.sign_in_time
+            t3.org,t3.student_id,t2.release_time,t1.create_time,t2.sign_in_time,t1.uuid
         from
             sign_in_websocket t1
-                inner join
+        inner join
             sign_in_admin_websocket t2
-                inner join
+        inner join
             user t3
-            on
+        inner join
+            notice t4
+        on
                 t2.community_id = t1.community_id
-            and
+        and
                 t1.user_id = (select id from user where id = #{id})
-            and
+        and
                 t1.content = t2.content
-            and
+        and
                 t1.create_time >= t2.release_time
-            and
+        and
                 DATE(t1.create_time) = CURDATE()
-            and
+        and
                 DATE(t2.release_time) = CURDATE()
-            and
-                now() > t2.release_time
-            where
+        and
+                dealt = 0
+        and
+                t1.uuid = t2.uuid
+        where
                 t2.release_time > t1.create_time - INTERVAL t2.sign_in_time MINUTE
         limit 1
     </select>
@@ -246,9 +250,9 @@
     <insert id="insertSignInWeb" parameterType="com.gsxy.core.pojo.SignInWebSocket">
         insert into
             sign_in_websocket
-            (user_id,content,community_id,create_time)
+            (user_id,content,community_id,create_time,uuid)
         values
-            (#{userId},#{content},#{communityId},#{createTime})
+            (#{userId},#{content},#{communityId},#{createTime},#{uuid})
     </insert>
 
     <!-- 插入数据到 sign_in_user_status_web -->
@@ -256,19 +260,10 @@
         insert into
             sign_in_user_status_web
             (user_id,admin_id,community_id,name,college,grade
-            ,professional,org,student_id,status,release_time,create_time,sign_in_time)
+            ,professional,org,student_id,status,release_time,create_time,sign_in_time,uuid)
         values
             (#{userId},#{adminId},#{communityId},#{name},#{college},#{grade}
-            ,#{professional},#{org},#{studentId},1,#{releaseTime},#{createTime},#{signInTime})
+            ,#{professional},#{org},#{studentId},1,#{releaseTime},#{createTime},#{signInTime},#{uuid})
     </insert>
-
-    <!-- 删除签到记录（如果该社团没有该用户） -->
-    <delete id="deleteSignIn" parameterType="com.gsxy.core.pojo.bo.UserSignInBo">
-        delete
-        from
-            sign_in
-        where
-            id = #{Id}
-    </delete>
 
 </mapper>

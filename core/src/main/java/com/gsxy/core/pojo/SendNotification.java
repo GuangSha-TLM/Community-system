@@ -11,14 +11,16 @@ public class SendNotification implements Serializable {
     private String name;//签到人名
     private Integer kinds = 2;//签到状态
     private Long userId;//用户ID
+    private String uuid;//uuid编码
 
-    public SendNotification(Long createBy, Date createTime, String context, String name, Integer kinds, Long userId) {
+    public SendNotification(Long createBy, Date createTime, String context, String name, Integer kinds, Long userId, String uuid) {
         this.createBy = createBy;
         this.createTime = createTime;
         this.context = context;
         this.name = name;
         this.kinds = kinds;
         this.userId = userId;
+        this.uuid = uuid;
     }
 
     public SendNotification() {
@@ -72,6 +74,14 @@ public class SendNotification implements Serializable {
         this.userId = userId;
     }
 
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
     @Override
     public String toString() {
         return "SendNotification{" +
@@ -81,6 +91,7 @@ public class SendNotification implements Serializable {
                 ", name='" + name + '\'' +
                 ", kinds=" + kinds +
                 ", userId=" + userId +
+                ", uuid='" + uuid + '\'' +
                 '}';
     }
 }

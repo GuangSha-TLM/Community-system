@@ -49,9 +49,9 @@
     <insert id="insertNotice">
         insert into
             notice
-            (user_email_id,context,create_by,create_time,name,kinds)
+            (user_email_id,context,create_by,create_time,name,kinds,uuid)
         values
-            (#{userId},#{context},#{createBy},#{createTime},#{name},#{kinds})
+            (#{userId},#{context},#{createBy},#{createTime},#{name},#{kinds},#{uuid})
     </insert>
 
     <!--
@@ -181,11 +181,13 @@
         FROM
             notice t1
         INNER JOIN
-                community_user t2
+            community_user t2
         ON
             t1.create_by = (SELECT community_id FROM community_user WHERE user_id = #{userId} LIMIT 1)
-        WHERE
-            t1.create_time > now() AND t1.create_time > DATE_SUB(NOW(), INTERVAL 10 MINUTE)
+        and
+            t1.create_time > DATE_SUB(NOW(), INTERVAL 3 MINUTE)
+        where
+            user_email_id = #{userId}
         LIMIT 1;
     </select>
 
@@ -209,7 +211,9 @@
         set
             dealt = 1
         where
-            id = #{noticeId};
+            user_email_id = #{userId}
+        and
+            create_time > DATE_SUB(NOW(), INTERVAL 1 MINUTE)
     </update>
 
     <!-- 修改用户确认通知状态 -->
@@ -221,6 +225,30 @@
             dealt = 1
         where
             id = #{id}
+    </update>
+
+    <!-- 根据id和uuid修改处理状态 -->
+    <update id="updateByIdDealt">
+        update
+            notice
+        set
+            dealt = 1
+        where
+            user_email_id = #{userId}
+          and
+            uuid = #{uuid}
+    </update>
+
+    <!-- 根据id和uuid修改阅读状态 -->
+    <update id="updateByIdRead">
+        update
+            notice
+        set
+            `read` = 1
+        where
+            user_email_id = #{userId}
+          and
+            uuid = #{uuid}
     </update>
 
 </mapper>

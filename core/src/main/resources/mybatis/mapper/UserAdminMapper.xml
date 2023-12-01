@@ -99,9 +99,9 @@
     <insert id="insertPutSignIn" parameterType="com.gsxy.core.pojo.SignInAdminWebSocket">
         insert into
             sign_in_admin_websocket
-            (admin_id,community_id,content,release_time,sign_in_time)
+            (admin_id,community_id,content,release_time,sign_in_time,uuid)
         values
-            (#{adminId},#{communityId},#{content},#{releaseTime},#{signInTime})
+            (#{adminId},#{communityId},#{content},#{releaseTime},#{signInTime},#{uuid})
     </insert>
 
     <!--
@@ -203,34 +203,34 @@
         limit 1
     </select>
 
-    <!-- 获取所需的所有字段 -->
-    <select id="selectToGetUserBo" resultType="com.gsxy.core.pojo.bo.UserSignInStatusBo"
-            parameterType="com.gsxy.core.pojo.bo.UserSignInStatusBo">
-        select
-            t1.id,t5.admin_id,t3.user_id,t1.community_id,t2.name,t2.college,t2.grade,t2.professional
-             ,t2.org,t2.student_id,t4.status,t1.create_time
-        from
-            sign_in_user_status t1
-        inner join
-            user t2
-        inner join
-            community_user t3
-        inner join
-            sign_in t4
-        inner join
-            sign_in_admin t5
-        on
-            t3.community_id = t1.community_id
-        and
-            t2.id = t3.user_id
-        and
-            t4.status = t5.status
-        and
-            t4.create_time > t5.create_time
-        and
-            t5.create_time > t4.create_time - INTERVAL 1 HOUR
-        limit 1
-    </select>
+<!--    &lt;!&ndash; 获取所需的所有字段 &ndash;&gt;-->
+<!--    <select id="selectToGetUserBo" resultType="com.gsxy.core.pojo.bo.UserSignInStatusBo"-->
+<!--            parameterType="com.gsxy.core.pojo.bo.UserSignInStatusBo">-->
+<!--        select-->
+<!--            t1.id,t5.admin_id,t3.user_id,t1.community_id,t2.name,t2.college,t2.grade,t2.professional-->
+<!--             ,t2.org,t2.student_id,t4.status,t1.create_time-->
+<!--        from-->
+<!--            sign_in_user_status t1-->
+<!--        inner join-->
+<!--            user t2-->
+<!--        inner join-->
+<!--            community_user t3-->
+<!--        inner join-->
+<!--            sign_in t4-->
+<!--        inner join-->
+<!--            sign_in_admin t5-->
+<!--        on-->
+<!--            t3.community_id = t1.community_id-->
+<!--        and-->
+<!--            t2.id = t3.user_id-->
+<!--        and-->
+<!--            t4.status = t5.status-->
+<!--        and-->
+<!--            t4.create_time > t5.create_time-->
+<!--        and-->
+<!--            t5.create_time > t4.create_time - INTERVAL 1 HOUR-->
+<!--        limit 1-->
+<!--    </select>-->
 
     <!-- 查询所有的实体类SignInAdminWebSocket的信息到sign_in_admin_websocket -->
     <select id="selectToGetWebByAdminId" resultType="com.gsxy.core.pojo.bo.SignInAdminWebSocketBo">
@@ -243,18 +243,21 @@
         limit 1
     </select>
 
-    <!-- 封装所有用户签到状态表中的用户id -->
-    <select id="selectToGetIdByAdminId" resultType="long" parameterType="long">
+    <!-- 查找当前的id对应用户的姓名 -->
+    <select id="selectToGetName" resultType="java.lang.String" parameterType="java.lang.Long">
         select
-            user_id
+            t1.name
         from
-            sign_in_user_status_web
-        where
-            admin_id = #{adminId}
+            user t1
+        inner join
+            notice t2
+        on
+            t1.id = (select id from user where id = #{userId})
+        limit 1
     </select>
 
     <!-- 封装该社团所有用户id到List集合中 -->
-    <select id="selectToGetUserIdByAdminId" resultType="java.lang.Long" parameterType="long">
+    <select id="selectToGetUserIdByAdminId" resultType="java.lang.Long" parameterType="java.lang.Long">
         select
             user_id
         from
@@ -263,14 +266,20 @@
             create_by = #{adminId}
     </select>
 
-    <!-- 查找当前的id对应用户的姓名 -->
-    <select id="selectToGetName" resultType="java.lang.String" parameterType="java.lang.Long">
+    <!-- 封装所有用户签到状态表中的用户id -->
+    <select id="selectToGetIdByAdminId" resultType="java.lang.Long">
         select
-            name
+            t1.user_id
         from
-            user
+            sign_in_user_status_web t1
+        inner join
+            notice t2
+        on
+            t1.admin_id = #{adminId}
+        and
+            t1.uuid = #{uuid}
         where
-            id = #{userId}
+            t2.dealt = 1
     </select>
 
 </mapper>

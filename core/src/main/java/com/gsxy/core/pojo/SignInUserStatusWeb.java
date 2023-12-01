@@ -21,8 +21,9 @@ public class SignInUserStatusWeb implements Serializable {
     private Date releaseTime;//签到发布状态
     private Date createTime;//用户进行签到时间
     private Integer signInTime;//签到时长
+    private String uuid;//uuid
 
-    public SignInUserStatusWeb(Long userId, Long adminId, Long communityId, String name, Integer college, String grade, String professional, Integer org, String studentId, Integer status, Date releaseTime, Date createTime, Integer signInTime) {
+    public SignInUserStatusWeb(Long userId, Long adminId, Long communityId, String name, Integer college, String grade, String professional, Integer org, String studentId, Integer status, Date releaseTime, Date createTime, Integer signInTime, String uuid) {
         this.userId = userId;
         this.adminId = adminId;
         this.communityId = communityId;
@@ -36,6 +37,7 @@ public class SignInUserStatusWeb implements Serializable {
         this.releaseTime = releaseTime;
         this.createTime = createTime;
         this.signInTime = signInTime;
+        this.uuid = uuid;
     }
 
     public SignInUserStatusWeb() {
@@ -145,6 +147,14 @@ public class SignInUserStatusWeb implements Serializable {
         this.signInTime = signInTime;
     }
 
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
     @Override
     public String toString() {
         return "SignInUserStatusWeb{" +
@@ -161,6 +171,7 @@ public class SignInUserStatusWeb implements Serializable {
                 ", releaseTime=" + releaseTime +
                 ", createTime=" + createTime +
                 ", signInTime=" + signInTime +
+                ", uuid='" + uuid + '\'' +
                 '}';
     }
 }

@@ -1,7 +1,6 @@
 package com.gsxy.core.controller;
 
 import com.alibaba.fastjson2.JSONArray;
-import com.gsxy.core.pojo.SignInAdmin;
 import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.ResponseVo;
 import com.gsxy.core.service.UserAdminService;
@@ -11,7 +10,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
 
 
@@ -132,20 +130,21 @@ public class UserAdminController {
     }
 
     /**
-     * @author hln 2023-11-07
-     *      管理员发起签到-WebSocket
      * @param signInAdminWebSocketBo
+     * @param uuid1
      * @return
+     * @author hln 2023-11-07
+     * 管理员发起签到-WebSocket
      */
     @PostMapping("/adminsigninweb")
     @ApiOperation("管理员发起签到")
-    public String userAdminSignInWebSocket(@RequestBody SignInAdminWebSocketBo signInAdminWebSocketBo){
+    public String userAdminSignInWebSocket(@RequestBody SignInAdminWebSocketBo signInAdminWebSocketBo, String uuid1){
         Map<String,String> map = ThreadLocalUtil.mapThreadLocal.get();
         if(map.get("error") != null){
             return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
         }
 
-        return JSONArray.toJSONString(userAdminService.adminSignInWeb(signInAdminWebSocketBo));
+        return JSONArray.toJSONString(userAdminService.adminSignInWeb(signInAdminWebSocketBo,uuid1));
     }
 
     /**
@@ -163,18 +162,18 @@ public class UserAdminController {
     /**
      * @author hln 2023-11-22
      *      管理员查看实时签到信息
-     * @param token
+     * @param uuid
      * @return
      */
     @PostMapping("/findAllStatusInRealTime")
     @ApiOperation("管理员查看实时签到信息")
-    public String adminCheckInStatusInRealTime(@RequestParam String token){
+    public String adminCheckInStatusInRealTime(@RequestParam String uuid){
         Map<String,String> map = ThreadLocalUtil.mapThreadLocal.get();
         if(map.get("error") != null){
             return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
         }
 
-        return JSONArray.toJSONString(userAdminService.adminCheckInStatusInRealTime(token));
+        return JSONArray.toJSONString(userAdminService.adminCheckInStatusInRealTime(uuid));
     }
 
 }

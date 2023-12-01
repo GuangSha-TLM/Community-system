@@ -13,13 +13,15 @@ public class SignInWebSocket implements Serializable {
     private String content;//签到响应内容
     private Long communityId;//社团ID
     private Date createTime;//签到时间
+    private String uuid;//uuid
 
-    public SignInWebSocket(Long id, Long userId, String content, Long communityId, Date createTime) {
+    public SignInWebSocket(Long id, Long userId, String content, Long communityId, Date createTime, String uuid) {
         this.id = id;
         this.userId = userId;
         this.content = content;
         this.communityId = communityId;
         this.createTime = createTime;
+        this.uuid = uuid;
     }
 
     public SignInWebSocket() {
@@ -65,6 +67,14 @@ public class SignInWebSocket implements Serializable {
         this.createTime = createTime;
     }
 
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
     @Override
     public String toString() {
         return "SignInWebSocket{" +
@@ -73,6 +83,7 @@ public class SignInWebSocket implements Serializable {
                 ", content='" + content + '\'' +
                 ", communityId=" + communityId +
                 ", createTime=" + createTime +
+                ", uuid='" + uuid + '\'' +
                 '}';
     }
 }

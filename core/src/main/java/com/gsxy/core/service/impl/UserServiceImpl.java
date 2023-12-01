@@ -1,5 +1,6 @@
 package com.gsxy.core.service.impl;
 
+import com.gsxy.core.mapper.NoticeMapper;
 import com.gsxy.core.mapper.UserAdminMapper;
 import com.gsxy.core.mapper.UserMapper;
 import com.gsxy.core.pojo.*;
@@ -33,7 +34,8 @@ public class UserServiceImpl implements UserService {
     private SystemService systemService;
     @Autowired
     private UserAdminMapper userAdminMapper;
-
+    @Autowired
+    private NoticeMapper noticeMapper;
 
     /**
      * @author hln 2023-10-23
@@ -329,6 +331,7 @@ public class UserServiceImpl implements UserService {
         signInWebSocket.setCreateTime(new Date());
         signInWebSocket.setContent(signInWebSocketBo.getContent());
         signInWebSocket.setCommunityId(communityId);
+        signInWebSocket.setUuid(signInWebSocketBo.getUuid());
 
         userMapper.insertSignInWeb(signInWebSocket);
 
@@ -343,6 +346,10 @@ public class UserServiceImpl implements UserService {
         if(id == 0L){
             return new ResponseVo("签到失败",null,"0x502");
         }
+
+        //修改通知处理状态，若签到成功则dealt = 1
+        String uuid = signInWebSocketBo.getUuid();
+        noticeMapper.updateByIdDealt(uuid,userId);
 
         return new ResponseVo("签到成功",signInWebSocketBo,"0x200");
     }

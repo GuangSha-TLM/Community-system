@@ -1,7 +1,5 @@
 package com.gsxy.core.service;
 
-import com.gsxy.core.pojo.User;
-import com.gsxy.core.pojo.UserAdmin;
 import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.ResponseVo;
 
@@ -70,20 +68,21 @@ public interface UserAdminService {
     ResponseVo findAllSignInStatus();
 
     /**
-     * @author hln 2023-11-07
-     *      管理员发起签到-WebSocket
      * @param signInAdminWebSocketBo
+     * @param uuid1
      * @return
+     * @author hln 2023-11-07
+     * 管理员发起签到-WebSocket
      */
-    ResponseVo adminSignInWeb(SignInAdminWebSocketBo signInAdminWebSocketBo);
+    ResponseVo adminSignInWeb(SignInAdminWebSocketBo signInAdminWebSocketBo, String uuid1);
 
     /**
      * @author hln 2023-11-22
      *      管理员查看实时签到信息
-     * @param token
+     * @param uuid
      * @return
      */
-    ResponseVo adminCheckInStatusInRealTime(String token);
+    ResponseVo adminCheckInStatusInRealTime(String uuid);
 }
 
 

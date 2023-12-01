@@ -32,7 +32,7 @@ public class TestWebSocketController {
 
     @OnOpen
     public void onOpen(Session session, @PathParam("token") String token) throws IOException {
-        System.out.println("签到已发起"+token);
+//        System.out.println("签到已发起"+token);
         this.token = token;
         String s = this.serviceFunction(token, session);
         session.getBasicRemote().sendText(s);

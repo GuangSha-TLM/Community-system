@@ -121,6 +121,22 @@ public interface NoticeMapper {
      *      修改用户确认通知状态
      */
     void updateNoticeStatus(Long id);
+
+    /**
+     * @author hln 2023-11-30
+     *      根据id和uuid修改阅读状态
+     * @param userId
+     * @param uuid
+     */
+    void updateByIdRead(Long userId, String uuid);
+
+    /**
+     * @author hln 2023-11-30
+     *      根据userId和uuid修改处理状态
+     * @param uuid
+     * @param userId
+     */
+    void updateByIdDealt(String uuid, Long userId);
 }
 
 
