@@ -164,18 +164,17 @@ public class UserAdminController {
      * @author hln 2023-11-22
      *      管理员查看实时签到信息
      * @param token
-     * @param content
      * @return
      */
     @PostMapping("/findAllStatusInRealTime")
     @ApiOperation("管理员查看实时签到信息")
-    public String adminCheckInStatusInRealTime(@RequestParam String token,@RequestParam String content){
+    public String adminCheckInStatusInRealTime(@RequestParam String token){
         Map<String,String> map = ThreadLocalUtil.mapThreadLocal.get();
         if(map.get("error") != null){
             return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
         }
 
-        return JSONArray.toJSONString(userAdminService.adminCheckInStatusInRealTime(token,content));
+        return JSONArray.toJSONString(userAdminService.adminCheckInStatusInRealTime(token));
     }
 
 }

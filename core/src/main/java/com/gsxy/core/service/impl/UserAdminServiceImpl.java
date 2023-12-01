@@ -217,11 +217,10 @@ public class UserAdminServiceImpl implements UserAdminService {
      * @author hln 2023-11-22
      *      管理员查看实时签到信息
      * @param token
-     * @param content
      * @return
      */
     @Override
-    public ResponseVo adminCheckInStatusInRealTime(String token , String content) {
+    public ResponseVo adminCheckInStatusInRealTime(String token) {
         String adminIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
         Long adminId = Long.valueOf(adminIdOfStr);
 
@@ -229,7 +228,7 @@ public class UserAdminServiceImpl implements UserAdminService {
             return new ResponseVo("token解析失败",null,"0x501");
         }
 
-        Long id = noticeMapper.selectByUserIdNotice(adminId,content);
+        Long id = noticeMapper.selectByUserIdNotice(adminId);
         //判断通知是否收到
         if(id == null || id == 0L){
             return new ResponseVo("未接受到签到通知",null,"0x500");

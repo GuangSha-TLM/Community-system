@@ -56,7 +56,7 @@ public class TestWebSocketController {
 //        adminCheckInStatusInRealTimeBo.setContent(content);
 
         //转换格式
-        String str = userAdminController.adminCheckInStatusInRealTime(token,content);
+        String str = userAdminController.adminCheckInStatusInRealTime(token);
 
         return str;
     }

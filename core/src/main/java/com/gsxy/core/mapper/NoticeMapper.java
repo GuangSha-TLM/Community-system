@@ -113,7 +113,7 @@ public interface NoticeMapper {
      * @param userId
      * @return
      */
-    Long selectByUserIdNotice(Long userId, String content);
+    Long selectByUserIdNotice(Long userId);
 
     /**
      * @author hln 2023-11-30

@@ -258,8 +258,7 @@ public class CommunityServiceImpl implements CommunityService {
         }
 
         //通过社团id找数据
-        String content = receiveNotificationsBo.getContent();
-        Long id = noticeMapper.selectByUserIdNotice(userId,content);
+        Long id = noticeMapper.selectByUserIdNotice(userId);
 
         //判断通知是否收到
         if(id == null || id == 0L){
