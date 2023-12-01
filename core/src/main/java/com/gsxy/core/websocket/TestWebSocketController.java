@@ -27,14 +27,12 @@ import java.util.Set;
 public class TestWebSocketController {
 
     // 构造函数注入任何需要的依赖项
-    private String token;//前端传输的token信息
     private UserAdminController userAdminController = SpringContextUtil.getBean(UserAdminController.class);
 
     @OnOpen
-    public void onOpen(Session session, @PathParam("token") String token) throws IOException {
+    public void onOpen(Session session, @PathParam("token") String content) throws IOException {
 //        System.out.println("签到已发起"+token);
-        this.token = token;
-        String s = this.serviceFunction(token, session);
+        String s = this.serviceFunction(content, session);
         session.getBasicRemote().sendText(s);
     }
 
@@ -49,8 +47,8 @@ public class TestWebSocketController {
     }
 
 
-    public String serviceFunction(String token, Session session) throws IOException {
-        String str = userAdminController.adminCheckInStatusInRealTime(token);
+    public String serviceFunction(String content, Session session) throws IOException {
+        String str = userAdminController.adminCheckInStatusInRealTime(content);
 
         return str;
     }
