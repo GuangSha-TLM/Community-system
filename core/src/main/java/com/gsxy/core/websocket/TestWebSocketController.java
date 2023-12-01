@@ -51,12 +51,12 @@ public class TestWebSocketController {
         String content = userAdminMapper.selectToGetContent();
 
         //注入对象
-        AdminCheckInStatusInRealTimeBo adminCheckInStatusInRealTimeBo = new AdminCheckInStatusInRealTimeBo();
-        adminCheckInStatusInRealTimeBo.setToken(token);
-        adminCheckInStatusInRealTimeBo.setContent(content);
+//        AdminCheckInStatusInRealTimeBo adminCheckInStatusInRealTimeBo = new AdminCheckInStatusInRealTimeBo();
+//        adminCheckInStatusInRealTimeBo.setToken(token);
+//        adminCheckInStatusInRealTimeBo.setContent(content);
 
         //转换格式
-        String str = userAdminController.adminCheckInStatusInRealTime(adminCheckInStatusInRealTimeBo);
+        String str = userAdminController.adminCheckInStatusInRealTime(token,content);
 
         return str;
     }

@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
 import java.util.Map;
 
 
@@ -162,18 +163,19 @@ public class UserAdminController {
     /**
      * @author hln 2023-11-22
      *      管理员查看实时签到信息
-     * @param adminCheckInStatusInRealTimeBo
+     * @param token
+     * @param content
      * @return
      */
     @PostMapping("/findAllStatusInRealTime")
     @ApiOperation("管理员查看实时签到信息")
-    public String adminCheckInStatusInRealTime(@RequestBody AdminCheckInStatusInRealTimeBo adminCheckInStatusInRealTimeBo){
+    public String adminCheckInStatusInRealTime(@RequestParam String token,@RequestParam String content){
         Map<String,String> map = ThreadLocalUtil.mapThreadLocal.get();
         if(map.get("error") != null){
             return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
         }
 
-        return JSONArray.toJSONString(userAdminService.adminCheckInStatusInRealTime(adminCheckInStatusInRealTimeBo));
+        return JSONArray.toJSONString(userAdminService.adminCheckInStatusInRealTime(token,content));
     }
 
 }
