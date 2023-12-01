@@ -206,6 +206,7 @@ public class CommunityServiceImpl implements CommunityService {
         UUID uuid = UUID.randomUUID();
         String uuidString = uuid.toString().replace("-", "").toLowerCase();
         uuid1 = uuidString;
+        this.uuid = uuid1;
 
         int l = 0;
         while (l < list.size()) {
@@ -240,6 +241,8 @@ public class CommunityServiceImpl implements CommunityService {
         return new ResponseVo("通知已发起",uuid1,"0x200");
     }
 
+    private static String uuid = "";
+
     /**
      * @author hln 2023-11-14
      *      社团成员接受签到通知
@@ -266,6 +269,7 @@ public class CommunityServiceImpl implements CommunityService {
         }
 
         //修改通知状态
+        receiveNotificationsBo.setUuid(this.uuid);
         String uuid = receiveNotificationsBo.getUuid();
         noticeMapper.updateByIdRead(userId,uuid);
 
