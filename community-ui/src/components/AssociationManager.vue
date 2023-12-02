@@ -164,7 +164,7 @@ export default {
         },
         async showModal() {
             this.sendNotificationBo.token = this.token
-            let obj = await synRequestPost("/community/sendNotification", this.sendNotificationBo);
+            let obj = await synRequestPost("/community/sendNotificationNew", this.sendNotificationBo);
             if (obj.code == "0x200") {
                 this.SignInWindow = false
                 this.setupWebSocket()
