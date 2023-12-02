@@ -16,7 +16,7 @@
         from
             notice
         where
-            user_email_id = #{userEmailId}
+            user_email_id = #{userId}
     </select>
 
 

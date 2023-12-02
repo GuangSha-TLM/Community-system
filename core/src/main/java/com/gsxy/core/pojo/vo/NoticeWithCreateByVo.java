@@ -4,6 +4,9 @@ import com.gsxy.core.pojo.Notice;
 import com.gsxy.core.pojo.User;
 import io.swagger.models.auth.In;
 
+import javax.xml.crypto.Data;
+import java.util.Date;
+
 /**
  * @author Oh...Yeah!!! 2023-11-5
  * 用户查看通知的实体类
@@ -21,6 +24,9 @@ public class NoticeWithCreateByVo {
     private Integer read;
     private Integer dealt;
     private Integer kinds;
+    private Date createTime;
+
+
 
 
     public NoticeWithCreateByVo() {
@@ -30,7 +36,11 @@ public class NoticeWithCreateByVo {
         this.name = name;
     }
 
-    public NoticeWithCreateByVo(Long id, String noticeName, Long userEmailId, Long createBy, String context, String name, String professional, String grade, Integer read, Integer dealt, Integer kinds) {
+    public NoticeWithCreateByVo(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public NoticeWithCreateByVo(Long id, String noticeName, Long userEmailId, Long createBy, String context, String name, String professional, String grade, Integer read, Integer dealt, Integer kinds,Date createTime) {
         this.id = id;
         this.noticeName = noticeName;
         UserEmailId = userEmailId;
@@ -42,6 +52,25 @@ public class NoticeWithCreateByVo {
         this.read = read;
         this.dealt = dealt;
         this.kinds = kinds;
+        this.createTime = createTime;
+    }
+
+    @Override
+    public String toString() {
+        return "NoticeWithCreateByVo{" +
+                "id=" + id +
+                ", noticeName='" + noticeName + '\'' +
+                ", UserEmailId=" + UserEmailId +
+                ", createBy=" + createBy +
+                ", context='" + context + '\'' +
+                ", name='" + name + '\'' +
+                ", professional='" + professional + '\'' +
+                ", grade='" + grade + '\'' +
+                ", read=" + read +
+                ", dealt=" + dealt +
+                ", kinds=" + kinds +
+                ", createTime=" + createTime +
+                '}';
     }
 
     public Long getId() {
@@ -132,20 +161,11 @@ public class NoticeWithCreateByVo {
         this.kinds = kinds;
     }
 
-    @Override
-    public String toString() {
-        return "NoticeWithCreateByVo{" +
-                "id=" + id +
-                ", noticeName='" + noticeName + '\'' +
-                ", UserEmailId=" + UserEmailId +
-                ", createBy=" + createBy +
-                ", context='" + context + '\'' +
-                ", name='" + name + '\'' +
-                ", professional='" + professional + '\'' +
-                ", grade='" + grade + '\'' +
-                ", read=" + read +
-                ", dealt=" + dealt +
-                ", kinds=" + kinds +
-                '}';
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

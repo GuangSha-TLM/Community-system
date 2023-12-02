@@ -448,6 +448,7 @@ public class CommunityServiceImpl implements CommunityService {
         notice.setRead(0);
         notice.setDealt(0);
         notice.setKinds(1);
+        notice.setCreateTime(new Date());
         UUID uuid = UUID.randomUUID();
         notice.setUuid(uuid.toString());
 
@@ -464,6 +465,8 @@ public class CommunityServiceImpl implements CommunityService {
         noticeWithUser.setSendUserId(userId);
         noticeWithUser.setCreateBy(userId);
         noticeWithUser.setNoticeId(notice2.getId());
+        noticeWithUser.setCreateTime(new Date());
+
 
         //增添历史记录
         noticeWithUserMapper.addNoticeWithUser(noticeWithUser);
@@ -517,6 +520,8 @@ public class CommunityServiceImpl implements CommunityService {
             notice.setRead(0);
             notice.setDealt(1);
             notice.setKinds(0);
+            notice.setCreateTime(new Date());
+
             //发送通知
             noticeMapper.addNotice(notice);
 
@@ -530,6 +535,7 @@ public class CommunityServiceImpl implements CommunityService {
             noticeWithUser.setCreateBy(userId);
             noticeWithUser.setStatus(0);
             noticeWithUser.setDelFlag(0);
+            noticeWithUser.setCreateTime(new Date());
 
             noticeWithUserMapper.addNoticeWithUser(noticeWithUser);
 
@@ -563,6 +569,8 @@ public class CommunityServiceImpl implements CommunityService {
         notice.setRead(0);
         notice.setDealt(1);
         notice.setKinds(0);
+        notice.setCreateTime(new Date());
+
         noticeMapper.addNotice(notice);
 
 
@@ -573,7 +581,7 @@ public class CommunityServiceImpl implements CommunityService {
         noticeWithUser2.setCreateBy(userId);
         noticeWithUser2.setStatus(0);
         noticeWithUser2.setDelFlag(0);
-
+        noticeWithUser2.setCreateTime(new Date());
         //增添历史记录
         noticeWithUserMapper.addNoticeWithUser(noticeWithUser2);
 

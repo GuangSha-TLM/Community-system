@@ -12,10 +12,7 @@ import com.gsxy.core.util.ThreadLocalUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author Oh...Yeah!!! 2023-10-28
@@ -57,7 +54,7 @@ public class NoticeServiceImpl implements NoticeService {
             if (user != null){
 
                 //有用户数据
-                list2.add(new NoticeWithCreateByVo(
+              list2.add(new NoticeWithCreateByVo(
                         notice.getId(),
                         notice.getName(),
                         notice.getUserEmailId(),
@@ -68,8 +65,10 @@ public class NoticeServiceImpl implements NoticeService {
                         user.getGrade(),
                         notice.getRead(),
                         notice.getDealt(),
-                        notice.getKinds()
-                ));
+                        notice.getKinds(),
+                        notice.getCreateTime()
+                )
+                );
             }else {
 
                 //没有用户数据

@@ -88,9 +88,9 @@
     <!-- 根据id查找用户 -->
     <select id="selectByUserId" resultType="com.gsxy.core.pojo.User" parameterType="java.lang.Long">
         select
-            t1.name,t1.college,t1.student_id,t1.org,t1.grade,t1.professional
+            *
         from
-            user t1
+            user
         where
             id=#{id}
         limit 1
