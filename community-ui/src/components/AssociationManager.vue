@@ -114,17 +114,23 @@ export default {
             webSocketIp: "127.0.0.1",
             webSocketPort: 8008,
 
-            signInFrom: []
-
+            signInFrom: [],
+            // adminCheckInStatusInRealTimeBo:{
+            //     token:'',
+            //     content:''
+            // }
         }
     },
     mounted() {
         this.getMerchantInformation()
+        // this.setupWebSocket() 
         if (this.user.role > 0) {
             setInterval(() => {
-                const token = this.token; // 替换为您的消息内容
+                 // 替换为您的消息内容
                 if (this.socket && this.socket.readyState === WebSocket.OPEN) {
-                    this.socket.send(token);
+                    // this.adminCheckInStatusInRealTimeBo.token= this.token
+                    // this.adminCheckInStatusInRealTimeBo.content= this.sendNotificationBo.content
+                    this.socket.send(this.token);
                 }
             }, 500);
         }
@@ -141,19 +147,19 @@ export default {
 
             this.socket.onopen = () => {
                 this.socketStatus = '已连接';
+                console.log('连接成功');
             };
 
             this.socket.onmessage = (event) => {
                 // console.log(event);
                 let obj = JSON.parse(event.data);
                 this.signInFrom = obj.data
-                console.log(this.signInFrom);
+                console.log(obj);
             };
 
             this.socket.onclose = () => {
                 this.socketStatus = '已关闭';
                 console.log("close");
-                this.setupWebSocket();
             };
         },
         async showModal() {
@@ -163,7 +169,7 @@ export default {
                 this.SignInWindow = false
                 this.setupWebSocket()
             }
-            console.log(obj);
+            // console.log(obj);
         },
 
         //跳转指定页面
@@ -171,6 +177,7 @@ export default {
             let res = await synRequestPost(`/community/communityAndUser?token=${this.token}`);
             if (res.code == "0x200") {
                 this.list = res.data;
+                console.log(this.list);
             }
         },
         async deleteById(id) {
