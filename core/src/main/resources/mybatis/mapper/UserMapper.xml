@@ -225,7 +225,7 @@
         inner join
             user t3
         inner join
-            notice t4
+            notice  t4
         on
             t2.community_id = t1.community_id
         and
