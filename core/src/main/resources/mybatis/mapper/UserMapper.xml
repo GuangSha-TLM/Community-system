@@ -239,6 +239,9 @@
             t1.uuid = t2.uuid
         where
             t2.release_time > t1.create_time - INTERVAL t2.sign_in_time MINUTE
+        order by
+            t4.create_time
+        desc
         limit 1
     </select>
 
