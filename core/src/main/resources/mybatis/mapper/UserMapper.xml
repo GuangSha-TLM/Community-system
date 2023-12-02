@@ -212,6 +212,7 @@
         limit 1
     </select>
 
+
     <!-- 查询UserAndAdminSignIn实体类信息 -->
     <select id="selectToGetUserAndAdminSignInNew" resultType="com.gsxy.core.pojo.SignInUserStatusWeb">
         select
