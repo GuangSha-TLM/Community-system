@@ -185,10 +185,6 @@
         inner join
             sign_in_admin_websocket t3
         ON
-            t1.create_by = (SELECT community_id FROM community_user WHERE user_id = #{userId} LIMIT 1)
-        and
-            user_email_id = #{userId}
-        and
             t1.uuid = t3.uuid
         where
             t1.create_by = t3.admin_id
