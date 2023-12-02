@@ -22,11 +22,10 @@ public class TestWebSocketController {
 
     // 构造函数注入任何需要的依赖项
     private UserAdminController userAdminController = SpringContextUtil.getBean(UserAdminController.class);
-    private UserAdminMapper userAdminMapper = SpringContextUtil.getBean(UserAdminMapper.class);
+//    private UserAdminMapper userAdminMapper = SpringContextUtil.getBean(UserAdminMapper.class);
 
     @OnOpen
     public void onOpen(Session session, @PathParam("token") String token) throws IOException {
-//        System.out.println("签到已发起"+token);
         String s = this.serviceFunction(token, session);
         session.getBasicRemote().sendText(s);
     }
@@ -43,20 +42,8 @@ public class TestWebSocketController {
 
 
     public String serviceFunction(String token, Session session) throws IOException {
-        //拿到用户的id
-//        String adminIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
-//        Long userId = Long.valueOf(adminIdOfStr);
-
-        //通过数据库查content
-        String content = userAdminMapper.selectToGetContent();
-
-        //注入对象
-//        AdminCheckInStatusInRealTimeBo adminCheckInStatusInRealTimeBo = new AdminCheckInStatusInRealTimeBo();
-//        adminCheckInStatusInRealTimeBo.setToken(token);
-//        adminCheckInStatusInRealTimeBo.setContent(content);
-
         //转换格式
-        String str = userAdminController.adminCheckInStatusInRealTime(token);
+        String str = userAdminController.adminCheckInStatusInRealTimeNew(token);
 
         return str;
     }

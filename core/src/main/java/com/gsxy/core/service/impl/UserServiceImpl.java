@@ -354,4 +354,53 @@ public class UserServiceImpl implements UserService {
         return new ResponseVo("签到成功",signInWebSocketBo,"0x200");
     }
 
+    /**
+     * @author hln 2023-11-07
+     *      用户签到（响应）功能
+     * @param signInWebSocketBo
+     * @return
+     */
+    @Override
+    public ResponseVo userSignInWebSocketNew(SignInWebSocketBo signInWebSocketBo) {
+        String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
+        Long userId = Long.valueOf(userIdOfStr);//用户id
+
+        if(userId == null || userId == 0L){
+            return new ResponseVo("token解析失败",null,"0x501");
+        }
+
+        Long communityId = userMapper.selectToGetCommunityId(userId);
+
+        if(communityId == null || communityId == 0L){
+            return new ResponseVo<>("该社团内找不到此用户",null,"0x500");
+        }
+
+        SignInWebSocket signInWebSocket = new SignInWebSocket();
+        signInWebSocket.setUserId(userId);
+        signInWebSocket.setCreateTime(new Date());
+        signInWebSocket.setContent(signInWebSocketBo.getContent());
+        signInWebSocket.setCommunityId(communityId);
+        signInWebSocket.setUuid(signInWebSocketBo.getUuid());
+
+        userMapper.insertSignInWeb(signInWebSocket);
+
+        SignInUserStatusWeb signInUserStatusWeb = userMapper.selectToGetUserAndAdminSignInNew(userId);
+
+        if (signInUserStatusWeb == null){
+            return new ResponseVo("签到失败",null,"0x500");
+        }
+
+        Long id = userMapper.insertSignInUserWithAdmin(signInUserStatusWeb);
+
+        if(id == 0L){
+            return new ResponseVo("签到失败",null,"0x502");
+        }
+
+        //修改通知处理状态，若签到成功则dealt = 1
+        String uuid = signInWebSocketBo.getUuid();
+        noticeMapper.updateByIdDealt(uuid,userId);
+
+        return new ResponseVo("签到成功",signInWebSocketBo,"0x200");
+    }
+
 }

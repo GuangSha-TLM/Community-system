@@ -89,4 +89,13 @@ public interface UserService {
      * @return
      */
     ResponseVo userSignInWebSocket(SignInWebSocketBo signInWebSocketBo);
+
+    /**
+     * @author hln 2023-11-07
+     *      用户签到（响应）功能
+     * @param signInWebSocketBo
+     * @return
+     */
+    ResponseVo userSignInWebSocketNew(SignInWebSocketBo signInWebSocketBo);
+
 }

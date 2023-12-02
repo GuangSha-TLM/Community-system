@@ -104,6 +104,15 @@
             (#{adminId},#{communityId},#{content},#{releaseTime},#{signInTime},#{uuid})
     </insert>
 
+    <!-- 插入管理员发起的签到功能 -->
+    <insert id="insertPutSignInNew" parameterType="com.gsxy.core.pojo.SignInAdminWebSocket">
+        insert into
+            sign_in_admin_websocket
+            (admin_id,community_id,content,release_time,sign_in_time,uuid)
+        values
+            (#{adminId},#{communityId},#{content},#{releaseTime},#{signInTime},#{uuid})
+    </insert>
+
     <!--
          @author Oh… Yeah!!! 2023-10-24
          更新UserAdmin数据
@@ -249,10 +258,32 @@
             t1.name
         from
             user t1
+        where
+            t1.id = (select id from user where id = #{userId})
+        limit 1
+    </select>
+
+    <!-- 查找当前的id对应用户的姓名 -->
+    <select id="selectToGetNameNew" resultType="java.lang.String" parameterType="java.lang.Long">
+        select
+            t1.name
+        from
+            user t1
         inner join
             notice t2
+        inner join
+            sign_in_user_status_web t3
         on
             t1.id = (select id from user where id = #{userId})
+        and
+            t2.dealt = 1
+        and
+            t2.`read` = 1
+        where
+            t3.uuid = t2.uuid
+        order by
+            t2.create_time
+        desc
         limit 1
     </select>
 

@@ -166,6 +166,13 @@ public interface UserAdminMapper {
     void insertPutSignIn(SignInAdminWebSocket signInAdminWebSocket);
 
     /**
+     * @author hln 2023-11-07
+     *      插入所有的实体类SignInAdminWebSocketBo的信息到sign_in_admin_websocket
+     * @param signInAdminWebSocket
+     */
+    void insertPutSignInNew(SignInAdminWebSocket signInAdminWebSocket);
+
+    /**
      * @param adminId
      * @param uuid
      * @return
@@ -189,6 +196,14 @@ public interface UserAdminMapper {
      * @return
      */
     String selectToGetName(Long userId);
+
+    /**
+     * @author hln 2023-11-22
+     *      查找当前的id对应用户的姓名
+     * @param userId
+     * @return
+     */
+    String selectToGetNameNew(Long userId);
 
     /**
      * @author hln 2023-12-01

@@ -181,5 +181,34 @@ public class CommunityControllerAopImpl implements CommunityControllerAop {
         systemService.auth(token);
     }
 
+    /**
+     * @author hln 2023-11-14
+     *      社长发起签到通知鉴权
+     * @param joinPoint
+     */
+    @Override
+    @Before("execution(* com.gsxy.core.controller.CommunityController.adminSendNotificationNew(..))")
+    public void adminSendNotificationNew(JoinPoint joinPoint) {
+        Object[] args = joinPoint.getArgs();
+        SendNotificationBo arg = (SendNotificationBo) args[0];
+        String token = arg.getToken();
+
+        systemService.isAdmin(token,2);
+    }
+
+    /**
+     * @author hln 2023-11-14
+     *      社团成员接受签到通知鉴权
+     * @param joinPoint
+     */
+    @Override
+    @Before("execution(* com.gsxy.core.controller.CommunityController.userReceiveNotificationsNew(..))")
+    public void userReceiveNotificationsNew(JoinPoint joinPoint) {
+        Object[] args = joinPoint.getArgs();
+        ReceiveNotificationsBo arg = (ReceiveNotificationsBo) args[0];
+        String token = arg.getToken();
+
+        systemService.auth(token);
+    }
 
 }

@@ -77,12 +77,30 @@ public interface UserAdminService {
     ResponseVo adminSignInWeb(SignInAdminWebSocketBo signInAdminWebSocketBo, String uuid1);
 
     /**
+     * @param signInAdminWebSocketBo
+     * @param uuid1
+     * @return
+     * @author hln 2023-12-02
+     * 管理员发起签到-WebSocket
+     */
+    ResponseVo adminSignInWebNew(SignInAdminWebSocketBo signInAdminWebSocketBo, String uuid1);
+
+    /**
      * @author hln 2023-11-22
      *      管理员查看实时签到信息
      * @param token
      * @return
      */
     ResponseVo adminCheckInStatusInRealTime(String token);
+
+    /**
+     * @author hln 2023-11-22
+     *      管理员查看实时签到信息
+     * @param token
+     * @return
+     */
+    ResponseVo adminCheckInStatusInRealTimeNew(String token);
+
 }
 
 

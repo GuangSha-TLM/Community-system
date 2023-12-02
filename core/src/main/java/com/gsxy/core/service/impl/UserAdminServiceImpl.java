@@ -14,10 +14,7 @@ import com.gsxy.core.util.ThreadLocalUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  *  @author Oh...Yeah!!! 2023-10-28
@@ -214,6 +211,36 @@ public class UserAdminServiceImpl implements UserAdminService {
     }
 
     /**
+     * @param signInAdminWebSocketBo
+     * @param uuid1
+     * @return
+     * @author hln 2023-11-07
+     * 管理员发起签到-WebSocket
+     */
+    @Override
+    public ResponseVo adminSignInWebNew(SignInAdminWebSocketBo signInAdminWebSocketBo, String uuid1) {
+        String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
+        Long adminId = Long.valueOf(userIdOfStr);
+
+        if (adminId == null || adminId == 0L){
+            return new ResponseVo("token解析失败",null,"0x501");
+        }
+
+        SignInAdminWebSocket signInAdminWebSocket = new SignInAdminWebSocket();
+
+        signInAdminWebSocket.setAdminId(adminId);
+        signInAdminWebSocket.setCommunityId(adminId);
+        signInAdminWebSocket.setReleaseTime(new Date());
+        signInAdminWebSocket.setContent(signInAdminWebSocketBo.getContent());
+        signInAdminWebSocket.setSignInTime(signInAdminWebSocketBo.getSignInTime());
+        signInAdminWebSocket.setUuid(uuid1);
+
+        userAdminMapper.insertPutSignInNew(signInAdminWebSocket);
+
+        return new ResponseVo("签到已发起",signInAdminWebSocketBo,"0x200");
+    }
+
+    /**
      * @author hln 2023-11-22
      *      管理员查看实时签到信息
      * @param token
@@ -252,6 +279,58 @@ public class UserAdminServiceImpl implements UserAdminService {
                 continue;
 
             if(!set.add(list.get(i))){
+                listSignIn.add(name + "已签到");
+            }else {
+                listSignIn.add(name + "未签到");
+            }
+        }
+
+        return new ResponseVo("查询成功",listSignIn,"0x200");
+    }
+
+    /**
+     * @author hln 2023-12-02
+     *      管理员查看实时签到信息
+     * @param token
+     * @return
+     */
+    @Override
+    public ResponseVo adminCheckInStatusInRealTimeNew(String token) {
+        String adminIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
+        Long adminId = Long.valueOf(adminIdOfStr);
+
+        if(adminId == null || adminId == 0L){
+            return new ResponseVo("token解析失败",null,"0x501");
+        }
+
+        //获取通知对应的id编号
+        Long id = noticeMapper.selectByUserIdNotice(adminId);
+        //判断通知是否收到
+        if(id == null || id == 0L){
+            return new ResponseVo("未接受到签到通知",null,"0x500");
+        }
+
+        String uuid = noticeMapper.selectToGetUUID(id);
+
+        //封装所有用户签到状态表中的用户id
+        Set<Long> set = new HashSet<>();
+        set = userAdminMapper.selectToGetIdByAdminId(adminId,uuid);
+
+        //封装该社团所有用户id到List集合中
+        List<Long> list = new ArrayList<>();
+        list = userAdminMapper.selectToGetUserIdByAdminId(adminId);
+
+        List<String> listSignIn = new ArrayList<>();
+
+        for (int i = 0; i < list.size(); i++) {
+            Long userId = list.get(i);
+            String name = userAdminMapper.selectToGetName(userId);
+            String name2 = userAdminMapper.selectToGetNameNew(userId);
+
+            if (name == null)
+                continue;
+
+            if(!set.add(list.get(i)) && name2 != null){
                 listSignIn.add(name + "已签到");
             }else {
                 listSignIn.add(name + "未签到");

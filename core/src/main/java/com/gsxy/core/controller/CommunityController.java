@@ -207,6 +207,24 @@ public class CommunityController {
         return JSONArray.toJSONString(communityService.adminSendNotification(sendNotificationBo));
     }
 
+    /**
+     * @author hln 2023-11-13
+     *      社长（管理员）向社团成员发起签到通知
+     * @param sendNotificationBo
+     * @return
+     */
+    @PostMapping("/sendNotificationNew")
+    @ApiOperation("社长向社团成员发起签到通知")
+    public String adminSendNotificationNew(@RequestBody SendNotificationBo sendNotificationBo){
+        Map<String, String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+        if(map.get("error") != null){
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
+
+        return JSONArray.toJSONString(communityService.adminSendNotificationNew(sendNotificationBo));
+    }
+
 
     /**
      * @author hln 2023-11-14
@@ -224,6 +242,24 @@ public class CommunityController {
         }
 
         return JSONArray.toJSONString(communityService.userReceiveNotifications(receiveNotificationsBo));
+    }
+
+    /**
+     * @author hln 2023-11-14
+     *      社团成员接受签到通知
+     * @param receiveNotificationsBo
+     * @return
+     */
+    @PostMapping("/receiveNotificationsNew")
+    @ApiOperation("社团成员接受通知")
+    public String userReceiveNotificationsNew(@RequestBody ReceiveNotificationsBo receiveNotificationsBo){
+        Map<String, String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+        if(map.get("error") != null){
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
+
+        return JSONArray.toJSONString(communityService.userReceiveNotificationsNew(receiveNotificationsBo));
     }
 
 }

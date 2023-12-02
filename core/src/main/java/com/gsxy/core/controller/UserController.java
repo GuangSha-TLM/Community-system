@@ -148,24 +148,24 @@ public class UserController {
         return JSONArray.toJSONString(userService.userFindAll());
     }
 
-    /**
-     * @quthor hln 2023-10-30
-     *      用户签到
-     * @param userSignInBo
-     * @return
-     */
-    @PostMapping("/userSignIn")
-    @ApiOperation("用户签到")
-    public String userSignIn(@RequestBody UserSignInBo userSignInBo){
-
-        Map<String,String> map = ThreadLocalUtil.mapThreadLocal.get();
-        ThreadLocalUtil.mapThreadLocal.remove();
-        if(map.get("error") != null){
-            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
-        }
-
-        return JSONArray.toJSONString(userService.userSignIn(userSignInBo));
-    }
+//    /**
+//     * @quthor hln 2023-10-30
+//     *      用户签到
+//     * @param userSignInBo
+//     * @return
+//     */
+//    @PostMapping("/userSignIn")
+//    @ApiOperation("用户签到")
+//    public String userSignIn(@RequestBody UserSignInBo userSignInBo){
+//
+//        Map<String,String> map = ThreadLocalUtil.mapThreadLocal.get();
+//        ThreadLocalUtil.mapThreadLocal.remove();
+//        if(map.get("error") != null){
+//            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+//        }
+//
+//        return JSONArray.toJSONString(userService.userSignIn(userSignInBo));
+//    }
 
     /**
      * @quthor hln 2023-10-30
@@ -183,6 +183,24 @@ public class UserController {
         }
 
         return JSONArray.toJSONString(userService.userSignInWebSocket(signInWebSocketBo));
+    }
+
+    /**
+     * @quthor hln 2023-10-30
+     *      用户签到-WebSocket
+     * @param signInWebSocketBo
+     * @return
+     */
+    @PostMapping("/userSignInWebSocketNew")
+    @ApiOperation("用户签到")
+    public String userSignInWebSocketNew(@RequestBody SignInWebSocketBo signInWebSocketBo){
+        Map<String,String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+        if(map.get("error") != null){
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
+
+        return JSONArray.toJSONString(userService.userSignInWebSocketNew(signInWebSocketBo));
     }
 
     /**

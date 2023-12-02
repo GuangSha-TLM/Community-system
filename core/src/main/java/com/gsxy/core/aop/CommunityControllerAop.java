@@ -87,4 +87,18 @@ public interface CommunityControllerAop {
      */
     public void userReceiveNotifications(JoinPoint joinPoint);
 
+    /**
+     * @author hln 2023-11-14
+     *      社长发起签到通知鉴权
+     * @param joinPoint
+     */
+    public void adminSendNotificationNew(JoinPoint joinPoint);
+
+    /**
+     * @author hln 2023-11-14
+     *      社团成员接受签到通知鉴权
+     * @param joinPoint
+     */
+    public void userReceiveNotificationsNew(JoinPoint joinPoint);
+
 }

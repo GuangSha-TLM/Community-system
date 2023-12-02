@@ -37,13 +37,13 @@ public interface UserControllerAop {
      */
     public String pagingToGetUserData(JoinPoint joinPoint);
 
-    /**
-     * @author hln 2023-10-31
-     *      用户签到鉴权
-     * @param joinPoint
-     * @return
-     */
-    public String userSignIn(JoinPoint joinPoint);
+//    /**
+//     * @author hln 2023-10-31
+//     *      用户签到鉴权
+//     * @param joinPoint
+//     * @return
+//     */
+//    public String userSignIn(JoinPoint joinPoint);
 
     /**
      * @author hln 2023-10-31
@@ -60,5 +60,13 @@ public interface UserControllerAop {
      * @return
      */
     public String userSignInWebSocket(JoinPoint joinPoint);
+
+    /**
+     * @author hln 2023-11-07
+     *      用户签到-WebSocket鉴权
+     * @param joinPoint
+     * @return
+     */
+    public String userSignInWebSocketNew(JoinPoint joinPoint);
 
 }

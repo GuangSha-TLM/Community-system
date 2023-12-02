@@ -145,6 +145,13 @@ public interface UserMapper {
     SignInUserStatusWeb selectToGetUserAndAdminSignIn(Long userId);
 
     /**
+     * @author hln 2023-11-10
+     *      查询UserAndAdminSignIn实体类信息
+     * @return
+     */
+    SignInUserStatusWeb selectToGetUserAndAdminSignInNew(Long userId);
+
+    /**
      * @param signInUserStatusWeb
      * @return
      * @author hln 2023-11-10

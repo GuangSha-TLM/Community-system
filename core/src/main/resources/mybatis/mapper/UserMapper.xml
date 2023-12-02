@@ -212,6 +212,37 @@
         limit 1
     </select>
 
+    <!-- 查询UserAndAdminSignIn实体类信息 -->
+    <select id="selectToGetUserAndAdminSignInNew" resultType="com.gsxy.core.pojo.SignInUserStatusWeb">
+        select
+            t1.user_id,t2.admin_id,t1.community_id,t3.name,t3.college,t3.grade,t3.professional,
+            t3.org,t3.student_id,t2.release_time,t1.create_time,t2.sign_in_time,t1.uuid
+        from
+            sign_in_websocket t1
+        inner join
+            sign_in_admin_websocket t2
+        inner join
+            user t3
+        inner join
+            notice t4
+        on
+            t2.community_id = t1.community_id
+        and
+            t1.user_id = (select id from user where id = #{id})
+        and
+            t1.content = t2.content
+        and
+            DATE(t1.create_time) = CURDATE()
+        and
+            DATE(t2.release_time) = CURDATE()
+        and
+            t1.uuid = t2.uuid
+        where
+            t2.release_time > t1.create_time - INTERVAL t2.sign_in_time MINUTE
+        limit 1
+    </select>
+
+
     <!-- 查询用户姓名根据id -->
     <select id="selectToGetNameByUserId" resultType="java.lang.String" parameterType="java.lang.Long">
         select

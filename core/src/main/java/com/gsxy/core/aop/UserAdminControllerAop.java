@@ -48,13 +48,13 @@ public interface UserAdminControllerAop {
      */
     public void userAdminPagingToGetData(JoinPoint joinPoint);
 
-    /**
-     * @author hln 2023-10-31
-     *      管理员发起签到鉴权
-     * @param joinPoint
-     * @return
-     */
-    public String userAdminSignIn(JoinPoint joinPoint);
+//    /**
+//     * @author hln 2023-10-31
+//     *      管理员发起签到鉴权
+//     * @param joinPoint
+//     * @return
+//     */
+//    public String userAdminSignIn(JoinPoint joinPoint);
 
     /**
      * @author hln 2023-11-07
@@ -70,6 +70,21 @@ public interface UserAdminControllerAop {
      * @param joinPoint
      */
     void adminCheckInStatusInRealTime(JoinPoint joinPoint);
+
+    /**
+     * @author hln 2023-11-07
+     *      管理员发起签到
+     * @param joinPoint
+     * @return
+     */
+    public String userAdminSignInWebSocketNew(JoinPoint joinPoint);
+
+    /**
+     * @author hln 2023-11-22
+     *      管理员查看实时签到信息
+     * @param joinPoint
+     */
+    void adminCheckInStatusInRealTimeNew(JoinPoint joinPoint);
 
 //    /**
 //     * @author hln 2023-11-01

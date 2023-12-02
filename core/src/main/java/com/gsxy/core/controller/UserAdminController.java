@@ -113,22 +113,22 @@ public class UserAdminController {
         return JSONArray.toJSONString(userAdminService.pagingToGetUserAdminData(userAdminPagingToGetDataBo));
     }
 
-    /**
-     * @author hln 2023-10-31
-     *      管理员发起签到
-     * @param signInAdminBo
-     * @return
-     */
-    @PostMapping("/userAdminSignIn")
-    @ApiOperation("管理员发起签到")
-    public String userAdminSignIn(@RequestBody SignInAdminBo signInAdminBo){
-        Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
-        if (map.get("error") != null) {
-            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
-        }
-
-        return JSONArray.toJSONString(userAdminService.userAdminSignIn(signInAdminBo));
-    }
+//    /**
+//     * @author hln 2023-10-31
+//     *      管理员发起签到
+//     * @param signInAdminBo
+//     * @return
+//     */
+//    @PostMapping("/userAdminSignIn")
+//    @ApiOperation("管理员发起签到")
+//    public String userAdminSignIn(@RequestBody SignInAdminBo signInAdminBo){
+//        Map<String , String> map = ThreadLocalUtil.mapThreadLocal.get();
+//        if (map.get("error") != null) {
+//            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+//        }
+//
+//        return JSONArray.toJSONString(userAdminService.userAdminSignIn(signInAdminBo));
+//    }
 
     /**
      * @param signInAdminWebSocketBo
@@ -149,16 +149,34 @@ public class UserAdminController {
     }
 
     /**
-     * @author hln 2023-11-01
-     *      管理员查看所有签到状态
+     * @param signInAdminWebSocketBo
+     * @param uuid1
      * @return
+     * @author hln 2023-11-07
+     * 管理员发起签到-WebSocket
      */
-    @PostMapping("/userAdminFindAllSignInStatus")
-    @ApiOperation("管理员显示所有签到信息")
-    public String userAdminFindAllSignInStatus(){
+    @PostMapping("/adminSignInWebSocketNew")
+    @ApiOperation("管理员发起签到")
+    public String userAdminSignInWebSocketNew(@RequestBody SignInAdminWebSocketBo signInAdminWebSocketBo, String uuid1){
+        Map<String,String> map = ThreadLocalUtil.mapThreadLocal.get();
+        if(map.get("error") != null){
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
 
-        return JSONArray.toJSONString(userAdminService.findAllSignInStatus());
+        return JSONArray.toJSONString(userAdminService.adminSignInWebNew(signInAdminWebSocketBo,uuid1));
     }
+
+//    /**
+//     * @author hln 2023-11-01
+//     *      管理员查看所有签到状态
+//     * @return
+//     */
+//    @PostMapping("/userAdminFindAllSignInStatus")
+//    @ApiOperation("管理员显示所有签到信息")
+//    public String userAdminFindAllSignInStatus(){
+//
+//        return JSONArray.toJSONString(userAdminService.findAllSignInStatus());
+//    }
 
     /**
      * @author hln 2023-11-22
@@ -175,6 +193,23 @@ public class UserAdminController {
         }
 
         return JSONArray.toJSONString(userAdminService.adminCheckInStatusInRealTime(token));
+    }
+
+    /**
+     * @author hln 2023-12-02
+     *      管理员查看实时签到信息
+     * @param token
+     * @return
+     */
+    @PostMapping("/findAllStatusInRealTimeNew")
+    @ApiOperation("管理员查看实时签到信息")
+    public String adminCheckInStatusInRealTimeNew(@RequestParam String token){
+        Map<String,String> map = ThreadLocalUtil.mapThreadLocal.get();
+        if(map.get("error") != null){
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
+
+        return JSONArray.toJSONString(userAdminService.adminCheckInStatusInRealTimeNew(token));
     }
 
 }

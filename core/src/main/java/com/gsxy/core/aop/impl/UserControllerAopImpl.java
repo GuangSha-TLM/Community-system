@@ -84,22 +84,22 @@ public class UserControllerAopImpl implements UserControllerAop {
         return null;
     }
 
-    /**
-     * @author hln 2023-10-27
-     *      做了用户签到功能权限验证
-     * @param joinPoint
-     * @return
-     */
-    @Override
-    @Before("execution(* com.gsxy.core.controller.UserController.userSignIn(..))")
-    public String userSignIn(JoinPoint joinPoint) {
-        Object[] args = joinPoint.getArgs();
-        UserSignInBo arg = (UserSignInBo) args[0];
-        String token = arg.getToken();
-        systemService.auth(token);
-
-        return null;
-    }
+//    /**
+//     * @author hln 2023-10-27
+//     *      做了用户签到功能权限验证
+//     * @param joinPoint
+//     * @return
+//     */
+//    @Override
+//    @Before("execution(* com.gsxy.core.controller.UserController.userSignIn(..))")
+//    public String userSignIn(JoinPoint joinPoint) {
+//        Object[] args = joinPoint.getArgs();
+//        UserSignInBo arg = (UserSignInBo) args[0];
+//        String token = arg.getToken();
+//        systemService.auth(token);
+//
+//        return null;
+//    }
 
     /**
      * @author hln 2023-10-31
@@ -127,6 +127,23 @@ public class UserControllerAopImpl implements UserControllerAop {
     @Override
     @Before("execution(* com.gsxy.core.controller.UserController.userSignInWebSocket(..))")
     public String userSignInWebSocket(JoinPoint joinPoint) {
+        Object[] args = joinPoint.getArgs();
+        SignInWebSocketBo arg = (SignInWebSocketBo) args[0];
+        String token = arg.getToken();
+        systemService.auth(token);
+
+        return null;
+    }
+
+    /**
+     * @author hln 2023-11-07
+     *      用户签到-WebSocket鉴权
+     * @param joinPoint
+     * @return
+     */
+    @Override
+    @Before("execution(* com.gsxy.core.controller.UserController.userSignInWebSocketNew(..))")
+    public String userSignInWebSocketNew(JoinPoint joinPoint) {
         Object[] args = joinPoint.getArgs();
         SignInWebSocketBo arg = (SignInWebSocketBo) args[0];
         String token = arg.getToken();
