@@ -217,7 +217,7 @@
     <select id="selectToGetUserAndAdminSignInNew" resultType="com.gsxy.core.pojo.SignInUserStatusWeb">
         select
             t1.user_id,t2.admin_id,t1.community_id,t3.name,t3.college,t3.grade,t3.professional,
-            t3.org,t3.student_id,t2.release_time,t1.create_time,t2.sign_in_time,t1.uuid
+            t3.org,t3.student_id,t2.release_time,t1.create_time,t2.sign_in_time,t4.uuid
         from
             sign_in_websocket t1
         inner join
