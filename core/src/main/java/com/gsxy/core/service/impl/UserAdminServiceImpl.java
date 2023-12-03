@@ -8,6 +8,7 @@ import com.gsxy.core.pojo.SignInAdminWebSocket;
 import com.gsxy.core.pojo.UserAdmin;
 import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.ResponseVo;
+import com.gsxy.core.pojo.vo.SignInAdminWebVo;
 import com.gsxy.core.pojo.vo.UserAdminPagingToGetDataVo;
 import com.gsxy.core.service.UserAdminService;
 import com.gsxy.core.util.ThreadLocalUtil;
@@ -338,6 +339,67 @@ public class UserAdminServiceImpl implements UserAdminService {
         }
 
         return new ResponseVo("查询成功",listSignIn,"0x200");
+    }
+
+    /**
+     * @author hln 2023-12-02
+     *      管理员查看实时签到信息
+     * @param id
+     * @return
+     */
+    @Override
+    public ResponseVo adminCheckInStatusInRealTimeLast(String id) {
+
+        //获取通知对应的id编号
+        Long noticeId = noticeMapper.selectByAdminSignIdNotice(id);
+        //判断通知是否收到
+        if(noticeId == null || noticeId == 0L){
+            return new ResponseVo("未接受到签到通知",null,"0x500");
+        }
+
+        String uuid = noticeMapper.selectToGetUUID(noticeId);
+
+        //封装所有用户签到状态表中的用户id
+        Set<Long> set = userAdminMapper.selectToIdByAdminId(uuid);
+
+        //封装该社团所有用户id到List集合中
+        List<Long> list = noticeMapper.selectToGetUser(uuid);
+
+        List<String> listSignIn = new ArrayList<>();
+
+        for (int i = 0; i < list.size(); i++) {
+            Long userId = list.get(i);
+            String name = userAdminMapper.selectToGetName(userId);
+            String name2 = userAdminMapper.selectToGetNameNew(userId);
+
+            if (name == null)
+                continue;
+
+            if(!set.add(list.get(i)) && name2 != null){
+                listSignIn.add(name + "已签到");
+            }else {
+                listSignIn.add(name + "未签到");
+            }
+        }
+
+        return new ResponseVo("查询成功",listSignIn,"0x200");
+    }
+
+    /**
+     * @author hln 2023-12-03
+     *      管理员查看新发起的签到信息
+     * @return
+     */
+    @Override
+    public ResponseVo adminToGetSignInReal() {
+
+        SignInAdminWebVo signInAdminWebVo =userAdminMapper.selectToGetSignInReal();
+
+        if (signInAdminWebVo == null) {
+            return new ResponseVo("查询失败",null,"0x500");
+        }
+
+        return new ResponseVo("查询成功",signInAdminWebVo,"0x200");
     }
 
 }

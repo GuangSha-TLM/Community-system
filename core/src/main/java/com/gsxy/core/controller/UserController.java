@@ -203,6 +203,24 @@ public class UserController {
         return JSONArray.toJSONString(userService.userSignInWebSocketNew(signInWebSocketBo));
     }
 
+//    /**
+//     * @quthor hln 2023-12-03
+//     *      用户签到-WebSocket
+//     * @param signInWebSocketBo
+//     * @return
+//     */
+//    @PostMapping("/userSignInWebSocketLast")
+//    @ApiOperation("用户签到")
+//    public String userSignInWebSocketLast(@RequestBody SignInWebSocketBo signInWebSocketBo){
+//        Map<String,String> map = ThreadLocalUtil.mapThreadLocal.get();
+//        ThreadLocalUtil.mapThreadLocal.remove();
+//        if(map.get("error") != null){
+//            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+//        }
+//
+//        return JSONArray.toJSONString(userService.userSignInWebSocketNew(signInWebSocketBo));
+//    }
+
     /**
      * @author hln 2023-11-03
      *      根据前端指定字段返回User信息

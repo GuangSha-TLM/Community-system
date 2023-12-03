@@ -23,11 +23,12 @@ public class Notice {
     private Date updateTime;    //更新时间
     private Integer status;    //状态
     private Integer delFlag;    //逻辑删除
+    private Long adminSignId; //管理员发起签到的id
 
     public Notice() {
     }
 
-    public Notice(Long id, Long userEmailId, String context, String uuid, Long imgId, String name, Integer read, Integer dealt, Integer kinds, Long createBy, Date createTime, Long updateBy, Date updateTime, Integer status, Integer delFlag) {
+    public Notice(Long id, Long userEmailId, String context, String uuid, Long imgId, String name, Integer read, Integer dealt, Integer kinds, Long createBy, Date createTime, Long updateBy, Date updateTime, Integer status, Integer delFlag, Long adminSignId) {
         this.id = id;
         this.userEmailId = userEmailId;
         this.context = context;
@@ -43,6 +44,7 @@ public class Notice {
         this.updateTime = updateTime;
         this.status = status;
         this.delFlag = delFlag;
+        this.adminSignId = adminSignId;
     }
 
     public Long getId() {
@@ -165,6 +167,14 @@ public class Notice {
         this.delFlag = delFlag;
     }
 
+    public Long getAdminSignId() {
+        return adminSignId;
+    }
+
+    public void setAdminSignId(Long adminSignId) {
+        this.adminSignId = adminSignId;
+    }
+
     @Override
     public String toString() {
         return "Notice{" +
@@ -183,6 +193,7 @@ public class Notice {
                 ", updateTime=" + updateTime +
                 ", status=" + status +
                 ", delFlag=" + delFlag +
+                ", adminSignId=" + adminSignId +
                 '}';
     }
 }

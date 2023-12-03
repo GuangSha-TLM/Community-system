@@ -144,6 +144,30 @@ public interface NoticeMapper {
      * @return
      */
     String selectToGetUUID(Long id);
+
+    /**
+     * @author hln 2023-12-01
+     *      根据指定id插入id
+     * @param uuid1
+     * @param id
+     */
+    void updateByUUIDAddAdminSignId(String uuid1, Long id);
+
+    /**
+     * @author hln 2023-12-01
+     *      根据指定id查找noticeid
+     * @param id
+     * @return
+     */
+    Long selectByAdminSignIdNotice(String id);
+
+    /**
+     * @author hln 2023-12-03
+     *      根据指定uuid获取社团中的对象
+     * @param uuid
+     * @return
+     */
+    List<Long> selectToGetUser(String uuid);
 }
 
 

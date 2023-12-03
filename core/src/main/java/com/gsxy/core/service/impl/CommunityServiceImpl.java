@@ -287,7 +287,10 @@ public class CommunityServiceImpl implements CommunityService {
 
         userAdminController.userAdminSignInWebSocketNew(signInAdminWebSocketBo,uuid1);
 
-        return new ResponseVo("通知已发起",null,"0x200");
+        Long id = userAdminMapper.selectToGetId();
+        noticeMapper.updateByUUIDAddAdminSignId(uuid1,id);
+
+        return new ResponseVo("通知已发起",id,"0x200");
     }
 
     /**

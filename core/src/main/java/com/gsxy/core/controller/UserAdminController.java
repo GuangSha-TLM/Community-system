@@ -212,6 +212,30 @@ public class UserAdminController {
         return JSONArray.toJSONString(userAdminService.adminCheckInStatusInRealTimeNew(token));
     }
 
+    /**
+     * @author hln 2023-12-02
+     *      管理员查看实时签到信息
+     * @param id
+     * @return
+     */
+    @PostMapping("/findAllStatusInRealTimeLast")
+    @ApiOperation("管理员查看实时签到信息")
+    public String adminCheckInStatusInRealTimeLast(@RequestParam String id){
+
+        return JSONArray.toJSONString(userAdminService.adminCheckInStatusInRealTimeLast(id));
+    }
+
+    /**
+     * @author hln 2023-12-03
+     *      管理员查看新发起的签到信息
+     * @return
+     */
+    @PostMapping("/adminToGetSignInReal")
+    @ApiOperation("管理员查看新发起的签到信息")
+    public String adminToGetSignInReal(){
+        return JSONArray.toJSONString(userAdminService.adminToGetSignInReal());
+    }
+
 }
 
 

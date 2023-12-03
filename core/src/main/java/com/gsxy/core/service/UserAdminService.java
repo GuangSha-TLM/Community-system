@@ -101,6 +101,20 @@ public interface UserAdminService {
      */
     ResponseVo adminCheckInStatusInRealTimeNew(String token);
 
+    /**
+     * @author hln 2023-12-03
+     *      管理员查看实时签到信息
+     * @param id
+     * @return
+     */
+    ResponseVo adminCheckInStatusInRealTimeLast(String id);
+
+    /**
+     * @author hln 2023-12-03
+     *      管理员查看新发起的签到信息
+     * @return
+     */
+    ResponseVo adminToGetSignInReal();
 }
 
 

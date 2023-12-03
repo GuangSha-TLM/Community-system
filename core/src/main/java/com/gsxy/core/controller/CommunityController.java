@@ -262,4 +262,22 @@ public class CommunityController {
         return JSONArray.toJSONString(communityService.userReceiveNotificationsNew(receiveNotificationsBo));
     }
 
+    /**
+     * @author hln 2023-12-03
+     *      社团成员接受签到通知
+     * @param receiveNotificationsBo
+     * @return
+     */
+    @PostMapping("/receiveNotificationsLast")
+    @ApiOperation("社团成员接受通知")
+    public String userReceiveNotificationsLast(@RequestBody ReceiveNotificationsBo receiveNotificationsBo){
+        Map<String, String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+        if(map.get("error") != null){
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
+
+        return JSONArray.toJSONString(communityService.userReceiveNotificationsNew(receiveNotificationsBo));
+    }
+
 }

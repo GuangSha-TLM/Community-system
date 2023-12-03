@@ -204,6 +204,31 @@
         limit 1
     </select>
 
+    <!-- 根据指定id查找noticeid -->
+    <select id="selectByAdminSignIdNotice" resultType="java.lang.Long" parameterType="java.lang.String">
+        select
+            id
+        from
+            notice
+        where
+            admin_sign_id = #{id}
+        limit 1
+    </select>
+
+    <!-- 根据指定uuid获取社团中的对象 -->
+    <select id="selectToGetUser" resultType="java.lang.Long" parameterType="java.lang.String">
+        select
+            t2.name
+        from
+            user t2
+        inner join
+            notice t1
+        on
+            t1.user_email_id = t2.id
+        and
+            t1.uuid = #{uuid}
+    </select>
+
     <!--
          @author Oh… Yeah!!! 2023-10-27
          更改通知阅读状态.
@@ -262,6 +287,16 @@
             user_email_id = #{userId}
           and
             uuid = #{uuid}
+    </update>
+
+    <!-- 根据指定id插入id -->
+    <update id="updateByUUIDAddAdminSignId">
+        update
+            notice
+        set
+            admin_sign_id = #{id}
+        where
+            uuid = #{uuid1}
     </update>
 
 </mapper>

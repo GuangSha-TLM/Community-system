@@ -6,6 +6,7 @@ import com.gsxy.core.pojo.UserAdmin;
 import com.gsxy.core.pojo.bo.SignInAdminWebSocketBo;
 import com.gsxy.core.pojo.bo.UserAdminPagingToGetDataBo;
 import com.gsxy.core.pojo.bo.UserSignInStatusBo;
+import com.gsxy.core.pojo.vo.SignInAdminWebVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -211,4 +212,26 @@ public interface UserAdminMapper {
      * @return
      */
     String selectToGetContent();
+
+    /**
+     * @author hln 2023-12-03
+     *      查找最新发布签到的id
+     * @return
+     */
+    Long selectToGetId();
+
+    /**
+     * @author hln 2023-12-03
+     *      根据uuid找该社团中签到的人
+     * @param uuid
+     * @return
+     */
+    Set<Long> selectToIdByAdminId(String uuid);
+
+    /**
+     * @author hln 2023-12-03
+     *      返回最新签到信息
+     * @return
+     */
+    SignInAdminWebVo selectToGetSignInReal();
 }

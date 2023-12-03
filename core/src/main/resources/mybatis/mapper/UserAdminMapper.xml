@@ -334,4 +334,42 @@
         limit 1
     </select>
 
+    <!-- 查找最新发布签到的id -->
+    <select id="selectToGetId" resultType="java.lang.Long">
+        select
+            id
+        from
+            sign_in_admin_websocket
+        order by
+            release_time
+        desc
+        limit 1
+    </select>
+
+    <!-- 根据uuid找该社团中签到的人 -->
+    <select id="selectToIdByAdminId" resultType="java.lang.Long" parameterType="java.lang.String">
+        select
+            t2.name
+        from
+            sign_in_user_status_web t1
+        inner join
+            user t2
+        on
+            t1.uuid = #{uuid}
+        and
+            t1.user_id = t2.id
+    </select>
+
+    <!-- 返回最新签到信息 -->
+    <select id="selectToGetSignInReal" resultType="com.gsxy.core.pojo.vo.SignInAdminWebVo">
+        select
+            id,community_id,content,release_time
+        from
+            sign_in_admin_websocket
+        order by
+            release_time
+        desc
+        limit 1
+    </select>
+
 </mapper>
