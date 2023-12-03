@@ -40,6 +40,10 @@ public class CommunityUserServiceImpl implements CommunityUserService {
         communityUserAddBo.getCommunityUser().setCommunityId(communityUserId);
         communityUserAddBo.getCommunityUser().setCreateBy(communityUserId);
         communityUserAddBo.getCommunityUser().setCreateTime(new Date());
+        Long aLong = communityUserMapper.communityUseAdd(communityUserAddBo.getCommunityUser());
+        if (aLong.longValue() == 0L) {
+            return new ResponseVo("增加失败",  null, "0x500");
+        }
         String userIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
         Long userId = Long.valueOf(userIdOfStr);
 
@@ -75,7 +79,11 @@ public class CommunityUserServiceImpl implements CommunityUserService {
         noticeWithUser.setDelFlag(0);
         noticeWithUserMapper.addNoticeWithUser(noticeWithUser);
 
-        return new ResponseVo("增加成功", communityUserId, "0x200");
+        communityUserAddBo.getCommunityUser().setCommunityId(communityUserId);
+        communityUserAddBo.getCommunityUser().setCreateBy(communityUserId);
+        communityUserAddBo.getCommunityUser().setCreateTime(new Date());
+        communityUserAddBo.getCommunityUser().getUserId();
+        return new ResponseVo("增加成功", userId, "0x200");
     }
 
 
