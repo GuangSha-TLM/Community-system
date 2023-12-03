@@ -39,10 +39,11 @@
     <insert id="addNotice" parameterType="com.gsxy.core.pojo.Notice">
         insert into
             notice
+        ()
         values
             (null,#{userEmailId},#{context},#{uuid},#{imgId},#{name},
              #{read},#{dealt},#{kinds},#{createBy},#{createTime},#{updateBy},
-             #{updateTime},#{status},#{delFlag});
+             #{updateTime},#{status},#{delFlag},#{adminSignId});
     </insert>
 
     <!-- 社长（管理员）向社团成员发起签到通知 -->
