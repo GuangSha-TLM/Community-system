@@ -1,10 +1,8 @@
 package com.gsxy.core.service;
 
-import com.baomidou.mybatisplus.extension.api.R;
 import com.gsxy.core.pojo.User;
 import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.ResponseVo;
-import com.gsxy.core.pojo.vo.UserSelectToGetVo;
 
 /**
  * 用户板块
@@ -98,4 +96,11 @@ public interface UserService {
      */
     ResponseVo userSignInWebSocketNew(SignInWebSocketBo signInWebSocketBo);
 
+    /**
+     * @param findAllBo
+     * @return
+     * @author hln 2023-11-03
+     * 查询所有信息
+     */
+    ResponseVo findAll(FindAllBo findAllBo);
 }

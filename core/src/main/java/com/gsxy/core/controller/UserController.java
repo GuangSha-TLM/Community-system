@@ -142,7 +142,7 @@ public class UserController {
      *      查找所有信息
      * @return
      */
-    @PostMapping("/findAll")
+    @PostMapping("/userFindAll")
     @ApiOperation("查询所有用户信息")
     public String userFindAll(){
         return JSONArray.toJSONString(userService.userFindAll());
@@ -237,6 +237,25 @@ public class UserController {
         }
 
         return JSONArray.toJSONString(userService.selectToGetUser(userSelectToGetBo));
+    }
+
+    /**
+     * @author hln 2023-11-03
+     *      查询所有信息
+     * @param findAllBo
+     * @return
+     */
+    @PostMapping("/findAll")
+    @ApiOperation("查询所有信息")
+    private String findAll(@RequestBody FindAllBo findAllBo) {
+        Map<String, String> map = ThreadLocalUtil.mapThreadLocal.get();
+        ThreadLocalUtil.mapThreadLocal.remove();
+
+        if (map.get("error") != null) {
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
+
+        return JSONArray.toJSONString(userService.findAll(findAllBo));
     }
 
 }

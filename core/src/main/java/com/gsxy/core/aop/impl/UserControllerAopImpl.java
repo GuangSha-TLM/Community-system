@@ -152,4 +152,16 @@ public class UserControllerAopImpl implements UserControllerAop {
         return null;
     }
 
+    /**
+     * @author hln 2023-11-03
+     *      查询所有信息
+     * @param joinPoint
+     */
+    @Override
+    public void findAll(JoinPoint joinPoint) {
+        Object[] args = joinPoint.getArgs();
+        String token = (String) args[0];
+        systemService.auth(token);
+    }
+
 }

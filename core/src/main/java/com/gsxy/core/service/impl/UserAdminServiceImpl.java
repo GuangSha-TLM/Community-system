@@ -401,13 +401,13 @@ public class UserAdminServiceImpl implements UserAdminService {
         }
 
 
-        SignInAdminWebVo signInAdminWebVo =userAdminMapper.selectToGetSignInReal(adminId);
+        List<SignInAdminWebVo> list =userAdminMapper.selectToGetSignInReal(adminId);
 
-        if (signInAdminWebVo == null) {
+        if (list == null) {
             return new ResponseVo("查询失败",null,"0x500");
         }
 
-        return new ResponseVo("查询成功",signInAdminWebVo,"0x200");
+        return new ResponseVo("查询成功",list,"0x200");
     }
 
 }

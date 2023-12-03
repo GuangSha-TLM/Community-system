@@ -233,5 +233,5 @@ public interface UserAdminMapper {
      *      返回最新签到信息
      * @return
      */
-    SignInAdminWebVo selectToGetSignInReal(Long adminId);
+    List<SignInAdminWebVo> selectToGetSignInReal(Long adminId);
 }

@@ -69,4 +69,11 @@ public interface UserControllerAop {
      */
     public String userSignInWebSocketNew(JoinPoint joinPoint);
 
+    /**
+     * @author hln 2023-11-03
+     *      查询所有信息
+     * @param joinPoint
+     */
+    void findAll(JoinPoint joinPoint);
+
 }
