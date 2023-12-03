@@ -454,6 +454,7 @@ public class CommunityServiceImpl implements CommunityService {
         notice.setCreateTime(new Date());
         UUID uuid = UUID.randomUUID();
         notice.setUuid(uuid.toString());
+        notice.setAdminSignId(0L);
 
         //发送通知
         noticeMapper.addNotice(notice);
@@ -469,6 +470,7 @@ public class CommunityServiceImpl implements CommunityService {
         noticeWithUser.setCreateBy(userId);
         noticeWithUser.setNoticeId(notice2.getId());
         noticeWithUser.setCreateTime(new Date());
+
 
 
         //增添历史记录
@@ -524,6 +526,7 @@ public class CommunityServiceImpl implements CommunityService {
             notice.setDealt(1);
             notice.setKinds(0);
             notice.setCreateTime(new Date());
+            notice.setAdminSignId(0L);
 
             //发送通知
             noticeMapper.addNotice(notice);
@@ -573,6 +576,7 @@ public class CommunityServiceImpl implements CommunityService {
         notice.setDealt(1);
         notice.setKinds(0);
         notice.setCreateTime(new Date());
+        notice.setAdminSignId(0L);
 
         noticeMapper.addNotice(notice);
 
