@@ -94,4 +94,11 @@ public interface UserAdminControllerAop {
 //     */
 //    public String userAdminFindAllSignInStatus(JoinPoint joinPoint);
 
+    /**
+     * @author hln 2023-12-03
+     *      管理员查看新发起的签到信息
+     * @param joinPoint
+     */
+    void adminToGetSignInReal(JoinPoint joinPoint);
+
 }

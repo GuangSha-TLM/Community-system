@@ -184,6 +184,18 @@ public class UserAdminControllerAopImpl implements UserAdminControllerAop {
         systemService.isAdmin(token,2);
     }
 
+    /**
+     * @author hln 2023-12-03
+     *      管理员查看新发起的签到信息
+     * @param joinPoint
+     */
+    @Override
+    public void adminToGetSignInReal(JoinPoint joinPoint) {
+        Object[] args = joinPoint.getArgs();
+        String token = (String) args[0];
+        systemService.isAdmin(token,2);
+    }
+
 //    /**
 //     * @author hln 2023-11-01
 //     *      管理员查看所有用户签到鉴权(相应社团)
@@ -199,6 +211,7 @@ public class UserAdminControllerAopImpl implements UserAdminControllerAop {
 //
 //        return null;
 //    }
+
 
 
 }

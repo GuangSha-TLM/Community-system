@@ -114,7 +114,7 @@ public interface UserAdminService {
      *      管理员查看新发起的签到信息
      * @return
      */
-    ResponseVo adminToGetSignInReal();
+    ResponseVo adminToGetSignInReal(String token);
 }
 
 

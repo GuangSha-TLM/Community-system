@@ -391,9 +391,17 @@ public class UserAdminServiceImpl implements UserAdminService {
      * @return
      */
     @Override
-    public ResponseVo adminToGetSignInReal() {
+    public ResponseVo adminToGetSignInReal(String token) {
 
-        SignInAdminWebVo signInAdminWebVo =userAdminMapper.selectToGetSignInReal();
+        String adminIdOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
+        Long adminId = Long.valueOf(adminIdOfStr);
+
+        if(adminId == null || adminId == 0L){
+            return new ResponseVo("token解析失败",null,"0x501");
+        }
+
+
+        SignInAdminWebVo signInAdminWebVo =userAdminMapper.selectToGetSignInReal(adminId);
 
         if (signInAdminWebVo == null) {
             return new ResponseVo("查询失败",null,"0x500");

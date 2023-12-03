@@ -361,15 +361,14 @@
     </select>
 
     <!-- 返回最新签到信息 -->
-    <select id="selectToGetSignInReal" resultType="com.gsxy.core.pojo.vo.SignInAdminWebVo">
+    <select id="selectToGetSignInReal" resultType="com.gsxy.core.pojo.vo.SignInAdminWebVo"
+            parameterType="java.lang.Long">
         select
             id,community_id,content,release_time
         from
             sign_in_admin_websocket
-        order by
-            release_time
-        desc
-        limit 1
+        where
+            admin_id = #{adminId}
     </select>
 
 </mapper>

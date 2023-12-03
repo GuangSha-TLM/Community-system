@@ -228,12 +228,18 @@ public class UserAdminController {
     /**
      * @author hln 2023-12-03
      *      管理员查看新发起的签到信息
+     * @param token
      * @return
      */
     @PostMapping("/adminToGetSignInReal")
     @ApiOperation("管理员查看新发起的签到信息")
-    public String adminToGetSignInReal(){
-        return JSONArray.toJSONString(userAdminService.adminToGetSignInReal());
+    public String adminToGetSignInReal(@RequestParam String token){
+        Map<String,String> map = ThreadLocalUtil.mapThreadLocal.get();
+        if(map.get("error") != null){
+            return JSONArray.toJSONString(new ResponseVo<>(map.get("error"),null,map.get("code")));
+        }
+
+        return JSONArray.toJSONString(userAdminService.adminToGetSignInReal(token));
     }
 
 }
