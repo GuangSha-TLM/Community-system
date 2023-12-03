@@ -10,7 +10,7 @@
                                 <h4 class="card-title">
                                     <button class="btn btn-primary" @click="SignInWindow = true">发起签到</button>
                                     <button class="btn btn-primary" @click="dialogVisible = true">拉取人员</button>
-                                    <button class="btn btn-primary" @click="lookSignInWindow = true">查看签到状态</button>
+                                    <button class="btn btn-primary" @click="showSignList()">查看签到状态</button>
                                 </h4>
                             </div>
                         </div>
@@ -55,21 +55,39 @@
                             <el-button type="primary" @click="showModal">确 定</el-button>
                         </span>
                     </el-dialog>
+
+                    <el-dialog title="查看签到列表" :visible.sync="signInListShow" height="250" width="70%">
+                        <el-table :data="signList" style="width: 100%">
+                            <el-table-column prop="releaseTime" label="时间" width="180">
+                            </el-table-column>
+                            <el-table-column prop="content" label="内容">
+                            </el-table-column>
+                            <el-table-column fixed="right" label="操作" width="100">
+                                <template slot-scope="scope">
+                                    <el-button @click="setupWebSocket(scope.row.id)" type="text" size="small">查看</el-button>
+                                </template>
+                            </el-table-column>
+                        </el-table>
+                    </el-dialog>
+
                     <el-dialog title="查看签到人员" :visible.sync="lookSignInWindow" width="50%">
                         <div class="showSign">
                             <div class="left">
-                            <p>已签到:</p>
-                            <div v-for="(item, index) in signedData" :key="index">
-                                {{ item.name }}
+                                <p>已签到:</p>
+                                <div v-for="(item, index) in signedData" :key="index">
+                                    {{ item.name }}
+                                </div>
+                            </div>
+                            <div class="right">
+                                <p>未签到:</p>
+                                <div v-for="(item, index) in unsignedData" :key="index">
+                                    {{ item.name }}
+                                </div>
                             </div>
                         </div>
-                        <div class="right">
-                            <p>未签到:</p>
-                            <div v-for="(item, index) in unsignedData" :key="index">
-                                {{ item.name }}
-                            </div>
-                        </div>
-                        </div>
+                        <span slot="footer" class="dialog-footer">
+                            <el-button @click="lookSignInWindow = false">取 消</el-button>
+                        </span>
                     </el-dialog>
                 </div>
             </section>
@@ -91,6 +109,9 @@ export default {
             SignInWindow: false,
             // 查看签到人员的弹窗
             lookSignInWindow: false,
+            //控制签到列表的显示
+            signInListShow: false,
+            signList: [],
             communityUserdeleteUserBo: {
                 token: '',
                 userId: ''
@@ -123,31 +144,33 @@ export default {
     },
     mounted() {
         this.getMerchantInformation()
-        // this.setupWebSocket() 
-        if (this.user.role > 0) {
-            setInterval(() => {
-                 // 替换为您的消息内容
-                if (this.socket && this.socket.readyState === WebSocket.OPEN) {
-                    // this.adminCheckInStatusInRealTimeBo.token= this.token
-                    // this.adminCheckInStatusInRealTimeBo.content= this.sendNotificationBo.content
-                    this.socket.send(this.token);
-                }
-            }, 500);
-        }
+
     },
 
     components: {
         ClassManagement
     },
     methods: {
-        setupWebSocket() {
-            // const contestId = 80; // 用于示例的contest_id
+
+        setupWebSocket(id) {
+            // console.log(id);
             // alert(this.getHashVariable("contestId"));
-            this.socket = new WebSocket("ws://" + this.webSocketIp + ":" + this.webSocketPort + `/websocket/${this.token}`);
+            this.socket = new WebSocket("ws://" + this.webSocketIp + ":" + this.webSocketPort + `/websocket/${id}`);
 
             this.socket.onopen = () => {
                 this.socketStatus = '已连接';
                 console.log('连接成功');
+                if (this.user.role > 0) {
+                    setInterval(() => {
+                        // 替换为您的消息内容
+                        if (this.socket && this.socket.readyState === WebSocket.OPEN) {
+                            // this.adminCheckInStatusInRealTimeBo.token= this.token
+                            // this.adminCheckInStatusInRealTimeBo.content= this.sendNotificationBo.content
+                            this.socket.send(id);
+                        }
+                    }, 500);
+                }
+                this.lookSignInWindow = true
             };
 
             this.socket.onmessage = (event) => {
@@ -167,17 +190,23 @@ export default {
             let obj = await synRequestPost("/community/sendNotificationNew", this.sendNotificationBo);
             if (obj.code == "0x200") {
                 this.SignInWindow = false
-                this.setupWebSocket()
             }
             // console.log(obj);
         },
 
+        async showSignList() {
+            // console.log(111);
+            let res = await synRequestPost(`/userAdmin/adminToGetSignInReal?token=${this.token}`);
+            // console.log(res);
+            this.signList = res.data
+            this.signInListShow = true
+        },
         //跳转指定页面
         async getMerchantInformation() {
             let res = await synRequestPost(`/community/communityAndUser?token=${this.token}`);
             if (res.code == "0x200") {
                 this.list = res.data;
-                console.log(this.list);
+                // console.log(this.list);
             }
         },
         async deleteById(id) {
@@ -291,22 +320,26 @@ a {
     background-color: #fff;
     color: #42b983;
 }
-.card-title{
+
+.card-title {
     display: flex;
 
 }
-.showSign{
+
+.showSign {
     display: flex;
     justify-content: space-between
 }
-.showSign .left{
+
+.showSign .left {
     width: 50%;
 }
-.showSign .right{
+
+.showSign .right {
     width: 50%;
 }
+
 .el-input {
     margin-bottom: 30px;
 }
-
 </style>

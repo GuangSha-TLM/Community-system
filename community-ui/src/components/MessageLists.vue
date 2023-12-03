@@ -1,7 +1,7 @@
 <!--
  * @Author: tianleiyu
  * @Date: 2023-11-05 20:12:55
- * @LastEditTime: 2023-12-02 15:30:35
+ * @LastEditTime: 2023-12-03 15:03:04
  * @LastEditors: tianleiyu
  * @Description:
  * @FilePath: /community-ui/src/components/MessageLists.vue
@@ -17,7 +17,7 @@
                             <tr>
                                 <th scope="col">序号</th>
                                 <th scope="col">简要</th>
-                                <th scope="col">申请人</th>
+                                <th scope="col">发起时间</th>
                                 <th scope="col">申请原因</th>
                                 <th scope="col">操作</th>
                             </tr>
@@ -29,7 +29,7 @@
                                         class="item"></el-badge>{{ index + 1 }}
                                 </th>
                                 <td>{{ obj.noticeName }}</td>
-                                <td>{{ obj.name }}</td>
+                                <td>{{ obj.createTime }}</td>
                                 <td>{{ obj.context }}</td>
                                 <td>
                                     <el-link v-if="obj.kinds == 0" type="success" @click="read(index)">标为已读</el-link>
@@ -77,7 +77,8 @@ export default {
                 token: '',
                 content: '',
                 noticeId: '',
-                result: ''
+                result: '',
+                adminSignId:''
             },
             //回复的头
             title: '是否通过?',
@@ -87,7 +88,8 @@ export default {
             receiveNotificationsBo:{
                 token:'',
                 content:'',
-                noticeId:''
+                noticeId:'',
+                // adminSignId:''
             },
             
 
@@ -104,7 +106,7 @@ export default {
         async sign(){
             this.receiveNotificationsBo.token = this.token;
             this.receiveNotificationsBo.content = this.communityReplyNoticeBo.content;
-            console.log(1111);
+            // this.receiveNotificationsBo.adminSignId = this.communityReplyNoticeBo.adminSignId;
             let obj = await synRequestPost("/community/receiveNotificationsNew", this.receiveNotificationsBo);
             console.log(obj);
             this.communityReplyNoticeBo.content=''
@@ -138,6 +140,7 @@ export default {
             console.log(index);
             this.noticeSelectByNoticeIdBo.id = this.messageList[index].id
             this.communityReplyNoticeBo.noticeId = this.messageList[index].id
+            // this.communityReplyNoticeBo.adminSignId = this.messageList[index].adminSignId
             this.receiveNotificationsBo.noticeId = this.messageList[index].id
             let obj = await synRequestPost("/notice/select_id", this.noticeSelectByNoticeIdBo);
             this.getMerchantInformation();
@@ -166,6 +169,7 @@ export default {
         UpdatedMessageList(MessageList) {
             // 处理更新后的 messageList
             this.messageList = MessageList;
+            console.log(this.messageList);
         }
     },
     watch: {
