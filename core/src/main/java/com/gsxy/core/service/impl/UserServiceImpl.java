@@ -5,10 +5,7 @@ import com.gsxy.core.mapper.UserAdminMapper;
 import com.gsxy.core.mapper.UserMapper;
 import com.gsxy.core.pojo.*;
 import com.gsxy.core.pojo.bo.*;
-import com.gsxy.core.pojo.vo.PagingToGetUserDataVo;
-import com.gsxy.core.pojo.vo.ResponseVo;
-import com.gsxy.core.pojo.vo.UserSelectToGetListVo;
-import com.gsxy.core.pojo.vo.UserSelectToGetVo;
+import com.gsxy.core.pojo.vo.*;
 import com.gsxy.core.service.SystemService;
 import com.gsxy.core.service.UserAdminService;
 import com.gsxy.core.service.UserService;
@@ -409,10 +406,25 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public ResponseVo findAll(FindAllBo findAllBo) {
+        String userOfStr = (String) ThreadLocalUtil.mapThreadLocalOfJWT.get().get("userinfo").get("id");
+        Long userId = Long.valueOf(userOfStr);
 
+        if (userId == 0L || userId == null) {
+            return new ResponseVo("token解析失败",null,"0x501");
+        }
 
+        List<FindAllVo> list;
+        //判断前端是否传数据
+        //1）若传
+        if (findAllBo.getCollege() != null || findAllBo.getGrade() != null || findAllBo.getProfessional() != null) {
+            list = userMapper.selectToGetUserBy(findAllBo);
+        }
+        //2）若不传
+        else {
+            list = userMapper.selectGetUser();
+        }
 
-        return null;
+        return new ResponseVo("查询成功",list,"0x200");
     }
 
 }

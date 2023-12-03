@@ -400,7 +400,6 @@ public class UserAdminServiceImpl implements UserAdminService {
             return new ResponseVo("token解析失败",null,"0x501");
         }
 
-
         List<SignInAdminWebVo> list =userAdminMapper.selectToGetSignInReal(adminId);
 
         if (list == null) {

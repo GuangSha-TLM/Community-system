@@ -152,16 +152,17 @@ public class UserControllerAopImpl implements UserControllerAop {
         return null;
     }
 
-    /**
-     * @author hln 2023-11-03
-     *      查询所有信息
-     * @param joinPoint
-     */
-    @Override
-    public void findAll(JoinPoint joinPoint) {
-        Object[] args = joinPoint.getArgs();
-        String token = (String) args[0];
-        systemService.auth(token);
-    }
+//    /**
+//     * @author hln 2023-12-03
+//     *      查询所有信息
+//     * @param joinPoint
+//     */
+//    @Override
+//    @Before("execution(* com.gsxy.core.controller.UserController.findAll(..))")
+//    public void findAll(JoinPoint joinPoint) {
+//        Object[] args = joinPoint.getArgs();
+//        String token = (String) args[0];
+//        systemService.auth(token);
+//    }
 
 }

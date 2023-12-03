@@ -4,6 +4,7 @@ import com.gsxy.core.pojo.SignInUserStatusWeb;
 import com.gsxy.core.pojo.SignInWebSocket;
 import com.gsxy.core.pojo.User;
 import com.gsxy.core.pojo.bo.*;
+import com.gsxy.core.pojo.vo.FindAllVo;
 import com.gsxy.core.pojo.vo.UserSelectToGetVo;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -166,4 +167,19 @@ public interface UserMapper {
      * @return
      */
     String selectToGetNameByUserId(Long aLong);
+
+    /**
+     * @author hln 2023-12-03
+     *      查询前段指定字段查询用户信息
+     * @param findAllBo
+     * @return
+     */
+    List<FindAllVo> selectToGetUserBy(FindAllBo findAllBo);
+
+    /**
+     * @author hln 2023-12-03
+     *      返回所有用户信息
+     * @return
+     */
+    List<FindAllVo> selectGetUser();
 }
