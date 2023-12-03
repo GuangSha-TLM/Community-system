@@ -25,6 +25,7 @@ public class NoticeWithCreateByVo {
     private Integer dealt;
     private Integer kinds;
     private Date createTime;
+    private Long adminSignId;
 
 
 
@@ -40,7 +41,7 @@ public class NoticeWithCreateByVo {
         this.createTime = createTime;
     }
 
-    public NoticeWithCreateByVo(Long id, String noticeName, Long userEmailId, Long createBy, String context, String name, String professional, String grade, Integer read, Integer dealt, Integer kinds,Date createTime) {
+    public NoticeWithCreateByVo(Long id, String noticeName, Long userEmailId, Long createBy, String context, String name, String professional, String grade, Integer read, Integer dealt, Integer kinds,Date createTime,long adminSignId) {
         this.id = id;
         this.noticeName = noticeName;
         UserEmailId = userEmailId;
@@ -53,24 +54,7 @@ public class NoticeWithCreateByVo {
         this.dealt = dealt;
         this.kinds = kinds;
         this.createTime = createTime;
-    }
-
-    @Override
-    public String toString() {
-        return "NoticeWithCreateByVo{" +
-                "id=" + id +
-                ", noticeName='" + noticeName + '\'' +
-                ", UserEmailId=" + UserEmailId +
-                ", createBy=" + createBy +
-                ", context='" + context + '\'' +
-                ", name='" + name + '\'' +
-                ", professional='" + professional + '\'' +
-                ", grade='" + grade + '\'' +
-                ", read=" + read +
-                ", dealt=" + dealt +
-                ", kinds=" + kinds +
-                ", createTime=" + createTime +
-                '}';
+        this.adminSignId =adminSignId;
     }
 
     public Long getId() {
@@ -167,5 +151,32 @@ public class NoticeWithCreateByVo {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public Long getAdminSignId() {
+        return adminSignId;
+    }
+
+    public void setAdminSignId(Long adminSignId) {
+        this.adminSignId = adminSignId;
+    }
+
+    @Override
+    public String toString() {
+        return "NoticeWithCreateByVo{" +
+                "id=" + id +
+                ", noticeName='" + noticeName + '\'' +
+                ", UserEmailId=" + UserEmailId +
+                ", createBy=" + createBy +
+                ", context='" + context + '\'' +
+                ", name='" + name + '\'' +
+                ", professional='" + professional + '\'' +
+                ", grade='" + grade + '\'' +
+                ", read=" + read +
+                ", dealt=" + dealt +
+                ", kinds=" + kinds +
+                ", createTime=" + createTime +
+                ", adminSignId=" + adminSignId +
+                '}';
     }
 }

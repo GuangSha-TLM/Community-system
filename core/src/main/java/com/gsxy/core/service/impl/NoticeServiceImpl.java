@@ -66,7 +66,8 @@ public class NoticeServiceImpl implements NoticeService {
                         notice.getRead(),
                         notice.getDealt(),
                         notice.getKinds(),
-                        notice.getCreateTime()
+                        notice.getCreateTime(),
+                        notice.getAdminSignId()
                 )
                 );
             }else {
