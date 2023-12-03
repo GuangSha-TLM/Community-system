@@ -107,7 +107,7 @@ public interface UserAdminService {
      * @param id
      * @return
      */
-    ResponseVo adminCheckInStatusInRealTimeLast(String id);
+    ResponseVo adminCheckInStatusInRealTimeLast(Long id);
 
     /**
      * @author hln 2023-12-03

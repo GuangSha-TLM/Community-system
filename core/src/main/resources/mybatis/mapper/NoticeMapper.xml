@@ -219,18 +219,8 @@
             t1.uuid = #{uuid}
     </select>
 
-    <!-- 根据指定id查找noticeid -->
-    <select id="selectByAdminSignIdNotice" resultType="java.lang.Long" parameterType="java.lang.String">
-        select
-            id
-        from
-            notice
-        where
-            admin_sign_id = #{id}
-    </select>
-
     <!-- 根据指定noticeId获取社团中的所有对象 -->
-    <select id="selectToUser" resultType="java.lang.Long" parameterType="java.lang.Long">
+    <select id="selectToUser" resultType="java.lang.String" parameterType="java.lang.Long">
         select
             t2.name
         from
@@ -241,6 +231,18 @@
             t1.user_email_id = t2.id
         and
             t1.id = #{noticeId}
+    </select>
+
+    <!-- 根据指定id查找noticeid -->
+    <select id="selectByAdminSignIdNotice" resultType="java.lang.Long" parameterType="java.lang.Long">
+        select
+            id
+        from
+            notice
+        where
+            admin_sign_id = #{id}
+          and
+            create_time > now() - INTERVAL 5 MINUTE
     </select>
 
     <!--

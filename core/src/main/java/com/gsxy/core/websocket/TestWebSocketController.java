@@ -25,25 +25,25 @@ public class TestWebSocketController {
 //    private UserAdminMapper userAdminMapper = SpringContextUtil.getBean(UserAdminMapper.class);
 
     @OnOpen
-    public void onOpen(Session session, @PathParam("token") String token) throws IOException {
-        String s = this.serviceFunction(token, session);
+    public void onOpen(Session session, @PathParam("id") Long id) throws IOException {
+        String s = this.serviceFunction(id, session);
         session.getBasicRemote().sendText(s);
     }
 
     // 其他方法...
     @OnMessage
-    public void onMessage(String token, Session session) throws IOException {
+    public void onMessage(Long id, Session session) throws IOException {
 
         //实现用户签到信息的实时查看
-        String s = this.serviceFunction(token, session);
+        String s = this.serviceFunction(id, session);
         session.getBasicRemote().sendText(s);
 
     }
 
 
-    public String serviceFunction(String token, Session session) throws IOException {
+    public String serviceFunction(Long id, Session session) throws IOException {
         //转换格式
-        String str = userAdminController.adminCheckInStatusInRealTimeLast(token);
+        String str = userAdminController.adminCheckInStatusInRealTimeLast(id);
 
         return str;
     }

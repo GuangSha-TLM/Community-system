@@ -221,12 +221,12 @@ public interface UserAdminMapper {
     Long selectToGetId();
 
     /**
-     * @author hln 2023-12-03
-     *      根据uuid找该社团中签到的人
      * @param noticeId
      * @return
+     * @author hln 2023-12-03
+     * 根据uuid找该社团中签到的人
      */
-    Set<Long> selectToIdByAdminId(Long noticeId);
+    Set<String> selectToIdByAdminId(Long noticeId);
 
     /**
      * @author hln 2023-12-03

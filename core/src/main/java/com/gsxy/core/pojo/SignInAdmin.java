@@ -1,7 +1,10 @@
 package com.gsxy.core.pojo;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import java.io.Serializable;
 import java.util.Date;
+
 
 public class SignInAdmin implements Serializable {
 

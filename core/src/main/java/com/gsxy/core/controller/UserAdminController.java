@@ -220,7 +220,7 @@ public class UserAdminController {
      */
     @PostMapping("/findAllStatusInRealTimeLast")
     @ApiOperation("管理员查看实时签到信息")
-    public String adminCheckInStatusInRealTimeLast(@RequestParam String id){
+    public String adminCheckInStatusInRealTimeLast(@RequestParam Long id){
 
         return JSONArray.toJSONString(userAdminService.adminCheckInStatusInRealTimeLast(id));
     }
