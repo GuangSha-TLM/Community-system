@@ -43,7 +43,7 @@ public class TestWebSocketController {
 
     public String serviceFunction(String token, Session session) throws IOException {
         //转换格式
-        String str = userAdminController.adminCheckInStatusInRealTimeNew(token);
+        String str = userAdminController.adminCheckInStatusInRealTimeLast(token);
 
         return str;
     }
