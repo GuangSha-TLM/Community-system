@@ -190,6 +190,7 @@ public class UserAdminControllerAopImpl implements UserAdminControllerAop {
      * @param joinPoint
      */
     @Override
+    @Before("execution(* com.gsxy.core.controller.UserAdminController.adminToGetSignInReal(..))")
     public void adminToGetSignInReal(JoinPoint joinPoint) {
         Object[] args = joinPoint.getArgs();
         String token = (String) args[0];
