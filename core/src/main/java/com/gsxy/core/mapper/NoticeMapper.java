@@ -154,12 +154,12 @@ public interface NoticeMapper {
     void updateByUUIDAddAdminSignId(String uuid1, Long id);
 
     /**
-     * @author hln 2023-12-01
-     *      根据指定id查找noticeid
      * @param id
      * @return
+     * @author hln 2023-12-01
+     * 根据指定id查找noticeid
      */
-    Long selectByAdminSignIdNotice(String id);
+    List<Long> selectByAdminSignIdNotice(String id);
 
     /**
      * @author hln 2023-12-03
@@ -168,6 +168,14 @@ public interface NoticeMapper {
      * @return
      */
     List<Long> selectToGetUser(String uuid);
+
+    /**
+     * @author hln 2023-12-03
+     *      根据指定noticeId获取社团中的所有对象
+     * @param noticeId
+     * @return
+     */
+    List<Long> selectToUser(Long noticeId);
 }
 
 

@@ -351,19 +351,27 @@ public class UserAdminServiceImpl implements UserAdminService {
     public ResponseVo adminCheckInStatusInRealTimeLast(String id) {
 
         //获取通知对应的id编号
-        Long noticeId = noticeMapper.selectByAdminSignIdNotice(id);
+        List<Long> listId = noticeMapper.selectByAdminSignIdNotice(id);
         //判断通知是否收到
-        if(noticeId == null || noticeId == 0L){
+        if(listId == null){
             return new ResponseVo("未接受到签到通知",null,"0x500");
         }
 
-        String uuid = noticeMapper.selectToGetUUID(noticeId);
+//        String uuid = noticeMapper.selectToGetUUID(noticeId);
 
         //封装所有用户签到状态表中的用户id
-        Set<Long> set = userAdminMapper.selectToIdByAdminId(uuid);
+        Set<Long> set = new HashSet<>();
+        for (int i = 0; i < listId.size(); i++) {
+            Long noticeId = listId.get(i);
+            set = userAdminMapper.selectToIdByAdminId(noticeId);
+        }
 
         //封装该社团所有用户id到List集合中
-        List<Long> list = noticeMapper.selectToGetUser(uuid);
+        List<Long> list = new ArrayList<>();
+        for (int i = 0; i < listId.size(); i++) {
+            Long noticeId = listId.get(i);
+            list = noticeMapper.selectToUser(noticeId);
+        }
 
         List<String> listSignIn = new ArrayList<>();
 

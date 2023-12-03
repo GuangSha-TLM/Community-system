@@ -205,17 +205,6 @@
         limit 1
     </select>
 
-    <!-- 根据指定id查找noticeid -->
-    <select id="selectByAdminSignIdNotice" resultType="java.lang.Long" parameterType="java.lang.String">
-        select
-            id
-        from
-            notice
-        where
-            admin_sign_id = #{id}
-        limit 1
-    </select>
-
     <!-- 根据指定uuid获取社团中的对象 -->
     <select id="selectToGetUser" resultType="java.lang.Long" parameterType="java.lang.String">
         select
@@ -228,6 +217,30 @@
             t1.user_email_id = t2.id
         and
             t1.uuid = #{uuid}
+    </select>
+
+    <!-- 根据指定id查找noticeid -->
+    <select id="selectByAdminSignIdNotice" resultType="java.lang.Long" parameterType="java.lang.String">
+        select
+            id
+        from
+            notice
+        where
+            admin_sign_id = #{id}
+    </select>
+
+    <!-- 根据指定noticeId获取社团中的所有对象 -->
+    <select id="selectToUser" resultType="java.lang.Long" parameterType="java.lang.Long">
+        select
+            t2.name
+        from
+            notice t1
+        inner join
+            user t2
+        on
+            t1.user_email_id = t2.id
+        and
+            t1.id = #{noticeId}
     </select>
 
     <!--
