@@ -112,6 +112,7 @@ public class CommunityUserServiceImpl implements CommunityUserService {
         notice.setUserEmailId(communityUserDeleteByIdBo.getUserId());
 
         notice.setCreateBy(communityUserId);
+        notice.setCreateTime(new Date());
         notice.setStatus(0);
         notice.setDelFlag(0);
         notice.setAdminSignId(0L);
@@ -131,6 +132,7 @@ public class CommunityUserServiceImpl implements CommunityUserService {
         noticeWithUser.setSendUserId(communityUserId);
         noticeWithUser.setNoticeId(notice2.getId());
         noticeWithUser.setCreateBy(communityUserId);
+        noticeWithUser.setCreateTime(new Date());
         noticeWithUser.setStatus(0);
         noticeWithUser.setDelFlag(0);
         noticeWithUserMapper.addNoticeWithUser(noticeWithUser);
