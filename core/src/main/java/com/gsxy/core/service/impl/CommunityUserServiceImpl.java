@@ -56,6 +56,7 @@ public class CommunityUserServiceImpl implements CommunityUserService {
         notice.setUserEmailId(communityUserAddBo.getCommunityUser().getUserId());
 
         notice.setCreateBy(userId);
+        notice.setCreateTime(new Date());
         notice.setStatus(0);
         notice.setDelFlag(0);
         notice.setAdminSignId(0L);
@@ -75,6 +76,7 @@ public class CommunityUserServiceImpl implements CommunityUserService {
         noticeWithUser.setSendUserId(userId);
         noticeWithUser.setNoticeId(notice2.getId());
         noticeWithUser.setCreateBy(userId);
+        noticeWithUser.setCreateTime(new Date());
         noticeWithUser.setStatus(0);
         noticeWithUser.setDelFlag(0);
         noticeWithUserMapper.addNoticeWithUser(noticeWithUser);
@@ -103,9 +105,9 @@ public class CommunityUserServiceImpl implements CommunityUserService {
         }
         Long id = communityUserDeleteByIdBo.getId();
         Long aLong = communityUserMapper.communityUserDeleteById(id);
-        if (aLong.longValue() == 0L) {
-            return new ResponseVo("删除失败", null, "0x500");
-        }
+
+
+        System.out.println(aLong);
 
         //获取该社团的信息
         Community community = communityMapper.selectByCommunityId(communityUserId);
@@ -138,6 +140,9 @@ public class CommunityUserServiceImpl implements CommunityUserService {
         noticeWithUser.setStatus(0);
         noticeWithUser.setDelFlag(0);
         noticeWithUserMapper.addNoticeWithUser(noticeWithUser);
+        if (aLong.longValue() == 0L) {
+            return new ResponseVo("删除失败", null, "0x500");
+        }
         return new ResponseVo("删除成功",id, "0x200");
     }
 

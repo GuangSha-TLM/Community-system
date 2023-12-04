@@ -1,7 +1,7 @@
 <!--
  * @Author: tianleiyu 
  * @Date: 2023-11-09 16:14:29
- * @LastEditTime: 2023-11-11 11:12:37
+ * @LastEditTime: 2023-12-04 20:02:17
  * @LastEditors: tianleiyu
  * @Description: 
  * @FilePath: /community-ui/src/components/Userinfo.vue
@@ -62,7 +62,7 @@
 
                         <el-form-item label="专业">
                             <el-select v-model="userUpdateByUserIdBo.user.professional" placeholder="请选择">
-                                <el-option-group v-for="group in professionalList[user.college - 1]" :key="group.value"
+                                <el-option-group v-for="group in professionalList[userUpdateByUserIdBo.user.college - 1]" :key="group.value"
                                     :label="group.label">
                                     <el-option v-for="item in group.professionalList" :key="item.professionalList"
                                         :label="item.label" :value="item">
@@ -249,8 +249,10 @@ export default {
             this.userSelectByUserIdBo.token = this.token;
             let res = await synRequestPost("/user/select", this.userSelectByUserIdBo);
 
-            if (obj.code == "0x200") {
+            if (res.code == "0x200") {
                 this.user = res.data;
+                localStorage.setItem("user",JSON.stringify(res.data));
+                console.log(JSON.parse(localStorage.getItem("user")));
                 this.getMerchantInformation()
                 this.dialogFormVisible = false
                 this.$message({
