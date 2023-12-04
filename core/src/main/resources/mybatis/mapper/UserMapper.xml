@@ -297,15 +297,14 @@
 
     <select id="selectToGetUserBy" resultType="com.gsxy.core.pojo.vo.FindAllVo">
         select
-        t1.id, t1.name, t1.college, t1.grade, t1.professional
+        distinct t1.id, t1.name, t1.college, t1.grade, t1.professional
         from
         user t1
         INNER JOIN community_user t2
         on
-            t2.user_id != t1.id
         <where>
             <if test="college != null">
-                and college = #{college}
+                college = #{college}
             </if>
             <if test="grade != null">
                 and grade like concat('%', #{grade}, '%')
@@ -313,7 +312,7 @@
             <if test="professional != null">
                 and professional like concat('%', #{professional}, '%')
             </if>
-            and t2.community_id = 1
+            and t2.community_id != 1
         </where>
         limit #{page}, #{size}
     </select>
