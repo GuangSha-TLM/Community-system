@@ -181,5 +181,12 @@ public interface UserMapper {
      *      返回所有用户信息
      * @return
      */
-    List<FindAllVo> selectGetUser(FindAllBo findAllBo);
+    List<FindAllVo> selectGetUser();
+
+    /**
+     * @author hln 2023-12-03
+     *      返回用户表中所有数据的个数
+     * @return
+     */
+    int selectToGetCount(FindAllBo findAllBo);
 }

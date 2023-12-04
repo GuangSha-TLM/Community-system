@@ -15,6 +15,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -417,17 +418,24 @@ public class UserServiceImpl implements UserService {
         findAllBo.setPage(page);
 
         List<FindAllVo> list;
-        //判断前端是否传数据
-        //1）若传
-        if (findAllBo.getCollege() != null || findAllBo.getGrade() != null || findAllBo.getProfessional() != null) {
-            list = userMapper.selectToGetUserBy(findAllBo);
-        }
-        //2）若不传
-        else {
-            list = userMapper.selectGetUser(findAllBo);
-        }
+//        //判断前端是否传数据
+//        //1）若传
+//        if ((findAllBo.getCollege() != 0 && findAllBo.getCollege() != null) || findAllBo.getGrade() != null || findAllBo.getProfessional() != null) {
+//            list = userMapper.selectToGetUserBy(findAllBo);
+//        }
+//        //2）若不传
+//        else {
+//            list = userMapper.selectGetUser();
+//        }
 
-        return new ResponseVo("查询成功",list,"0x200");
+        list = userMapper.selectToGetUserBy(findAllBo);
+        int count = userMapper.selectToGetCount(findAllBo);
+
+        FindAllVoNew findAllVoNew = new FindAllVoNew();
+        findAllVoNew.setList(list);
+        findAllVoNew.setCount(count);
+
+        return new ResponseVo("查询成功",findAllVoNew,"0x200");
     }
 
 }

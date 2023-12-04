@@ -273,20 +273,7 @@
     </select>
 
 
-    <select id="selectToGetUserBy" resultType="com.gsxy.core.pojo.vo.FindAllVo"
-            parameterType="com.gsxy.core.pojo.bo.FindAllBo">
-        select
-            id,name,college,grade,professional,count(id)
-        from
-            user
-        where
-            college = #{college}
-        and
-            grade like concat('%',#{grade},'%')
-        and
-            professional like concat('%',#{professional},'%')
-        limit #{page},#{size}
-    </select>
+
 
     <!-- 返回所有用户信息 -->
     <select id="selectGetUser" resultType="com.gsxy.core.pojo.vo.FindAllVo">
@@ -297,7 +284,43 @@
         limit 0 ,10
     </select>
 
-<!--    &lt;!&ndash; 插入用户签到状态 &ndash;&gt;-->
+    <select id="selectToGetUserBy" resultType="com.gsxy.core.pojo.vo.FindAllVo">
+        select
+            id,name,college,grade,professional
+        from
+            user
+        where
+        <if test="college != 0">
+            college = #{college} and
+        </if>
+        <if test="grade != null">
+            grade like concat('%',#{grade},'%') and
+        </if>
+        <if test="professional != null">
+            professional like concat('%',#{professional},'%')
+        </if>
+        limit #{page},#{size}
+    </select>
+
+    <!-- 返回用户表中所有数据的个数 -->
+    <select id="selectToGetCount" resultType="java.lang.Integer">
+        select
+        count(*)
+        from
+        user
+        where
+        <if test="college != 0">
+            college = #{college} and
+        </if>
+        <if test="grade != null">
+            grade like concat('%',#{grade},'%') and
+        </if>
+        <if test="professional != null">
+            professional like concat('%',#{professional},'%')
+        </if>
+    </select>
+
+    <!--    &lt;!&ndash; 插入用户签到状态 &ndash;&gt;-->
 <!--    <insert id="userSignIn" parameterType="com.gsxy.core.pojo.bo.UserSignInBo">-->
 <!--        insert into-->
 <!--            sign_in-->
