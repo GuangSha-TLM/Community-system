@@ -361,10 +361,16 @@ public class UserAdminServiceImpl implements UserAdminService {
 //        String uuid = noticeMapper.selectToGetUUID(noticeId);
 
         //封装所有用户签到状态表中的用户id
+        Set<String> set1 = new HashSet<>();
         Set<String> set = new HashSet<>();
         for (int i = 0; i < listId.size(); i++) {
             Long noticeId = listId.get(i);
-            set = userAdminMapper.selectToIdByAdminId(noticeId);
+            set1 = userAdminMapper.selectToIdByAdminId(noticeId);
+            if (set1.size() != 0){
+                for (String s : set1) {
+                    set.add(s);
+                }
+            }
         }
 
         //封装该社团所有用户id到List集合中
