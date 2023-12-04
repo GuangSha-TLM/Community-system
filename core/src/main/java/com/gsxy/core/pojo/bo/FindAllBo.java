@@ -8,15 +8,15 @@ public class FindAllBo implements Serializable {
     private Integer college;//学院
     private String grade;//年级
     private String professional;//专业
-    private Integer first;//开始长度
+    private Integer page;//开始长度
     private Integer size;//截止长度
 
-    public FindAllBo(String token, Integer college, String grade, String professional, Integer first, Integer size) {
+    public FindAllBo(String token, Integer college, String grade, String professional, Integer page, Integer size) {
         this.token = token;
         this.college = college;
         this.grade = grade;
         this.professional = professional;
-        this.first = first;
+        this.page = page;
         this.size = size;
     }
 
@@ -55,12 +55,12 @@ public class FindAllBo implements Serializable {
         this.professional = professional;
     }
 
-    public Integer getFirst() {
-        return first;
+    public Integer getPage() {
+        return page;
     }
 
-    public void setFirst(Integer first) {
-        this.first = first;
+    public void setPage(Integer page) {
+        this.page = page;
     }
 
     public Integer getSize() {
@@ -78,7 +78,7 @@ public class FindAllBo implements Serializable {
                 ", college=" + college +
                 ", grade='" + grade + '\'' +
                 ", professional='" + professional + '\'' +
-                ", first=" + first +
+                ", page=" + page +
                 ", size=" + size +
                 '}';
     }

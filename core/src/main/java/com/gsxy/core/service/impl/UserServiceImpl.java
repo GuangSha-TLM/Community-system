@@ -413,6 +413,9 @@ public class UserServiceImpl implements UserService {
             return new ResponseVo("token解析失败",null,"0x501");
         }
 
+        int page = (findAllBo.getPage() - 1) * findAllBo.getSize();
+        findAllBo.setPage(page);
+
         List<FindAllVo> list;
         //判断前端是否传数据
         //1）若传
