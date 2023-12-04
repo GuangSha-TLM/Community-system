@@ -1,6 +1,7 @@
 package com.gsxy.core.pojo.vo;
 
 import java.util.List;
+import java.util.Set;
 
 public class FindAllVoNew {
 

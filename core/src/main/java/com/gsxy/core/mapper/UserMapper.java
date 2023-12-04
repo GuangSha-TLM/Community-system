@@ -176,7 +176,7 @@ public interface UserMapper {
      * @author hln 2023-12-03
      * 查询前段指定字段查询用户信息
      */
-    List<FindAllVo> selectToGetUserBy(FindAllBo findAllBoNew);
+    List<FindAllVo> selectToGetUserBy(FindAllBoNew findAllBoNew);
 
     /**
      * @author hln 2023-12-03
