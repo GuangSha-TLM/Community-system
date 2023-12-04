@@ -247,7 +247,7 @@ public class UserController {
      */
     @PostMapping("/findAll")
     @ApiOperation("查询所有信息")
-    private String findAll(@RequestBody FindAllBo findAllBo) {
+    public String findAllByPaging(@RequestBody FindAllBo findAllBo) {
         Map<String, String> map = ThreadLocalUtil.mapThreadLocal.get();
         ThreadLocalUtil.mapThreadLocal.remove();
 

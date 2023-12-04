@@ -12,6 +12,19 @@ import org.springframework.stereotype.Component;
 @Component
 @Aspect
 public class UserControllerAopImpl implements UserControllerAop {
+    /**
+     * @author hln 2023-12-03
+     *      查询所有信息
+     * @param joinPoint
+     */
+    @Override
+    @Before("execution(* com.gsxy.core.controller.UserController.findAllByPaging(..))")
+    public void findAll(JoinPoint joinPoint) {
+        Object[] args = joinPoint.getArgs();
+        FindAllBo arg = (FindAllBo) args[0];
+        String token = arg.getToken();
+        systemService.auth(token);
+    }
 
     @Autowired
     private SystemService systemService;
@@ -152,17 +165,5 @@ public class UserControllerAopImpl implements UserControllerAop {
         return null;
     }
 
-//    /**
-//     * @author hln 2023-12-03
-//     *      查询所有信息
-//     * @param joinPoint
-//     */
-//    @Override
-//    @Before("execution(* com.gsxy.core.controller.UserController.findAll(..))")
-//    public void findAll(JoinPoint joinPoint) {
-//        Object[] args = joinPoint.getArgs();
-//        String token = (String) args[0];
-//        systemService.auth(token);
-//    }
 
 }
