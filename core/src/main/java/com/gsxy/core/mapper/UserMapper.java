@@ -169,12 +169,13 @@ public interface UserMapper {
     String selectToGetNameByUserId(Long aLong);
 
     /**
-     * @author hln 2023-12-03
-     *      查询前段指定字段查询用户信息
      * @param findAllBo
+     * @param userId
      * @return
+     * @author hln 2023-12-03
+     * 查询前段指定字段查询用户信息
      */
-    List<FindAllVo> selectToGetUserBy(FindAllBo findAllBo);
+    List<FindAllVo> selectToGetUserBy(FindAllBo findAllBo, Long userId);
 
     /**
      * @author hln 2023-12-03

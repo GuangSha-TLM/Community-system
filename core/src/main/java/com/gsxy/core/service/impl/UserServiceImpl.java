@@ -427,8 +427,7 @@ public class UserServiceImpl implements UserService {
 //        else {
 //            list = userMapper.selectGetUser();
 //        }
-
-        list = userMapper.selectToGetUserBy(findAllBo);
+        list = userMapper.selectToGetUserBy(findAllBo,userId);
         int count = userMapper.selectToGetCount(findAllBo);
 
         FindAllVoNew findAllVoNew = new FindAllVoNew();

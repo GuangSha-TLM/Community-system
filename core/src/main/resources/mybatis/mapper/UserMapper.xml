@@ -284,23 +284,6 @@
         limit 0 ,10
     </select>
 
-    <select id="selectToGetUserBy" resultType="com.gsxy.core.pojo.vo.FindAllVo">
-        select
-            id,name,college,grade,professional
-        from
-            user
-        where
-        <if test="college != 0">
-            college = #{college} and
-        </if>
-        <if test="grade != null">
-            grade like concat('%',#{grade},'%') and
-        </if>
-        <if test="professional != null">
-            professional like concat('%',#{professional},'%')
-        </if>
-        limit #{page},#{size}
-    </select>
 
     <!-- 返回用户表中所有数据的个数 -->
     <select id="selectToGetCount" resultType="java.lang.Integer">
@@ -318,6 +301,30 @@
         <if test="professional != null">
             professional like concat('%',#{professional},'%')
         </if>
+    </select>
+
+    <select id="selectToGetUserBy" resultType="com.gsxy.core.pojo.vo.FindAllVo">
+        select
+            t1.id,t1.name,t1.college,t1.grade,t1.professional
+        from
+            user t1
+        inner join
+            community_user t2
+        on
+        <if test="college != 0">
+            college = #{college} and
+        </if>
+        <if test="grade != null">
+            grade like concat('%',#{grade},'%') and
+        </if>
+        <if test="professional != null">
+            professional like concat('%',#{professional},'%')
+        </if>
+        and
+            t2.community_id = #{userId}
+        and
+            t2.user_id = t1.id
+        limit #{page},#{size}
     </select>
 
     <!--    &lt;!&ndash; 插入用户签到状态 &ndash;&gt;-->
