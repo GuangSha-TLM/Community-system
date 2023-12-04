@@ -285,7 +285,7 @@
             grade like concat('%',#{grade},'%')
         and
             professional like concat('%',#{professional},'%')
-        limit #{start},#{size}
+        limit #{first},#{size}
     </select>
 
     <!-- 返回所有用户信息 -->
