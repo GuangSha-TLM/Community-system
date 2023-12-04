@@ -350,7 +350,7 @@
     <select id="selectToGetSignInReal" resultType="com.gsxy.core.pojo.vo.SignInAdminWebVo"
             parameterType="java.lang.Long">
         select
-            id,community_id,content,release_time
+            id,community_id,content,release_time,sign_in_time
         from
             sign_in_admin_websocket
         where

@@ -8,12 +8,14 @@ public class SignInAdminWebVo {
     private Long communityId;
     private String content;
     private Date releaseTime;
+    private Integer signTime;
 
-    public SignInAdminWebVo(Long id, Long communityId, String content, Date releaseTime) {
+    public SignInAdminWebVo(Long id, Long communityId, String content, Date releaseTime, Integer signTime) {
         this.id = id;
         this.communityId = communityId;
         this.content = content;
         this.releaseTime = releaseTime;
+        this.signTime = signTime;
     }
 
     public SignInAdminWebVo() {
@@ -51,6 +53,14 @@ public class SignInAdminWebVo {
         this.releaseTime = releaseTime;
     }
 
+    public Integer getSignTime() {
+        return signTime;
+    }
+
+    public void setSignTime(Integer signTime) {
+        this.signTime = signTime;
+    }
+
     @Override
     public String toString() {
         return "SignInAdminWebVo{" +
@@ -58,6 +68,7 @@ public class SignInAdminWebVo {
                 ", communityId=" + communityId +
                 ", content='" + content + '\'' +
                 ", releaseTime=" + releaseTime +
+                ", signTime=" + signTime +
                 '}';
     }
 }
