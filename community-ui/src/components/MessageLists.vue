@@ -1,7 +1,7 @@
 <!--
  * @Author: tianleiyu
  * @Date: 2023-11-05 20:12:55
- * @LastEditTime: 2023-12-03 15:03:04
+ * @LastEditTime: 2023-12-04 19:34:52
  * @LastEditors: tianleiyu
  * @Description:
  * @FilePath: /community-ui/src/components/MessageLists.vue
@@ -108,9 +108,19 @@ export default {
             this.receiveNotificationsBo.content = this.communityReplyNoticeBo.content;
             // this.receiveNotificationsBo.adminSignId = this.communityReplyNoticeBo.adminSignId;
             let obj = await synRequestPost("/community/receiveNotificationsNew", this.receiveNotificationsBo);
-            console.log(obj);
-            this.communityReplyNoticeBo.content=''
+            if (obj.code == "0x200") {
+                this.communityReplyNoticeBo.content=''
             this.dialogVisible= false
+                this.$message({
+                    showClose: true,
+                    message: '签到成功!',
+                    type: 'success'
+                });
+                this.getMerchantInformation()
+            }else{
+                this.$message.error(`签到失败!`);
+            }
+            
         },
         //发送空的MessageLists给LoginTop，解决刷新数据为空问题
         async getMerchantInformation() {

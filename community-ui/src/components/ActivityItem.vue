@@ -1,7 +1,7 @@
 <!--
  * @Author: tianleiyu
  * @Date: 2023-10-29 13:15:48
- * @LastEditTime: 2023-11-19 12:36:46
+ * @LastEditTime: 2023-12-04 19:15:53
  * @LastEditors: tianleiyu
  * @Description:
  * @FilePath: /community-ui/src/components/ActivityItem.vue
@@ -78,6 +78,8 @@ export default {
             console.log(obj);
             if (obj.code == "0x200") {
                 this.list = obj.data;
+                this.list.activeToGetBo.context = this.list.activeToGetBo.context.replace(/<img/g,"<img style='max-width:100%;height:auto;'");
+
             }
         },
     }
@@ -123,7 +125,7 @@ a {
 .context{
     margin-top: 30px;
 }
-img{
+.context img{
     width: 100%;
     height: auto;
 }
