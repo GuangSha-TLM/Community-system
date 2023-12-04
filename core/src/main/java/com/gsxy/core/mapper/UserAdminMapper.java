@@ -234,4 +234,11 @@ public interface UserAdminMapper {
      * @return
      */
     List<SignInAdminWebVo> selectToGetSignInReal(Long adminId);
+
+    /**
+     * @author hln 2023-12-03
+     *      查找最新发布签到内容
+     * @return
+     */
+    String selectToGetContentNew();
 }

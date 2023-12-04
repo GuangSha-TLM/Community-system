@@ -49,10 +49,10 @@ public class TestWebSocketController {
         return str;
     }
 
-    @OnClose
-    public void onClose(Session session) {
-        // 处理关闭事件
-        System.out.println("WebSocket closed for session: " + session.getId());
-    }
+//    @OnClose
+//    public void onClose(Session session) {
+//        // 处理关闭事件
+//        System.out.println("WebSocket closed for session: " + session.getId());
+//    }
 
 }

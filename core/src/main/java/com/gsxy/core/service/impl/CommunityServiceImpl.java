@@ -395,7 +395,7 @@ public class CommunityServiceImpl implements CommunityService {
         signInWebSocketBo.setToken(receiveNotificationsBo.getToken());
         signInWebSocketBo.setUuid(uuid2);
 
-        String content = userAdminMapper.selectToGetContent();
+        String content = userAdminMapper.selectToGetContentNew();
 
         if (content != receiveNotificationsBo.getContent()) {
             return new ResponseVo("签到失败",null,"0x500");

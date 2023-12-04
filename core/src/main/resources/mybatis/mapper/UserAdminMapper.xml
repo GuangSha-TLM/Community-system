@@ -378,4 +378,22 @@
         desc
     </select>
 
+    <!-- 查找最新签到发布内容 -->
+    <select id="selectToGetContentNew" resultType="java.lang.String">
+        select
+            t1.content
+        from
+            sign_in_admin_websocket t1
+        inner join
+            notice t2
+        on
+            t2.uuid = t1.uuid
+        and
+            t1.admin_id = t2.create_by
+        order by
+            release_time
+        desc
+        limit 1
+    </select>
+
 </mapper>
