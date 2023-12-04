@@ -355,6 +355,10 @@
             sign_in_admin_websocket
         where
             admin_id = #{adminId}
+        order by
+            release_time
+        desc
+        limit 1
     </select>
 
     <!-- 根据id找该社团中签到的人 -->
