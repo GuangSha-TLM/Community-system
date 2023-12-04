@@ -380,7 +380,7 @@ public class UserAdminServiceImpl implements UserAdminService {
 
         List<String> listSignIn = new ArrayList<>();
 
-        for (int i = 0; i < list.size(); i++) {
+        for (int i = 0; i <  list.size(); i++) {
 
             if(!set.add(list.get(i))){
                 listSignIn.add(list.get(i) + "已签到");
