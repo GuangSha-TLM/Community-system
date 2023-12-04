@@ -35,7 +35,7 @@
                                 <td>{{ obj.professional }}</td>
                                 <td>{{ obj.studentId }}</td>
                                 <td>
-                                    <el-link type="success" @click="deleteById(obj.userId)">删除</el-link>
+                                    <el-link type="success" @click="deleteById(obj.userId)">提出</el-link>
                                 </td>
                             </tr>
 

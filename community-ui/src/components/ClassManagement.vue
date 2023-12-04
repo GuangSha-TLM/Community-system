@@ -391,8 +391,6 @@ export default {
             this.getMerchantInformation(1);
 
         },
-       
-
         //拉取功能
         async Pulling(id) {
             this.communityUserAddBo.token = this.token;
