@@ -313,7 +313,7 @@
             college = #{college} and
         </if>
         <if test="grade != null">
-            grade like concat('%',#{grade},'%') and
+            grade like concat('%',#{grade},'%')  and
         </if>
         <if test="professional != null">
             professional like concat('%',#{professional},'%')
