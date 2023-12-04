@@ -8,6 +8,7 @@ import com.gsxy.core.pojo.vo.FindAllVo;
 import com.gsxy.core.pojo.vo.UserSelectToGetVo;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Mapper
@@ -169,12 +170,12 @@ public interface UserMapper {
     String selectToGetNameByUserId(Long aLong);
 
     /**
-     * @author hln 2023-12-03
-     *      查询前段指定字段查询用户信息
-     * @param findAllBo
+     * @param findAllBoNew
      * @return
+     * @author hln 2023-12-03
+     * 查询前段指定字段查询用户信息
      */
-    List<FindAllVo> selectToGetUserBy(FindAllBo findAllBo);
+    List<FindAllVo> selectToGetUserBy(FindAllBo findAllBoNew);
 
     /**
      * @author hln 2023-12-03
@@ -189,4 +190,20 @@ public interface UserMapper {
      * @return
      */
     int selectToGetCount(FindAllBo findAllBo);
+
+    /**
+     * @author hln 2023-12-04
+     *      根据传入的id查找该社团内的用户id
+     * @param userId
+     * @return
+     */
+    ArrayList<Long> selectGetUserId(Long userId);
+
+    /**
+     * @author hln 2023-12-04
+     *      根据传入的id查找该社团内的用户的总数
+     * @param userId
+     * @return
+     */
+    int selectToGetCountNew(Long userId);
 }

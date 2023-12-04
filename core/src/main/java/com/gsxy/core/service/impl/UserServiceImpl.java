@@ -428,12 +428,33 @@ public class UserServiceImpl implements UserService {
 //            list = userMapper.selectGetUser();
 //        }
 
+//        FindAllBoNew findAllBoNew = new FindAllBoNew();
+//        findAllBoNew.setCollege(findAllBo.getCollege());
+//        findAllBoNew.setGrade(findAllBo.getGrade());
+//        findAllBoNew.setPage(findAllBoNew.getPage());
+//        findAllBoNew.setProfessional(findAllBoNew.getProfessional());
+//        findAllBoNew.setSize(findAllBo.getSize());
+//        findAllBoNew.setUserId(userId);
+
         list = userMapper.selectToGetUserBy(findAllBo);
         int count = userMapper.selectToGetCount(findAllBo);
+        int countNew = userMapper.selectToGetCountNew(userId);
+
+        //记录社团成员的id
+        List<Long> listNew = userMapper.selectGetUserId(userId);
+
+        for (Long o : listNew) {
+            for (int i = 0; i < list.size(); i++) {
+                if(list.get(i).getId() == o){
+                    list.remove(list.get(i));
+                }
+            }
+        }
+
 
         FindAllVoNew findAllVoNew = new FindAllVoNew();
         findAllVoNew.setList(list);
-        findAllVoNew.setCount(count);
+        findAllVoNew.setCount(count - countNew);
 
         return new ResponseVo("查询成功",findAllVoNew,"0x200");
     }

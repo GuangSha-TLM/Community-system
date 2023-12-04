@@ -284,13 +284,32 @@
         limit 0 ,10
     </select>
 
+
+    <!-- 返回用户表中所有数据的个数 -->
+    <select id="selectToGetCount" resultType="java.lang.Integer">
+        select
+        count(*)
+        from
+        user
+        where
+        <if test="college != null">
+            college = #{college} and
+        </if>
+        <if test="grade != null">
+            grade like concat('%',#{grade},'%')  and
+        </if>
+        <if test="professional != null">
+            professional like concat('%',#{professional},'%')
+        </if>
+    </select>
+
     <select id="selectToGetUserBy" resultType="com.gsxy.core.pojo.vo.FindAllVo">
         select
             id,name,college,grade,professional
         from
-            user
+            user t1
         where
-        <if test="college != 0">
+        <if test="college != null">
             college = #{college} and
         </if>
         <if test="grade != null">
@@ -302,22 +321,24 @@
         limit #{page},#{size}
     </select>
 
-    <!-- 返回用户表中所有数据的个数 -->
-    <select id="selectToGetCount" resultType="java.lang.Integer">
+    <!-- 根据传入的id查找该社团内的用户id -->
+    <select id="selectGetUserId" resultType="java.lang.Long">
         select
-        count(*)
+            user_id
         from
-        user
+            community_user
         where
-        <if test="college != 0">
-            college = #{college} and
-        </if>
-        <if test="grade != null">
-            grade like concat('%',#{grade},'%')  and
-        </if>
-        <if test="professional != null">
-            professional like concat('%',#{professional},'%')
-        </if>
+            community_id = #{userId}
+    </select>
+
+    <!-- 根据传入的id查找该社团内的用户的总数 -->
+    <select id="selectToGetCountNew" resultType="java.lang.Integer">
+        select
+            count(*)
+        from
+            community_user
+        where
+            community_id = #{userId}
     </select>
 
     <!--    &lt;!&ndash; 插入用户签到状态 &ndash;&gt;-->
