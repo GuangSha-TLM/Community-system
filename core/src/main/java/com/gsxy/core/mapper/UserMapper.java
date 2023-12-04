@@ -5,6 +5,7 @@ import com.gsxy.core.pojo.SignInWebSocket;
 import com.gsxy.core.pojo.User;
 import com.gsxy.core.pojo.bo.*;
 import com.gsxy.core.pojo.vo.FindAllVo;
+import com.gsxy.core.pojo.vo.SelectUserVo;
 import com.gsxy.core.pojo.vo.UserSelectToGetVo;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -39,12 +40,12 @@ public interface UserMapper {
     Long userReg(User user);
 
     /**
-     * @author hln 2023-10-23
-     *      通过id查找用户
      * @param userId
      * @return
+     * @author hln 2023-10-23
+     * 通过id查找用户
      */
-    public User selectByUserId(Long userId);
+    public SelectUserVo selectByUserId(Long userId);
 
     /**
      * @author hln 2023-10-23
