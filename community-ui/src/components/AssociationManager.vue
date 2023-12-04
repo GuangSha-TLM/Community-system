@@ -60,7 +60,10 @@
                         <el-table :data="signList" style="width: 100%">
                             <el-table-column prop="releaseTime" label="时间" width="180">
                             </el-table-column>
+                           
                             <el-table-column prop="content" label="内容">
+                            </el-table-column>
+                            <el-table-column prop="signInTime" label="限制时间(分钟)">
                             </el-table-column>
                             <el-table-column fixed="right" label="操作" width="100">
                                 <template slot-scope="scope">

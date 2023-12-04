@@ -397,7 +397,7 @@ public class CommunityServiceImpl implements CommunityService {
 
         String content = userAdminMapper.selectToGetContentNew();
 
-        if (content != receiveNotificationsBo.getContent()) {
+        if (!content.equals(receiveNotificationsBo.getContent())) {
             return new ResponseVo("签到失败",null,"0x500");
         }
 
