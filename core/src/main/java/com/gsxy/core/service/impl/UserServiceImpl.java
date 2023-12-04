@@ -15,9 +15,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -428,22 +426,30 @@ public class UserServiceImpl implements UserService {
 //            list = userMapper.selectGetUser();
 //        }
 
-//        FindAllBoNew findAllBoNew = new FindAllBoNew();
-//        findAllBoNew.setCollege(findAllBo.getCollege());
-//        findAllBoNew.setGrade(findAllBo.getGrade());
-//        findAllBoNew.setPage(findAllBoNew.getPage());
-//        findAllBoNew.setProfessional(findAllBoNew.getProfessional());
-//        findAllBoNew.setSize(findAllBo.getSize());
-//        findAllBoNew.setUserId(userId);
+        FindAllBoNew findAllBoNew = new FindAllBoNew();
+        findAllBoNew.setCollege(findAllBo.getCollege());
+        findAllBoNew.setGrade(findAllBo.getGrade());
+        findAllBoNew.setPage(findAllBo.getPage());
+        findAllBoNew.setProfessional(findAllBo.getProfessional());
+        findAllBoNew.setSize(findAllBo.getSize());
+        findAllBoNew.setUserId(userId);
 
-        list = userMapper.selectToGetUserBy(findAllBo);
+        list = userMapper.selectToGetUserBy(findAllBoNew);
         int count = userMapper.selectToGetCount(findAllBo);
         int countNew = userMapper.selectToGetCountNew(userId);
 
-//        //记录不在社团的用户的id
+//        //记录在社团的用户的id
 //        List<Long> listNew = userMapper.selectGetUserId(userId);
 //
-//        ArrayList<FindAllVo> list2 = new ArrayList<>();
+//        Set<FindAllVo> set = new HashSet<>();
+//
+//        for (Long l : listNew) {
+//            for (int i = 0; i < list.size(); i++) {
+//                if (l == list.get(i).getId()) {
+//                    list.remove(list.get(i));
+//                }
+//            }
+//        }
 //
 //        for (int i = 0; i < list.size(); i++) {
 //
@@ -451,7 +457,7 @@ public class UserServiceImpl implements UserService {
 
         FindAllVoNew findAllVoNew = new FindAllVoNew();
         findAllVoNew.setList(list);
-        findAllVoNew.setCount(count - countNew);
+        findAllVoNew.setCount(count - countNew - 1);
 
         return new ResponseVo("查询成功",findAllVoNew,"0x200");
     }
