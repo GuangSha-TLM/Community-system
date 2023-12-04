@@ -443,17 +443,19 @@ public class UserServiceImpl implements UserService {
         //记录社团成员的id
         List<Long> listNew = userMapper.selectGetUserId(userId);
 
+        ArrayList<FindAllVo> list2 = new ArrayList<>();
+
         for (Long o : listNew) {
             for (int i = 0; i < list.size(); i++) {
-                if(list.get(i).getId() == o){
-                    list.remove(list.get(i));
-                }
+                if(list.get(i).getId() == o)
+                    continue;
+                else
+                    list2.add(list.get(i));
             }
         }
 
-
         FindAllVoNew findAllVoNew = new FindAllVoNew();
-        findAllVoNew.setList(list);
+        findAllVoNew.setList(list2);
         findAllVoNew.setCount(count - countNew);
 
         return new ResponseVo("查询成功",findAllVoNew,"0x200");
