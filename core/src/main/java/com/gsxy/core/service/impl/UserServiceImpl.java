@@ -424,7 +424,7 @@ public class UserServiceImpl implements UserService {
         }
         //2）若不传
         else {
-            list = userMapper.selectGetUser();
+            list = userMapper.selectGetUser(findAllBo);
         }
 
         return new ResponseVo("查询成功",list,"0x200");

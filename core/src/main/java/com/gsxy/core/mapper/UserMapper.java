@@ -181,5 +181,5 @@ public interface UserMapper {
      *      返回所有用户信息
      * @return
      */
-    List<FindAllVo> selectGetUser();
+    List<FindAllVo> selectGetUser(FindAllBo findAllBo);
 }

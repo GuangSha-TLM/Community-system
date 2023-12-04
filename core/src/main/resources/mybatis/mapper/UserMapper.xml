@@ -294,6 +294,7 @@
             username,name,college,student_id,org,grade,professional,count(id)
         from
             user
+        limit 0 ,10
     </select>
 
 <!--    &lt;!&ndash; 插入用户签到状态 &ndash;&gt;-->
