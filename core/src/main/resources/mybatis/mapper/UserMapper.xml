@@ -347,11 +347,15 @@
 
     <select id="selectToUserId" resultType="com.gsxy.core.pojo.vo.SelectUserVo">
         select
-            id,username,name,college,student_id,org,grade,professional
+            t1.id,t1.username,t1.name,t1.college,t1.student_id,t1.org,t1.grade,t1.professional,t2.role
         from
-            user
-        where
-            id=#{id}
+            user t1
+        inner join
+            user_admin t2
+        on
+            t1.id=#{id}
+        and
+            t2.user_id = t1.id
         limit 1
     </select>
 

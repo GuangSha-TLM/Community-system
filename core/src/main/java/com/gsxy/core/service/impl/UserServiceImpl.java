@@ -448,10 +448,12 @@ public class UserServiceImpl implements UserService {
         for (Long o : listNew) {
             for (int i = 0; i < list.size(); i++) {
                 if(list.get(i).getId() == o)
-                    continue;
-                else
-                    list2.add(list.get(i));
+                    list.remove(list.get(i));
             }
+        }
+
+        for (FindAllVo o : list) {
+            list2.add(o);
         }
 
         FindAllVoNew findAllVoNew = new FindAllVoNew();

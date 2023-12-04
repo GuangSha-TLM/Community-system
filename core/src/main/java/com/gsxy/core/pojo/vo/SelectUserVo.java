@@ -10,8 +10,9 @@ public class SelectUserVo {
     private Integer org;//班级
     private String grade;//年级
     private String professional;//专业
+    private Integer role;//权限
 
-    public SelectUserVo(Long id, String username, String name, Integer college, String studentId, Integer org, String grade, String professional) {
+    public SelectUserVo(Long id, String username, String name, Integer college, String studentId, Integer org, String grade, String professional, Integer role) {
         this.id = id;
         this.username = username;
         this.name = name;
@@ -20,6 +21,7 @@ public class SelectUserVo {
         this.org = org;
         this.grade = grade;
         this.professional = professional;
+        this.role = role;
     }
 
     public SelectUserVo() {
@@ -89,6 +91,14 @@ public class SelectUserVo {
         this.professional = professional;
     }
 
+    public Integer getRole() {
+        return role;
+    }
+
+    public void setRole(Integer role) {
+        this.role = role;
+    }
+
     @Override
     public String toString() {
         return "SelectUserVo{" +
@@ -100,6 +110,7 @@ public class SelectUserVo {
                 ", org=" + org +
                 ", grade='" + grade + '\'' +
                 ", professional='" + professional + '\'' +
+                ", role=" + role +
                 '}';
     }
 }
