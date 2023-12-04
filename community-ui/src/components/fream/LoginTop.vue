@@ -1,7 +1,7 @@
 <!--
  * @Author: tianleiyu
  * @Date: 2023-10-29 10:33:58
- * @LastEditTime: 2023-11-30 17:51:26
+ * @LastEditTime: 2023-12-04 12:22:37
  * @LastEditors: tianleiyu
  * @Description:
  * @FilePath: /community-ui/src/components/fream/LoginTop.vue
@@ -63,7 +63,7 @@
                 </div>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
 
-                    <ul class="navbar-nav mt-4 mt-lg-0 ml-auto" v-if="isLogin">
+                    <ul class="navbar-nav mt-4 mt-lg-0 ml-auto" v-if="username">
                         <el-dropdown>
                             <router-link to="/UserCenter">
                                 <li class="nav-item ">
@@ -90,10 +90,10 @@
                             <a class="nav-link" href="#">Help </a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link" href="/Login">登入 </a>
+                            <router-link class="nav-link" to="/Login">登入 </router-link>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link" href="/UserReg">注册 </a>
+                            <router-link class="nav-link" to="/UserReg">注册 </router-link>
                         </li>
                     </ul>
 
@@ -116,8 +116,8 @@ export default {
     name: 'Foot',
     data() {
         return {
-            // user:JSON.parse(localStorage.getItem("user")),
-            username: "",
+            username:JSON.parse(localStorage.getItem("user")).username,
+            // username: ,
             token: getCookie("token"),
             //登陆状态
             isLogin: false,
@@ -147,7 +147,7 @@ export default {
         }
     },
     mounted() {
-        
+        console.log(this.username)
         // if(this.user.role > 0 ){
         //     setInterval(() => {
         //             const token = this.token; // 替换为您的消息内容
@@ -160,7 +160,7 @@ export default {
     },
     //从MessageLists接收一个空的this.handleMessageListEmpty，
     created() {
-        this.isLoginInfo();
+        // this.isLoginInfo();
         this.isActiveInfo();
         // this.setupWebSocket();
         this.$bus.$on('messageListEmpty', this.handleMessageListEmpty);
@@ -194,19 +194,21 @@ export default {
         // },
 
         //判断是否为登陆
-        async isLoginInfo() {
-            if (this.$route.path != "/Login") {
-                var user = JSON.parse(localStorage.getItem("user"))
-                if (user && user.username) {
-                    this.username = user.username;
-                    this.isLogin = true;
-                    // this.getMessageList()
-                } else {
-                    this.$router.push("/Login");
-                    this.isLogin = false;
-                }
-            }
-        },
+        // async isLoginInfo() {
+            
+        //     if (this.$route.path != "/Login" || this.$route.path != "/UserReg") {
+        //         // console.log(111);
+        //         var user = JSON.parse(localStorage.getItem("user"))
+        //         if (user && user.username) {
+        //             this.username = user.username;
+        //             this.isLogin = true;
+        //             // this.getMessageList()
+        //         } else {
+        //             this.$router.push("/Login");
+        //             this.isLogin = false;
+        //         }
+        //     }
+        // },
         //获取message List
         async getMessageList() {
             try {
@@ -246,7 +248,7 @@ export default {
         //退出登陆的方法实现
         loginOut() {
             this.username = "";
-            localStorage.removeItem('user')
+            // localStorage.removeItem('user')
             delCookie('token')
             this.$router.push('/Login');
         },
@@ -263,7 +265,7 @@ export default {
     },
     watch: {
         '$route': 'isActiveInfo',
-        'username': 'isLoginInfo'
+        // 'username': 'isLoginInfo'
 
     }
 }
