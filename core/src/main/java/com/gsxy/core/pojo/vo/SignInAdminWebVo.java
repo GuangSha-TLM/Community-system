@@ -8,14 +8,14 @@ public class SignInAdminWebVo {
     private Long communityId;
     private String content;
     private Date releaseTime;
-    private Integer signTime;
+    private Integer signInTime;
 
-    public SignInAdminWebVo(Long id, Long communityId, String content, Date releaseTime, Integer signTime) {
+    public SignInAdminWebVo(Long id, Long communityId, String content, Date releaseTime, Integer signInTime) {
         this.id = id;
         this.communityId = communityId;
         this.content = content;
         this.releaseTime = releaseTime;
-        this.signTime = signTime;
+        this.signInTime = signInTime;
     }
 
     public SignInAdminWebVo() {
@@ -53,12 +53,12 @@ public class SignInAdminWebVo {
         this.releaseTime = releaseTime;
     }
 
-    public Integer getSignTime() {
-        return signTime;
+    public Integer getSignInTime() {
+        return signInTime;
     }
 
-    public void setSignTime(Integer signTime) {
-        this.signTime = signTime;
+    public void setSignInTime(Integer signInTime) {
+        this.signInTime = signInTime;
     }
 
     @Override
@@ -68,7 +68,7 @@ public class SignInAdminWebVo {
                 ", communityId=" + communityId +
                 ", content='" + content + '\'' +
                 ", releaseTime=" + releaseTime +
-                ", signTime=" + signTime +
+                ", signInTime=" + signInTime +
                 '}';
     }
 }
