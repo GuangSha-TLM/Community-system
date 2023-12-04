@@ -92,28 +92,28 @@ public interface UserMapper {
      */
     Integer selectByUserAndUserAdminId(Long id);
 
-    /**
-     * @quthor hln 2023-10-30
-     *      查询用户签到状态
-     * @param userSignInBo
-     * @return
-     */
-    void userSignIn(UserSignInBo userSignInBo);
+//    /**
+//     * @quthor hln 2023-10-30
+//     *      查询用户签到状态
+//     * @param userSignInBo
+//     * @return
+//     */
+//    void userSignIn(UserSignInBo userSignInBo);
 
-    /**
-     * @quthor hln 2023-10-30
-     *      根据user_id获取社团id
-     * @param userSignInBo
-     * @return
-     */
-    UserSignInBo selectToGetCommunityIdByUserId(UserSignInBo userSignInBo);
-
-    /**
-     * @author hln 2023-10-31
-     *      删除签到记录（如果该社团没有该用户）
-     * @param userSignInBo1
-     */
-    void deleteSignIn(UserSignInBo userSignInBo1);
+//    /**
+//     * @quthor hln 2023-10-30
+//     *      根据user_id获取社团id
+//     * @param userSignInBo
+//     * @return
+//     */
+//    UserSignInBo selectToGetCommunityIdByUserId(UserSignInBo userSignInBo);
+//
+//    /**
+//     * @author hln 2023-10-31
+//     *      删除签到记录（如果该社团没有该用户）
+//     * @param userSignInBo1
+//     */
+//    void deleteSignIn(UserSignInBo userSignInBo1);
 
     /**
      * @author hln 2023-11-03

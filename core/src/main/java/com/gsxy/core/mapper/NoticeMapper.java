@@ -5,7 +5,6 @@ import com.gsxy.core.pojo.SendNotification;
 import com.gsxy.core.pojo.bo.NoticePagingToGetDataBo;
 import org.apache.ibatis.annotations.Mapper;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -171,12 +170,12 @@ public interface NoticeMapper {
     List<Long> selectToGetUser(String uuid);
 
     /**
-     * @param noticeId
+     * @param uuid
      * @return
      * @author hln 2023-12-03
      * 根据指定noticeId获取社团中的所有对象
      */
-    List<String> selectToUser(Long noticeId);
+    List<String> selectToUser(String uuid);
 }
 
 

@@ -368,11 +368,9 @@ public class UserAdminServiceImpl implements UserAdminService {
         }
 
         //封装该社团所有用户id到List集合中
-        List<String> list = new ArrayList<>();
-        for (int i = 0; i < listId.size(); i++) {
-            Long noticeId = listId.get(i);
-            list = noticeMapper.selectToUser(noticeId);
-        }
+        Long noticeId = listId.get(listId.size() - 1);
+        String uuid = noticeMapper.selectToGetUUID(noticeId);
+        List<String> list = noticeMapper.selectToUser(uuid);
 
         List<String> listSignIn = new ArrayList<>();
 

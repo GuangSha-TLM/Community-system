@@ -123,23 +123,23 @@ public class UserAdminControllerAopImpl implements UserAdminControllerAop {
 //
 //        return null;
 //    }
-
-    /**
-     * @author hln 2023-11-07
-     *      管理员发起签到
-     * @param joinPoint
-     * @return
-     */
-    @Override
-    @Before("execution(* com.gsxy.core.controller.UserAdminController.userAdminSignInWebSocket(..))")
-    public String userAdminSignInWebSocket(JoinPoint joinPoint) {
-        Object[] args = joinPoint.getArgs();
-        SignInAdminWebSocketBo arg = (SignInAdminWebSocketBo) args[0];
-        String token = arg.getToken();
-        systemService.isAdmin(token,2);
-
-        return null;
-    }
+//
+//    /**
+//     * @author hln 2023-11-07
+//     *      管理员发起签到
+//     * @param joinPoint
+//     * @return
+//     */
+//    @Override
+//    @Before("execution(* com.gsxy.core.controller.UserAdminController.userAdminSignInWebSocket(..))")
+//    public String userAdminSignInWebSocket(JoinPoint joinPoint) {
+//        Object[] args = joinPoint.getArgs();
+//        SignInAdminWebSocketBo arg = (SignInAdminWebSocketBo) args[0];
+//        String token = arg.getToken();
+//        systemService.isAdmin(token,2);
+//
+//        return null;
+//    }
 
     /**
      * @author hln 2023-11-22

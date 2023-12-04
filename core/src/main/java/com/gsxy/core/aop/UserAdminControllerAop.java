@@ -56,13 +56,13 @@ public interface UserAdminControllerAop {
 //     */
 //    public String userAdminSignIn(JoinPoint joinPoint);
 
-    /**
-     * @author hln 2023-11-07
-     *      管理员发起签到
-     * @param joinPoint
-     * @return
-     */
-    public String userAdminSignInWebSocket(JoinPoint joinPoint);
+//    /**
+//     * @author hln 2023-11-07
+//     *      管理员发起签到
+//     * @param joinPoint
+//     * @return
+//     */
+//    public String userAdminSignInWebSocket(JoinPoint joinPoint);
 
     /**
      * @author hln 2023-11-22

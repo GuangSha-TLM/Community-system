@@ -104,13 +104,13 @@ public interface UserAdminMapper {
     SignInAdmin selectToGetCommunityId(SignInAdmin signInAdmin);
 
     //--------------------------
-    /**
-     * @author hln 2023-11-01
-     *      获取所需返回的user中的字段
-     * @param userSignInStatusBo
-     * @return
-     */
-    UserSignInStatusBo selectToGetUserBo(UserSignInStatusBo userSignInStatusBo);
+//    /**
+//     * @author hln 2023-11-01
+//     *      获取所需返回的user中的字段
+//     * @param userSignInStatusBo
+//     * @return
+//     */
+//    UserSignInStatusBo selectToGetUserBo(UserSignInStatusBo userSignInStatusBo);
 
     //---------------------------------
     /**

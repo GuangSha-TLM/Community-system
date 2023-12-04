@@ -64,13 +64,13 @@ public interface UserService {
      */
     ResponseVo pagingToGetUserData(PagingToGetUserDataBo pagingToGetUserDataBo);
 
-    /**
-     * @quthor hln 2023-10-30
-     *      用户签到
-     * @param userSignInBo
-     * @return
-     */
-    ResponseVo userSignIn(UserSignInBo userSignInBo);
+//    /**
+//     * @quthor hln 2023-10-30
+//     *      用户签到
+//     * @param userSignInBo
+//     * @return
+//     */
+//    ResponseVo userSignIn(UserSignInBo userSignInBo);
 
     /**
      * @author hln 2023-11-03
