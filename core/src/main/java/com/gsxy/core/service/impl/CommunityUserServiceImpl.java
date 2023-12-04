@@ -59,6 +59,7 @@ public class CommunityUserServiceImpl implements CommunityUserService {
         notice.setCreateBy(userId);
         notice.setStatus(0);
         notice.setDelFlag(0);
+        notice.setAdminSignId(0L);
 
         UUID uuid = UUID.randomUUID();
         notice.setUuid(uuid.toString());
