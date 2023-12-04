@@ -8,6 +8,7 @@ import com.gsxy.core.util.ThreadLocalUtil;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
+import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
@@ -48,5 +49,10 @@ public class TestWebSocketController {
         return str;
     }
 
+    @OnClose
+    public void onClose(Session session) {
+        // 处理关闭事件
+        System.out.println("WebSocket closed for session: " + session.getId());
+    }
 
 }
