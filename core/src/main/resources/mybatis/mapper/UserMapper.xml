@@ -310,6 +310,8 @@
         <if test="professional != null">
             professional like concat('%',#{professional},'%')
         </if>
+        order by
+            id
         limit #{page},#{size}
     </select>
 
@@ -333,7 +335,17 @@
             community_id = #{userId}
     </select>
 
-    <select id="selectByUserId" resultType="com.gsxy.core.pojo.vo.SelectUserVo">
+    <select id="selectByUserId" resultType="com.gsxy.core.pojo.User">
+        select
+            *
+        from
+            user
+        where
+            id=#{id}
+        limit 1
+    </select>
+
+    <select id="selectToUserId" resultType="com.gsxy.core.pojo.vo.SelectUserVo">
         select
             id,username,name,college,student_id,org,grade,professional
         from

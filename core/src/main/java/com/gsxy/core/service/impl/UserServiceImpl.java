@@ -114,7 +114,7 @@ public class UserServiceImpl implements UserService {
             return new ResponseVo("token解析失败",null,"0x501");
         }
 
-        SelectUserVo user = userMapper.selectByUserId(userSelectByUserIdBo.getId());
+        SelectUserVo user = userMapper.selectToUserId(userSelectByUserIdBo.getId());
 
         if(user == null){
             return new ResponseVo("查询条件不存在",null,"0x500");

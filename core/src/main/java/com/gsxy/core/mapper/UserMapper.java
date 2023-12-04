@@ -45,7 +45,7 @@ public interface UserMapper {
      * @author hln 2023-10-23
      * 通过id查找用户
      */
-    public SelectUserVo selectByUserId(Long userId);
+    public User selectByUserId(Long userId);
 
     /**
      * @author hln 2023-10-23
@@ -207,4 +207,12 @@ public interface UserMapper {
      * @return
      */
     int selectToGetCountNew(Long userId);
+
+    /**
+     * @author hln 2023-12-04
+     *      查找用户id
+     * @param id
+     * @return
+     */
+    SelectUserVo selectToUserId(Long id);
 }
