@@ -292,7 +292,7 @@
         from
         user
         where
-        <if test="college != 0">
+        <if test="college != null">
             college = #{college} and
         </if>
         <if test="grade != null">
@@ -305,13 +305,11 @@
 
     <select id="selectToGetUserBy" resultType="com.gsxy.core.pojo.vo.FindAllVo">
         select
-            t1.id,t1.name,t1.college,t1.grade,t1.professional
+            id,name,college,grade,professional
         from
             user t1
-        inner join
-            community_user t2
-        on
-        <if test="college != 0">
+        where
+        <if test="college != null">
             college = #{college} and
         </if>
         <if test="grade != null">
@@ -320,11 +318,17 @@
         <if test="professional != null">
             professional like concat('%',#{professional},'%')
         </if>
-        and
-            t2.community_id = #{userId}
-        and
-            t2.user_id = t1.id
         limit #{page},#{size}
+    </select>
+
+    <!-- 根据传入的id查找该社团内的用户id -->
+    <select id="selectGetUserId" resultType="java.lang.Long">
+        select
+            user_id
+        from
+            community_user
+        where
+            community_id = #{userId}
     </select>
 
     <!--    &lt;!&ndash; 插入用户签到状态 &ndash;&gt;-->
