@@ -68,9 +68,9 @@
                                 <!-- 拉取功能 -->
                                 <el-link type="primary" @click="Pulling(obj.id)">拉取</el-link>
 
-                                <el-link type="primary" @click="openUpdateuserInfoWindows(obj.id)">修改</el-link>
+                                <!-- <el-link type="primary" @click="openUpdateuserInfoWindows(obj.id)">修改</el-link> -->
                                 <!-- 修改窗口 -->
-                                <el-drawer title="我是标题" :visible.sync="updateWindows" :with-header="false">
+                                <!-- <el-drawer title="我是标题" :visible.sync="updateWindows" :with-header="false">
                                     <div>
 
                                         <div>
@@ -101,21 +101,21 @@
                                             </el-select>
                                         </div>
                                         <br><br>
-
                                         <el-button type="primary" @click="updateuserInfo()">提交</el-button>
                                     </div>
-                                </el-drawer>
-
-
-                                <el-link type="success" @click="deleteById(obj.id)">删除</el-link>
+                                </el-drawer> -->
+                                <!-- <el-link type="success" @click="deleteById(obj.id)">删除</el-link> -->
                             </td>
                         </tr>
                     </tbody>
                 </table>
+                <!-- :page-size="userSelectToGetBo.size" 
+                :pager-count="userSelectToGetBo.page"  -->
 
-
-                <el-pagination :page-size="userSelectToGetBo.size" :pager-count="userSelectToGetBo.page" @current-change="getMerchantInformation"
-                    layout="prev, pager, next" :total="count">
+                <el-pagination 
+                :page-size="userSelectToGetBo.size" 
+                :current-page="userSelectToGetBo.page"
+                layout="total,prev, pager, next, jumper" :total="count" @current-change="getMerchantInformation">
                 </el-pagination>
             </div>
         </section>
@@ -255,7 +255,6 @@ export default {
             token: getCookie("token"),
             //查看方法
             schoolView: {
-
             },
             //按钮开关
             switchbutton: false,
@@ -343,6 +342,7 @@ export default {
             this.getMerchantInformation(1);
         },
 
+        
         //更新用户信息
         async openUpdateuserInfoWindows(id) {
             this.userSelectByUserIdBo.id = id;
@@ -354,7 +354,9 @@ export default {
         },
 
         //跳转指定页面
-        async getMerchantInformation(val) {
+        async getMerchantInformation (page) {
+            this.userSelectToGetBo.page  = page ? page : 1
+            // this.userSelectToGetBo.page
             this.userSelectToGetBo.token = this.token;
             let obj = await synRequestPost("/user/findAll", this.userSelectToGetBo);
             console.log(obj);
