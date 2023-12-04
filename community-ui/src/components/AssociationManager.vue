@@ -70,7 +70,7 @@
                         </el-table>
                     </el-dialog>
 
-                    <el-dialog title="查看签到人员" :visible.sync="lookSignInWindow" width="50%">
+                    <el-dialog title="查看签到人员" :visible.sync="lookSignInWindow" width="50%" :before-close="closeWebSocket">
                         <div class="showSign">
                             <div class="left">
                                 <p>已签到:</p>
@@ -85,9 +85,6 @@
                                 </div>
                             </div>
                         </div>
-                        <span slot="footer" class="dialog-footer">
-                            <el-button @click="lookSignInWindow = false">取 消</el-button>
-                        </span>
                     </el-dialog>
                 </div>
             </section>
@@ -134,7 +131,7 @@ export default {
             socket: null,
             webSocketIp: "127.0.0.1",
             webSocketPort: 8008,
-
+            timer:null,
             signInFrom: [],
             // adminCheckInStatusInRealTimeBo:{
             //     token:'',
@@ -153,15 +150,17 @@ export default {
     methods: {
 
         setupWebSocket(id) {
-            // console.log(id);
+            // this.signInFrom=[]
+            
             // alert(this.getHashVariable("contestId"));
             this.socket = new WebSocket("ws://" + this.webSocketIp + ":" + this.webSocketPort + `/websocket/${id}`);
 
             this.socket.onopen = () => {
-                this.socketStatus = '已连接';
+
+                // this.socketStatus = '已连接';
                 console.log('连接成功');
                 if (this.user.role > 0) {
-                    setInterval(() => {
+                    this.timer = setInterval(() => {
                         // 替换为您的消息内容
                         if (this.socket && this.socket.readyState === WebSocket.OPEN) {
                             // this.adminCheckInStatusInRealTimeBo.token= this.token
@@ -181,9 +180,21 @@ export default {
             };
 
             this.socket.onclose = () => {
-                this.socketStatus = '已关闭';
+                // this.socketStatus = '已关闭';
+                clearInterval(this.timer);
                 console.log("close");
             };
+        },
+        closeWebSocket(done) {
+            if (this.socket && this.socket.readyState === WebSocket.OPEN) {
+                console.log(this.socket);
+                this.socket.close();
+                console.log(this.socket);
+                this.signInFrom = []
+                // this.socket = null;
+            }
+            done();
+            this.socket.close();
         },
         async showModal() {
             this.sendNotificationBo.token = this.token

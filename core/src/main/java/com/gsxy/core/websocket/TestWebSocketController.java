@@ -15,6 +15,8 @@ import javax.websocket.Session;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
+import java.util.Set;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 @ServerEndpoint("/websocket/{id}")
 @CrossOrigin
@@ -24,10 +26,12 @@ public class TestWebSocketController {
     // 构造函数注入任何需要的依赖项
     private UserAdminController userAdminController = SpringContextUtil.getBean(UserAdminController.class);
 //    private UserAdminMapper userAdminMapper = SpringContextUtil.getBean(UserAdminMapper.class);
-
+//private static final Set<Session> sessions = new CopyOnWriteArraySet<>();
     @OnOpen
     public void onOpen(Session session, @PathParam("id") Long id) throws IOException {
+//        sessions.add(session);
         String s = this.serviceFunction(id, session);
+//        broadcastMessage(s);
         session.getBasicRemote().sendText(s);
     }
 
@@ -35,9 +39,21 @@ public class TestWebSocketController {
     @OnMessage
     public void onMessage(Long id, Session session) throws IOException {
 
+//        System.out.println(id);
         //实现用户签到信息的实时查看
         String s = this.serviceFunction(id, session);
+//        broadcastMessage(s);
         session.getBasicRemote().sendText(s);
+
+    }
+
+    @OnClose
+    public void onClose(Session session) {
+//        sessions.remove(session);
+//        System.out.println(session);
+//        System.out.println("连接关闭");
+//        System.out.println("WebSocket closed for session: " + session.getId());
+
 
     }
 
@@ -48,6 +64,19 @@ public class TestWebSocketController {
 
         return str;
     }
+//    private static void broadcastMessage(String message) {
+//        for (Session session : sessions) {
+//            if (session.isOpen()) {
+//                try {
+//                    session.getBasicRemote().sendText(message);
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
+//    }
+
+
 
 //    @OnClose
 //    public void onClose(Session session) {
