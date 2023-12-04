@@ -200,9 +200,37 @@ public class CommunityUserServiceImpl implements CommunityUserService {
         }
 
         Community community = communityMapper.selectByCommunityId(communityUserId);
-
         communityUserMapper.communityUserdeleteUser(community.getCommunityId(),communityUserdeleteUserBo.getUserId());
+        //发送通知
+        Notice notice = new Notice();
+        notice.setContext(community.getName()+"的社长已将你移除该社团");
+        notice.setUserEmailId(communityUserdeleteUserBo.getUserId());
 
+        notice.setCreateBy(communityUserId);
+        notice.setCreateTime(new Date());
+        notice.setStatus(0);
+        notice.setDelFlag(0);
+        notice.setAdminSignId(0L);
+
+        UUID uuid = UUID.randomUUID();
+        notice.setUuid(uuid.toString());
+
+        //发送通知
+        noticeMapper.addNotice(notice);
+
+        //获取最新的通知的id
+        Notice notice2 =noticeMapper.seleByUUID(uuid.toString());
+
+        //设置历史记录信息
+        NoticeWithUser noticeWithUser = new NoticeWithUser();
+        noticeWithUser.setReceiveUserId(communityUserdeleteUserBo.getUserId());
+        noticeWithUser.setSendUserId(communityUserId);
+        noticeWithUser.setNoticeId(notice2.getId());
+        noticeWithUser.setCreateBy(communityUserId);
+        noticeWithUser.setCreateTime(new Date());
+        noticeWithUser.setStatus(0);
+        noticeWithUser.setDelFlag(0);
+        noticeWithUserMapper.addNoticeWithUser(noticeWithUser);
         Long userId = communityUserdeleteUserBo.getUserId();
         if (userId == 0L ) {
             return new ResponseVo("删除失败", null, "0x500");
