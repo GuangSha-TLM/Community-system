@@ -453,7 +453,7 @@ public class UserServiceImpl implements UserService {
         findAllVoNew.setList(list);
         findAllVoNew.setCount(count - countNew);
 
-        return new ResponseVo("查询成功",list,"0x200");
+        return new ResponseVo("查询成功",findAllVoNew,"0x200");
     }
 
 }
