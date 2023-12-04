@@ -438,6 +438,7 @@ public class UserServiceImpl implements UserService {
 
         list = userMapper.selectToGetUserBy(findAllBo);
         int count = userMapper.selectToGetCount(findAllBo);
+        int countNew = userMapper.selectToGetCountNew(userId);
 
         //记录社团成员的id
         List<Long> listNew = userMapper.selectGetUserId(userId);
@@ -453,7 +454,7 @@ public class UserServiceImpl implements UserService {
 
         FindAllVoNew findAllVoNew = new FindAllVoNew();
         findAllVoNew.setList(list);
-        findAllVoNew.setCount(count);
+        findAllVoNew.setCount(count - countNew);
 
         return new ResponseVo("查询成功",findAllVoNew,"0x200");
     }

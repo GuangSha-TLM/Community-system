@@ -198,4 +198,12 @@ public interface UserMapper {
      * @return
      */
     ArrayList<Long> selectGetUserId(Long userId);
+
+    /**
+     * @author hln 2023-12-04
+     *      根据传入的id查找该社团内的用户的总数
+     * @param userId
+     * @return
+     */
+    int selectToGetCountNew(Long userId);
 }
