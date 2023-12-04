@@ -2,6 +2,7 @@ package com.gsxy.core.pojo.vo;
 
 public class FindAllVo {
 
+    private Long id;
     private String username;//用户名
     private String name;//姓名
     private Integer college;//学院
@@ -11,7 +12,8 @@ public class FindAllVo {
     private String professional;//专业
     private Integer count;//数组总数
 
-    public FindAllVo(String username, String name, Integer college, String studentId, Integer org, String grade, String professional, Integer count) {
+    public FindAllVo(Long id, String username, String name, Integer college, String studentId, Integer org, String grade, String professional, Integer count) {
+        this.id = id;
         this.username = username;
         this.name = name;
         this.college = college;
@@ -23,6 +25,14 @@ public class FindAllVo {
     }
 
     public FindAllVo() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -92,7 +102,8 @@ public class FindAllVo {
     @Override
     public String toString() {
         return "FindAllVo{" +
-                "username='" + username + '\'' +
+                "id=" + id +
+                ", username='" + username + '\'' +
                 ", name='" + name + '\'' +
                 ", college=" + college +
                 ", studentId='" + studentId + '\'' +
