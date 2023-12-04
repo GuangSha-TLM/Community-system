@@ -1,8 +1,7 @@
 <template>
     <div class="hello">
-        <div>
-            <Top></Top>
-        </div>
+            <Top/>
+
 
         <!-- Main content -->
         <section >

@@ -1,7 +1,7 @@
 <!--
  * @Author: tianleiyu
  * @Date: 2023-10-29 10:33:58
- * @LastEditTime: 2023-12-04 12:22:37
+ * @LastEditTime: 2023-12-04 15:35:13
  * @LastEditors: tianleiyu
  * @Description:
  * @FilePath: /community-ui/src/components/fream/LoginTop.vue
@@ -63,7 +63,7 @@
                 </div>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
 
-                    <ul class="navbar-nav mt-4 mt-lg-0 ml-auto" v-if="username">
+                    <ul class="navbar-nav mt-4 mt-lg-0 ml-auto" v-if="username != ''">
                         <el-dropdown>
                             <router-link to="/UserCenter">
                                 <li class="nav-item ">
@@ -116,7 +116,7 @@ export default {
     name: 'Foot',
     data() {
         return {
-            username:JSON.parse(localStorage.getItem("user")).username,
+            username:"",
             // username: ,
             token: getCookie("token"),
             //登陆状态
@@ -147,15 +147,7 @@ export default {
         }
     },
     mounted() {
-        console.log(this.username)
-        // if(this.user.role > 0 ){
-        //     setInterval(() => {
-        //             const token = this.token; // 替换为您的消息内容
-        //             if (this.socket && this.socket.readyState === WebSocket.OPEN) {
-        //                 this.socket.send(token);
-        //             }
-        //         }, 500);
-        // }
+        this.username = JSON.parse(localStorage.getItem("user")).username ? JSON.parse(localStorage.getItem("user")).username : ''
         
     },
     //从MessageLists接收一个空的this.handleMessageListEmpty，
@@ -248,7 +240,7 @@ export default {
         //退出登陆的方法实现
         loginOut() {
             this.username = "";
-            // localStorage.removeItem('user')
+            localStorage.removeItem('user')
             delCookie('token')
             this.$router.push('/Login');
         },

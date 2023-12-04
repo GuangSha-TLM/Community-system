@@ -269,6 +269,7 @@ export default {
 
             //分页查询
             pagingToGetUserDataBo: {
+                token:'',
                 start: 0,
                 size: 100,
                 name: "",
