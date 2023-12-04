@@ -297,22 +297,25 @@
 
     <select id="selectToGetUserBy" resultType="com.gsxy.core.pojo.vo.FindAllVo">
         select
-            id,name,college,grade,professional
+        t1.id, t1.name, t1.college, t1.grade, t1.professional
         from
-            user
-        where
-        <if test="college != null">
-            college = #{college} and
-        </if>
-        <if test="grade != null">
-            grade like concat('%',#{grade},'%') and
-        </if>
-        <if test="professional != null">
-            professional like concat('%',#{professional},'%')
-        </if>
-        order by
-            id
-        limit #{page},#{size}
+        user t1
+        INNER JOIN community_user t2
+        on
+            t2.user_id != t1.id
+        <where>
+            <if test="college != null">
+                and college = #{college}
+            </if>
+            <if test="grade != null">
+                and grade like concat('%', #{grade}, '%')
+            </if>
+            <if test="professional != null">
+                and professional like concat('%', #{professional}, '%')
+            </if>
+            and t2.community_id = 1
+        </where>
+        limit #{page}, #{size}
     </select>
 
     <!-- 根据传入的id查找该社团内的用户id -->
@@ -322,7 +325,7 @@
         from
             community_user
         where
-            community_id = #{userId}
+            community_id != #{userId}
     </select>
 
     <!-- 根据传入的id查找该社团内的用户的总数 -->
