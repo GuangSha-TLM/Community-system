@@ -15,7 +15,7 @@
 
 
     <delete id="communityUserDeleteById">
-        delete from community_user where id = #{id}
+        delete from community_user where user_id = #{userId}
     </delete>
 
     <select id="communityUserSelectById" resultType="com.gsxy.core.pojo.CommunityUser">

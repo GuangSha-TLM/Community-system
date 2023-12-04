@@ -103,19 +103,13 @@ public class CommunityUserServiceImpl implements CommunityUserService {
         if(communityUserId == null || communityUserId == 0L){
             return new ResponseVo("token解析失败",null,"0x501");
         }
-        Long id = communityUserDeleteByIdBo.getId();
-        Long aLong = communityUserMapper.communityUserDeleteById(id);
-
-
-        System.out.println(aLong);
-
         //获取该社团的信息
         Community community = communityMapper.selectByCommunityId(communityUserId);
 
         //发送通知
         Notice notice = new Notice();
         notice.setContext(community.getName()+"的社长已将你移除该社团");
-        notice.setUserEmailId(communityUserDeleteByIdBo.getId());
+        notice.setUserEmailId(communityUserDeleteByIdBo.getUserId());
 
         notice.setCreateBy(communityUserId);
         notice.setStatus(0);
@@ -133,17 +127,19 @@ public class CommunityUserServiceImpl implements CommunityUserService {
 
         //设置历史记录信息
         NoticeWithUser noticeWithUser = new NoticeWithUser();
-        noticeWithUser.setReceiveUserId(communityUserDeleteByIdBo.getId());
+        noticeWithUser.setReceiveUserId(communityUserDeleteByIdBo.getUserId());
         noticeWithUser.setSendUserId(communityUserId);
         noticeWithUser.setNoticeId(notice2.getId());
         noticeWithUser.setCreateBy(communityUserId);
         noticeWithUser.setStatus(0);
         noticeWithUser.setDelFlag(0);
         noticeWithUserMapper.addNoticeWithUser(noticeWithUser);
+        Long userId = communityUserDeleteByIdBo.getUserId();
+        Long aLong = communityUserMapper.communityUserDeleteById(userId);
         if (aLong.longValue() == 0L) {
             return new ResponseVo("删除失败", null, "0x500");
         }
-        return new ResponseVo("删除成功",id, "0x200");
+        return new ResponseVo("删除成功",userId, "0x200");
     }
 
     /**
