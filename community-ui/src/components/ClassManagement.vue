@@ -7,7 +7,7 @@
                 <div class="bigfrom">
                     <div class="form-group">
                         <label for="exampleInputgrand">选择你的学院</label>
-                        <el-select v-model="selectInfo.college" placeholder="请选择" style="width: 100%;">
+                        <el-select v-model="userSelectToGetBo.college" placeholder="请选择" style="width: 100%;">
                             <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
                             </el-option>
                         </el-select>
@@ -15,9 +15,9 @@
 
                     <div class="form-group">
                         <label for="exampleInputprofessional">选择你的专业</label>
-                        <el-select v-model="selectInfo.professional" placeholder="请选择" style="width: 100%;">
+                        <el-select v-model="userSelectToGetBo.professional" placeholder="请选择" style="width: 100%;">
 
-                            <el-option-group v-for="group in professionalList[selectInfo.college - 1]" :key="group.value"
+                            <el-option-group v-for="group in professionalList[userSelectToGetBo.college - 1]" :key="group.value"
                                 :label="group.label">
                                 <el-option v-for="item in group.professionalList" :key="item.professionalList"
                                     :label="item.label" :value="item">
@@ -29,7 +29,7 @@
 
                     <div class="form-group">
                         <label for="exampleInputgrand">选择你的年级</label>
-                        <el-select v-model="selectInfo.grade" placeholder="请选择" style="width: 100%;">
+                        <el-select v-model="userSelectToGetBo.grade" placeholder="请选择" style="width: 100%;">
                           <el-option v-for="item in yearsList"
                                      :key="item"
                                      :label="item"
@@ -39,7 +39,7 @@
                         </el-select>
                     </div>
                     <div class="form-group but">
-                        <button class="btn btn-primary" style="width:10%;margin-top:10px" @click="selectForm()"
+                        <button class="btn btn-primary" style="width:10%;margin-top:10px" @click="getMerchantInformation()"
                             :disabled="switchbutton">查询</button>
                     </div>
 
@@ -114,7 +114,7 @@
                 </table>
 
 
-                <el-pagination :page-size="100" :pager-count="11" @current-change="getMerchantInformation"
+                <el-pagination :page-size="userSelectToGetBo.size" :pager-count="userSelectToGetBo.page" @current-change="getMerchantInformation"
                     layout="prev, pager, next" :total="count">
                 </el-pagination>
             </div>
@@ -147,14 +147,10 @@ export default {
                 college: '',
                 professional: '',
                 grade: '',
-
+                page:1,
+                size:10,
             },
-            //属性
-            selectInfo: {
-                college: '',
-                professional: '',
-                grade: ''
-            },
+           
             //学院
             options: [
                 { value: 1, label: "信息学院" },
@@ -271,10 +267,7 @@ export default {
             pagingToGetUserDataBo: {
                 token:'',
                 start: 0,
-                size: 100,
-                name: "",
-                status: 0,
-                delFlag: 0,
+                size: 15
             },
 
             //通过id删除
@@ -362,13 +355,20 @@ export default {
 
         //跳转指定页面
         async getMerchantInformation(val) {
-            this.pagingToGetUserDataBo.start = (val - 1) * this.pagingToGetUserDataBo.size;
-            let obj = await synRequestPost("/user/findAll", this.pagingToGetUserDataBo);
+            this.userSelectToGetBo.token = this.token;
+            let obj = await synRequestPost("/user/findAll", this.userSelectToGetBo);
+            console.log(obj);
             if (obj.code == "0x200") {
-                this.list = obj.data;
+                this.count = obj.data.count
+                this.list = obj.data.list;
+                if (this.list.length == 0) {
+                    this.$message.error('暂无数据!');
+                }
                 for (let i = 0; i < this.list.length; i++) {
                     this.list[i].college = this.options[this.list[i].college - 1].label
                 }
+            }else {
+                this.$message.error('查询失败');
             }
         },
 
@@ -389,24 +389,7 @@ export default {
             this.getMerchantInformation(1);
 
         },
-        //下拉列表接口
-        async selectForm() {
-            this.list = [];
-            this.userSelectToGetBo.token = this.token;
-            this.userSelectToGetBo.college = this.selectInfo.college;
-            this.userSelectToGetBo.grade = this.selectInfo.grade;
-            this.userSelectToGetBo.professional = this.selectInfo.professional;
-            let obj = await synRequestPost("/user/selectToGetUser", this.userSelectToGetBo);
-            if (obj.code == "0x200") {
-                this.list = obj.data.list;
-                if (this.list.length == 0) {
-                    this.$message.error('暂无数据!');
-                }
-            } else {
-                this.$message.error('查询失败');
-            }
-            this.list = obj.data.list;
-        },
+       
 
         //拉取功能
         async Pulling(id) {
