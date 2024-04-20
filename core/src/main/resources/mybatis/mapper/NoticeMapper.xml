@@ -229,7 +229,7 @@
         from
             notice
         where
-            admin_sign_id = #{id}
+            create_by = #{id}
           and
             create_time > now() - INTERVAL 5 MINUTE
     </select>
