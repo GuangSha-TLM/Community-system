@@ -55,7 +55,7 @@ public class NoticeServiceImpl implements NoticeService {
 
                 //有用户数据
               list2.add(new NoticeWithCreateByVo(
-                        notice.getId(),
+                        notice.getId()    ,
                         notice.getName(),
                         notice.getUserEmailId(),
                         notice.getCreateBy(),
@@ -67,7 +67,7 @@ public class NoticeServiceImpl implements NoticeService {
                         notice.getDealt(),
                         notice.getKinds(),
                         notice.getCreateTime(),
-                        notice.getAdminSignId()
+                        notice.getAdminSignId() == null ? -1 : notice.getAdminSignId()
                 )
                 );
             }else {
