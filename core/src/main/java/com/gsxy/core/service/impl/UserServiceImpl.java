@@ -67,12 +67,12 @@ public class UserServiceImpl implements UserService {
         //通过username去获取用户
         User user = userMapper.userLogin(userLoginBo);
 
-        Long id = user.getId();
-
         //比较用户密码和数据库中密码是否一致
         if(user == null || !user.getPassword().equals(userLoginBo.getPassword())){
             return new ResponseVo("登录失败",null,"0x500");
         }
+
+        Long id = user.getId();
 
         String jwt = JwtUtil.createJWT(user);
 
