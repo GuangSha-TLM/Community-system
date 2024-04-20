@@ -34,6 +34,7 @@ public class ImgController {
     /**
      * @author Oh… Yeah!!!, 2023-10-23
      *      根据id查询数据.
+     *
      * @param imgSelectByIdBo
      * @return String.class
      */
