@@ -117,7 +117,7 @@
         from
             community
         inner join
-                user
+            user
         on
             community.create_by = (select create_by from community where create_by = #{createBy})
         limit 1

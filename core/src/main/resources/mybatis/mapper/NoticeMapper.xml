@@ -43,7 +43,7 @@
         values
             (null,#{userEmailId},#{context},#{uuid},#{imgId},#{name},
              #{read},#{dealt},#{kinds},#{createBy},#{createTime},#{updateBy},
-             #{updateTime},#{status},#{delFlag},#{adminSignId});
+             #{updateTime},#{status},#{delFlag});
     </insert>
 
     <!-- 社长（管理员）向社团成员发起签到通知 -->
@@ -313,7 +313,7 @@
         update
             notice
         set
-            admin_sign_id = #{id}
+            create_by = #{id}
         where
             uuid = #{uuid1}
     </update>
